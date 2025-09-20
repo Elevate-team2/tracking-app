@@ -26,8 +26,8 @@ jobs:
           BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
           echo "Validating branch name: $BRANCH_NAME"
 
-          # ✅ استثناء master و development
-          if [[ "$BRANCH_NAME" == "master" || "$BRANCH_NAME" == "development" ]]; then
+        
+          if [[ "$BRANCH_NAME" == "main" || "$BRANCH_NAME" == "development" ]]; then
             echo "Branch '$BRANCH_NAME' is exempt from validation."
             exit 0
           fi
