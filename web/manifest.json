@@ -1,6 +1,6 @@
 {
-    "name": "tracking_app",
-    "short_name": "tracking_app",
+    "name": "test",
+    "short_name": "test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
