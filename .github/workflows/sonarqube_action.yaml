@@ -16,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v1.5.3
         with:
-          flutter-version: '3.35.2'
+          flutter-version: '3.35.4'
           channel: 'stable'
 
       - run: flutter --version
@@ -30,7 +30,8 @@ jobs:
       - name: Run tests
         run: flutter test --coverage
 
-      # Run SonarQube scan
+
+    
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
@@ -38,11 +39,11 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
         with:
           args: >
-            -Dsonar.projectName=tracking-app
-            -Dsonar.sources=lib
+            -Dsonar.projectKey=Aya921_tracking-app
+            -Dsonar.sources=lib,pubspec.yaml
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
-            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.branch.name=main
 
       - name: SonarQube Quality Gate Check
         uses: SonarSource/sonarqube-quality-gate-action@master
@@ -51,7 +52,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
-        continue-on-error: true
+     
           
 
 
