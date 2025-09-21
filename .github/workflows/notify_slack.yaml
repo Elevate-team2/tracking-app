@@ -1,30 +1,19 @@
-name: Slack Notification After Any Workflow
+name: Notify Slack
 
 on:
   workflow_run:
+    workflows: ["*"] # يراقب كل الأعمال في المستودع
     types:
-      - completed  # يشتغل بعد ما أي workflow يخلص
+      - completed
 
 jobs:
-  notify-slack:
+  notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Determine Slack Status Emoji
-        id: status
-        run: |
-          case "${{ github.event.workflow_run.conclusion }}" in
-            success) echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT ;;
-            failure) echo "emoji=:x:" >> $GITHUB_OUTPUT ;;
-            cancelled) echo "emoji=:stop_sign:" >> $GITHUB_OUTPUT ;;
-            *) echo "emoji=:grey_question:" >> $GITHUB_OUTPUT ;;
-          esac
-
-      - name: Send Slack Notification
-        run: |
-          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
-          -H "Content-type: application/json" \
-          --data '{
-            "channel": "C09GFR4UP3N",
-            "text": "${{ steps.status.outputs.emoji }} Workflow *${{ github.event.workflow_run.name }}* completed with status *${{ github.event.workflow_run.conclusion }}*\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
-          }' \
-          https://slack.com/api/chat.postMessage
+      - name: إرسال إشعار إلى Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: "${{ github.event.workflow_run.name }} - ${{ github.event.workflow_run.conclusion }}"
+          SLACK_MESSAGE: "سير العمل `${{ github.event.workflow_run.name }}` على الفرع `${{ github.event.workflow_run.head_branch }}` انتهى بحالة: **${{ github.event.workflow_run.conclusion }}**. تحقق: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+          SLACK_COLOR: ${{ github.event.workflow_run.conclusion == 'success' && '#00FF00' || github.event.workflow_run.conclusion == 'failure' && '#FF0000' || '#FFA500' }}
