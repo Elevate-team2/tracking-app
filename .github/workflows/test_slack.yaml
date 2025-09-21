@@ -3,8 +3,7 @@ name: Test Slack
 on:
   workflow_run:
     workflows: ["Validate Branch Name"]   # لازم يبقى مطابق بالظبط للي في الملف التاني
-    types:
-      - completed
+    types: [completed]
 
 jobs:
   notify-slack:
