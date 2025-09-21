@@ -23,16 +23,16 @@ jobs:
         run: |
           if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
             echo "emoji=✅" >> $GITHUB_OUTPUT
-            echo "color=#36a64f" >> $GITHUB_OUTPUT   # أخضر للنجاح
+            echo "color=#36a64f" >> $GITHUB_OUTPUT  
           elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
             echo "emoji=🔴" >> $GITHUB_OUTPUT
-            echo "color=#FF0000" >> $GITHUB_OUTPUT   # أحمر للفشل
+            echo "color=#FF0000" >> $GITHUB_OUTPUT  
           elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
             echo "emoji=⚪" >> $GITHUB_OUTPUT
-            echo "color=#AAAAAA" >> $GITHUB_OUTPUT   # رمادي للإلغاء
+            echo "color=#AAAAAA" >> $GITHUB_OUTPUT   
           else
             echo "emoji=❓" >> $GITHUB_OUTPUT
-            echo "color=#808080" >> $GITHUB_OUTPUT   # رمادي غامق لغير معروف
+            echo "color=#808080" >> $GITHUB_OUTPUT   
           fi
 
       - name: Send Slack Notification
