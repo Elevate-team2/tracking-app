@@ -1,17 +1,8 @@
 name: Slack Notifications for Workflows
 
 on:
-  workflow_run:
-    workflows: [
-      "Firebase Distribution",
-      "Flutter Linting",
-      "Validate PR Title",
-      "SonarQube Analysis",
-      "Validate Branch Name",
-      "Validate unit testing"
-    ]
-    types:
-      - completed
+  push:
+   
 
 jobs:
   notify-slack:
