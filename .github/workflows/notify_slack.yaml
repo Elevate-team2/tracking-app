@@ -1,0 +1,43 @@
+name: Notify Slack on Workflow Result
+
+on:
+  workflow_run:
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack notification (failure)
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": ":x: Workflow *${{ github.event.workflow_run.name }}* failed!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack notification (success)
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": ":white_check_mark: Workflow *${{ github.event.workflow_run.name }}* succeeded!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Slack notification (cancelled)
+        if: ${{ github.event.workflow_run.conclusion == 'cancelled' }}
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": ":stop_sign: Workflow *${{ github.event.workflow_run.name }}* was cancelled!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
