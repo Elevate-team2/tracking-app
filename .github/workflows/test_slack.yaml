@@ -2,7 +2,7 @@ name: Test Slack
 
 on:
   workflow_run:
-    workflows: ["Validate unit testing"]   # لازم يبقى مطابق بالظبط للي في الملف التاني
+    workflows: ["Validate Branch Name"]   # لازم يبقى مطابق بالظبط للي في الملف التاني
     types:
       - completed
 
