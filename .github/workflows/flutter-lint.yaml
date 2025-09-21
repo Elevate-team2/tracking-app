@@ -33,3 +33,6 @@ jobs:
       - name: Run Flutter Analyzer
         run: flutter analyze
 
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@master
+        continue-on-error: true
