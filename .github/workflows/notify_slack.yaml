@@ -9,27 +9,17 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    if: always()
     steps:
-      - name: Notify Slack on Success
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+      - name: Notify Slack
         uses: slackapi/slack-github-action@v1.27.0
         with:
-          text: ":white_check_mark: Workflow *${{ github.event.workflow_run.name }}* succeeded!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+          slack-message: |
+            Workflow: ${{ github.event.workflow_run.name }}
+            Branch: ${{ github.event.workflow_run.head_branch }}
+            Actor: ${{ github.event.workflow_run.actor.login }}
+            Status: ${{ github.event.workflow_run.conclusion }}
+            Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
+          channel-id: 'C09GFR4UP3N'
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack on Failure
-        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-        uses: slackapi/slack-github-action@v1.27.0
-        with:
-          text: ":x: Workflow *${{ github.event.workflow_run.name }}* failed!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack on Cancelled
-        if: ${{ github.event.workflow_run.conclusion == 'cancelled' }}
-        uses: slackapi/slack-github-action@v1.27.0
-        with:
-          text: ":stop_sign: Workflow *${{ github.event.workflow_run.name }}* was cancelled!\nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
