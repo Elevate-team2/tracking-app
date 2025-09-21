@@ -1,20 +1,42 @@
-name: Slack Notifications for Workflows (Debug)
+name: Slack Notifications for Workflows
 
 on:
-  push:
-    branches:
-      - development
+  workflow_run:
+    workflows: [
+      "Firebase Distribution",
+      "Flutter Linting",
+      "Validate PR Title",
+      "SonarQube Analysis",
+      "Validate Branch Name",
+      "Validate unit testing"
+    ]
+    types:
+      - completed
 
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
+    if: always()
     steps:
+      - name: Determine Slack Status Emoji
+        id: status
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
+            echo "emoji=:x:" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
+            echo "emoji=:stop_sign:" >> $GITHUB_OUTPUT
+          else
+            echo "emoji=:grey_question:" >> $GITHUB_OUTPUT
+          fi
+
       - name: Send Slack Notification
         run: |
           curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
           -H "Content-type: application/json" \
           --data '{
             "channel":"C09GFR4UP3N",
-            "text":"🚀 Push detected on branch *${{ github.ref_name }}* by *${{ github.actor }}* \n➡️ Commit: ${{ github.sha }}"
+            "text":"${{ steps.status.outputs.emoji }} Workflow *${{ github.event.workflow_run.name }}* completed with status *${{ github.event.workflow_run.conclusion }}* \nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
           }' \
           https://slack.com/api/chat.postMessage
