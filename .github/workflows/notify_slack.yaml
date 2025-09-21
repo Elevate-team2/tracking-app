@@ -6,7 +6,6 @@ on:
     types:
       - completed
 
-
 jobs:
   notify:
     runs-on: ubuntu-latest
