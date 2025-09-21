@@ -1,10 +1,7 @@
 name: Slack Notification - Validate Branch Name
 
 on:
-  workflow_run:
-    workflows: ["Validate Branch Name"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   notify-slack:
