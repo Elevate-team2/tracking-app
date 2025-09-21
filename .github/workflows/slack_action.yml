@@ -1,7 +1,10 @@
 name: Slack Notification
 
 on:
+ push:
+ 
  workflow_run:
+ 
     workflows: 
       - "Validate Branch Name"
       - "Firebase Distribution"
