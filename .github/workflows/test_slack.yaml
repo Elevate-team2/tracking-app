@@ -1,7 +1,10 @@
 name: Slack Notification - Validate Branch Name
 
 on:
- workflow_dispatch:
+ workflow_run:
+    workflows: ["Validate Branch Name"] # يراقب كل الأعمال في المستودع
+    types:
+      - completed
 
 jobs:
  notify-slack:
