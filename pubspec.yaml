@@ -39,11 +39,12 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
   injectable_generator:
-  retrofit_generator:
   analyzer:
   hive_generator:
-  json_serializable: ^6.8.0
-  build_runner:
+  build_runner: ^2.4.13
+  json_serializable: ^6.7.1
+  retrofit_generator: ^8.1.0
+  mockito: ^5.4.4
 
 
 flutter:
