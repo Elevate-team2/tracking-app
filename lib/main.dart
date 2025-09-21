@@ -6,7 +6,6 @@ import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
-import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/Cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
 
 extension SizeHelperExtension on BuildContext {
