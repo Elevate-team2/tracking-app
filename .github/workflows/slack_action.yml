@@ -1,15 +1,21 @@
-name: Slack Notification - Validate Branch Name
+name: Slack Notification
 
 on:
  workflow_run:
-    workflows: ["Validate Branch Name"] # يراقب كل الأعمال في المستودع
+    workflows: 
+      - "Validate Branch Name"
+      - "Firebase Distribution"
+      - "Flutter Linting"
+      - "Validate PR Title"
+      - "SonarQube Analysis"
+      - "Validate unit testing"
     types:
       - completed
 
 jobs:
  notify-slack:
    runs-on: ubuntu-latest
-   if: always()  # هيتنفذ حتى لو الجوب فشل
+   if: always()  
 
    steps:
      - name: Determine Slack Status Emoji
