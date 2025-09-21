@@ -44,7 +44,7 @@ jobs:
             -Dsonar.sources=lib,pubspec.yaml
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
-            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.branch.name=main
 
       - name: SonarQube Quality Gate Check
         uses: SonarSource/sonarqube-quality-gate-action@master
