@@ -1,7 +1,9 @@
 name: Test Slack Notification
 
 on:
-  workflow_dispatch:   
+  push:   
+
+
 
 jobs:
   slack-test:
