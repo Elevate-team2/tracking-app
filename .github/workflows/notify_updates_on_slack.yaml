@@ -20,7 +20,7 @@ jobs:
         run: |
           SEPARATOR="──────────────────────────────"
           if [ "${{ github.event_name }}" == "push" ]; then
-            MESSAGE=":rocket: *Push on branch* \`${{ github.ref_name }}\` by *${{ github.actor }}*\n➡️ Commit: \`${{ github.sha }}\`\n${SEPARATOR}"
+            MESSAGE=":rocket: *Push on branch* \`${{ github.ref_name }}\` by *${{ github.actor }}*\n➡️ Commit: ${{ github.sha }}\n${SEPARATOR}"
           elif [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_ACTION="${{ github.event.action }}"
             PR_NUMBER="${{ github.event.number }}"
