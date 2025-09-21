@@ -1,18 +1,25 @@
-name: Test slack
+name: Docker Build and Push
 
 on:
   push:
-    
+    branches: [ master, release/* ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       REPOSITORY_URL: docker.pkg.github.com
-      IMAGE_NAME: ${{ github.repository }}/alerta-cli
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
+      - name: Slack - Starting
+        uses: act10ns/slack@v2
+        with:
+          status: starting
+          channel: '#workflows'
+          message: Starting Docker Build and Push...
+        if: always()
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -20,25 +27,29 @@ jobs:
         id: vars
         run: echo "SHORT_COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
+      - name: Set lowercase repo
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
       - name: Build image
-        run: |
-          docker build \
-            -t $IMAGE_NAME \
-            -t $REPOSITORY_URL/$IMAGE_NAME:${{ env.SHORT_COMMIT_ID }} \
-            -t $REPOSITORY_URL/$IMAGE_NAME:latest .
+        run: >-
+          docker build
+          -t $REPO_LC/alerta-cli
+          -t $REPOSITORY_URL/$REPO_LC/alerta-cli:${{ env.SHORT_COMMIT_ID }}
+          -t $REPOSITORY_URL/$REPO_LC/alerta-cli:latest .
 
       - name: Docker Login
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: docker login $REPOSITORY_URL --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
 
       - name: Publish Image
-        run: docker push $REPOSITORY_URL/$IMAGE_NAME
+        run: docker push $REPOSITORY_URL/$REPO_LC/alerta-cli
 
-      # Slack Notification (final status only)
-      - uses: act10ns/slack@v2
+      - name: Slack - Result
+        uses: act10ns/slack@v2
         with:
           status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
           channel: '#workflows'
         if: always()
