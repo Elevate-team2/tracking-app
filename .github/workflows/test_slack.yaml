@@ -1,0 +1,18 @@
+name: Test Slack Notification
+
+on:
+  workflow_dispatch:   
+
+jobs:
+  slack-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Test Slack Message
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+          -H "Content-type: application/json" \
+          --data '{
+            "channel":"C09GFR4UP3N",
+            "text":"Hello Slack 👋 - Test from GitHub Actions"
+          }' \
+          https://slack.com/api/chat.postMessage -v
