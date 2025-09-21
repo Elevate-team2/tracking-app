@@ -30,22 +30,20 @@ jobs:
         id: info
         run: |
           if [ "${{ github.event_name }}" == "push" ]; then
+            echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
             echo "message=🚀 Push on branch *${{ github.ref_name }}* by *${{ github.actor }}*\n➡️ Commit: ${{ github.sha }}" >> $GITHUB_OUTPUT
+            echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
           elif [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_ACTION="${{ github.event.action }}"
             PR_NUMBER="${{ github.event.number }}"
             PR_BRANCH="${{ github.event.pull_request.head.ref }}"
             PR_ACTOR="${{ github.event.pull_request.user.login }}"
-            echo "message=🔀 Pull Request #${PR_NUMBER} ${PR_ACTION} on branch *${PR_BRANCH}* by *${PR_ACTOR}*" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event_name }}" == "workflow_run" ]; then
-            WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
-            WORKFLOW_STATUS="${{ github.event.workflow_run.conclusion }}"
-            BRANCH="${{ github.event.workflow_run.head_branch }}"
-            ACTOR="${{ github.event.workflow_run.actor.login }}"
-            RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
-            echo "message=📊 Workflow *${WORKFLOW_NAME}* completed with status *${WORKFLOW_STATUS}*\nBranch: *${BRANCH}*\nActor: *${ACTOR}*\n➡️ Check run: ${RUN_URL}" >> $GITHUB_OUTPUT
+           echo "message=🔀 Pull Request #${PR_NUMBER} ${PR_ACTION} on branch *${PR_BRANCH}* by *${PR_ACTOR}*" >> $GITHUB_OUTPUT
+           echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
           else
             echo "message=❓ Unknown event: ${{ github.event_name }}" >> $GITHUB_OUTPUT
+            echo "✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨"
+          
           fi
 
       - name: Send Slack Notification
