@@ -1,12 +1,10 @@
 name: tracking_app
 description: "A new Flutter project."
 
-
 version: 1.0.0+1
 
 environment:
   sdk: ^3.9.2
-
 
 dependencies:
   flutter:
@@ -15,38 +13,30 @@ dependencies:
     sdk: flutter
   intl: any
 
-
   cupertino_icons: ^1.0.8
   device_preview: ^1.3.1
   google_fonts: ^6.3.1
-  injectable:
-  get_it:
+  injectable: ^2.5.0
+  get_it: ^7.7.0
   dio: ^5.9.0
   pretty_dio_logger: ^1.4.0
-  shared_preferences: ^2.5.3
-  provider: ^6.1.5+1
+  shared_preferences: ^2.3.5
+  provider: ^6.1.2
   retrofit: ^4.7.2
   json_annotation: ^4.9.0
-  mockito: ^5.4.4
   dio_cache_interceptor: ^4.0.3
-
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^5.0.0
-  injectable_generator:
-  analyzer:
-  hive_generator:
+
+  # Code generation tools
+  injectable_generator: ^2.5.0
+  hive_generator: ^2.0.1
   build_runner: ^2.4.13
   json_serializable: ^6.7.1
   retrofit_generator: ^8.1.0
+
+  # Testing
   mockito: ^5.4.4
-
-
-flutter:
-
-  generate: true
-  uses-material-design: true
