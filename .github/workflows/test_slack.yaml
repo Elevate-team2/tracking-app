@@ -1,44 +1,44 @@
-name: Test Slack
+name: Test slack
 
 on:
-  workflow_run:
-    workflows: ["Validate Branch Name"]   # لازم يبقى مطابق بالظبط للي في الملف التاني
-    types: [completed]
+  push:
+    
 
 jobs:
-  notify-slack:
+  build:
     runs-on: ubuntu-latest
-    if: always()
+    env:
+      REPOSITORY_URL: docker.pkg.github.com
+      IMAGE_NAME: ${{ github.repository }}/alerta-cli
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
     steps:
-      - name: Debug Event Payload
-        run: |
-          echo "Workflow triggered by: ${{ github.event.workflow_run.name }}"
-          echo "Conclusion: ${{ github.event.workflow_run.conclusion }}"
-          echo "Branch: ${{ github.event.workflow_run.head_branch }}"
-          echo "Actor: ${{ github.event.workflow_run.actor.login }}"
-          echo "Run ID: ${{ github.event.workflow_run.id }}"
-          echo "Full event payload:"
-          echo '${{ toJson(github.event) }}'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Determine Slack Status Emoji
-        id: status
-        run: |
-          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
-            echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
-            echo "emoji=:x:" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
-            echo "emoji=:stop_sign:" >> $GITHUB_OUTPUT
-          else
-            echo "emoji=:grey_question:" >> $GITHUB_OUTPUT
-          fi
+      - name: Variables
+        id: vars
+        run: echo "SHORT_COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Send Slack Notification
+      - name: Build image
         run: |
-          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
-          -H "Content-type: application/json" \
-          --data '{
-            "channel":"C09GFR4UP3N",
-            "text":"${{ steps.status.outputs.emoji }} Workflow *${{ github.event.workflow_run.name }}* انتهى بالحالة *${{ github.event.workflow_run.conclusion }}* \n🔀 Branch: *${{ github.event.workflow_run.head_branch }}*\n👤 Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
-          }' \
-          https://slack.com/api/chat.postMessage
+          docker build \
+            -t $IMAGE_NAME \
+            -t $REPOSITORY_URL/$IMAGE_NAME:${{ env.SHORT_COMMIT_ID }} \
+            -t $REPOSITORY_URL/$IMAGE_NAME:latest .
+
+      - name: Docker Login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: docker login $REPOSITORY_URL --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
+
+      - name: Publish Image
+        run: docker push $REPOSITORY_URL/$IMAGE_NAME
+
+      # Slack Notification (final status only)
+      - uses: act10ns/slack@v2
+        with:
+          status: ${{ job.status }}
+          channel: '#workflows'
+        if: always()
