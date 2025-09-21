@@ -2,7 +2,7 @@ name: Test Slack
 
 on:
   workflow_run:
-    workflows: ["*"] 
+    workflows: ["Validate unit testing"] 
     types:
       - completed
 
