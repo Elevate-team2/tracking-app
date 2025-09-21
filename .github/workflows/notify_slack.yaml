@@ -1,24 +1,36 @@
-name: Slack Notifications for All Workflows
+name: Slack Notifications for All Events
 
 on:
-  workflow_run:
-    types:
-      - completed
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened, edited, synchronize, reopened, closed]
 
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
     if: always()
     steps:
+      - name: Determine Event Type
+        id: event
+        run: |
+          echo "event_name=${GITHUB_EVENT_NAME}" >> $GITHUB_ENV
+          echo "branch_name=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "actor=${GITHUB_ACTOR}" >> $GITHUB_ENV
+          echo "sha=${GITHUB_SHA}" >> $GITHUB_ENV
+
       - name: Determine Slack Status Emoji
         id: status
         run: |
-          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
-            echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
-            echo "emoji=:x:" >> $GITHUB_OUTPUT
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
-            echo "emoji=:stop_sign:" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "emoji=:rocket:" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            if [ "${{ github.event.action }}" == "closed" ]; then
+              echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT
+            else
+              echo "emoji=:arrows_counterclockwise:" >> $GITHUB_OUTPUT
+            fi
           else
             echo "emoji=:grey_question:" >> $GITHUB_OUTPUT
           fi
@@ -29,6 +41,27 @@ jobs:
           -H "Content-type: application/json" \
           --data '{
             "channel":"C09GFR4UP3N",
-            "text":"${{ steps.status.outputs.emoji }} Workflow *${{ github.event.workflow_run.name }}* completed with status *${{ github.event.workflow_run.conclusion }}* \nBranch: *${{ github.event.workflow_run.head_branch }}*\nActor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+            "text":"${{ steps.status.outputs.emoji }} Event *${{ github.event_name }}* on branch *${GITHUB_REF_NAME}* by *${GITHUB_ACTOR}* \n➡️ Commit: ${GITHUB_SHA} \nCheck run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }' \
           https://slack.com/api/chat.postMessage
+
+#name: Slack Notifications for Workflows (Debug)
+#
+#on:
+#  push:
+#    branches:
+#      - development
+#
+#jobs:
+#  notify-slack:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Send Slack Notification
+#        run: |
+#          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+#          -H "Content-type: application/json" \
+#          --data '{
+#            "channel":"C09GFR4UP3N",
+#            "text":"🚀 Push detected on branch *${{ github.ref_name }}* by *${{ github.actor }}* \n➡️ Commit: ${{ github.sha }}"
+#          }' \
+#          https://slack.com/api/chat.postMessage
