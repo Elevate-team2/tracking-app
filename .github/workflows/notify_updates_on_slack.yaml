@@ -3,7 +3,7 @@ name: Slack Notifications for All Updates
 on:
   push:
     branches:
-      - development
+
   pull_request:
     types:
       - opened
