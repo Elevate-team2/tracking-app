@@ -19,22 +19,17 @@ jobs:
         id: info
         run: |
           SEPARATOR="─────────────────"
-          if [ "${GITHUB_EVENT_NAME}" == "push" ]; then
-            BRANCH_NAME="${GITHUB_REF#refs/heads/}"
-            MESSAGE=":rocket: *Push on branch* \`${BRANCH_NAME}\` by *${GITHUB_ACTOR}*\n➡️ Commit: \`${GITHUB_SHA}\`\n${SEPARATOR}"
-            echo "message=${MESSAGE}" >> $GITHUB_OUTPUT
-          elif [ "${GITHUB_EVENT_NAME}" == "pull_request" ]; then
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "message=${SEPARATOR}\n🚀 Push on branch *${{ github.ref_name }}* by *${{ github.actor }}*\n➡️ Commit: ${{ github.sha }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_ACTION="${{ github.event.action }}"
             PR_NUMBER="${{ github.event.number }}"
             PR_BRANCH="${{ github.event.pull_request.head.ref }}"
             PR_ACTOR="${{ github.event.pull_request.user.login }}"
-            MESSAGE=":twisted_rightwards_arrows: *Pull Request #${PR_NUMBER} ${PR_ACTION}* on branch \`${PR_BRANCH}\` by *${PR_ACTOR}*\n${SEPARATOR}"
-            echo "message=${MESSAGE}" >> $GITHUB_OUTPUT
+            echo "message=${SEPARATOR}\n🔀 Pull Request #${PR_NUMBER} ${PR_ACTION} on branch *${PR_BRANCH}* by *${PR_ACTOR}*\n${SEPARATOR}" >> $GITHUB_OUTPUT
           else
-            MESSAGE="❓ Unknown event: \`${GITHUB_EVENT_NAME}\`\n${SEPARATOR}"
-            echo "message=${MESSAGE}" >> $GITHUB_OUTPUT
+            echo "message=${SEPARATOR}\n❓ Unknown event: ${{ github.event_name }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
           fi
-
 
       - name: Send Slack Notification
         run: |
