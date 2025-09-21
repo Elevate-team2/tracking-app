@@ -3,7 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 
+
 @singleton
+
 class AppLanguageConfig extends ChangeNotifier {
   SharedPreferences sharedPreferences;
   AppLanguageConfig({required this.sharedPreferences});
