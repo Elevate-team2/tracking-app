@@ -1,54 +1,36 @@
-name: Docker Build and Push
+name: Slack Notification - Validate Branch Name
 
 on:
-  push:
-   
+  workflow_run:
+    workflows: ["Validate Branch Name"]
+    types:
+      - completed
+
 jobs:
-  build:
+  notify-slack:
     runs-on: ubuntu-latest
-    env:
-      REPOSITORY_URL: docker.pkg.github.com
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    if: always()  # هيتنفذ حتى لو الجوب فشل
 
     steps:
-      - name: Slack - Starting
-        uses: act10ns/slack@v2
-        with:
-          status: starting
-          channel: '#workflows'
-          message: Starting Docker Build and Push...
-        if: always()
+      - name: Determine Slack Status Emoji
+        id: status
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "emoji=:white_check_mark:" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
+            echo "emoji=:x:" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
+            echo "emoji=:stop_sign:" >> $GITHUB_OUTPUT
+          else
+            echo "emoji=:grey_question:" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Variables
-        id: vars
-        run: echo "SHORT_COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-      - name: Set lowercase repo
-        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
-
-      - name: Build image
-        run: >-
-          docker build
-          -t $REPO_LC/alerta-cli
-          -t $REPOSITORY_URL/$REPO_LC/alerta-cli:${{ env.SHORT_COMMIT_ID }}
-          -t $REPOSITORY_URL/$REPO_LC/alerta-cli:latest .
-
-      - name: Docker Login
-        env:
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        run: docker login $REPOSITORY_URL --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
-
-      - name: Publish Image
-        run: docker push $REPOSITORY_URL/$REPO_LC/alerta-cli
-
-      - name: Slack - Result
-        uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#workflows'
-        if: always()
+      - name: Send Slack Notification
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+          -H "Content-type: application/json" \
+          --data '{
+            "channel":"C09GFR4UP3N",
+            "text":"${{ steps.status.outputs.emoji }} Workflow *${{ github.event.workflow_run.name }}* انتهى بالحالة *${{ github.event.workflow_run.conclusion }}* \n🔀 Branch: *${{ github.event.workflow_run.head_branch }}*\n👤 Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+          }' \
+          https://slack.com/api/chat.postMessage
