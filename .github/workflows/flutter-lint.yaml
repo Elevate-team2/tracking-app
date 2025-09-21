@@ -33,6 +33,3 @@ jobs:
       - name: Run Flutter Analyzer
         run: flutter analyze
 
-
-      - name: Force Fail (for testing Slack notification)
-        run: exit 1
