@@ -5,6 +5,7 @@ import 'package:tracking_app/core/constants/constants.dart';
 
 
 @singleton
+
 class AppLanguageConfig extends ChangeNotifier {
   SharedPreferences sharedPreferences;
   AppLanguageConfig({required this.sharedPreferences});
