@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
+import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
 
 
 abstract class Routes {
@@ -7,7 +9,10 @@ abstract class Routes {
     final url = Uri.parse(settings.name ?? "/");
 
     switch (url.path) {
-     
+
+case (AppRoute.loginRoute):
+  return MaterialPageRoute(builder: (context)=>
+      LoginScreen());
 
       default:
         return MaterialPageRoute(

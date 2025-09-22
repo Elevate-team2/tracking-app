@@ -6,20 +6,25 @@ import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
+
+import 'feature/auth/api/data_source/local/user_local_storage_impl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
+  await UserLocalStorageImpl().init();
   runApp(
-    DevicePreview(
-      builder: (context) => ChangeNotifierProvider.value(
+    //DevicePreview(
+      //builder: (context) =>
+          ChangeNotifierProvider.value(
         value: getIt.get<AppLanguageConfig>(),
         child: MyApp(),
       ),
-    ),
+   // ),
   );
 }
 
@@ -36,7 +41,9 @@ class MyApp extends StatelessWidget {
       baseSize: const Size(375, 812),
       height: context.screenHight,
       width: context.screenWidth,
+
       child: MaterialApp(
+        initialRoute: AppRoute.loginRoute,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
