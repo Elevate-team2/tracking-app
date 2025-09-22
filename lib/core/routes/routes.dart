@@ -10,7 +10,7 @@ abstract class Routes {
     switch (url.path) {
       case '/':
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const ApplyScreen(),
           settings: settings,
         );
 

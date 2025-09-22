@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ApplyScreen extends StatelessWidget {
+  const ApplyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
         ),
         centerTitle: false,
         elevation: 0,
+        leading: BackButton(),
       ),
       body: SingleChildScrollView(
         child: Padding(
