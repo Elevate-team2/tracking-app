@@ -4,6 +4,7 @@ import 'package:tracking_app/core/theme/font_style_manger.dart';
 
 class CustomTxtField extends StatelessWidget {
   const CustomTxtField({
+    super.key,
     required this.hintTxt,
     required this.lbl,
     required this.controller,

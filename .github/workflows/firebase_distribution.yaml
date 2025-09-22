@@ -20,7 +20,7 @@ jobs:
       ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
     steps:
-      - name: Checkout My Code 
+      - name: Checkout My Code
         uses: actions/checkout@v3
 
       - name: Setup Java 17

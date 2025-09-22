@@ -9,7 +9,7 @@ import 'package:tracking_app/feature/auth/api/models/login/response/login_respon
 import '../../../data/data_source/remote/auth_remote_data_source.dart';
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
- AuthApiServices _apiServices;
+ final AuthApiServices _apiServices;
  AuthRemoteDataSourceImpl(this._apiServices);
   @override
   Future<Result<LoginResponse>> login(LoginRequest request)async {

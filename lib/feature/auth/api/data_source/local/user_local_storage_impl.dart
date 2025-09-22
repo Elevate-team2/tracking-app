@@ -10,12 +10,15 @@ class UserLocalStorageImpl implements  UserLocalStorage{
 
      storage = FlutterSecureStorage();
   }
+  @override
   Future<void>saveToken(String token)async{
     await storage!.write(key: Constants.token, value: token);
   }
+  @override
 Future<String?>getToken()async{
  return  await storage!.read(key: Constants.token);
 }
+  @override
  Future<void>deleteToken()async{
     await storage!.delete(key: Constants.token);
   }

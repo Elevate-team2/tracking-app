@@ -1,32 +1,42 @@
-name: Notify Slack on Workflow Result
+name: Slack Notifications for All Updates
 
 on:
-  workflow_run:
-    workflows: [
-      "Firebase Distribution",
-      "Flutter Linting",
-      "Validate PR Title",
-      "SonarQube Analysis",
-      "Validate Branch Name",
-      "Validate unit testing"
-    ]
+  push:
+    branches:
+  pull_request:
     types:
-      - completed
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - closed
 
 jobs:
-  notify:
+  notify-slack:
     runs-on: ubuntu-latest
-    if: always()
     steps:
-      - name: Notify Slack
-        uses: slackapi/slack-github-action@v1.27.0
-        with:
-          slack-message: |
-            Workflow: ${{ github.event.workflow_run.name }}
-            Branch: ${{ github.event.workflow_run.head_branch }}
-            Actor: ${{ github.event.workflow_run.actor.login }}
-            Status: ${{ github.event.workflow_run.conclusion }}
-            Check run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
-          channel-id: 'C09GFR4UP3N'
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Determine Event Info
+        id: info
+        run: |
+          SEPARATOR="─────────────────"
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "message=${SEPARATOR}\n🚀 Push on branch *${{ github.ref_name }}* by *${{ github.actor }}*\n➡️ Commit: ${{ github.sha }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            PR_ACTION="${{ github.event.action }}"
+            PR_NUMBER="${{ github.event.number }}"
+            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+            PR_ACTOR="${{ github.event.pull_request.user.login }}"
+            echo "message=${SEPARATOR}\n🔀 Pull Request #${PR_NUMBER} ${PR_ACTION} on branch *${PR_BRANCH}* by *${PR_ACTOR}*\n${SEPARATOR}" >> $GITHUB_OUTPUT
+          else
+            echo "message=${SEPARATOR}\n❓ Unknown event: ${{ github.event_name }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send Slack Notification
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+          -H "Content-type: application/json" \
+          --data "{
+            \"channel\":\"C09GFR4UP3N\",
+            \"text\":\"${{ steps.info.outputs.message }}\"
+          }" \
+          https://slack.com/api/chat.postMessage

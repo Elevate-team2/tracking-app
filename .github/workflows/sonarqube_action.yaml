@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+
     steps:
       - uses: actions/checkout@v5
         with:
@@ -31,7 +32,7 @@ jobs:
         run: flutter test --coverage
 
 
-    
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
@@ -52,8 +53,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
-     
-          
+
 
 
 

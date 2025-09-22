@@ -7,8 +7,8 @@ import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_da
 import '../../domain/repositry/auth_repositry.dart';
   @Injectable(as: AuthRepositry)
 class AuthRepositryImpl implements  AuthRepositry{
-  AuthRemoteDataSource _authRemoteDataSource;
-  AuthRepositryImpl(this._authRemoteDataSource);
+ final  AuthRemoteDataSource _authRemoteDataSource;
+   AuthRepositryImpl(this._authRemoteDataSource);
   @override
   Future<Result<LoginResponse>> login(LoginRequest request) async{
  return await _authRemoteDataSource.login(request);
