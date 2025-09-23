@@ -11,7 +11,7 @@ part 'forget_password_event.dart';
 @Injectable()
 class ForgetPasswordBloc
     extends Bloc<ForgetPasswordEvent, ForgetPasswordState> {
-  ForgetPasswordUseCase _useCase;
+  final ForgetPasswordUseCase _useCase;
   ForgetPasswordBloc(this._useCase) : super(ForgetPasswordState()) {
     on<SupmitEmailEvent>(_onSupmiEmail);
   }
