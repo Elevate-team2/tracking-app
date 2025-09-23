@@ -4,7 +4,7 @@ import 'package:tracking_app/feature/auth/domain/repositry/auth_repositry.dart';
 
 @Injectable()
 class ForgetPasswordUseCase {
-  AuthRepositry _authRepositry;
+  final AuthRepositry _authRepositry;
   ForgetPasswordUseCase(this._authRepositry);
 
   Future<Result<String>> call(String email)async{
