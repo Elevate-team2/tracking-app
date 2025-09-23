@@ -27,11 +27,13 @@ jobs:
       - name: Add Flutter to PATH
         run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
 
+
+      - name: Generate files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Run tests
         run: flutter test --coverage
 
-
-    
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
@@ -52,8 +54,3 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
-     
-          
-
-
-
