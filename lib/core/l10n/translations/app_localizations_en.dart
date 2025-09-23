@@ -10,4 +10,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noRouteFound => 'No Route Found';
+
+  @override
+  String get submitted => 'Your application has been submitted!';
+
+  @override
+  String get thankYou =>
+      'Thank you for providing your application, we will review your application and will get back to you soon.';
+
+  @override
+  String get login => 'Login';
 }

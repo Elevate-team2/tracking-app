@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
+import 'package:tracking_app/feature/application/presentation/view/approve_screen.dart';
 
 import '../../feature/application/presentation/view/apply_screen.dart';
 
@@ -11,6 +13,11 @@ abstract class Routes {
       case '/':
         return MaterialPageRoute(
           builder: (context) => const ApplyScreen(),
+          settings: settings,
+        );
+      case AppRoute.approveScreen:
+        return MaterialPageRoute(
+          builder: (context) => const ApproveScreen(),
           settings: settings,
         );
 
