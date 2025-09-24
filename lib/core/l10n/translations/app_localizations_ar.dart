@@ -9,5 +9,15 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get noRouteFound => 'لا يوجد صفحه بهذا الاسم';
+  String get noRouteFound => 'لا يوجد صفحة بهذا الاسم';
+
+  @override
+  String get submitted => 'تم إرسال طلبك بنجاح!';
+
+  @override
+  String get thankYou =>
+      'شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.';
+
+  @override
+  String get login => 'تسجيل';
 }

@@ -7,11 +7,11 @@ class DeviceUtils {
   }
 
   static bool isTablet(BuildContext context) {
-    return context.screenWidth >= 600 && context.scaleWidth < 1200;
+    return context.screenWidth >= 600 && context.screenWidth< 1200;
   }
 
   static bool isDesktop(BuildContext context) {
-    return context.scaleWidth >= 1200;
+    return context.screenWidth >= 1200;
   }
 
   static valueDecider<T>(
