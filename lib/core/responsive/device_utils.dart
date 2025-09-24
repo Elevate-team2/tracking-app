@@ -14,7 +14,7 @@ class DeviceUtils {
     return context.scaleWidth >= 1200;
   }
 
-  static valueDecider<T>(
+  static T  valueDecider<T>(
     BuildContext context, {
     required T onMobile,
     T? onTablet,

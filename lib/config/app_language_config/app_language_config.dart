@@ -14,7 +14,7 @@ class AppLanguageConfig extends ChangeNotifier {
   bool isEn() => selectedLocal == Constants.enLocal;
   @preResolve
   Future<void> setSelectedLocal()async {
-    var currentLocal = sharedPreferences.getString(
+    final  currentLocal = sharedPreferences.getString(
       Constants.sharedPrefrenceKeyLanguage,
     );
     selectedLocal = currentLocal??Constants.enLocal;

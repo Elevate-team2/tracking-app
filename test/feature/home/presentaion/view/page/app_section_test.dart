@@ -19,7 +19,7 @@ void main() {
           builder: (context) {
             myContext = context;
 
-            return AppSection();
+            return const AppSection();
           },
         ),
       ),
@@ -45,11 +45,11 @@ void main() {
 
   testWidgets('verify pageView drag', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
 
-        home: AppSection(),
+        home:  AppSection(),
       ),
     );
     BottomNavigationBar bottomNavBar;
@@ -108,7 +108,7 @@ void main() {
 
   testWidgets('verify bottomNavigationBar', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
 
@@ -118,7 +118,7 @@ void main() {
     BottomNavigationBar bottomNavBar;
     PageView pageView;
 
-    await tester.tap(find.byKey(Key("nav_orders")));
+    await tester.tap(find.byKey( const Key("nav_orders")));
     await tester.pumpAndSettle();
     bottomNavBar = tester.widget<BottomNavigationBar>(
       find.byType(BottomNavigationBar),
@@ -129,7 +129,7 @@ void main() {
     expect(bottomNavBar.currentIndex, 1);
     expect(pageView.controller!.page, 1);
 
-    await tester.tap(find.byKey(Key("nav_profile")));
+    await tester.tap(find.byKey(const Key("nav_profile")));
     await tester.pumpAndSettle();
     bottomNavBar = tester.widget<BottomNavigationBar>(
       find.byType(BottomNavigationBar),
@@ -139,7 +139,7 @@ void main() {
     expect(bottomNavBar.currentIndex, 2);
     expect(pageView.controller!.page, 2);
 
-    await tester.tap(find.byKey(Key("nav_home")));
+    await tester.tap(find.byKey(const Key("nav_home")));
     await tester.pumpAndSettle();
     pageView = tester.widget<PageView>(find.byType(PageView));
     bottomNavBar = tester.widget<BottomNavigationBar>(
