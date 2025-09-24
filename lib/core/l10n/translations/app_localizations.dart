@@ -149,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @rememberMe.
   ///
   /// In en, this message translates to:
-  /// **'Remember me'**
+  /// **'Remember Me'**
   String get rememberMe;
 
   /// No description provided for @successLogin.

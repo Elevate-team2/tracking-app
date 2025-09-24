@@ -32,19 +32,19 @@ final bool isPassword;
             fontSize: 14.0),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(4.0),
-            borderSide: BorderSide(
+            borderSide:const BorderSide(
                 color: AppColors.gray
             )
         ),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(4.0),
-            borderSide: BorderSide(
+            borderSide:const  BorderSide(
                 color: AppColors.gray
             )
         ),
         border: OutlineInputBorder(
 borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(
+          borderSide:const BorderSide(
             color: AppColors.gray
           )
         )

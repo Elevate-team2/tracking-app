@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetPassword => 'Forget Password';
 
   @override
-  String get rememberMe => 'Remember me';
+  String get rememberMe => 'Remember Me';
 
   @override
   String get successLogin => '✅ Success Login';

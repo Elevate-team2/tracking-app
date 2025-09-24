@@ -10,9 +10,9 @@ import 'package:tracking_app/feature/auth/presentation/view_model/login_view_mod
 import '../../../domain/use_case/login_use_case.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent,LoginStates>{
-  LoginUseCase useCase;
+ final LoginUseCase useCase;
   String?token;
-  LoginBloc(this.useCase):super(LoginStates()){
+   LoginBloc(this.useCase):super(const LoginStates()){
 
     on<GetLoginEvent>((event,emit)async{
      emit(state.copyWith(
@@ -29,6 +29,9 @@ switch(result){
   token=result.sucessResult.token;
   if (state.rememberMe && token != null) {
     await UserLocalStorageImpl.saveToken(token!);
+    emit(state.copyWith(
+      rememberMe: true,
+    ));
   }
   case FailedResult<LoginResponse>():
     emit(state.copyWith(

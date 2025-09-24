@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:provider/provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
-import 'package:tracking_app/core/routes/app_route.dart';
-import 'package:tracking_app/core/routes/routes.dart';
-import 'package:tracking_app/core/theme/app_theme.dart';
+import 'package:tracking_app/core/responsive/size_provider.dart';
+
 import 'package:tracking_app/core/utils/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
+import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -25,10 +24,10 @@ void main() {
 
   setUp(() async {
     mockLoginBloc = MockLoginBloc();
-    when(mockLoginBloc.state).thenReturn(LoginStates());
+    when(mockLoginBloc.state).thenReturn(const LoginStates());
     when(
       mockLoginBloc.stream,
-    ).thenAnswer((_) => Stream.fromIterable([LoginStates()]));
+    ).thenAnswer((_) => Stream.fromIterable([const LoginStates()]));
     getIt.registerFactory<LoginBloc>(() => mockLoginBloc);
   });
 
@@ -39,15 +38,20 @@ void main() {
 
   Widget prepareWidget() {
     return MaterialApp(
+
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: AppRoute.loginRoute,
-      routes: {
-        AppRoute.loginRoute: (context) => BlocProvider(
+
+      home: SizeProvider(
+        baseSize: const Size(375, 812), //
+        height: 812,
+        width: 375,
+        child: BlocProvider(
           create: (context) => mockLoginBloc,
-          child: LoginScreen(),
+          child: const LoginScreen(),
         ),
-      },
+      ),
+
     );
   }
 
@@ -64,31 +68,81 @@ void main() {
     expect(find.text("Remember Me"), findsOneWidget);
     expect(find.text('Forget Password'), findsOneWidget);
   });
-  testWidgets("validation fails with invalid inputs", (WidgetTester tester)
-  async{
+  testWidgets("validation fails with invalid inputs", (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(prepareWidget());
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(CustomTxtField).first, "invalid_email");
     await tester.enterText(find.byType(CustomTxtField).last, "invvalid");
     await tester.tap(find.byType(ElevatedButton));
-verifyNever(mockLoginBloc..add(any));
+    verifyNever(mockLoginBloc..add(any));
   });
-  testWidgets("validation fails with valid inputs", (WidgetTester tester)async{
+  testWidgets("validation fails with valid inputs", (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(prepareWidget());
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(CustomTxtField).first, "mariam@gmail.com");
+    await tester.enterText(
+      find.byType(CustomTxtField).first,
+      "mariam@gmail.com",
+    );
     await tester.enterText(find.byType(CustomTxtField).last, "Mariam257@");
-await tester.tap(find.byType(ElevatedButton));
+    await tester.tap(find.byType(ElevatedButton));
     await tester.pumpAndSettle();
-verify(mockLoginBloc..add(GetLoginEvent(LoginRequest(
-  email:  "mariam@gmail.com",
-  password: "Mariam257@"
-))));
+    verify(
+      mockLoginBloc..add(
+        GetLoginEvent(
+          LoginRequest(email: "mariam@gmail.com", password: "Mariam257@"),
+        ),
+      ),
+    );
   });
-
-  testWidgets("Verfiy Loading State ", (WidgetTester tester) async {
+final successResponse=LoginResponse(message: "success",
+    token: "qwertyuiolmnbgfe334567io_SDFGHg");
+  testWidgets("Checkbox toggles rememberMe state", (WidgetTester tester) async {
     await tester.pumpWidget(prepareWidget());
+    final checkBox = find.byType(Checkbox);
+    await tester.tap(checkBox);
+    await tester.pump();
+    verify(mockLoginBloc..add(RememberMeEvent(true))).called(1);
+  });
+  testWidgets(" Login Success with Button Tap", (WidgetTester tester)
+  async {
+    await tester.pumpWidget(prepareWidget());
+    when( mockLoginBloc.stream).thenAnswer((_)
+    => Stream.fromIterable([
+      LoginStates(
+      requestState: RequestState.success,
+      loginResponse: successResponse,
+    )]));
 
 
+    await tester.pump();
+    expect(find.text('Continue'), findsOneWidget);
+    await tester.tap(find.text('Continue'));
+    await tester.pumpAndSettle();
+    //expect(find.byType(SnackBar), findsOneWidget);
+  });
+const  errorMessage="Something went Wrong";
+  testWidgets(" Login Failed with Button Tap", (WidgetTester tester)async{
+    await tester.pumpWidget(prepareWidget());
+    when( mockLoginBloc.stream).thenAnswer((_)
+    => Stream.fromIterable([
+  const    LoginStates(
+        requestState: RequestState.error,
+errorMessageLogin: errorMessage
+      )]));
+
+
+    await tester.pump();
+    expect(find.text('Continue'), findsOneWidget);
+    await tester.tap(find.text('Continue'));
+    await tester.pumpAndSettle();
   });
 }
+
+
+
+
+

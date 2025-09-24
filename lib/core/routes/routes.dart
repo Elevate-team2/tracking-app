@@ -13,10 +13,10 @@ abstract class Routes {
 
 case (AppRoute.loginRoute):
   return MaterialPageRoute(builder: (context)=>
-      LoginScreen());
+  const   LoginScreen());
       case (AppRoute.testRoute):
         return MaterialPageRoute(builder: (context)=>
-            TestScreen());
+        const    TestScreen());
       default:
         return MaterialPageRoute(
           builder: (context) {

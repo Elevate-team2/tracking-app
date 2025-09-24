@@ -10,7 +10,7 @@ import '../../../data/data_source/remote/auth_remote_data_source.dart';
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
  final AuthApiServices _apiServices;
- AuthRemoteDataSourceImpl(this._apiServices);
+ const AuthRemoteDataSourceImpl(this._apiServices);
   @override
   Future<Result<LoginResponse>> login(LoginRequest request)async {
 try{

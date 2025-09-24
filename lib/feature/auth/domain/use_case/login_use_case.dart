@@ -7,10 +7,10 @@ import '../../api/models/login/response/login_response.dart';
 
 @injectable
 class LoginUseCase{
-  final AuthRepositry _authRepositry;
-const  LoginUseCase(this._authRepositry);
+  final AuthRepositry _authRepo;
+const  LoginUseCase(this._authRepo);
   Future<Result<LoginResponse>>login(LoginRequest request)async{
-    return await _authRepositry.login(request);
+    return await _authRepo.login(request);
   }
 
 }
