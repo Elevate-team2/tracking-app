@@ -12,8 +12,10 @@ class ApproveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        key: const Key("stack1"),
         children: [
           Align(
+             key: const Key("align1"),
             alignment: Alignment.bottomCenter,
             child: Image.asset(
               "assets/images/wave.png",
@@ -23,6 +25,7 @@ class ApproveScreen extends StatelessWidget {
             ),
           ),
           Center(
+            key: const Key("center1"),
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: context.setWidth(20),
@@ -63,7 +66,9 @@ class ApproveScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // navigate to login page
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
                           vertical: context.setHight(12),
