@@ -27,6 +27,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 
+  @override
+  Future<Result<String>> verifyResetCode(String code) async {
+    try {
+      final response = await _authApiServices.verifyResetCode({"resetCode": code});
+        final message = response['status'] ?? response['message'] ?? "Success";
+        return SucessResult<String>(message);
+
+
+    } on DioException catch (dioError) {
+      final errorMessage = dioError.response?.data['error'] ??
+          dioError.response?.data['message'] ??
+          dioError.message;
+      return FailedResult<String>(errorMessage);
+    } catch (error) {
+      return FailedResult<String>(error.toString());
+    }
+  }
+
 
 }
 

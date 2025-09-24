@@ -6,5 +6,13 @@
       "forgetPassword": "نسيت كلمة المرور",
       "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
       "enterEmail": "أدخل بريدك الإلكتروني",
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "verifyCode": "تحقق من الرمز",
+      "emailVerification": "التحقق من البريد الإلكتروني",
+      "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
+      "verify": "تحقق",
+      "didNotReceiveCode": "لم يصلك الرمز؟",
+      "resend": "إعادة إرسال",
+      "success": "تم بنجاح ✅",
+      "error": "خطأ ❌"
 }

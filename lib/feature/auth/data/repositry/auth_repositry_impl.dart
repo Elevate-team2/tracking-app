@@ -12,4 +12,10 @@ class AuthRepositryImpl implements  AuthRepositry{
   Future<Result<String>> forgetPassword(String email)async {
     return await _authRemoteDataSource.forgetPassword(email);
   }
+
+  @override
+  Future<Result<String>> verifyResetCode(String code)async{
+    return await _authRemoteDataSource.verifyResetCode(code);
+  }
+
 }

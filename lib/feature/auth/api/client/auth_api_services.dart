@@ -7,12 +7,17 @@ part 'auth_api_services.g.dart';
 
 @RestApi(baseUrl: EndPointsConstants.baseUrl)
 @injectable
-abstract class AuthApiServices{
+abstract class AuthApiServices {
   @factoryMethod
-  factory AuthApiServices(Dio dio)=_AuthApiServices;
+  factory AuthApiServices(Dio dio) = _AuthApiServices;
 
   @POST(EndPointsConstants.forgetPass)
   Future<ForgetPasswordResponse> forgetPassword(
-      @Body() Map<String, dynamic> body,
-      );
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST(EndPointsConstants.verifyCode)
+  Future<Map<String, String>> verifyResetCode(
+      @Body() Map<String, String> body);
+
 }
