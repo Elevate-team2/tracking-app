@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       width: context.screenWidth,
 
       child: MaterialApp(
-        initialRoute: AppRoute.loginRoute,
+        initialRoute: AppRoute.login,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

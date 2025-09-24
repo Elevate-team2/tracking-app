@@ -8,7 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-
     steps:
       - uses: actions/checkout@v5
         with:
@@ -25,13 +24,15 @@ jobs:
       - name: Install packages
         run: flutter pub get
 
+    
+      - name: Generate files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Add Flutter to PATH
         run: echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
 
       - name: Run tests
         run: flutter test --coverage
-
-
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
@@ -45,6 +46,10 @@ jobs:
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
             -Dsonar.branch.name=main
+            -Dsonar.exclusions=/.g.dart,/.freezed.dart,/*.config.dart
+            -Dsonar.coverage.exclusions=/.g.dart,/.freezed.dart,/*.config.dart
+            -Dsonar.dart.lcov.reportPaths=coverage/lcov.info
+
 
       - name: SonarQube Quality Gate Check
         uses: SonarSource/sonarqube-quality-gate-action@master
@@ -53,7 +58,3 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_URL }}
-
-
-
-
