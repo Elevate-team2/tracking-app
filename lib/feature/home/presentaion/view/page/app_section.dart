@@ -34,7 +34,7 @@ class _AppSectionState extends State<AppSection> {
           });
         },
 
-        children: [HomePage(), OrderPage(), ProfilePage()],
+        children: const [HomePage(), OrderPage(), ProfilePage()],
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -43,22 +43,22 @@ class _AppSectionState extends State<AppSection> {
           setState(() {
             _pageController.animateToPage(
               value,
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.decelerate,
             );
           });
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, key: Key(Constants.homeKey)),
+            icon: const Icon(Icons.home, key: Key(Constants.homeKey)),
             label: context.loc.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu, key: Key(Constants.orderkey)),
+            icon: const  Icon(Icons.menu, key: Key(Constants.orderkey)),
             label: context.loc.orders,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, key: Key(Constants.profileKey)),
+            icon: const Icon(Icons.person, key: Key(Constants.profileKey)),
             label: context.loc.profile,
           ),
         ],

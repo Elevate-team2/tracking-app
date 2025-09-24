@@ -6,7 +6,7 @@ import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart
 
 abstract class Routes {
   static Route onGenerate(RouteSettings settings) {
-    final url = Uri.parse(settings.name ?? "/");
+    final url = Uri.parse(settings.name ??   '/');
 
     switch (url.path) {
 
@@ -14,7 +14,7 @@ abstract class Routes {
        return MaterialPageRoute(
           builder: (context) {
 
-            return AppSection();
+            return const  AppSection();
           },
         );
 

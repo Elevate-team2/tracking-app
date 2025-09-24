@@ -45,6 +45,8 @@ jobs:
             -Dsonar.tests=test
             -Dsonar.dart.analyzer.mode=FLUTTER
             -Dsonar.branch.name=main
+            -Dsonar.exclusions=**/*.g.dart,**/*.freezed.dart,**/*.config.dart
+            -Dsonar.coverage.exclusions=**/*.g.dart,**/*.freezed.dart,**/*.config.dart
 
       - name: SonarQube Quality Gate Check
         uses: SonarSource/sonarqube-quality-gate-action@master

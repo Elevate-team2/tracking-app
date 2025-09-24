@@ -5,8 +5,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Text("HomePage",style: TextStyle(fontSize: 100),),
+    return  const Scaffold(
+      body:  Text( 'HomePage',style: TextStyle(fontSize: 100),),
     );
   }
 }
