@@ -8,7 +8,7 @@ analyzer:
     - "build/**"
 
   errors:
-    # لو عايزة warnings بس مش توقف الـ build
+
     unused_import: warning
     dead_code: warning
 
