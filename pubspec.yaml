@@ -25,7 +25,10 @@ dependencies:
   retrofit: ^4.7.2
   json_annotation: ^4.9.0
   dio_cache_interceptor: ^4.0.3
-
+  equatable: ^2.0.7
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
+  image_picker: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

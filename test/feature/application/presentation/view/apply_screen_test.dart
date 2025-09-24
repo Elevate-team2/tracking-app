@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tracking_app/feature/application/presentation/view/apply_screen.dart';
+import 'package:tracking_app/feature/auth/presentation/view/screens/apply_screen.dart';
 
 void main() {
   testWidgets('ApplyScreen UI test', (WidgetTester tester) async {

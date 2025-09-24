@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 
-import '../../feature/application/presentation/view/apply_screen.dart';
+import '../../config/di/di.dart';
+import '../../feature/auth/presentation/bloc/apply_bloc.dart';
+import '../../feature/auth/presentation/view/screens/apply_screen.dart';
 
 abstract class Routes {
   static Route onGenerate(RouteSettings settings) {
@@ -10,10 +13,12 @@ abstract class Routes {
     switch (url.path) {
       case '/':
         return MaterialPageRoute(
-          builder: (context) => const ApplyScreen(),
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<ApplyDriverBloc>(),
+            child: const ApplyScreen(),
+          ),
           settings: settings,
         );
-
 
       default:
         return MaterialPageRoute(

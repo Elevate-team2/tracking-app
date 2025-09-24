@@ -1,14 +1,14 @@
+sealed class Result<T> {
+  const Result();
+}
 
-sealed class Result<t> {}
-
-class SucessResult<T> extends Result<T> {
-  T sucessResult;
-  SucessResult(this.sucessResult);
+class SuccessResult<T> extends Result<T> {
+  final T data;
+  const SuccessResult(this.data);
 }
 
 class FailedResult<T> extends Result<T> {
-  String errorMessage;
-
-  FailedResult(this.errorMessage);
-
+  final String message;
+  final String? error;
+  const FailedResult(this.message, [this.error]);
 }

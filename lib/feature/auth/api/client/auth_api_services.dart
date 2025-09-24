@@ -2,11 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../../core/constants/end_points_constants.dart';
+import '../../data/models/auth_response.dart';
+
 part 'auth_api_services.g.dart';
 
 @RestApi(baseUrl: EndPointsConstants.baseUrl)
 @injectable
-abstract class AuthApiServices{
+abstract class AuthApiServices {
   @factoryMethod
-  factory AuthApiServices(Dio dio)=_AuthApiServices;
+  factory AuthApiServices(Dio dio) = _AuthApiServices;
+
+  @POST("apply")
+  Future<AuthResponse> applyDriver(@Body() Map<String, dynamic> body);
 }

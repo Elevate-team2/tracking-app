@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
-// import 'package:tracking_app/feature/auth/data/repositry/auth_repositry_impl.dart';
+// import 'package:tracking_app/feature/auth/data/repositry/apply_repositry_impl.dart';
 //
 // import 'auth_repositry_impl_test.mocks.dart';
 @GenerateMocks([AuthRemoteDataSource])
