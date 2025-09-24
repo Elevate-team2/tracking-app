@@ -4,11 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/apply_screen.dart';
 
-import 'mock_bloc.dart'; // ده اللي انت عملته
+import 'mock_bloc.dart';
 
 import 'package:tracking_app/feature/auth/presentation/bloc/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/bloc/apply_state.dart';
-import 'package:tracking_app/feature/auth/presentation/bloc/apply_event.dart';
 
 void main() {
   late MockApplyDriverBloc mockBloc;
