@@ -1,93 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/apply_screen.dart';
 
+import 'mock_bloc.dart'; // ده اللي انت عملته
+
+import 'package:tracking_app/feature/auth/presentation/bloc/apply_bloc.dart';
+import 'package:tracking_app/feature/auth/presentation/bloc/apply_state.dart';
+import 'package:tracking_app/feature/auth/presentation/bloc/apply_event.dart';
+
 void main() {
-  testWidgets('ApplyScreen UI test', (WidgetTester tester) async {
-    // Arrange: Build ApplyScreen MaterialApp
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: ApplyScreen(),
-      ),
-    );
+  late MockApplyDriverBloc mockBloc;
 
-    // Act:
-
-    // Assert: AppBar title
-    expect(find.text('Apply'), findsOneWidget);
-
-    //  welcome text
-    expect(find.text('Welcome!!'), findsOneWidget);
-
-    //  dropdown Country
-    expect(find.text('🇪🇬 Egypt'), findsOneWidget);
-
-    //  TextFormField (First legal name)
-    expect(find.byType(TextFormField), findsNWidgets(9));
-
-    //  Radio Buttons
-    expect(find.text('Female'), findsOneWidget);
-    expect(find.text('Male'), findsOneWidget);
-
-    //   Continue
-    expect(find.text('Continue'), findsOneWidget);
-    expect(find.byType(ElevatedButton), findsOneWidget);
+  setUp(() {
+    mockBloc = MockApplyDriverBloc();
   });
-  testWidgets('ApplyScreen form interaction test', (WidgetTester tester) async {
-    // Arrange
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: ApplyScreen(),
+
+  Widget makeTestable(Widget child) {
+    return MaterialApp(
+      home: BlocProvider<ApplyDriverBloc>.value(
+        value: mockBloc,
+        child: child,
       ),
     );
+  }
 
-    // Act + Assert
-
-    // First legal name
-    await tester.enterText(
-      find.widgetWithText(TextFormField, 'Enter first legal name'),
-      'Mahmoud',
+  testWidgets('renders ApplyScreen correctly', (tester) async {
+    // Arrange
+    when(() => mockBloc.state).thenReturn(
+      const ApplyDriverState(requestState: RequestState.init),
     );
-    expect(find.text('Mahmoud'), findsOneWidget);
 
-    // Second legal name
-    await tester.enterText(
-      find.widgetWithText(TextFormField, 'Enter second legal name'),
-      'Ibrahim',
+    // Act
+    await tester.pumpWidget(makeTestable(const ApplyScreen()));
+
+    // Assert
+    expect(find.text('Apply'), findsOneWidget);
+    expect(find.text('Welcome!!'), findsOneWidget);
+    expect(find.text('Submit'), findsOneWidget);
+  });
+
+  testWidgets('shows loading when state is loading', (tester) async {
+    // Arrange
+    when(() => mockBloc.state).thenReturn(
+      const ApplyDriverState(requestState: RequestState.loading),
     );
-    expect(find.text('Ibrahim'), findsOneWidget);
 
-    //  Email
-    await tester.enterText(
-      find.widgetWithText(TextFormField, 'Enter your email'),
-      'test@example.com',
+    // Act
+    await tester.pumpWidget(makeTestable(const ApplyScreen()));
+
+    // Assert
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testWidgets('shows success state after submission', (tester) async {
+    // Arrange
+    when(() => mockBloc.state).thenReturn(
+      const ApplyDriverState(requestState: RequestState.success),
     );
-    expect(find.text('test@example.com'), findsOneWidget);
 
-    //   Phone number
-    await tester.enterText(
-      find.widgetWithText(TextFormField, 'Enter phone number'),
-      '01012345678',
+    // Act
+    await tester.pumpWidget(makeTestable(const ApplyScreen()));
+
+    // Assert
+    expect(find.text('Submitted ✅'), findsOneWidget);
+  });
+
+  testWidgets('shows error when state is error', (tester) async {
+    // Arrange
+    when(() => mockBloc.state).thenReturn(
+      const ApplyDriverState(requestState: RequestState.error, error: "Failed"),
     );
-    expect(find.text('01012345678'), findsOneWidget);
 
-    //   ID number
-    await tester.enterText(
-      find.widgetWithText(TextFormField, 'Enter national ID number'),
-      '12345678901234',
-    );
-    expect(find.text('12345678901234'), findsOneWidget);
+    // Act
+    await tester.pumpWidget(makeTestable(const ApplyScreen()));
 
-    //  Dropdown Vehicle type
-    await tester.tap(find.text('Car'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Bike').last);
-    await tester.pumpAndSettle();
-    expect(find.text('Bike'), findsOneWidget);
-
-    //    Continue
-    await tester.tap(find.text('Continue'));
-    await tester.pump();
-    expect(find.text('Continue'), findsOneWidget);
+    // Assert
+    expect(find.text('Retry'), findsOneWidget);
   });
 }
