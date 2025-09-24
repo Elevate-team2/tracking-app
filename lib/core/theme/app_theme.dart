@@ -14,7 +14,7 @@ abstract class AppTheme {
         titleSpacing: 0,
         elevation: 0,
         centerTitle: false,
-        iconTheme: IconThemeData(color: AppColors.black,size: 30),
+        iconTheme: const IconThemeData(color: AppColors.black,size: 30),
         titleTextStyle: GoogleFonts.roboto(
           color: AppColors.black,
           fontSize: 24,
@@ -48,15 +48,15 @@ abstract class AppTheme {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(color: AppColors.red),
+          borderSide: const BorderSide(color: AppColors.red),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: AppColors.red, width: 2.0),
+          borderSide: const BorderSide(color: AppColors.red, width: 2.0),
         ),
         labelStyle: GoogleFonts.roboto(color: AppColors.black, fontSize: 16),
         hintStyle: GoogleFonts.roboto(color: AppColors.black[55], fontSize: 14),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        contentPadding:const  EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
     
     );
