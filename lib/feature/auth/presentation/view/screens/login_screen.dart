@@ -5,12 +5,16 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/utils/request_state/request_state.dart';
 import 'package:tracking_app/core/utils/validator.dart';
+import 'package:tracking_app/feature/auth/api/data_source/local/user_local_storage_impl.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_states.dart';
+
+import '../../../../../core/extensions/app_localization_extenstion.dart';
+import '../../../../../core/routes/app_route.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -40,8 +44,14 @@ class _LoginScreenState extends State<LoginScreen> {
           listener: (context,state){
             if(state.requestState==RequestState.success){
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
-              Text("Success Login")));
+              Text(context.loc.successLogin)));
+              Navigator.pushReplacementNamed(context, AppRoute.testRoute);
             }
+            if(state.requestState==RequestState.error){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
+              Text(state.errorMessageLogin!)));
+            }
+
             },
           builder:(context,state){
             return        Scaffold(
@@ -50,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       icon: Icon(Icons.arrow_back_ios_new_outlined,
                         size: 16.0,
                         color: AppColors.black[0]!,)),
-                  title: Text("Login",style:
+                  title: Text(context.loc.login,style:
 
                   getMediumStyle(color:
                   AppColors.black[0]!,
@@ -62,10 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         key: formKey,
                         child:       Column(
                           children: [
-                            CustomTxtField(hintTxt: "Enter your E-mail", lbl: "E-mail",
+                            CustomTxtField(hintTxt: context.loc.enterYourEmail,
+                                lbl: context.loc.email,
                                 controller: emailController, validator: Validator.validateEmail),
                             const SizedBox(height: 20.0,),
-                            CustomTxtField(hintTxt: "Enter your Password", lbl: "Password",
+                            CustomTxtField(hintTxt: context.loc.enterYourPassword,
+                                lbl: context.loc.password,
                                 controller: passwordController,isPassword: true,
                                 validator: Validator.validatePassword),
                             const SizedBox(height: 20.0,),
@@ -76,17 +88,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   child: Checkbox(value:state.rememberMe ,
                                       onChanged: (value){
-                                        context.read<LoginBloc>().add(
-                                            RememberMeEvent(value??false));
+                                        if (value != null) {
+                                          context.read<LoginBloc>()
+                                              .add(RememberMeEvent(value));
+                                        }
                                       }),
                                 ),
 
-                                Text("Remember me",
+                                Text(context.loc.rememberMe,
                                   style: getMediumStyle(color: AppColors.black[0]!,
                                       fontSize: 14.0
                                   ),),
-                                Spacer(),
-                                Text("Forget Password",
+                              const  Spacer(),
+                                Text(context.loc.forgetPassword,
                                   style: getRegularStyle(
                                       color: AppColors.gray).copyWith(
                                       decoration: TextDecoration.underline,
@@ -100,11 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: (){
                                   if(formKey.currentState!.validate()){
                                     context.read<LoginBloc>().add
-
                                       (GetLoginEvent(
                                         LoginRequest(
-                                        email: emailController.text.trim(),
-
+                                     email: emailController.text.trim(),
                                             password: passwordController.text.trim()
 
                                     )));

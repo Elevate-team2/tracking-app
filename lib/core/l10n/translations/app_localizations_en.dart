@@ -10,4 +10,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noRouteFound => 'No Route Found';
+
+  @override
+  String get enterYourEmail => 'Enter your E-mail';
+
+  @override
+  String get enterYourPassword => 'Enter your Password';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get continue1 => 'Continue';
+
+  @override
+  String get forgetPassword => 'Forget Password';
+
+  @override
+  String get rememberMe => 'Remember me';
+
+  @override
+  String get successLogin => '✅ Success Login';
 }

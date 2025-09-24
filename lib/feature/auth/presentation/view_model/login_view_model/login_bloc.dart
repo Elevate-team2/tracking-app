@@ -26,7 +26,10 @@ switch(result){
     requestState: RequestState.success,
     loginResponse: result.sucessResult
   ));
-  token=result.sucessResult.token!;
+  token=result.sucessResult.token;
+  if (state.rememberMe && token != null) {
+    await UserLocalStorageImpl.saveToken(token!);
+  }
   case FailedResult<LoginResponse>():
     emit(state.copyWith(
         requestState: RequestState.error,
@@ -35,12 +38,9 @@ switch(result){
 }
    });
     on<RememberMeEvent>((event,emit)async{
-
-    emit(state.copyWith(
-        rememberMe: event.isLoggedIn,
+      emit(state.copyWith(
+      rememberMe: event.isLoggedIn,
     ));
-    await UserLocalStorageImpl().saveToken(token!);
-
     });
   }
 

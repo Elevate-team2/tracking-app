@@ -1,4 +1,13 @@
 {
     "@@locale": "ar",
-    "noRouteFound":"لا يوجد صفحه بهذا الاسم"
+    "noRouteFound":"لا يوجد صفحه بهذا الاسم",
+    "enterYourEmail": "ادخل بريدك الالكترونى",
+    "enterYourPassword": "ادخل كلمة المرور",
+    "email": "البريد الالكترونى",
+    "password": "كلمة المرور",
+    "login": "تسجيل الدخول",
+    "continue1": "المتابعة",
+    "forgetPassword": "هل نسيت كلمة السر",
+    "rememberMe": "ذكرنى",
+    "successLogin": "✅ تم تسجيل الدخول بنجاح"
 }

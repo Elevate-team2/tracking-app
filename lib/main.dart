@@ -16,7 +16,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
-  await UserLocalStorageImpl().init();
   runApp(
     //DevicePreview(
       //builder: (context) =>
@@ -42,17 +41,21 @@ class MyApp extends StatelessWidget {
       height: context.screenHight,
       width: context.screenWidth,
 
-      child: MaterialApp(
-        initialRoute: AppRoute.login,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: Locale(appLanguageConfig.selectedLocal),
-        theme: AppTheme.lightTheme,
-        onGenerateRoute: Routes.onGenerate,
-    
-        
-      ),
+      child:FutureBuilder<bool>(future: UserLocalStorageImpl.isLoggedIn(),
+          builder: (context,snapshot){
+        final initialRoute=snapshot.data==true?AppRoute.testRoute:AppRoute.loginRoute;
+        return      MaterialApp(
+          initialRoute:initialRoute,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Locale(appLanguageConfig.selectedLocal),
+          theme: AppTheme.lightTheme,
+          onGenerateRoute: Routes.onGenerate,
+
+        );
+          })
+
     );
   }
 }
