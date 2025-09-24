@@ -7,7 +7,7 @@ class ForgetPasswordState extends Equatable {
   final String error;
   final bool isResendEnabled;
   final int secondsRemaining;
-  final bool showSnackBar;
+  final bool isVerifySuccess;
 
   const ForgetPasswordState({
     this.requestState = RequestState.init,
@@ -15,7 +15,7 @@ class ForgetPasswordState extends Equatable {
     this.error = "",
     this.isResendEnabled = true,
     this.secondsRemaining = 60,
-    this.showSnackBar = false,
+    this.isVerifySuccess = false,
   });
 
   ForgetPasswordState copyWith({
@@ -24,7 +24,7 @@ class ForgetPasswordState extends Equatable {
     String? error,
     bool? isResendEnabled,
     int? secondsRemaining,
-    bool? showSnackBar,
+    bool? isVerifySuccess,
   }) {
     return ForgetPasswordState(
       requestState: requestState ?? this.requestState,
@@ -32,10 +32,10 @@ class ForgetPasswordState extends Equatable {
       error: error ?? this.error,
       isResendEnabled: isResendEnabled ?? this.isResendEnabled,
       secondsRemaining: secondsRemaining ?? this.secondsRemaining,
-      showSnackBar: showSnackBar ?? this.showSnackBar,
+      isVerifySuccess: isVerifySuccess ?? this.isVerifySuccess,
     );
   }
 
   @override
-  List<Object?> get props => [requestState, info, error, isResendEnabled, secondsRemaining, showSnackBar];
+  List<Object?> get props => [requestState, info, error, isResendEnabled, secondsRemaining,isVerifySuccess];
 }

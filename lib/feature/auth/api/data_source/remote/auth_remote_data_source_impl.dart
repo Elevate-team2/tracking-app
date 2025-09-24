@@ -16,7 +16,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.info != null && response.info!.isNotEmpty) {
         return SucessResult<String>(response.info!);
       } else {
-        final errorMessage = response.error ?? response.message ?? "Unknown error";
+        final errorMessage =
+            response.error ?? response.message ?? "Unknown error";
         return FailedResult<String>(errorMessage);
       }
     } on DioException catch (dioError) {
@@ -30,13 +31,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Result<String>> verifyResetCode(String code) async {
     try {
-      final response = await _authApiServices.verifyResetCode({"resetCode": code});
-        final message = response['status'] ?? response['message'] ?? "Success";
-        return SucessResult<String>(message);
+      final response = await _authApiServices.verifyResetCode({
+        "resetCode": code,
+      });
 
+      if (response['error'] != null &&
+          (response['error'] as String).isNotEmpty) {
+        return FailedResult<String>(response['error']!);
+      }
 
+      final message = response['status'] ?? response['message'] ?? "Success";
+      return SucessResult<String>(message);
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data['error'] ??
+      final errorMessage =
+          dioError.response?.data['error'] ??
           dioError.response?.data['message'] ??
           dioError.message;
       return FailedResult<String>(errorMessage);
@@ -45,6 +53,27 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 
-
+  @override
+  Future<Result<String>> resetPassword(String email, String newPassword) async {
+    try {
+      final response = await _authApiServices.resetPassword({
+        "email": email,
+        "newPassword": newPassword,
+      });
+      if (response.message != null && response.message!.isNotEmpty) {
+        return SucessResult<String>(response.message!);
+      } else {
+        final errorMessage = response.error ?? "Unknown error";
+        return FailedResult<String>(errorMessage);
+      }
+    } on DioException catch (dioError) {
+      final errorMessage =
+          dioError.response?.data['error'] ??
+          dioError.response?.data['message'] ??
+          dioError.message;
+      return FailedResult<String>(errorMessage);
+    } catch (error) {
+      return FailedResult<String>(error.toString());
+    }
+  }
 }
-

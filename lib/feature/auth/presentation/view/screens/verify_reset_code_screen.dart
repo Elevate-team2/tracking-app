@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -10,6 +11,7 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 
 class VerifyResetCodeScreen extends StatefulWidget {
   final String email;
@@ -27,23 +29,39 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
     return BlocProvider(
       create: (context) => getIt<ForgetPasswordBloc>(),
       child: Scaffold(
-        appBar: AppBar(title: Text(context.loc.verifyCode)),
+        appBar: AppBar(
+          key: const Key(AppWidgetsKeys.verifyCodeAppBar),
+          title: Text(context.loc.password),
+          leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Padding(
+              padding: EdgeInsets.only(right: context.setWidth(2)),
+              child: Icon(Icons.arrow_back_ios, size: context.setSp(20)),
+            ),
+          ),
+        ),
         body: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
           listener: (context, state) {
-            if (!state.showSnackBar) {
-              if (state.requestState == RequestState.success) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.info)),
-                );
-              } else if (state.requestState == RequestState.error) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.error)),
+            if (state.requestState == RequestState.success) {
+              if (state.isVerifySuccess) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.info)));
+                Navigator.pushNamed(
+                  context,
+                  AppRoute.resetPasswordScreen,
+                  arguments: widget.email,
                 );
               }
             }
+            if (state.requestState == RequestState.error) {
+              if (state.isVerifySuccess) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.error)));
+            }}
           },
-
-            builder: (context, state) {
+          builder: (context, state) {
             return Padding(
               padding: EdgeInsets.all(context.setWidth(20)),
               child: Column(
@@ -51,6 +69,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                 children: [
                   Text(
                     context.loc.emailVerification,
+                    key: const Key(AppWidgetsKeys.emailVerificationText),
                     style: getBoldStyle(
                       color: AppColors.black,
                       fontSize: context.setSp(FontSize.s20),
@@ -60,6 +79,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                   SizedBox(height: context.setHight(16)),
                   Text(
                     context.loc.enterCodeEmail,
+                    key: const Key(AppWidgetsKeys.enterCodeEmailText),
                     style: getRegularStyle(
                       color: AppColors.gray,
                       fontSize: context.setSp(FontSize.s16),
@@ -69,6 +89,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                   SizedBox(height: context.setHight(24)),
 
                   PinCodeTextField(
+                    key: const Key(AppWidgetsKeys.pinCodeField),
                     appContext: context,
                     animationType: AnimationType.scale,
                     pinTheme: PinTheme(
@@ -98,7 +119,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                   SizedBox(
                     height: context.setHight(50),
                     child: ElevatedButton(
-                      key: const Key('verifyButton'),
+                      key: const Key(AppWidgetsKeys.verifyButton),
                       onPressed: () {
                         context.read<ForgetPasswordBloc>().add(
                           SubmitCodeEvent(currentText),
@@ -116,13 +137,13 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                   SizedBox(height: context.setHight(12)),
 
                   TextButton(
-                    key: const Key('resendButton'),
+                    key: const Key(AppWidgetsKeys.resendButton),
                     onPressed: state.isResendEnabled
                         ? () {
-                      context.read<ForgetPasswordBloc>().add(
-                        ResendCodeEvent(widget.email),
-                      );
-                    }
+                            context.read<ForgetPasswordBloc>().add(
+                              ResendCodeEvent(widget.email),
+                            );
+                          }
                         : null,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -139,12 +160,20 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
                           state.isResendEnabled
                               ? context.loc.resend
                               : "(${state.secondsRemaining}s)",
-                          style: getMediumStyle(
-                            color: state.isResendEnabled
-                                ? AppColors.pink
-                                : AppColors.gray,
-                            fontSize: context.setSp(FontSize.s18),
-                          ),
+                          style:
+                              getMediumStyle(
+                                color: state.isResendEnabled
+                                    ? AppColors.pink
+                                    : AppColors.gray,
+                                fontSize: context.setSp(FontSize.s18),
+                              ).copyWith(
+                                decoration: state.isResendEnabled
+                                    ? TextDecoration.underline
+                                    : TextDecoration.none,
+                                decorationColor: state.isResendEnabled
+                                    ? AppColors.pink
+                                    : AppColors.gray,
+                              ),
                         ),
                       ],
                     ),

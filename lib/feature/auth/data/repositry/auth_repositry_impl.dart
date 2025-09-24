@@ -18,4 +18,9 @@ class AuthRepositryImpl implements  AuthRepositry{
     return await _authRemoteDataSource.verifyResetCode(code);
   }
 
+  @override
+  Future<Result<String>> resetPassword(String email, String newPassword) async{
+   return await _authRemoteDataSource.resetPassword(email, newPassword);
+  }
+
 }
