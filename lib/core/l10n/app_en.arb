@@ -1,4 +1,8 @@
 {
     "@@locale": "en",
-    "noRouteFound":"No Route Found"
+    "noRouteFound":"No Route Found",
+    "home":"Home",
+    "orders":"Orders",
+    "profile":"Profile"
+
 }
