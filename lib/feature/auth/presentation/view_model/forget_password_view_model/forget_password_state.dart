@@ -33,9 +33,11 @@ class ForgetPasswordState extends Equatable {
       isResendEnabled: isResendEnabled ?? this.isResendEnabled,
       secondsRemaining: secondsRemaining ?? this.secondsRemaining,
       isVerifySuccess: isVerifySuccess ?? this.isVerifySuccess,
+
     );
   }
 
   @override
+
   List<Object?> get props => [requestState, info, error, isResendEnabled, secondsRemaining,isVerifySuccess];
 }

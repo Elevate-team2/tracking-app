@@ -26,8 +26,6 @@ abstract class Routes {
           builder: (context) => ResetPasswordScreen(email: email),
         );
 
-
-
       default:
         return MaterialPageRoute(
           builder: (context) {

@@ -11,6 +11,11 @@ part 'auth_api_services.g.dart';
 abstract class AuthApiServices {
   @factoryMethod
   factory AuthApiServices(Dio dio) = _AuthApiServices;
+  
+  @POST(EndPointsConstants.forgetPass)
+  Future<ForgetPasswordResponse> forgetPassword(
+      @Body() Map<String, dynamic> body,
+      );
 
   @POST(EndPointsConstants.forgetPass)
   Future<ForgetPasswordResponse> forgetPassword(
@@ -24,6 +29,5 @@ abstract class AuthApiServices {
   @PUT(EndPointsConstants.resetPassword)
   Future<ResetPasswordResponse> resetPassword(
       @Body() Map<String, dynamic> body);
-
 
 }

@@ -23,6 +23,10 @@ void main() {
   late MockResetPasswordUseCase mockResetPasswordUseCase;
   late ForgetPasswordBloc forgetPasswordBloc;
 
+  const email = "test@gmail.com";
+  const code = "123456";
+  const newPassword = "12345678";
+
   setUp(() {
     provideDummy<Result<String>>(SucessResult<String>("success"));
     mockForgetPasswordUseCase = MockForgetPasswordUseCase();
@@ -36,8 +40,6 @@ void main() {
   });
 
   group("SubmitEmailEvent", () {
-    const email = "test@gmail.com";
-
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, success] when useCase returns SucessResult",
       build: () {
@@ -47,7 +49,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitEmailEvent(email)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -60,13 +62,13 @@ void main() {
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, error] when useCase returns FailedResult",
       build: () {
-        when(
-          mockForgetPasswordUseCase.call(email),
-        ).thenAnswer((_) async => FailedResult<String>("No account found"));
+        when(mockForgetPasswordUseCase.call(email)).thenAnswer(
+          (_) async => FailedResult<String>("No account found"),
+        );
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitEmailEvent(email)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -78,8 +80,6 @@ void main() {
   });
 
   group("SubmitCodeEvent", () {
-    const code = "123456";
-
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, success] when code verification succeeds",
       build: () {
@@ -89,7 +89,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitCodeEvent(code)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -108,13 +108,13 @@ void main() {
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, error] when code verification fails",
       build: () {
-        when(
-          mockVerifyResetCodeUseCase.call(code),
-        ).thenAnswer((_) async => FailedResult<String>("Invalid code"));
+        when(mockVerifyResetCodeUseCase.call(code)).thenAnswer(
+          (_) async => FailedResult<String>("Invalid code"),
+        );
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitCodeEvent(code)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -126,85 +126,23 @@ void main() {
   });
 
   group("ResendCodeEvent", () {
-    const email = "test@gmail.com";
-
     // test(
     //   "emits [loading, success, timer states, resend enabled] when resend succeeds",
-    //       () {
-    //     fakeAsync((async) {
-    //       // Mock the use case
-    //       when(mockForgetPasswordUseCase.call(email))
-    //           .thenAnswer((_) async => SucessResult<String>("OTP resent"));
-    //
-    //       // Collect states in a list
-    //       final states = <ForgetPasswordState>[];
-    //       final subscription = forgetPasswordBloc.stream.listen((state) {
-    //         // Filter states: include loading, initial success, secondsRemaining == 59, and secondsRemaining == 0
-    //         if (state.requestState == RequestState.loading ||
-    //             (state.info == "OTP resent" && state.secondsRemaining == 60) ||
-    //             state.secondsRemaining == 59 ||
-    //             state.secondsRemaining == 0) {
-    //           states.add(state);
-    //         }
-    //       });
-    //
-    //       // Flush any pending microtasks before adding the event
-    //       async.flushMicrotasks();
-    //
-    //       // Trigger the event *after* setting up the subscription
-    //       forgetPasswordBloc.add(ResendCodeEvent(email));
-    //
-    //       // Flush microtasks to process the initial event (loading and success states)
-    //       async.flushMicrotasks();
-    //
-    //       // Advance time to complete the 60-second timer
-    //       async.elapse(const Duration(seconds: 61));
-    //
-    //       // Verify the collected states
-    //       expect(states, [
-    //         ForgetPasswordState(requestState: RequestState.loading),
-    //         ForgetPasswordState(
-    //           requestState: RequestState.success,
-    //           info: "OTP resent",
-    //           isVerifySuccess: false,
-    //           isResendEnabled: false,
-    //           secondsRemaining: 60,
-    //         ),
-    //         ForgetPasswordState(
-    //           requestState: RequestState.success,
-    //           info: "OTP resent",
-    //           isVerifySuccess: false,
-    //           isResendEnabled: false,
-    //           secondsRemaining: 59,
-    //         ),
-    //         ForgetPasswordState(
-    //           requestState: RequestState.success,
-    //           info: "OTP resent",
-    //           isVerifySuccess: false,
-    //           isResendEnabled: true,
-    //           secondsRemaining: 0,
-    //         ),
-    //       ]);
-    //
-    //       // Verify the use case was called
-    //       verify(mockForgetPasswordUseCase.call(email)).called(1);
-    //
-    //       // Clean up
-    //       subscription.cancel();
-    //     });
+    //   () {
+    //     ...
     //   },
     // );
 
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, error] when resend fails",
       build: () {
-        when(
-          mockForgetPasswordUseCase.call(email),
-        ).thenAnswer((_) async => FailedResult<String>("Cannot resend code"));
+        when(mockForgetPasswordUseCase.call(email)).thenAnswer(
+          (_) async => FailedResult<String>("Cannot resend code"),
+        );
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(ResendCodeEvent(email)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -216,9 +154,6 @@ void main() {
   });
 
   group("ResetPasswordEvent", () {
-    const email = "test@gmail.com";
-    const newPassword = "12345678";
-
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, success] when reset succeeds",
       build: () {
@@ -228,7 +163,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(ResetPasswordEvent(email, newPassword)),
-      expect: () => const[
+      expect: () => const [
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -242,15 +177,15 @@ void main() {
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
       "emits [loading, error] when reset fails",
       build: () {
-        when(
-          mockResetPasswordUseCase.call(email, newPassword),
-        ).thenAnswer((_) async => FailedResult<String>("Reset failed"));
+        when(mockResetPasswordUseCase.call(email, newPassword)).thenAnswer(
+          (_) async => FailedResult<String>("Reset failed"),
+        );
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(ResetPasswordEvent(email, newPassword)),
-      expect: () => [
-        const ForgetPasswordState(requestState: RequestState.loading),
-        const ForgetPasswordState(
+      expect: () => const [
+        ForgetPasswordState(requestState: RequestState.loading),
+        ForgetPasswordState(
           requestState: RequestState.error,
           error: "Reset failed",
         ),

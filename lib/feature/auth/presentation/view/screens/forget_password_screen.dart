@@ -24,6 +24,13 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+ 
+  @override
+  void dispose() {
+   _emailController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +64,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(SnackBar(content: Text(state.error)));
+                
               }
             },
             builder: (context, state) {

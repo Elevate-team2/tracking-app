@@ -24,4 +24,4 @@ class ResetPasswordEvent extends ForgetPasswordEvent{
   final String email;
   final String newPassword;
   ResetPasswordEvent(this.email,this.newPassword);}
-  // to edit sonarqube
+ 

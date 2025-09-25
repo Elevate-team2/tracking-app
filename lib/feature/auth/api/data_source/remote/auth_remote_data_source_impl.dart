@@ -8,7 +8,26 @@ import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_da
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiServices _authApiServices;
   AuthRemoteDataSourceImpl(this._authApiServices);
+  
+  @override
+  Future<Result<String>> forgetPassword(String email) async {
+    try {
+      final response = await _authApiServices.forgetPassword({Constants.email: email});
+      if (response.info != null && response.info!.isNotEmpty) {
+        return SucessResult<String>(response.info!);
+      } else {
+        final errorMessage = response.error ?? response.message ?? Constants.unknownError;
+        return FailedResult<String>(errorMessage);
+      }
+    } on DioException catch (dioError) {
+      final errorMessage = dioError.response?.data[Constants.error] ?? dioError.message;
+      return FailedResult<String>(errorMessage);
+    } catch (error) {
+      return FailedResult<String>(error.toString());
+    }
+  }
 
+  
   @override
   Future<Result<String>> forgetPassword(String email) async {
     try {
@@ -77,3 +96,4 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 }
+
