@@ -55,4 +55,78 @@ void main() {
    verifyNoMoreInteractions(mockAuthRemoteDataSource);
   });
  });
+
+ group("test verifyResetCode", () {
+  const code = "123456";
+
+  test("should return SuccessResult when remote call succeeds", () async {
+   // arrange
+   when(mockAuthRemoteDataSource.verifyResetCode(code))
+       .thenAnswer((_) async => SucessResult<String>("Code verified successfully"));
+
+   // act
+   final result = await authRepository.verifyResetCode(code);
+
+   // assert
+   expect(result, isA<SucessResult<String>>());
+   final success = result as SucessResult<String>;
+   expect(success.sucessResult, "Code verified successfully");
+   verify(mockAuthRemoteDataSource.verifyResetCode(code)).called(1);
+   verifyNoMoreInteractions(mockAuthRemoteDataSource);
+  });
+
+  test("should return FailedResult when remote call fails", () async {
+   // arrange
+   when(mockAuthRemoteDataSource.verifyResetCode(code))
+       .thenAnswer((_) async => FailedResult<String>("Invalid reset code"));
+
+   // act
+   final result = await authRepository.verifyResetCode(code);
+
+   // assert
+   expect(result, isA<FailedResult<String>>());
+   final error = result as FailedResult<String>;
+   expect(error.errorMessage, "Invalid reset code");
+   verify(mockAuthRemoteDataSource.verifyResetCode(code)).called(1);
+   verifyNoMoreInteractions(mockAuthRemoteDataSource);
+  });
+ });
+
+ group("test resetPassword", () {
+  const email = "test@gmail.com";
+  const newPassword = "12345678";
+
+  test("should return SuccessResult when remote call succeeds", () async {
+   // arrange
+   when(mockAuthRemoteDataSource.resetPassword(email, newPassword))
+       .thenAnswer((_) async => SucessResult<String>("Password reset successfully"));
+
+   // act
+   final result = await authRepository.resetPassword(email, newPassword);
+
+   // assert
+   expect(result, isA<SucessResult<String>>());
+   final success = result as SucessResult<String>;
+   expect(success.sucessResult, "Password reset successfully");
+   verify(mockAuthRemoteDataSource.resetPassword(email, newPassword)).called(1);
+   verifyNoMoreInteractions(mockAuthRemoteDataSource);
+  });
+
+  test("should return FailedResult when remote call fails", () async {
+   // arrange
+   when(mockAuthRemoteDataSource.resetPassword(email, newPassword))
+       .thenAnswer((_) async => FailedResult<String>("Invalid request"));
+
+   // act
+   final result = await authRepository.resetPassword(email, newPassword);
+
+   // assert
+   expect(result, isA<FailedResult<String>>());
+   final error = result as FailedResult<String>;
+   expect(error.errorMessage, "Invalid request");
+   verify(mockAuthRemoteDataSource.resetPassword(email, newPassword)).called(1);
+   verifyNoMoreInteractions(mockAuthRemoteDataSource);
+  });
+ });
+
 }

@@ -13,7 +13,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/forget_passw
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 
-import 'forget_pasword_screen_test.mocks.dart';
+import 'forget_password_screen_test.mocks.dart';
 
 @GenerateMocks([ForgetPasswordBloc])
 void main() {
@@ -41,6 +41,12 @@ void main() {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        onGenerateRoute: (settings) {
+          if (settings.name == "verifyCodeScreen") {
+            return MaterialPageRoute(builder: (_) => const Scaffold());
+          }
+          return null;
+        },
         home: BlocProvider<ForgetPasswordBloc>.value(
           value: mockForgetPasswordBloc,
           child: const ForgetPasswordScreen(),
