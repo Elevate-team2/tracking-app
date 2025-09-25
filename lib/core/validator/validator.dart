@@ -1,14 +1,16 @@
 class Validator {
   Validator._();
+
+  // Define constant for repeated literal
+  static const String fieldRequired = 'this field is required';
+
   static String? validateEmail(String? val) {
     final RegExp emailRegex = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     );
-    if (val == null) {
-      return 'Email  is required';
-    } else if (val.trim().isEmpty) {
-      return ' Email  is required';
-    } else if (emailRegex.hasMatch(val) == false) {
+    if (val == null || val.trim().isEmpty) {
+      return 'Email is required';
+    } else if (!emailRegex.hasMatch(val)) {
       return 'This Email is not valid';
     } else {
       return null;
@@ -36,9 +38,9 @@ class Validator {
 
   static String? validateConfirmPassword(String? val, String? password) {
     if (val == null || val.isEmpty) {
-      return 'this field is required';
+      return fieldRequired;
     } else if (val != password) {
-      return 'same password';
+      return 'Passwords do not match';
     } else {
       return null;
     }
@@ -46,12 +48,10 @@ class Validator {
 
   static String? validateUsername(String? val) {
     final RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9,.-]+$');
-    if (val == null) {
-      return 'this field is required';
-    } else if (val.isEmpty) {
-      return 'this field is required';
+    if (val == null || val.isEmpty) {
+      return fieldRequired;
     } else if (!usernameRegex.hasMatch(val)) {
-      return 'enter valid username';
+      return 'Enter a valid username';
     } else {
       return null;
     }
@@ -59,19 +59,19 @@ class Validator {
 
   static String? validateFullName(String? val) {
     if (val == null || val.isEmpty) {
-      return 'this field is required';
+      return fieldRequired;
     } else {
       return null;
     }
   }
 
   static String? validatePhoneNumber(String? val) {
-    if (val == null) {
-      return 'this field is required';
+    if (val == null || val.isEmpty) {
+      return fieldRequired;
     } else if (int.tryParse(val.trim()) == null) {
-      return 'enter numbers only';
+      return 'Enter numbers only';
     } else if (val.trim().length != 11) {
-      return 'enter value must equal 11 digit';
+      return 'Value must be 11 digits';
     } else {
       return null;
     }

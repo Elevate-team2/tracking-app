@@ -25,6 +25,5 @@ class ForgetPasswordState extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props =>[requestState,info,error];
 }
