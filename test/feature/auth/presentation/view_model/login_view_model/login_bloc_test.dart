@@ -72,18 +72,28 @@ void main() {
       verify: (_) => verify(mockLoginUseCase.login(request)).called(1),
     );
   });
-  // group("Remember Me Event", (){
-  //   blocTest("emits updated rememberMe state when RememberMeEvent is added with isLoggedIn true", build: (){
-  //    when(mockLoginUseCase.login(request)).thenReturn(successResponse as
-  //    Future<SucessResult<LoginResponse>>);
-  //     return bloc;
-  //   },act: (bloc)=>bloc..add(RememberMeEvent(true),
-  //
-  //   ),expect: ()=>[
-  //    const LoginStates(
-  //       requestState: RequestState.success,
-  //      rememberMe: true
-  //     )
-  //   ],verify: (_)=>verify(mockLoginUseCase.login(request)).called(1));
-  // });
+  group("Remember Me Event", (){
+    blocTest<LoginBloc, LoginStates>
+      ("emits updated rememberMe state when RememberMeEvent is added with isLoggedIn true", build: (){
+     when(mockLoginUseCase.login(request));
+      return bloc;
+    },act: (bloc)=>bloc..add(RememberMeEvent(true),
+
+    ),expect: ()=>[
+     const LoginStates(
+       rememberMe: true
+      )
+    ]);
+    blocTest<LoginBloc, LoginStates>
+    ("emits updated rememberMe state when RememberMeEvent is added with"
+        " isLoggedIn false", build: (){
+    return bloc;
+    },act: (bloc)=>bloc..add(RememberMeEvent(false),
+
+    ),expect: ()=>[
+    const LoginStates(
+    rememberMe: false
+    )
+    ]);
+  });
 }

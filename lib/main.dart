@@ -39,15 +39,14 @@ class MyApp extends StatelessWidget {
       baseSize: const Size(375, 812),
       height: context.screenHight,
       width: context.screenWidth,
-      child: FutureBuilder<bool>(
+      child:
+      FutureBuilder(
         future: UserLocalStorageImpl().isLoggedIn(),
         builder: (context, snapshot) {
-
-          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
+          final isLoggedIn = snapshot.data!=null?true:false;
           final initialRoute = isLoggedIn ? AppRoute.testRoute : AppRoute.loginRoute;
-           Future.delayed(const Duration(seconds: 2));
-
-          return MaterialApp(
+        return
+          MaterialApp(
             initialRoute: initialRoute,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
