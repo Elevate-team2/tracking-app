@@ -11,7 +11,6 @@ import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
 
 import 'feature/auth/presentation/bloc/apply_bloc.dart';
-import 'feature/auth/presentation/bloc/apply_event.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

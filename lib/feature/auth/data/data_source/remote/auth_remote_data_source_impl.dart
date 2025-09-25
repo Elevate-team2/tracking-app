@@ -60,10 +60,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Result<(Driver, String)>> applyDriver(Map<String, dynamic> body) async {
     try {
       final authResponse = await api.applyDriver(body);
-      final driverJson = authResponse.driver?.toJson() ?? {};
+      final driverJson = authResponse.driver.toJson() ;
       final driverModel = DriverModel.fromJson(driverJson);
       final driverEntity = driverModel.toEntity();
-      final token = authResponse.token ?? '';
+      final token = authResponse.token ;
       return SuccessResult((driverEntity, token));
     } catch (e) {
       return FailedResult(
