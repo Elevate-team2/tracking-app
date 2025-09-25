@@ -47,7 +47,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitEmailEvent(email)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -66,7 +66,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitEmailEvent(email)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -89,7 +89,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitCodeEvent(code)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -114,7 +114,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SubmitCodeEvent(code)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -204,7 +204,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(ResendCodeEvent(email)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
@@ -228,7 +228,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(ResetPasswordEvent(email, newPassword)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -249,8 +249,8 @@ void main() {
       },
       act: (bloc) => bloc.add(ResetPasswordEvent(email, newPassword)),
       expect: () => [
-        ForgetPasswordState(requestState: RequestState.loading),
-        ForgetPasswordState(
+        const ForgetPasswordState(requestState: RequestState.loading),
+        const ForgetPasswordState(
           requestState: RequestState.error,
           error: "Reset failed",
         ),

@@ -20,7 +20,7 @@ class ForgetPasswordBloc extends Bloc<ForgetPasswordEvent, ForgetPasswordState> 
   Timer? _resendTimer;
 
   ForgetPasswordBloc(this._forgetPasswordUseCase, this._verifyResetCodeUseCase, this._resetPasswordUseCase)
-      : super(ForgetPasswordState()) {
+      : super(const ForgetPasswordState()) {
     on<SubmitEmailEvent>(_onSubmitEmail);
     on<SubmitCodeEvent>(_onSubmitCode);
     on<ResendCodeEvent>(_onResendCode);

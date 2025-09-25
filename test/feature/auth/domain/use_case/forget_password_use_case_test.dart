@@ -19,7 +19,7 @@ void main() {
   });
 
   group("test forget password use case", () {
-    String email = "test@gmail.com";
+    const String email = "test@gmail.com";
     test(
       "should return SuccessResult when AuthRepositry SucessResult",
       () async {

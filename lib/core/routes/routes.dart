@@ -12,7 +12,7 @@ abstract class Routes {
 
     switch (url.path) {
       case AppRoute.forgetPasswordScreen:
-       return MaterialPageRoute(builder: (context) => ForgetPasswordScreen());
+       return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
 
       case AppRoute.verifyCodeScreen:
         final email = settings.arguments as String;

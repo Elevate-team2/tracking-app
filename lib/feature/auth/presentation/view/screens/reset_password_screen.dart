@@ -113,7 +113,7 @@ class ResetPasswordScreen extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state.requestState == RequestState.loading) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
                     return SizedBox(
                       height: context.setHight(50),
