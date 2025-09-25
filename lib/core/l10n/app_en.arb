@@ -1,4 +1,10 @@
 {
     "@@locale": "en",
-    "noRouteFound":"No Route Found"
+    "noRouteFound":"No Route Found",
+    "email":"Email",
+    "password":"Password",
+    "forgetPassword":"Forget Password",
+    "pleaseEnterEmail":"Please enter your email associated with your account",
+    "enterEmail":"Enter your email",
+    "confirm":"Confirm"
 }

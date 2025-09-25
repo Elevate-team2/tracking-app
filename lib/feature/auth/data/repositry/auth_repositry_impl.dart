@@ -1,5 +1,15 @@
   import 'package:injectable/injectable.dart';
+import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 
 import '../../domain/repositry/auth_repositry.dart';
-@injectable
-class AuthRepositryImpl implements  AuthRepositry{}
+@Injectable(as: AuthRepositry)
+class AuthRepositryImpl implements  AuthRepositry{
+  final AuthRemoteDataSource _authRemoteDataSource;
+  AuthRepositryImpl(this._authRemoteDataSource);
+
+  @override
+  Future<Result<String>> forgetPassword(String email)async {
+    return await _authRemoteDataSource.forgetPassword(email);
+  }
+}

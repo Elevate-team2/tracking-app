@@ -5,6 +5,7 @@ abstract class Constants {
   static const String contentType = "content-Type";
   static const String appJson = "application/json";
   static const String sharedPrefrenceKeyLanguage = "appLanguage";
-
-
+  static const String email="email";
+  static const String unknownError="Unknown error";
+  static const String error="error";
 }
