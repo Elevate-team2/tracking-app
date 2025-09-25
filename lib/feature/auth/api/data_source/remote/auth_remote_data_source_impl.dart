@@ -12,7 +12,7 @@ import '../../../domain/entity/timezone.dart';
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AssetBundle assetBundle;
 
-  AuthRemoteDataSourceImpl(this.assetBundle);
+  AuthRemoteDataSourceImpl(this.assetBundle, MockAuthApiServices mockApi);
 
   @override
   Future<Result<(Driver, String)>> applyDriver(Map<String, dynamic> body) async {
@@ -65,4 +65,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return FailedResult("Error", e.toString());
     }
   }
+}
+
+class MockAuthApiServices {
 }
