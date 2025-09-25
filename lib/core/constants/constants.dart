@@ -5,6 +5,7 @@ abstract class Constants {
   static const String contentType = "content-Type";
   static const String appJson = "application/json";
   static const String sharedPrefrenceKeyLanguage = "appLanguage";
+  static const String onboardingphoto="assets/images/delivery-service-delivery-man-3qnPlWnOuR.png";
   static const String homeKey = "nav_home";
   static const String profileKey = "nav_profile";
   static const String orderkey = "nav_orders";
