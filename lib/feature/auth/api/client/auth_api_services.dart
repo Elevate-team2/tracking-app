@@ -17,11 +17,6 @@ abstract class AuthApiServices {
       @Body() Map<String, dynamic> body,
       );
 
-  @POST(EndPointsConstants.forgetPass)
-  Future<ForgetPasswordResponse> forgetPassword(
-    @Body() Map<String, dynamic> body,
-  );
-
   @POST(EndPointsConstants.verifyCode)
   Future<Map<String, String>> verifyResetCode(
       @Body() Map<String, String> body);

@@ -12,25 +12,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Result<String>> forgetPassword(String email) async {
     try {
-      final response = await _authApiServices.forgetPassword({Constants.email: email});
-      if (response.info != null && response.info!.isNotEmpty) {
-        return SucessResult<String>(response.info!);
-      } else {
-        final errorMessage = response.error ?? response.message ?? Constants.unknownError;
-        return FailedResult<String>(errorMessage);
-      }
-    } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data[Constants.error] ?? dioError.message;
-      return FailedResult<String>(errorMessage);
-    } catch (error) {
-      return FailedResult<String>(error.toString());
-    }
-  }
-
-  
-  @override
-  Future<Result<String>> forgetPassword(String email) async {
-    try {
       final response = await _authApiServices.forgetPassword({"email": email});
       if (response.info != null && response.info!.isNotEmpty) {
         return SucessResult<String>(response.info!);
