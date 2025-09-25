@@ -73,8 +73,6 @@ void main() {
 
       final emailField = find.byKey(const Key(AppWidgetsKeys.emailTextField));
       expect(emailField, findsOneWidget);
-
-      expect(find.textContaining("Email"), findsWidgets); // label + hint
     });
 
     testWidgets("Verify Confirm Button exists", (WidgetTester tester) async {

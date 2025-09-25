@@ -1,43 +1,47 @@
-name: Validate Branch Name
+name: Validate unit testing
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
   push:
 
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
 jobs:
-  validate:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-      - name: Get branch name
-        id: branch
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "branch_name=${{ github.head_ref }}" >> $GITHUB_OUTPUT
-          else
-            echo "branch_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
-          fi
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.4'
+          channel: stable
 
-      - name: Validate branch name
-        run: |
-          BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
-          echo "Validating branch name: $BRANCH_NAME"
+      - name: Verify Flutter installation
+        run: flutter doctor -v
 
-        
-          if [[ "$BRANCH_NAME" == "main" || "$BRANCH_NAME" == "development" ]]; then
-            echo "Branch '$BRANCH_NAME' is exempt from validation."
-            exit 0
-          fi
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            build
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-${{ runner.os }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
 
-        
-          if [[ "$BRANCH_NAME" =~ ^(feature|bugfix|release)\/[a-zA-Z0-9_-]+$ ]]; then
-            echo "Branch name is valid."
-            exit 0
-          else
-            echo "Branch name is not valid."
-            echo "Branch names must start with 'feature/', 'bugfix/', or 'release/' followed by a description (e.g., 'feature/new-login-page')."
-            exit 1
-          fi
+      - name: Install packages
+        run: flutter pub get
+
+      - name: Run generator
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Run unit tests
+        run: flutter test

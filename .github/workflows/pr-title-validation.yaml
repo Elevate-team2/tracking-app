@@ -24,8 +24,8 @@ jobs:
           BASE_BRANCH="${{ github.base_ref }}"
 
           echo "Base branch: $BASE_BRANCH"
-
-       
+          
+          
           if [[ "$BASE_BRANCH" == "main" || "$BASE_BRANCH" == "development" ]]; then
             echo "PR targeting '$BASE_BRANCH' is exempt from PR title validation."
             exit 0

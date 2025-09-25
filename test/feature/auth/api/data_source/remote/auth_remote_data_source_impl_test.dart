@@ -5,226 +5,236 @@ import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
 import 'package:tracking_app/feature/auth/api/data_source/remote/auth_remote_data_source_impl.dart';
+import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
+import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 import 'package:tracking_app/feature/auth/api/models/forget_password_response.dart';
 import 'package:tracking_app/feature/auth/api/models/reset_password_response.dart';
+
 import 'auth_remote_data_source_impl_test.mocks.dart';
 
 @GenerateMocks([AuthApiServices])
 void main() {
   late MockAuthApiServices mockAuthApiServices;
   late AuthRemoteDataSourceImpl authRemoteDataSourceImpl;
+
   setUp(() {
     mockAuthApiServices = MockAuthApiServices();
     authRemoteDataSourceImpl = AuthRemoteDataSourceImpl(mockAuthApiServices);
   });
 
-  group("test forget password", () {
-    const  String email = "test11@gmail.com";
+  group("AuthRemoteDataSourceImpl Tests", () {
+    group("Login", () {
+      final request = LoginRequest(
+        email: "mariammohmed.25720@gmail.com",
+        password: "Mariam257@",
+      );
+      final successResponse = LoginResponse(
+        message: "success",
+        token: "dummy_token",
+      );
 
-    test(
-      "should return SuccessResult when otp send to email/return info",
-      () async {
-        //arrange
-        final fakeForgetPasswordResponse = ForgetPasswordResponse(
-          info: "OTP sent to your email",
-          message: "success",
+      test("return SuccessResult when API call succeeds", () async {
+        when(mockAuthApiServices.login(request))
+            .thenAnswer((_) async => successResponse);
+
+        final result = await authRemoteDataSourceImpl.login(request);
+
+        expect(result, isA<SucessResult<LoginResponse>>());
+        expect((result as SucessResult).sucessResult, successResponse);
+        verify(mockAuthApiServices.login(request)).called(1);
+      });
+
+      test("return FailedResult when DioException is thrown", () async {
+        final dioException = DioException(
+          requestOptions: RequestOptions(path: "/"),
+          type: DioExceptionType.connectionTimeout,
         );
-        when(
-          mockAuthApiServices.forgetPassword({"email": email}),
-        ).thenAnswer((_) async => fakeForgetPasswordResponse);
+        when(mockAuthApiServices.login(request)).thenThrow(dioException);
 
-        //act
+        final result = await authRemoteDataSourceImpl.login(request);
+
+        expect(result, isA<FailedResult<LoginResponse>>());
+        expect((result as FailedResult).errorMessage,
+            "ServerFailure with Api Server");
+        verify(mockAuthApiServices.login(request)).called(1);
+      });
+
+      test("return FailedResult when generic Exception is thrown", () async {
+        final exception = Exception("Unexpected error");
+        when(mockAuthApiServices.login(request)).thenThrow(exception);
+
+        final result = await authRemoteDataSourceImpl.login(request);
+
+        expect(result, isA<FailedResult<LoginResponse>>());
+        expect((result as FailedResult).errorMessage, exception.toString());
+        verify(mockAuthApiServices.login(request)).called(1);
+      });
+    });
+
+    group("Forget Password", () {
+      const email = "test11@gmail.com";
+
+      test("return SuccessResult when OTP is sent", () async {
+        final fakeResponse =
+            ForgetPasswordResponse(info: "OTP sent to your email", message: "success");
+        when(mockAuthApiServices.forgetPassword({"email": email}))
+            .thenAnswer((_) async => fakeResponse);
+
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
-        //assert
         expect(result, isA<SucessResult<String>>());
-        final success = result as SucessResult<String>;
-        expect(success.sucessResult, "OTP sent to your email");
+        expect((result as SucessResult).sucessResult, "OTP sent to your email");
         verify(mockAuthApiServices.forgetPassword(any)).called(1);
-      },
-    );
+      });
 
-    test("should return FailedResult when API return error ", () async {
-      //arrange
-      final fakeForgetPasswordResponse = ForgetPasswordResponse(
-        error: "There is no account with this email address test11@gmail.com",
-      );
-      when(
-        mockAuthApiServices.forgetPassword({"email": email}),
-      ).thenAnswer((_) async => fakeForgetPasswordResponse);
+      test("return FailedResult when API returns error", () async {
+        final fakeResponse = ForgetPasswordResponse(
+            error: "There is no account with this email address $email");
+        when(mockAuthApiServices.forgetPassword({"email": email}))
+            .thenAnswer((_) async => fakeResponse);
 
-      //act
-      final result = await authRemoteDataSourceImpl.forgetPassword(email);
-
-      //assert
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(
-        error.errorMessage,
-        "There is no account with this email address test11@gmail.com",
-      );
-      verify(mockAuthApiServices.forgetPassword(any)).called(1);
-    });
-
-    test("should return FailedResult when DioException is thrown", () async {
-      // arrange
-      final dioError = DioException(
-        requestOptions: RequestOptions(path: "/forget-password"),
-        response: Response(
-          requestOptions: RequestOptions(path: "/forget-password"),
-          statusCode: 400,
-          data: {
-            "error":
-                "There is no account with this email address test@gmail.com",
-          },
-        ),
-        type: DioExceptionType.badResponse,
-      );
-
-      when(mockAuthApiServices.forgetPassword(any)).thenThrow(dioError);
-
-      // act
-      final result = await authRemoteDataSourceImpl.forgetPassword(email);
-
-      // assert
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(
-        error.errorMessage,
-        "There is no account with this email address test@gmail.com",
-      );
-      verify(mockAuthApiServices.forgetPassword(any)).called(1);
-    });
-
-    test(
-      "should return FailedResult when generic exception is thrown",
-      () async {
-        //arrange
-        when(
-          mockAuthApiServices.forgetPassword(any),
-        ).thenThrow(Exception("dio exception error"));
-
-        //act
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
-        //assert
         expect(result, isA<FailedResult<String>>());
-        final error = result as FailedResult<String>;
-        expect(error.errorMessage, Exception("dio exception error").toString());
+        expect((result as FailedResult).errorMessage,
+            "There is no account with this email address $email");
         verify(mockAuthApiServices.forgetPassword(any)).called(1);
-      },
-    );
-  });
+      });
 
-  group("test verifyResetCode", () {
-    const code = "123456";
+      test("return FailedResult when DioException is thrown", () async {
+        final dioError = DioException(
+          requestOptions: RequestOptions(path: "/forget-password"),
+          response: Response(
+            requestOptions: RequestOptions(path: "/forget-password"),
+            statusCode: 400,
+            data: {
+              "error": "There is no account with this email address $email",
+            },
+          ),
+          type: DioExceptionType.badResponse,
+        );
+        when(mockAuthApiServices.forgetPassword(any)).thenThrow(dioError);
 
-    test("should return SuccessResult when code is valid", () async {
-      // arrange
-      final fakeResponse = {"status": "Code verified successfully"};
-      when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
-          .thenAnswer((_) async => fakeResponse);
+        final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
-      // act
-      final result = await authRemoteDataSourceImpl.verifyResetCode(code);
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage,
+            "There is no account with this email address $email");
+        verify(mockAuthApiServices.forgetPassword(any)).called(1);
+      });
 
-      // assert
-      expect(result, isA<SucessResult<String>>());
-      final success = result as SucessResult<String>;
-      expect(success.sucessResult, "Code verified successfully");
-      verify(mockAuthApiServices.verifyResetCode(any)).called(1);
+      test("return FailedResult when generic Exception is thrown", () async {
+        when(mockAuthApiServices.forgetPassword(any))
+            .thenThrow(Exception("Unexpected error"));
+
+        final result = await authRemoteDataSourceImpl.forgetPassword(email);
+
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage,
+            Exception("Unexpected error").toString());
+        verify(mockAuthApiServices.forgetPassword(any)).called(1);
+      });
     });
 
-    test("should return FailedResult when API returns error", () async {
-      // arrange
-      final fakeResponse = {"error": "Invalid reset code"};
-      when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
-          .thenAnswer((_) async => fakeResponse);
+    group("Verify Reset Code", () {
+      const code = "123456";
 
-      // act
-      final result = await authRemoteDataSourceImpl.verifyResetCode(code);
+      test("return SuccessResult when code is valid", () async {
+        final fakeResponse = {"status": "Code verified successfully"};
+        when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
+            .thenAnswer((_) async => fakeResponse);
 
-      // assert
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(error.errorMessage, "Invalid reset code");
-      verify(mockAuthApiServices.verifyResetCode(any)).called(1);
-    });
+        final result = await authRemoteDataSourceImpl.verifyResetCode(code);
 
-    test("should return FailedResult when DioException is thrown", () async {
-      final dioError = DioException(
-        requestOptions: RequestOptions(path: "/verify-reset-code"),
-        response: Response(
+        expect(result, isA<SucessResult<String>>());
+        expect((result as SucessResult).sucessResult, "Code verified successfully");
+        verify(mockAuthApiServices.verifyResetCode(any)).called(1);
+      });
+
+      test("return FailedResult when API returns error", () async {
+        final fakeResponse = {"error": "Invalid reset code"};
+        when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
+            .thenAnswer((_) async => fakeResponse);
+
+        final result = await authRemoteDataSourceImpl.verifyResetCode(code);
+
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage, "Invalid reset code");
+        verify(mockAuthApiServices.verifyResetCode(any)).called(1);
+      });
+
+      test("return FailedResult when DioException is thrown", () async {
+        final dioError = DioException(
           requestOptions: RequestOptions(path: "/verify-reset-code"),
-          statusCode: 400,
-          data: {"error": "Invalid reset code"},
-        ),
-        type: DioExceptionType.badResponse,
-      );
+          response: Response(
+            requestOptions: RequestOptions(path: "/verify-reset-code"),
+            statusCode: 400,
+            data: {"error": "Invalid reset code"},
+          ),
+          type: DioExceptionType.badResponse,
+        );
+        when(mockAuthApiServices.verifyResetCode(any)).thenThrow(dioError);
 
-      when(mockAuthApiServices.verifyResetCode(any)).thenThrow(dioError);
+        final result = await authRemoteDataSourceImpl.verifyResetCode(code);
 
-      final result = await authRemoteDataSourceImpl.verifyResetCode(code);
-
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(error.errorMessage, "Invalid reset code");
-      verify(mockAuthApiServices.verifyResetCode(any)).called(1);
-    });
-  });
-
-  group("test resetPassword", () {
-    const email = "test11@gmail.com";
-    const newPassword = "12345678";
-
-    test("should return SuccessResult when password is reset successfully", () async {
-      // arrange
-      final fakeResponse = ResetPasswordResponse(message: "Password reset successfully");
-      when(mockAuthApiServices.resetPassword({"email": email, "newPassword": newPassword}))
-          .thenAnswer((_) async => fakeResponse);
-
-      // act
-      final result = await authRemoteDataSourceImpl.resetPassword(email, newPassword);
-
-      // assert
-      expect(result, isA<SucessResult<String>>());
-      final success = result as SucessResult<String>;
-      expect(success.sucessResult, "Password reset successfully");
-      verify(mockAuthApiServices.resetPassword(any)).called(1);
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage, "Invalid reset code");
+        verify(mockAuthApiServices.verifyResetCode(any)).called(1);
+      });
     });
 
-    test("should return FailedResult when API returns error", () async {
-      final fakeResponse = ResetPasswordResponse(error: "Invalid request");
-      when(mockAuthApiServices.resetPassword({"email": email, "newPassword": newPassword}))
-          .thenAnswer((_) async => fakeResponse);
+    group("Reset Password", () {
+      const email = "test11@gmail.com";
+      const newPassword = "12345678";
 
-      final result = await authRemoteDataSourceImpl.resetPassword(email, newPassword);
+      test("return SuccessResult when reset is successful", () async {
+        final fakeResponse =
+            ResetPasswordResponse(message: "Password reset successfully");
+        when(mockAuthApiServices
+                .resetPassword({"email": email, "newPassword": newPassword}))
+            .thenAnswer((_) async => fakeResponse);
 
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(error.errorMessage, "Invalid request");
-      verify(mockAuthApiServices.resetPassword(any)).called(1);
-    });
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
 
-    test("should return FailedResult when DioException is thrown", () async {
-      final dioError = DioException(
-        requestOptions: RequestOptions(path: "/reset-password"),
-        response: Response(
+        expect(result, isA<SucessResult<String>>());
+        expect((result as SucessResult).sucessResult, "Password reset successfully");
+        verify(mockAuthApiServices.resetPassword(any)).called(1);
+      });
+
+      test("return FailedResult when API returns error", () async {
+        final fakeResponse = ResetPasswordResponse(error: "Invalid request");
+        when(mockAuthApiServices
+                .resetPassword({"email": email, "newPassword": newPassword}))
+            .thenAnswer((_) async => fakeResponse);
+
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
+
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage, "Invalid request");
+        verify(mockAuthApiServices.resetPassword(any)).called(1);
+      });
+
+      test("return FailedResult when DioException is thrown", () async {
+        final dioError = DioException(
           requestOptions: RequestOptions(path: "/reset-password"),
-          statusCode: 400,
-          data: {"error": "Invalid request"},
-        ),
-        type: DioExceptionType.badResponse,
-      );
+          response: Response(
+            requestOptions: RequestOptions(path: "/reset-password"),
+            statusCode: 400,
+            data: {"error": "Invalid request"},
+          ),
+          type: DioExceptionType.badResponse,
+        );
+        when(mockAuthApiServices.resetPassword(any)).thenThrow(dioError);
 
-      when(mockAuthApiServices.resetPassword(any)).thenThrow(dioError);
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
 
-      final result = await authRemoteDataSourceImpl.resetPassword(email, newPassword);
-
-      expect(result, isA<FailedResult<String>>());
-      final error = result as FailedResult<String>;
-      expect(error.errorMessage, "Invalid request");
-      verify(mockAuthApiServices.resetPassword(any)).called(1);
+        expect(result, isA<FailedResult<String>>());
+        expect((result as FailedResult).errorMessage, "Invalid request");
+        verify(mockAuthApiServices.resetPassword(any)).called(1);
+      });
     });
   });
 }

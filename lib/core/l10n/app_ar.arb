@@ -21,5 +21,15 @@
       "enterNewPassword": "أدخل كلمة المرور الجديدة",
       "confirmPassword": "تأكيد كلمة المرور",
       "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
-      "errorReset": "حدث خطأ ما"
+      "errorReset": "حدث خطأ ما",
+    "noRouteFound":"لا يوجد صفحه بهذا الاسم",
+    "enterYourEmail": "ادخل بريدك الالكترونى",
+    "enterYourPassword": "ادخل كلمة المرور",
+    "email": "البريد الالكترونى",
+    "password": "كلمة المرور",
+    "login": "تسجيل الدخول",
+    "continue1": "المتابعة",
+    "forgetPassword": "هل نسيت كلمة السر",
+    "rememberMe": "ذكرنى",
+    "successLogin": "✅ تم تسجيل الدخول بنجاح"
 }

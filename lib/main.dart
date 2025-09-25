@@ -6,8 +6,10 @@ import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
+import 'feature/auth/api/data_source/local/user_local_storage_impl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,36 +17,72 @@ void main() async {
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
   runApp(
     DevicePreview(
-      builder: (context) => ChangeNotifierProvider.value(
-        value: getIt.get<AppLanguageConfig>(),
-        child: MyApp(),
-      ),
+    builder: (context) =>
+    ChangeNotifierProvider.value(
+      value: getIt.get<AppLanguageConfig>(),
+      child: const MyApp(),
+    ),
     ),
   );
 }
 
-// ignore: must_be_immutable
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
-  late AppLanguageConfig appLanguageConfig;
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late Future<bool> _loginFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeApp();
+  }
+
+  // دالة لتهيئة التطبيق وفحص حالة Login
+  void _initializeApp() {
+    _loginFuture = UserLocalStorageImpl().isLoggedIn();
+  }
 
   @override
   Widget build(BuildContext context) {
-    appLanguageConfig = Provider.of(context)!;
+    final appLanguageConfig = Provider.of<AppLanguageConfig>(context);
+
     return SizeProvider(
       baseSize: const Size(375, 812),
       height: context.screenHight,
       width: context.screenWidth,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: Locale(appLanguageConfig.selectedLocal),
-        theme: AppTheme.lightTheme,
-        onGenerateRoute: Routes.onGenerate,
-    
-        
+      child: FutureBuilder<bool>(
+        future: _loginFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: Center(
+
+                ),
+              ),
+            );
+          }
+
+          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
+          final initialRoute = isLoggedIn ? AppRoute.testRoute : AppRoute.loginRoute;
+
+          return MaterialApp(
+            navigatorKey: Routes.navigatorKey,
+            initialRoute: initialRoute,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale(appLanguageConfig.selectedLocal),
+            theme: AppTheme.lightTheme,
+            onGenerateRoute: Routes.onGenerate,
+          );
+        },
       ),
     );
   }
