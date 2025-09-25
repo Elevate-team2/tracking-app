@@ -12,7 +12,7 @@ part 'forget_password_event.dart';
 class ForgetPasswordBloc
     extends Bloc<ForgetPasswordEvent, ForgetPasswordState> {
   final ForgetPasswordUseCase _useCase;
-  ForgetPasswordBloc(this._useCase) : super(ForgetPasswordState()) {
+  ForgetPasswordBloc(this._useCase) : super(const ForgetPasswordState()) {
     on<SupmitEmailEvent>(_onSupmiEmail);
   }
   Future<void> _onSupmiEmail(

@@ -29,9 +29,7 @@ void main() {
     getIt.registerFactory<ForgetPasswordBloc>(() => mockForgetPasswordBloc);
   });
 
-  tearDown(() {
-    getIt.reset();
-  });
+  tearDown(getIt.reset);
 
   Widget prepareWidget() {
     return SizeProvider(

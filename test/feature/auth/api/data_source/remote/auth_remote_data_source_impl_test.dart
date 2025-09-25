@@ -18,7 +18,7 @@ void main() {
   });
 
   group("test forget password", () {
-    String email = "test11@gmail.com";
+    const String email = "test11@gmail.com";
 
     test(
       "should return SuccessResult when otp send to email/return info",

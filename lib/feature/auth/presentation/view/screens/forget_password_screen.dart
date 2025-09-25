@@ -96,7 +96,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     TextFormField(
                       key: const Key(AppWidgetsKeys.emailTextField),
                       controller: _emailController,
-                      validator: (value) => Validator.validateEmail(value),
+                      validator: Validator.validateEmail,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: context.loc.email,

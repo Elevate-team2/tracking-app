@@ -10,7 +10,7 @@ abstract class Routes {
 
     switch (url.path) {
       case AppRoute.forgetPasswordScreen:
-       return MaterialPageRoute(builder: (context) => ForgetPasswordScreen());
+       return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
      
 
       default:

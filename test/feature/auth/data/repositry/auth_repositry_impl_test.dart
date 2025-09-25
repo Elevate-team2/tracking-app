@@ -22,7 +22,7 @@ void main() {
  });
 
  group("test forget password", () {
-   String email = "test@gmail.com";
+   const String email = "test@gmail.com";
   test("should return SuccessResult when remote call succeeds", () async {
    // arrange
    when(mockAuthRemoteDataSource.forgetPassword(email))

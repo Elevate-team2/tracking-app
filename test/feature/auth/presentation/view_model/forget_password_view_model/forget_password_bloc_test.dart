@@ -22,10 +22,10 @@ void main() {
   });
 
   group("test forget password bloc", () {
-    String email = "test@gmail.com";
+    const String email = "test@gmail.com";
     test("initial state should be ForgetPasswordState()", () {
       final bloc = ForgetPasswordBloc(mockForgetPasswordUseCase);
-      expect(bloc.state, ForgetPasswordState());
+      expect(bloc.state,const ForgetPasswordState());
     });
 
     blocTest<ForgetPasswordBloc, ForgetPasswordState>(
@@ -37,7 +37,7 @@ void main() {
         return forgetPasswordBloc;
       },
       act: (bloc) => bloc.add(SupmitEmailEvent(email)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.success,
@@ -58,7 +58,7 @@ void main() {
         return ForgetPasswordBloc(mockForgetPasswordUseCase);
       },
       act: (bloc) => bloc.add(SupmitEmailEvent(email)),
-      expect: () => [
+      expect: () => const[
         ForgetPasswordState(requestState: RequestState.loading),
         ForgetPasswordState(
           requestState: RequestState.error,
