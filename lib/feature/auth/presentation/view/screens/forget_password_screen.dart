@@ -5,6 +5,7 @@ import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -30,6 +31,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,16 +53,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
             listener: (context, state) {
               if (state.requestState == RequestState.success &&
-                  state.info?.isNotEmpty == true) {
-                // Navigator.pushNamed(context, routeName)
+                  state.info.isNotEmpty == true) {
+                Navigator.pushNamed(context, AppRoute.verifyCodeScreen,
+                arguments: _emailController.text.trim());
                 ScaffoldMessenger.of(
                   context,
-                ).showSnackBar(SnackBar(content: Text(state.info!)));
+                ).showSnackBar(SnackBar(content: Text(state.info)));
               } else if (state.requestState == RequestState.error &&
-                  state.error?.isNotEmpty == true) {
+                  state.error.isNotEmpty == true) {
                 ScaffoldMessenger.of(
                   context,
-                ).showSnackBar(SnackBar(content: Text(state.error!)));
+                ).showSnackBar(SnackBar(content: Text(state.error)));
+                
               }
             },
             builder: (context, state) {
@@ -123,7 +127,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           if (formKey.currentState!.validate()) {
                             final email = _emailController.text.trim();
                             context.read<ForgetPasswordBloc>().add(
-                              SupmitEmailEvent(email),
+                              SubmitEmailEvent(email),
                             );
                           }
                         },

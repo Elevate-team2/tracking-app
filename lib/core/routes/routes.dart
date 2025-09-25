@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
+import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
+import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 
 
 abstract class Routes {
@@ -11,7 +13,18 @@ abstract class Routes {
     switch (url.path) {
       case AppRoute.forgetPasswordScreen:
        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
-     
+
+      case AppRoute.verifyCodeScreen:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => VerifyResetCodeScreen(email: email),
+        );
+
+      case AppRoute.resetPasswordScreen:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => ResetPasswordScreen(email: email),
+        );
 
       default:
         return MaterialPageRoute(

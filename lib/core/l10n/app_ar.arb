@@ -6,5 +6,20 @@
       "forgetPassword": "نسيت كلمة المرور",
       "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
       "enterEmail": "أدخل بريدك الإلكتروني",
-      "confirm": "تأكيد"
+      "confirm": "تأكيد",
+      "verifyCode": "تحقق من الرمز",
+      "emailVerification": "التحقق من البريد الإلكتروني",
+      "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
+      "verify": "تحقق",
+      "didNotReceiveCode": "لم يصلك الرمز؟",
+      "resend": "إعادة إرسال",
+      "success": "تم بنجاح ✅",
+      "error": "خطأ ❌",
+      "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+      "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
+      "newPassword": "كلمة المرور الجديدة",
+      "enterNewPassword": "أدخل كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
+      "errorReset": "حدث خطأ ما"
 }
