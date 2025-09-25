@@ -6,4 +6,5 @@ abstract class AppRoute {
   static const String loginRoute="/login";
   static const String testRoute="/test";
 static const String approveScreen = "approve";
+  static const String home = 'home';
 }

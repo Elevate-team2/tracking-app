@@ -33,6 +33,12 @@
     "rememberMe": "Remember Me",
     "successLogin": "✅ Success Login",
     "submitted":"Your application has been submitted!",
-    "thankYou":"Thank you for providing your application, we will review your application and will get back to you soon."
+    "thankYou":"Thank you for providing your application, we will review your application and will get back to you soon.",
+    "welcome": "Welcome to",
+    "flowery": "Flowery rider app",
+    "apply": "Apply",
+    "home":"Home",
+    "orders":"Orders",
+    "profile":"Profile"
 
 }

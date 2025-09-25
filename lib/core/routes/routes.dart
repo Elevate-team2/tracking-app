@@ -7,15 +7,25 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/forget_passw
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
+import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 
 
 abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static Route onGenerate(RouteSettings settings) {
-    final url = Uri.parse(settings.name ?? "/");
+    final url = Uri.parse(settings.name ??   '/');
 
     switch (url.path) {
+
+      case AppRoute.home:
+       return MaterialPageRoute(
+          builder: (context) {
+
+            return const  AppSection();
+          },
+        );
+
 
 case (AppRoute.loginRoute):
   return MaterialPageRoute(builder: (context)=>
