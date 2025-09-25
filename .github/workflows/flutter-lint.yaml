@@ -32,3 +32,4 @@ jobs:
 
       - name: Run Flutter Analyzer
         run: flutter analyze --no-fatal-warnings
+

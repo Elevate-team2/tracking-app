@@ -21,41 +21,43 @@ void main() async {
       //builder: (context) =>
           ChangeNotifierProvider.value(
         value: getIt.get<AppLanguageConfig>(),
-        child: MyApp(),
+        child: const MyApp(),
       ),
    // ),
   );
 }
 
-// ignore: must_be_immutable
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
 
-  late AppLanguageConfig appLanguageConfig;
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    appLanguageConfig = Provider.of(context)!;
+    final appLanguageConfig = Provider.of<AppLanguageConfig>(context);
+
     return SizeProvider(
       baseSize: const Size(375, 812),
       height: context.screenHight,
       width: context.screenWidth,
+      child: FutureBuilder<bool>(
+        future: UserLocalStorageImpl().isLoggedIn(),
+        builder: (context, snapshot) {
 
-      child:FutureBuilder<bool>(future: UserLocalStorageImpl.isLoggedIn(),
-          builder: (context,snapshot){
-        final initialRoute=snapshot.data==true?AppRoute.testRoute:AppRoute.loginRoute;
-        return      MaterialApp(
-          initialRoute:initialRoute,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale(appLanguageConfig.selectedLocal),
-          theme: AppTheme.lightTheme,
-          onGenerateRoute: Routes.onGenerate,
+          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
+          final initialRoute = isLoggedIn ? AppRoute.testRoute : AppRoute.loginRoute;
+           Future.delayed(const Duration(seconds: 2));
 
-        );
-          })
-
+          return MaterialApp(
+            initialRoute: initialRoute,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale(appLanguageConfig.selectedLocal),
+            theme: AppTheme.lightTheme,
+            onGenerateRoute: Routes.onGenerate,
+          );
+        },
+      ),
     );
   }
 }

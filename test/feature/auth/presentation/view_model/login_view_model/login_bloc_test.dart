@@ -22,16 +22,18 @@ void main() {
     bloc = LoginBloc(mockLoginUseCase);
     provideDummy<Result<LoginResponse>>(FailedResult("Dummy Error"));
   });
-  group("Login Bloc", () {
-    final LoginRequest request = LoginRequest(
-      email: "mariammohmed.25720@gmail.com",
-      password: "Mariam257@",
-    );
-    final successResponse = LoginResponse(
-      message: "success",
-      token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQwNDIyY2RkODkzN2UwNTczZWUwNmMiLCJpYXQiOjE3NTg1NTIyNzF9.PHzemBMcIvQJN2J0NWtzPU5q3JdGq1mXiISTq25qMpY",
-    );
+  final LoginRequest request = LoginRequest(
+    email: "mariammohmed.25720@gmail.com",
+    password: "Mariam257@",
+  );
+  final successResponse = LoginResponse(
+    message: "success",
+    token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQwNDIyY2RkODkzN2UwNTczZWUwNmMiLCJpYXQiOjE3NTg1NTIyNzF9.PHzemBMcIvQJN2J0NWtzPU5q3JdGq1mXiISTq25qMpY",
+  );
+  group("Login Event", () {
+
+
     blocTest<LoginBloc, LoginStates>(
       "emits [loading, success] when LoginEvent succeed",
       build: () {
@@ -70,4 +72,18 @@ void main() {
       verify: (_) => verify(mockLoginUseCase.login(request)).called(1),
     );
   });
+  // group("Remember Me Event", (){
+  //   blocTest("emits updated rememberMe state when RememberMeEvent is added with isLoggedIn true", build: (){
+  //    when(mockLoginUseCase.login(request)).thenReturn(successResponse as
+  //    Future<SucessResult<LoginResponse>>);
+  //     return bloc;
+  //   },act: (bloc)=>bloc..add(RememberMeEvent(true),
+  //
+  //   ),expect: ()=>[
+  //    const LoginStates(
+  //       requestState: RequestState.success,
+  //      rememberMe: true
+  //     )
+  //   ],verify: (_)=>verify(mockLoginUseCase.login(request)).called(1));
+  // });
 }

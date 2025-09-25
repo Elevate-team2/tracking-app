@@ -22,17 +22,16 @@ final result=await useCase.login(event.request);
 switch(result){
 
   case SucessResult<LoginResponse>():
-  emit(state.copyWith(
-    requestState: RequestState.success,
-    loginResponse: result.sucessResult
-  ));
+
   token=result.sucessResult.token;
   if (state.rememberMe && token != null) {
-    await UserLocalStorageImpl.saveToken(token!);
-    emit(state.copyWith(
-      rememberMe: true,
-    ));
+    await UserLocalStorageImpl().saveToken(token!);
+
   }
+  emit(state.copyWith(
+      requestState: RequestState.success,
+      loginResponse: result.sucessResult
+  ));
   case FailedResult<LoginResponse>():
     emit(state.copyWith(
         requestState: RequestState.error,
@@ -43,7 +42,8 @@ switch(result){
     on<RememberMeEvent>((event,emit)async{
       emit(state.copyWith(
       rememberMe: event.isLoggedIn,
-    ));
+
+      ));
     });
   }
 

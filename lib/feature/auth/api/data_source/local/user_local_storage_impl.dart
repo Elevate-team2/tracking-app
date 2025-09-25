@@ -1,21 +1,41 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 
- class UserLocalStorageImpl {
-   static  FlutterSecureStorage storage = const FlutterSecureStorage();
+class UserLocalStorageImpl {
+  final FlutterSecureStorage storage;
 
-   static Future<void>saveToken(String token)async{
-    await storage.write(key: Constants.token, value: token);
+  UserLocalStorageImpl({FlutterSecureStorage? storage})
+      : storage = storage ?? const FlutterSecureStorage();
+
+  Future<void> saveToken(String token) async {
+    try {
+      await storage.write(key: Constants.token, value: token);
+    } catch (e) {
+      throw Exception('Failed to save token: $e');
+    }
   }
 
- static Future<String?>getToken()async{
- return  await storage.read(key: Constants.token);
-}
-
- static Future<void>deleteToken()async{
-    await storage.delete(key: Constants.token);
+  Future<String?> getToken() async {
+    try {
+      return await storage.read(key: Constants.token);
+    } catch (e) {
+      throw Exception('Failed to get token: $e');
+    }
   }
-  static Future<bool>  isLoggedIn()async{
-     return await storage.containsKey(key: Constants.token);
+
+  Future<void> deleteToken() async {
+    try {
+      await storage.delete(key: Constants.token);
+    } catch (e) {
+      throw Exception('Failed to delete token: $e');
+    }
+  }
+
+  Future<bool> isLoggedIn() async {
+    try {
+      return await storage.containsKey(key: Constants.token);
+    } catch (e) {
+      throw Exception('Failed to check login status: $e');
+    }
   }
 }
