@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 
@@ -12,15 +13,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Result<String>> forgetPassword(String email) async {
     try {
-      final response = await _authApiServices.forgetPassword({"email": email});
+      final response = await _authApiServices.forgetPassword({Constants.email: email});
       if (response.info != null && response.info!.isNotEmpty) {
         return SucessResult<String>(response.info!);
       } else {
-        final errorMessage = response.error ?? response.message ?? "Unknown error";
+        final errorMessage = response.error ?? response.message ?? Constants.unknownError;
         return FailedResult<String>(errorMessage);
       }
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data["error"] ?? dioError.message;
+      final errorMessage = dioError.response?.data[Constants.error] ?? dioError.message;
       return FailedResult<String>(errorMessage);
     } catch (error) {
       return FailedResult<String>(error.toString());
