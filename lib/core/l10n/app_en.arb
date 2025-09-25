@@ -1,8 +1,11 @@
 {
     "@@locale": "en",
-    "noRouteFound":"No Route Found",
-    "home":"Home",
-    "orders":"Orders",
-    "profile":"Profile"
-
+    "noRouteFound": "No Route Found",
+    "welcome": "Welcome to",
+    "flowery": "Flowery rider app",
+    "login": "Login",
+    "apply": "Apply",
+     "home":"Home",
+        "orders":"Orders",
+        "profile":"Profile"
 }
