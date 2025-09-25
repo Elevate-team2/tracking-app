@@ -14,16 +14,9 @@ class ApplyRepositoryImpl implements ApplyRepository {
   Future<Result<(Driver, String)>> applyDriver(Map<String, dynamic> data) async {
     try {
       final result = await remoteDataSource.applyDriver(data);
-
-      if (result is SuccessResult<(Driver, String)>) {
-        return result;
-      } else if (result is FailedResult) {
-        return result;
-      }
-
-      return FailedResult("Unknown error", "Unexpected result type");
+      return result;
     } catch (e) {
-      return FailedResult("Exception occurred", e.toString());
+      return FailedResult("Repository error", e.toString());
     }
   }
 }

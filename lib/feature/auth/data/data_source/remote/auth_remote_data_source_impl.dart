@@ -49,7 +49,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return SuccessResult(countries);
     } catch (e) {
-      return FailedResult(e.toString(), e is DioError ? e.message ?? '' : '');
+      return FailedResult(
+        e.toString(),
+        e is DioException ? e.message ?? '' : '',
+      );
     }
   }
 
@@ -63,7 +66,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final token = authResponse.token ?? '';
       return SuccessResult((driverEntity, token));
     } catch (e) {
-      return FailedResult(e.toString(), e is DioError ? e.message ?? '' : '');
+      return FailedResult(
+        e.toString(),
+        e is DioException ? e.message ?? '' : '',
+      );
     }
   }
 }
