@@ -25,6 +25,11 @@ dependencies:
   retrofit: ^4.7.2
   json_annotation: ^4.9.0
   dio_cache_interceptor: ^4.0.3
+  equatable:
+  flutter_bloc: ^9.1.1
+  flutter_secure_storage: ^9.2.2
+  bloc_test: ^10.0.0
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -40,3 +45,10 @@ dev_dependencies:
 
   # Testing
   mockito: ^5.4.4
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+assets:
+   - assets/json/
