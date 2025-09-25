@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
@@ -30,8 +31,8 @@ void main() {
     );
 
     expect(find.byKey(const Key("stack1")), findsOneWidget);
-    expect(find.byKey(const Key("center1")), findsOneWidget);
-    expect(find.byKey(const Key("align1")), findsOneWidget);
+    expect(find.byKey(const Key(Constants.ceenterKey1)), findsOneWidget);
+    expect(find.byKey(const Key(Constants.alignKey1)), findsOneWidget);
     expect(find.byType(Padding), findsNWidgets(2));
     expect(find.byType(Column), findsOneWidget);
     expect(find.byType(Icon), findsOneWidget);
@@ -130,7 +131,7 @@ void main() {
       find.byWidgetPredicate(
         (widget) =>
             widget is Center &&
-            widget.key == const Key("center1")&&
+            widget.key == const Key(Constants.ceenterKey1)&&
             // widget.size==myContext.setWidth(140)&&
             widget.child is Padding,
       ),
@@ -165,7 +166,7 @@ void main() {
 
 
 
-    final alignFinder = find.byKey(const Key("align1"));
+    final alignFinder = find.byKey(const Key(Constants.alignKey1));
   expect(alignFinder, findsOneWidget);
 
 
@@ -185,7 +186,7 @@ void main() {
   expect(imageWidget.image, isA<AssetImage>());
 
   final assetImage = imageWidget.image as AssetImage;
-  expect(assetImage.assetName, "assets/images/wave.png");
+  expect(assetImage.assetName, Constants.approveImageUrl);
 
 
 
