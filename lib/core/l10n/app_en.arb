@@ -31,6 +31,8 @@
     "continue1": "Continue",
     "forgetPassword": "Forget Password",
     "rememberMe": "Remember Me",
-    "successLogin": "✅ Success Login"
+    "successLogin": "✅ Success Login",
+    "submitted":"Your application has been submitted!",
+    "thankYou":"Thank you for providing your application, we will review your application and will get back to you soon."
 
 }

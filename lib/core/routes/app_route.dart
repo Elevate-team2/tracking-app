@@ -5,5 +5,5 @@ abstract class AppRoute {
   static const String resetPasswordScreen= "resetPasswordScreen";
   static const String loginRoute="/login";
   static const String testRoute="/test";
-
+static const String approveScreen = "approve";
 }

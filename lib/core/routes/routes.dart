@@ -6,6 +6,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/test_screen.
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
+import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 
 
 abstract class Routes {
@@ -37,6 +38,13 @@ case (AppRoute.loginRoute):
         final email = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) => ResetPasswordScreen(email: email),
+        );
+
+        case AppRoute.approveScreen:
+      return MaterialPageRoute(
+          builder: (context) {
+            return const  ApproveScreen();
+          },
         );
 
       default:
