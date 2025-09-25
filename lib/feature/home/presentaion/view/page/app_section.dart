@@ -23,8 +23,13 @@ class _AppSectionState extends State<AppSection> {
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -54,7 +59,7 @@ class _AppSectionState extends State<AppSection> {
             label: context.loc.home,
           ),
           BottomNavigationBarItem(
-            icon: const  Icon(Icons.menu, key: Key(Constants.orderkey)),
+            icon: const Icon(Icons.menu, key: Key(Constants.orderkey)),
             label: context.loc.orders,
           ),
           BottomNavigationBarItem(
