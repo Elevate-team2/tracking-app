@@ -67,9 +67,8 @@ void main() {
     blocTest<ApplyDriverBloc, ApplyDriverState>(
       "emits [loading, success] when apply driver succeeds",
       build: () {
-        when(() => mockUseCase.call(fakeBody)).thenAnswer(
-              (_) async => SuccessResult<(Driver, String)>((fakeDriver, "token123")),
-        );
+        when(() => mockUseCase.call(fakeBody))
+            .thenAnswer((_) async => SuccessResult((fakeDriver, "token123")));
         return bloc;
       },
       act: (bloc) => bloc.add(ApplyDriverSubmitted(fakeBody)),
@@ -86,9 +85,8 @@ void main() {
     blocTest<ApplyDriverBloc, ApplyDriverState>(
       "emits [loading, error] when apply driver fails",
       build: () {
-        when(() => mockUseCase.call(fakeBody)).thenAnswer(
-              (_) async => FailedResult<(Driver, String)>("Server error"),
-        );
+        when(() => mockUseCase.call(fakeBody))
+            .thenAnswer((_) async => FailedResult("Server error"));
         return bloc;
       },
       act: (bloc) => bloc.add(ApplyDriverSubmitted(fakeBody)),
@@ -100,5 +98,6 @@ void main() {
         ),
       ],
     );
+
   });
 }
