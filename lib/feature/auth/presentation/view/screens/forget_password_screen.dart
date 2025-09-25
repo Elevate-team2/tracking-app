@@ -6,12 +6,10 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
-import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
-import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -48,17 +46,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordState>(
             listener: (context, state) {
               if (state.requestState == RequestState.success &&
-                  state.info?.isNotEmpty == true) {
+                  state.info.isNotEmpty == true) {
                 Navigator.pushNamed(context, AppRoute.verifyCodeScreen,
                 arguments: _emailController.text.trim());
                 ScaffoldMessenger.of(
                   context,
-                ).showSnackBar(SnackBar(content: Text(state.info!)));
+                ).showSnackBar(SnackBar(content: Text(state.info)));
               } else if (state.requestState == RequestState.error &&
-                  state.error?.isNotEmpty == true) {
+                  state.error.isNotEmpty == true) {
                 ScaffoldMessenger.of(
                   context,
-                ).showSnackBar(SnackBar(content: Text(state.error!)));
+                ).showSnackBar(SnackBar(content: Text(state.error)));
               }
             },
             builder: (context, state) {
