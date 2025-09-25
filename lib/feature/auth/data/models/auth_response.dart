@@ -28,8 +28,8 @@ class Driver {
   final String vehicleType;
   final String vehicleNumber;
   final String vehicleLicense;
-  final String NID;
-  final String NIDImg;
+  final String nid;
+  final String nidImg;
   final String email;
   final String gender;
   final String phone;
@@ -48,8 +48,8 @@ class Driver {
     required this.vehicleType,
     required this.vehicleNumber,
     required this.vehicleLicense,
-    required this.NID,
-    required this.NIDImg,
+    required this.nid,
+    required this.nidImg,
     required this.email,
     required this.gender,
     required this.phone,
