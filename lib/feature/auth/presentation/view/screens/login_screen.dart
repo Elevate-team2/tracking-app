@@ -50,7 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(context.loc.successLogin)));
-            Navigator.pushNamed(context, AppRoute.testRoute);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                AppRoute.testRoute, (route) => false,
+              );
+            });
           }
           if (state.requestState == RequestState.error) {
             ScaffoldMessenger.of(
@@ -107,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Checkbox(
                               value: state.rememberMe,
                               onChanged: (value) {
-                                value=true;
+
                                 context.read<LoginBloc>().add(
-                                    RememberMeEvent(value),
+                                    RememberMeEvent(value??false),
                                   );
 
                               },
