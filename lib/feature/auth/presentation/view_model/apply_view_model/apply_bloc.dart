@@ -56,7 +56,7 @@ class ApplyBloc extends Bloc<ApplyEvent,ApplyStates>{
     on<GetApplyEvent>((event,emit)async{
 
       final result=await _applyUseCase.
-      apply(event.request,event.nid,event.vehiclesLicense);
+      apply(event.request);
     switch(result){
 
       case SucessResult<DriverEntity>():

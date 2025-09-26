@@ -483,25 +483,6 @@ import '../../../domain/entity/country_entity.dart';
 //
 //   }
 // }
-
-import 'dart:io';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:tracking_app/config/di/di.dart';
-import 'package:tracking_app/core/responsive/size_helper_extension.dart';
-import 'package:tracking_app/core/theme/app_colors.dart';
-import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
-import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
-import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
-import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
-import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
-import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
-import '../../../../../core/utils/request_state/request_state.dart';
-import '../../../domain/entity/country_entity.dart';
-
 class ApplyScreen extends StatefulWidget {
   const ApplyScreen({super.key});
 
@@ -730,6 +711,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         value: vehicleType,
+
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Please select vehicle type";
@@ -738,15 +720,13 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         },
                         items: state.vehicle.map((e) {
                           return DropdownMenuItem(
-                            value: e.type,
+                            value: e.id,
                             child: Row(
                               children: [
-                                Image.network(
-                                  e.image,
-                                  width: context.setWidth(50),
-                                  height: context.setHight(60), // Fixed typo
-                                  fit: BoxFit.scaleDown,
-                                ),
+Image.network(e.image,
+  width: context.setWidth(60),
+  height: context.setHight(50),
+  fit: BoxFit.scaleDown,),
                                 SizedBox(width: context.setWidth(10)),
                                 Text(e.type),
                               ],
@@ -928,6 +908,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             context.read<ApplyBloc>().add(
                               GetApplyEvent(
                                 ApplyRequest(
+                                  NIDImg: nidImg,
+                                  vehicleLicense: vehicleLicenseImg,
                                   country: country,
                                   firstName: firstNameCtrl.text,
                                   lastName: lastNameCtrl.text,
@@ -940,8 +922,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                   NID: nidCtrl.text,
                                   rePassword: confirmPasswordCtrl.text,
                                 ),
-                                nidImg!,
-vehicleLicenseImg!
+
                                 //ظبظلى هنا ياخد file
                               ),
                             );

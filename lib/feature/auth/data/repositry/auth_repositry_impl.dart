@@ -27,9 +27,8 @@ class AuthRepositryImpl implements
 
   @override
   Future<Result<DriverEntity>> apply(ApplyRequest request ,
-      File nid,
-      File vehiclesLicense,)async {
-    return await _authRemoteDataSource.apply(request,nid,vehiclesLicense);
+    )async {
+    return await _authRemoteDataSource.apply(request);
   }
 
 }

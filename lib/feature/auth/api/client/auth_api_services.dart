@@ -18,8 +18,5 @@ abstract class AuthApiServices{
 
   @POST(EndPointsConstants.applyEndPoint)
   @MultiPart()
-  Future<ApplyResponse> apply(
-@Body() ApplyRequest request,@Part(name:  "NIDImg") File nid,
-      @Part(name:  "vehicleLicense") File vehiclesLicense,
-      );
+  Future<ApplyResponse> apply(@Body() FormData body);
 }

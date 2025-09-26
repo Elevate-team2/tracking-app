@@ -11,7 +11,5 @@ abstract interface class AuthRemoteDataSource{
 
   Future<Result<List<CountryEntity>>>getCountries();
   Future<Result<List<VehicleEntity>>>getAllVehicles();
-  Future<Result<DriverEntity>> apply(ApplyRequest request ,
-      File nid,
-      File vehiclesLicense,);
+  Future<Result<DriverEntity>> apply(ApplyRequest request);
 }

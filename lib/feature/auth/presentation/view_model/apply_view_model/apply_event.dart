@@ -13,9 +13,8 @@ class GetAllCountriesEvent extends ApplyEvent{}
 class GetAllVehiclesEvent extends ApplyEvent{}
 class GetApplyEvent extends ApplyEvent{
   final ApplyRequest request;
-  final File nid;
-final  File vehiclesLicense;
-  GetApplyEvent(this.request,this.nid,this.vehiclesLicense);
+
+  GetApplyEvent(this.request);
   @override
-  List<Object?> get props => [request,nid,vehiclesLicense];
+  List<Object?> get props => [request];
 }

@@ -12,8 +12,7 @@ class ApplyUseCase{
   final AuthRepositry _authRepositry;
   const ApplyUseCase(this._authRepositry);
   Future<Result<DriverEntity>> apply(ApplyRequest request ,
-      File nid,
-      File vehiclesLicense,)async{
-    return await _authRepositry.apply(request,nid,vehiclesLicense);
+     )async{
+    return await _authRepositry.apply(request);
   }
 }
