@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
+import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/utils/request_state/request_state.dart';
 import 'package:tracking_app/core/utils/validator.dart';
@@ -80,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Form(
                   key: formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomTxtField(
                         hintTxt: context.loc.enterYourEmail,
@@ -136,22 +138,29 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       SizedBox(height: context.setHight(20)),
-                      CustomBtn(
-                        bg: AppColors.pink,
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            context.read<LoginBloc>().add(
-                              GetLoginEvent(
-                                LoginRequest(
-                                  email: emailController.text.trim(),
-                                  password: passwordController.text.trim(),
+                      SizedBox(
+                        height: context.setHight(50),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              context.read<LoginBloc>().add(
+                                GetLoginEvent(
+                                  LoginRequest(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  ),
                                 ),
-                              ),
-                            );
-                          }
-                        },
-                        txt: context.loc.continue1,
-                      ),
+                              );
+                            }
+                          },
+                           child:  Text(
+                            context.loc.continue1,
+                            style: getMediumStyle(
+                              color: AppColors.white,
+                              fontSize: context.setSp(FontSize.s20),
+                            ),
+                          ),),
+                      )
                     ],
                   ),
                 ),

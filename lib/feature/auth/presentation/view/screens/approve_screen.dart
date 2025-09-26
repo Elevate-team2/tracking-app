@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -65,10 +66,11 @@ class ApproveScreen extends StatelessWidget {
                   ),
                   SizedBox(height: context.setHight(20)),
                   SizedBox(
+                    height: context.setHight(50),
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // navigate to login page
+                       Navigator.pushNamed(context, AppRoute.loginRoute);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(

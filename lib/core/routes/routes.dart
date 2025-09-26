@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
-import 'package:tracking_app/feature/auth/presentation/view/screens/test_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
+import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 
 
 abstract class Routes {
@@ -31,9 +31,9 @@ case (AppRoute.loginRoute):
   return MaterialPageRoute(builder: (context)=>
   const   LoginScreen());
   
-      case (AppRoute.testRoute):
+      case (AppRoute.onBoarding):
         return MaterialPageRoute(builder: (context)=>
-        const    TestScreen());
+        const    OnBoarddingScreen());
 
       case AppRoute.forgetPasswordScreen:
        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
