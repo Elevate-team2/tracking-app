@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class Timezone extends Equatable{
+class Timezone {
   final String zoneName;
   final int gmtOffset;
   final String gmtOffsetName;
   final String abbreviation;
   final String tzName;
-  Timezone({
+  const Timezone({
     required this.zoneName,
     required this.gmtOffset,
     required this.gmtOffsetName,
@@ -14,10 +14,5 @@ class Timezone extends Equatable{
     required this.tzName,
   });
 
-  @override
-  // TODO: implement props
-  List<Object?> get props => [
-    zoneName,gmtOffset,gmtOffsetName,abbreviation,
-    tzName
-  ];
+
 }

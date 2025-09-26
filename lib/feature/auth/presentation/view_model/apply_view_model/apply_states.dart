@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:tracking_app/core/utils/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 
 class ApplyStates extends Equatable{
@@ -10,6 +11,9 @@ class ApplyStates extends Equatable{
   final RequestState vehiclesState;
   final List<VehicleEntity>vehicle;
   final String? vehicleErrorMessage;
+  final RequestState applyState;
+  final DriverEntity? driverEntity;
+  final String? applyErrorMessage;
  const ApplyStates({
     this.countriesState=RequestState.loading,
    this.countries=const [],
@@ -17,6 +21,9 @@ class ApplyStates extends Equatable{
    this.vehiclesState=RequestState.loading,
    this.vehicle=const [],
    this.vehicleErrorMessage,
+   this.applyState=RequestState.loading,
+   this.driverEntity,
+   this.applyErrorMessage
 });
   ApplyStates copyWith({
      RequestState? countriesState,
@@ -24,7 +31,10 @@ class ApplyStates extends Equatable{
      String? countryErrorMessage,
      RequestState? vehiclesState,
      List<VehicleEntity>?vehicle,
-     String? vehicleErrorMessage
+     String? vehicleErrorMessage,
+     RequestState? applyState,
+     DriverEntity? driverEntity,
+     String? applyErrorMessage
 }){
     return  ApplyStates(
       countryErrorMessage:
@@ -34,13 +44,18 @@ class ApplyStates extends Equatable{
       vehiclesState: vehiclesState??this.vehiclesState,
       vehicle: vehicle??this.vehicle,
       vehicleErrorMessage: vehicleErrorMessage??this.vehicleErrorMessage
+   ,applyState: applyState??this.applyState,
+      driverEntity: driverEntity??this.driverEntity,
+      applyErrorMessage: applyErrorMessage??this.applyErrorMessage
     );
   }
 
   @override
   // TODO: implement props
   List<Object?> get props => [
-    countriesState,countries,countryErrorMessage
+    countriesState,countries,countryErrorMessage,
+    vehicle,vehiclesState,vehicleErrorMessage,
+    applyErrorMessage,driverEntity,applyState
   ];
 
 }
