@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -5,9 +7,11 @@ import 'package:tracking_app/feature/auth/api/models/forget_password_response.da
 import 'package:tracking_app/feature/auth/api/models/reset_password_response.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
+import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
+import 'package:tracking_app/feature/auth/api/models/response/apply_response/all_vehicles_response.dart';
+import 'package:tracking_app/feature/auth/api/models/response/apply_response/apply_response.dart';
 import '../../../../core/constants/end_points_constants.dart';
 part 'auth_api_services.g.dart';
-
 @RestApi(baseUrl: EndPointsConstants.baseUrl)
 @injectable
 abstract class AuthApiServices {
@@ -30,4 +34,10 @@ abstract class AuthApiServices {
   Future<ResetPasswordResponse> resetPassword(
       @Body() Map<String, dynamic> body);
 
+@GET(EndPointsConstants.allVehicles)
+  Future<AllVehiclesResponse>getAllVehicles();
+
+  @POST(EndPointsConstants.applyEndPoint)
+  @MultiPart()
+  Future<ApplyResponse> apply(@Body() FormData body);
 }

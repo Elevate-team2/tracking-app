@@ -7,4 +7,6 @@ abstract class AppRoute {
   static const String approveScreen = "approve";
   static const String home = 'home';
   static const String onBoarding= "onBoarding";
+ //ApplyScreen
+ static  const applyScreen="ApplyScreen";
 }

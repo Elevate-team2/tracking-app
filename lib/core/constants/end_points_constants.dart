@@ -4,5 +4,9 @@ static const String forgetPass="forgotPassword";
 static const String verifyCode="verifyResetCode";
 static const String resetPassword="resetPassword";
 static const String signinEndPoint="signin";
+//vehicles
+   static const String allVehicles="vehicles";
+//apply
+   static const String applyEndPoint="drivers/apply";
 
  }
