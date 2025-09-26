@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(
                 context,
-              ).pushNamedAndRemoveUntil(AppRoute.testRoute, (route) => false);
+              ).pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
             });
           }
           if (state.requestState == RequestState.error) {

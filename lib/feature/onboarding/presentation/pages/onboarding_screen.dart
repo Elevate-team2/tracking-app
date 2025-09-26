@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class OnBoarddingScreen extends StatefulWidget{
@@ -15,7 +16,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
-    version: '1.0.0',
+    version: '0.0.0',
     buildNumber: 'Unknown',
     buildSignature: 'Unknown',
     installerStore: 'Unknown',
@@ -51,14 +52,17 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                  SizedBox(
                      height: context.setHight(10)),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, AppRoute.loginRoute);
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor:AppColors.pink,
                       padding:  EdgeInsets.symmetric(vertical:context.setHight(20)),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(context.setMinSize(30))
                       )
-                  ), child:
+                  ),
+                   child:
                 Center(
 
                   child: Text(
@@ -75,7 +79,9 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                  SizedBox(
                      height:context.setHight(10)),
                 OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pushNamed(context, AppRoute.approveScreen);
+                  },
                   style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.black),
                       padding:  EdgeInsets.symmetric(vertical:context.setHight(20)),

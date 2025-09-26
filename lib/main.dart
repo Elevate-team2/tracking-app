@@ -42,7 +42,6 @@ class _MyAppState extends State<MyApp> {
     _initializeApp();
   }
 
-  // دالة لتهيئة التطبيق وفحص حالة Login
   void _initializeApp() {
     _loginFuture = UserLocalStorageImpl().isLoggedIn();
   }
@@ -70,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           }
 
           final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
-          final initialRoute = isLoggedIn ? AppRoute.testRoute : AppRoute.loginRoute;
+          final initialRoute = isLoggedIn ? AppRoute.home : AppRoute.onBoarding;
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
