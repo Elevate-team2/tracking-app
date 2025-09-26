@@ -484,7 +484,6 @@ import '../../../domain/entity/country_entity.dart';
 //   }
 // }
 
-
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -512,6 +511,7 @@ class ApplyScreen extends StatefulWidget {
 
 class _ApplyScreenState extends State<ApplyScreen> {
   final _formKey = GlobalKey<FormState>();
+
   // Controllers
   final firstNameCtrl = TextEditingController();
   final lastNameCtrl = TextEditingController();
@@ -530,25 +530,25 @@ class _ApplyScreenState extends State<ApplyScreen> {
   // Images
   File? vehicleLicenseImg;
   File? nidImg;
+  Future<File> _saveTemporaryFile(XFile pickedFile) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
+    final savedFile = await File('${directory.path}/$fileName')
+        .writeAsBytes(await pickedFile.readAsBytes());
+    return savedFile;
+  }
 
   Future<File?> _pickImage() async {
     final picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 85, // اختياري عشان تصغر حجم الصورة
+    );
 
     if (pickedFile != null) {
-      final directory = await getApplicationDocumentsDirectory();
-      final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpeg";
-      final savedFile = await File("${directory.path}/$fileName").writeAsBytes(
-        await pickedFile.readAsBytes(),
-      );
-      return savedFile;
+      return await _saveTemporaryFile(pickedFile);
     }
     return null;
-  }
-
-  String? _fileToBase64(File? file) {
-    if (file == null) return null;
-    return base64Encode(file.readAsBytesSync());
   }
 
   @override
@@ -612,9 +612,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
             print("vehicles===================${state.vehicle}");
           }
           if (state.applyState == RequestState.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Register Success")),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text("Register Success")));
           }
         },
         builder: (context, state) {
@@ -644,16 +644,21 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Welcome!!",
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w500)),
+                      const Text(
+                        "Welcome!!",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       SizedBox(height: sh * 0.01),
                       const Text(
                         "You want to be a delivery man?\nJoin our team ",
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
                       ),
                       SizedBox(height: sh * 0.02),
                       // Country
@@ -671,10 +676,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                               children: [
                                 Text(e.flag),
                                 SizedBox(width: context.setWidth(10)),
-                                Text(
-                                  e.name,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                Text(e.name, overflow: TextOverflow.ellipsis),
                               ],
                             ),
                           );
@@ -682,7 +684,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         onChanged: (value) {
                           setState(() {
                             final selectedCountry = state.countries.firstWhere(
-                                  (c) => c.name == value,
+                              (c) => c.name == value,
                               orElse: () => const CountryEntity(
                                 isoCode: "",
                                 name: "",
@@ -707,7 +709,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // Last name
@@ -718,7 +720,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // Vehicle type
@@ -753,7 +755,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         }).toList(),
                         onChanged: (value) {
                           final selectedVehicle = state.vehicle.firstWhere(
-                                (e) => e.type == value,
+                            (e) => e.type == value,
                             orElse: () => const VehicleEntity(
                               id: "",
                               type: "",
@@ -777,7 +779,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // Vehicle license upload
@@ -800,7 +802,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // Phone
@@ -811,7 +813,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // NID
@@ -822,7 +824,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (val) =>
-                        val == null || val.isEmpty ? "Required" : null,
+                            val == null || val.isEmpty ? "Required" : null,
                       ),
                       SizedBox(height: sh * 0.02),
                       // ID image upload
@@ -865,8 +867,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
                               validator: (val) => val != passwordCtrl.text
                                   ? "Not match"
                                   : (val != null && val.length < 6
-                                  ? "Min 6 chars"
-                                  : null),
+                                        ? "Min 6 chars"
+                                        : null),
                             ),
                           ),
                         ],
@@ -878,7 +880,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           const Text(
                             "Gender",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                           const SizedBox(width: 20),
                           Row(
@@ -909,21 +913,17 @@ class _ApplyScreenState extends State<ApplyScreen> {
                       ),
                       SizedBox(height: sh * 0.02),
                       CustomBtn(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             // Validate images
                             if (vehicleLicenseImg == null || nidImg == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                    content: Text("Please upload both images")),
+                                  content: Text("Please upload both images"),
+                                ),
                               );
                               return;
                             }
-
-                            // Convert files to Base64 strings
-                            final vehicleLicenseBase64 =
-                            _fileToBase64(vehicleLicenseImg);
-                            final nidImgBase64 = _fileToBase64(nidImg);
 
                             context.read<ApplyBloc>().add(
                               GetApplyEvent(
@@ -932,16 +932,17 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                   firstName: firstNameCtrl.text,
                                   lastName: lastNameCtrl.text,
                                   vehicleType: vehicleType,
-                                  vehicleLicense: vehicleLicenseBase64,
                                   vehicleNumber: vehicleNumberCtrl.text,
                                   password: passwordCtrl.text,
                                   email: emailCtrl.text,
                                   gender: gender,
                                   phone: phoneCtrl.text,
-                                  NIDImg: nidImgBase64,
                                   NID: nidCtrl.text,
                                   rePassword: confirmPasswordCtrl.text,
                                 ),
+                                nidImg!,
+vehicleLicenseImg!
+                                //ظبظلى هنا ياخد file
                               ),
                             );
                           }
@@ -959,3 +960,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
     );
   }
 }
+
+//    vehicleLicense": vehicleLicenseBase64,
+//    "NIDImg": nidImgBase64,

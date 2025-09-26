@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -6,7 +8,6 @@ import 'package:tracking_app/feature/auth/api/models/response/apply_response/all
 import 'package:tracking_app/feature/auth/api/models/response/apply_response/apply_response.dart';
 import '../../../../core/constants/end_points_constants.dart';
 part 'auth_api_services.g.dart';
-
 @RestApi(baseUrl: EndPointsConstants.baseUrl)
 @injectable
 abstract class AuthApiServices{
@@ -14,9 +15,11 @@ abstract class AuthApiServices{
   factory AuthApiServices(Dio dio)=_AuthApiServices;
 @GET(EndPointsConstants.allVehicles)
   Future<AllVehiclesResponse>getAllVehicles();
-  @MultiPart()
+
   @POST(EndPointsConstants.applyEndPoint)
+  @MultiPart()
   Future<ApplyResponse> apply(
-   ApplyRequest request
+@Body() ApplyRequest request,@Part(name:  "NIDImg") File nid,
+      @Part(name:  "vehicleLicense") File vehiclesLicense,
       );
 }

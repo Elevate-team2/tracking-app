@@ -1,4 +1,6 @@
-  import 'package:injectable/injectable.dart';
+  import 'dart:io';
+
+import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
@@ -24,8 +26,10 @@ class AuthRepositryImpl implements
   }
 
   @override
-  Future<Result<DriverEntity>> apply(ApplyRequest request)async {
-    return await _authRemoteDataSource.apply(request);
+  Future<Result<DriverEntity>> apply(ApplyRequest request ,
+      File nid,
+      File vehiclesLicense,)async {
+    return await _authRemoteDataSource.apply(request,nid,vehiclesLicense);
   }
 
 }

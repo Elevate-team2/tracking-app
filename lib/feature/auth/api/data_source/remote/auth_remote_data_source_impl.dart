@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -73,9 +74,11 @@ try{
   }
 
   @override
-  Future<Result<DriverEntity>> apply(ApplyRequest request) async{
+  Future<Result<DriverEntity>> apply(ApplyRequest request ,
+      File nid,
+      File vehiclesLicense,) async{
    try{
-     final response=await _authApiServices.apply(request);
+     final response=await _authApiServices.apply(request,nid,vehiclesLicense);
   final   driver=response.driver!.toEntity();
   return SucessResult(driver);
    }catch(error){
