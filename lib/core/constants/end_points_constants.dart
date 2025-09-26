@@ -1,9 +1,9 @@
 abstract class EndPointsConstants {
-static const String baseUrl="https://flower.elevateegy.com/api/v1/drivers/";
-static const String forgetPass="forgotPassword";
-static const String verifyCode="verifyResetCode";
-static const String resetPassword="resetPassword";
-static const String signinEndPoint="signin";
+static const String baseUrl="https://flower.elevateegy.com/api/v1/";
+static const String forgetPass="drivers/forgotPassword";
+static const String verifyCode="drivers/verifyResetCode";
+static const String resetPassword="drivers/resetPassword";
+static const String signinEndPoint="drivers/signin";
 //vehicles
    static const String allVehicles="vehicles";
 //apply

@@ -74,7 +74,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                   height:  context.setHight(50),
                   child: OutlinedButton(
                     onPressed: (){
-                      Navigator.pushNamed(context, AppRoute.approveScreen);
+                      Navigator.pushNamed(context, AppRoute.applyScreen);
                     },
                     style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: AppColors.black),

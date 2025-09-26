@@ -35,8 +35,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   package_info_plus: ^9.0.0
   equatable:
-  flutter_bloc: ^9.1.1
-  flutter_secure_storage: ^9.2.2
+
   
   image_picker: ^1.2.0
   path_provider: ^2.1.5
@@ -65,5 +64,5 @@ flutter:
 
   assets:
     - assets/images/
-    -  assets/json/country.json
+    - assets/json/country.json
 

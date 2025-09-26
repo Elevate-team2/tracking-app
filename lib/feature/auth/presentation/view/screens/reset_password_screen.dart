@@ -5,6 +5,7 @@ import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -105,6 +106,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       ScaffoldMessenger.of(
                         context,
                       ).showSnackBar(SnackBar(content: Text(state.info)));
+                      Navigator.pushNamed(context, AppRoute.loginRoute);
                     } else if (state.requestState == RequestState.error) {
                       ScaffoldMessenger.of(
                         context,

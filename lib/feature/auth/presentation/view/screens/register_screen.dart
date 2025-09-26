@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
@@ -584,6 +585,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
       child: BlocConsumer<ApplyBloc, ApplyStates>(
         listener: (context, state) {
           if (state.countriesState == RequestState.success) {
+            Navigator.pushNamed(context,AppRoute.loginRoute);
             print(state.countries);
           }
           if (state.countriesState == RequestState.error) {
