@@ -60,16 +60,17 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
               SizedBox(
                 height: context.setHight(50),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoute.loginRoute);
-                  },
-                  child: Text(
-                    context.loc.login,
-                    style: getMediumStyle(
+                  style: ElevatedButton.styleFrom(
+                    textStyle: getMediumStyle(
                       color: AppColors.white,
                       fontSize: context.setSp(FontSize.s20),
                     ),
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoute.loginRoute);
+                  },
+
+                  child: Text(context.loc.login),
                 ),
               ),
               SizedBox(height: context.setHight(10)),
@@ -94,7 +95,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                     child: Text(
                       AppLocalizations.of(context)!.apply,
                       style: getMediumStyle(
-                        color: AppColors.white,
+                        color: AppColors.black,
                         fontSize: context.setSp(FontSize.s16),
                       ),
                     ),
