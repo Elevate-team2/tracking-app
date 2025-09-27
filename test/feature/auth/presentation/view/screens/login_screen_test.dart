@@ -56,17 +56,20 @@ void main() {
   }
 
   testWidgets("Verify Structure of login Screen", (WidgetTester tester) async {
+
+    final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+
     await tester.pumpWidget(prepareWidget());
     expect(find.byType(AppBar), findsOneWidget);
     expect(find.byType(TextFormField), findsNWidgets(2));
-    expect(find.bySemanticsLabel("E-mail"), findsOneWidget);
-    expect(find.bySemanticsLabel("Password"), findsOneWidget);
-    expect(find.text("Enter your E-mail"), findsOneWidget);
-    expect(find.text("Enter your Password"), findsOneWidget);
+    expect(find.bySemanticsLabel(l10n.email), findsOneWidget);
+    expect(find.bySemanticsLabel(l10n.password), findsOneWidget);
+    expect(find.text(l10n.enterYourEmail), findsOneWidget);
+    expect(find.text(l10n.enterYourPassword), findsOneWidget);
     expect(find.byType(ElevatedButton), findsOneWidget);
     expect(find.byType(Checkbox), findsOneWidget);
-    expect(find.text("Remember Me"), findsOneWidget);
-    expect(find.text('Forget Password'), findsOneWidget);
+    expect(find.text(l10n.rememberMe), findsOneWidget);
+    expect(find.text(l10n.forgetPassword), findsOneWidget);
   });
   testWidgets("validation fails with invalid inputs", (
     WidgetTester tester,

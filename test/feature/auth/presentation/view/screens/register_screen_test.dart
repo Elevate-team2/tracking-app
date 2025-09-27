@@ -5,8 +5,10 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/constants/app_widgets_keys.dart';
+import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
@@ -20,9 +22,9 @@ void main() {
   setUp(() {
     mockApplyBloc = MockApplyBloc();
     when(mockApplyBloc.state).thenReturn(const ApplyStates());
-    when(mockApplyBloc.stream).thenAnswer(
-      (_) => Stream.fromIterable([const ApplyStates()]),
-    );
+    when(
+      mockApplyBloc.stream,
+    ).thenAnswer((_) => Stream.fromIterable([const ApplyStates()]));
 
     getIt.registerFactory<ApplyBloc>(() => mockApplyBloc);
   });
@@ -35,10 +37,17 @@ void main() {
       height: 812,
       width: 375,
       child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: BlocProvider<ApplyBloc>.value(
           value: mockApplyBloc,
           child: const ApplyScreen(),
         ),
+        routes: {
+      AppRoute.loginRoute: (_) => const Scaffold(
+            body: Text('Login Screen'),
+          ),
+    },
       ),
     );
   }
@@ -48,10 +57,7 @@ void main() {
       await tester.pumpWidget(prepareWidget());
 
       expect(find.byType(AppBar), findsOneWidget);
-      expect(
-        find.byKey(const Key(AppWidgetsKeys.applyScreen)),
-        findsOneWidget,
-      );
+      expect(find.byKey(const Key(AppWidgetsKeys.applyScreen)), findsOneWidget);
     });
 
     testWidgets("Verify TextFields exist", (tester) async {
@@ -71,19 +77,23 @@ void main() {
     });
 
     testWidgets("Show validation error when fields are empty", (tester) async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+
       await tester.pumpWidget(prepareWidget());
 
-      await tester.ensureVisible(find.text("Continue"));
-      await tester.tap(find.text("Continue"));
+      await tester.ensureVisible(find.text(l10n.continueBtn));
+      await tester.tap(find.text(l10n.continueBtn));
       await tester.pumpAndSettle();
 
-      expect(find.text("Required"), findsWidgets);
+      expect(find.text(l10n.required), findsWidgets);
     });
 
     testWidgets("Show SnackBar on success", (tester) async {
-      when(mockApplyBloc.state).thenReturn(
-        const ApplyStates(applyState: RequestState.success),
-      );
+      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+
+      when(
+        mockApplyBloc.state,
+      ).thenReturn(const ApplyStates(applyState: RequestState.success));
       when(mockApplyBloc.stream).thenAnswer(
         (_) => Stream.fromIterable([
           const ApplyStates(applyState: RequestState.success),
@@ -92,11 +102,10 @@ void main() {
 
       await tester.pumpWidget(prepareWidget());
       await tester.pumpAndSettle();
-      await tester.pump(); 
+      await tester.pump();
 
       expect(find.byType(SnackBar), findsOneWidget);
-      expect(find.text("Register Success"), findsOneWidget);
+      expect(find.text(l10n.sucessApply), findsOneWidget);
     });
-
   });
 }

@@ -8,6 +8,7 @@ import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
@@ -119,7 +120,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
           if (state.applyState == RequestState.success) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(context.loc.apply)));
+            ).showSnackBar(SnackBar(content: Text(context.loc.sucessApply)));
+            Navigator.of(context).pushNamed(AppRoute.loginRoute);
           }
         },
         builder: (context, state) {
@@ -179,7 +181,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           labelText: context.loc.country,
                           border: const OutlineInputBorder(),
                         ),
-                        value: country,
+                        initialValue: country,
                         items: state.countries.map((e) {
                           return DropdownMenuItem(
                             value: e.name,
@@ -228,7 +230,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           labelText: context.loc.vehicleType,
                           border: const OutlineInputBorder(),
                         ),
-                        value: vehicleType,
+                        initialValue: vehicleType,
                         validator: (value) => value == null
                             ? context.loc.vehicleTypeFieldError
                             : null,
@@ -260,8 +262,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         file: vehicleLicenseImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null)
+                          if (file != null) {
                             setState(() => vehicleLicenseImg = file);
+                          }
                         },
                       ),
                       SizedBox(height: sh * 0.02),

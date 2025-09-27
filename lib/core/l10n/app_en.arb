@@ -42,7 +42,7 @@
     "profile":"Profile",
     "welcomText":"Welcome to\nFlowery rider app",
     
-  "apply": "Apply",
+
   "welcome": "Welcome!!",
   "questionInRegister": "You want to be a delivery man?\nJoin our team",
   "country": "Country",
@@ -65,7 +65,8 @@
   "male": "Male",
   "continueBtn": "Continue",
   "pleaseUploadBothImages": "Please upload both images",
-  "required": "Required"
+  "required": "Required",
+  "sucessApply":"sucessApply"
 
 
     
