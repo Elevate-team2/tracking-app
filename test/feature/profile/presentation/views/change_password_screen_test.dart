@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/change_password_bloc.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/change_password_state.dart';
+import 'package:tracking_app/feature/profile/domain/use_case/use_case.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/change_password.dart';
 
-class MockChangePasswordBloc
-    extends Mock implements ChangePasswordBloc {}
+class MockChangePasswordUseCase extends Mock implements ChangePasswordUseCase {}
 
 void main() {
+  final sl = GetIt.instance;
+  late MockChangePasswordUseCase mockUseCase;
+
+  setUp(() {
+    sl.reset();
+    mockUseCase = MockChangePasswordUseCase();
+    sl.registerLazySingleton<ChangePasswordUseCase>(() => mockUseCase);
+  });
+
   testWidgets("renders ChangePasswordScreen with fields and button",
-          (WidgetTester tester) async {
-        final mockBloc = MockChangePasswordBloc();
-
-        when(() => mockBloc.state).thenReturn(ChangePasswordInitial());
-
+          (tester) async {
         await tester.pumpWidget(
-          MaterialApp(
-            home: BlocProvider<ChangePasswordBloc>.value(
-              value: mockBloc,
-              child: const ChangePasswordScreen(),
-            ),
+          const MaterialApp(
+            home: ChangePasswordScreen(),
           ),
         );
 
         expect(find.text("Current password"), findsOneWidget);
         expect(find.text("New password"), findsOneWidget);
-        expect(find.text("Confirm password"), findsOneWidget);
-
-        expect(find.text("Update"), findsOneWidget);
+        expect(find.text("Confirm new password"), findsOneWidget);
+        expect(find.text("Submit"), findsOneWidget);
       });
 }
