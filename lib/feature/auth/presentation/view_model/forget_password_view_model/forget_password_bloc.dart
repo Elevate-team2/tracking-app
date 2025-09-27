@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
