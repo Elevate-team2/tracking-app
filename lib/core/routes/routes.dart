@@ -10,6 +10,8 @@ import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 
+import '../../feature/profile/presentation/views/screens/change_password.dart';
+
 
 abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -31,7 +33,7 @@ abstract class Routes {
 case (AppRoute.loginRoute):
   return MaterialPageRoute(builder: (context)=>
   const   LoginScreen());
-  
+
       case (AppRoute.onBoarding):
         return MaterialPageRoute(builder: (context)=>
         const    OnBoarddingScreen());
@@ -65,6 +67,12 @@ case (AppRoute.loginRoute):
             return const ApplyScreen();
           },
         );
+
+      case (AppRoute.changePassword):
+        return MaterialPageRoute(
+            builder: (context){
+              return const ChangePasswordScreen();
+            });
 
       default:
         return MaterialPageRoute(
