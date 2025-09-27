@@ -17,12 +17,20 @@ class ApplyRequest {
   @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
   final String? vehicleNumber;
   @JsonKey(name: JsonSerlizationConstants.nid)
-  final String? NID;
+  final String? nid;
   @JsonKey(name: JsonSerlizationConstants.email)
   final String? email;
-  @JsonKey(name: JsonSerlizationConstants.nidImg, ignore: true)
-  final File? NIDImg;
-  @JsonKey(name: JsonSerlizationConstants.vehicleLicense, ignore: true)
+  @JsonKey(
+    name: JsonSerlizationConstants.nidImg,
+    includeToJson: false,
+    includeFromJson: false,
+  )
+  final File? nidimg;
+  @JsonKey(
+    name: JsonSerlizationConstants.vehicleLicense,
+    includeToJson: false,
+    includeFromJson: false,
+  )
   final File? vehicleLicense;
   @JsonKey(name: JsonSerlizationConstants.password)
   final String? password;
@@ -36,12 +44,12 @@ class ApplyRequest {
   ApplyRequest({
     this.country,
     this.firstName,
-    this.NIDImg,
+    this.nidimg,
     this.vehicleLicense,
     this.lastName,
     this.vehicleType,
     this.vehicleNumber,
-    this.NID,
+    this.nid,
     this.email,
     this.password,
     this.rePassword,

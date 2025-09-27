@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_app/core/constants/constants.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/home_page.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/order_page.dart';
@@ -55,15 +55,15 @@ class _AppSectionState extends State<AppSection> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home, key: Key(Constants.homeKey)),
+            icon: const Icon(Icons.home, key: Key(AppWidgetsKeys.homeKey)),
             label: context.loc.home,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.menu, key: Key(Constants.orderkey)),
+            icon: const Icon(Icons.menu, key: Key(AppWidgetsKeys.orderkey)),
             label: context.loc.orders,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person, key: Key(Constants.profileKey)),
+            icon: const Icon(Icons.person, key: Key(AppWidgetsKeys.profileKey)),
             label: context.loc.profile,
           ),
         ],

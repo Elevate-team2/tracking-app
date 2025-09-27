@@ -5,17 +5,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/constants/app_widgets_keys.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
-import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
-import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
-import '../../../domain/entity/country_entity.dart';
 
 class ApplyScreen extends StatefulWidget {
   const ApplyScreen({super.key});
@@ -45,6 +43,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
   // Images
   File? vehicleLicenseImg;
   File? nidImg;
+
   Future<File> _saveTemporaryFile(XFile pickedFile) async {
     final directory = await getApplicationDocumentsDirectory();
     final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
@@ -58,9 +57,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.camera,
-      imageQuality: 85, // اختياري عشان تصغر حجم الصورة
+      imageQuality: 85,
     );
-
     if (pickedFile != null) {
       return await _saveTemporaryFile(pickedFile);
     }
@@ -118,37 +116,31 @@ class _ApplyScreenState extends State<ApplyScreen> {
         ..add(GetAllCountriesEvent()),
       child: BlocConsumer<ApplyBloc, ApplyStates>(
         listener: (context, state) {
-          if (state.countriesState == RequestState.success) {
-            Navigator.pushNamed(context, AppRoute.loginRoute);
-            debugPrint(state.countries as String?);
-          }
-          if (state.countriesState == RequestState.error) {
-            debugPrint(state.countryErrorMessage);
-          }
-          if (state.vehiclesState == RequestState.success) {
-            debugPrint("vehicles===================${state.vehicle}");
-          }
           if (state.applyState == RequestState.success) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(const SnackBar(content: Text("Register Success")));
+            ).showSnackBar(SnackBar(content: Text(context.loc.apply)));
           }
         },
         builder: (context, state) {
           return Scaffold(
-          key:const Key(AppWidgetsKeys.applyScreen),
+            key: const Key(AppWidgetsKeys.applyScreen),
             appBar: AppBar(
               backgroundColor: AppColors.white,
-              title: const Text(
-                'Apply',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+              title: Text(
+                context.loc.apply,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 26,
+                ),
               ),
               centerTitle: false,
               elevation: 0,
-              leading: Icon(
-                Icons.arrow_back_ios_new_outlined,
-                color: AppColors.black[0],
-                size: context.setSp(16),
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back_ios, size: context.setWidth(16)),
               ),
             ),
             body: SingleChildScrollView(
@@ -162,29 +154,30 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Welcome!!",
-                        style: TextStyle(
+                      Text(
+                        context.loc.welcome,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: sh * 0.01),
-                      const Text(
-                        "You want to be a delivery man?\nJoin our team ",
-                        style: TextStyle(
+                      Text(
+                        context.loc.questionInRegister,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,
                         ),
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Country
                       DropdownButtonFormField(
                         isExpanded: true,
-                        decoration: const InputDecoration(
-                          labelText: "Country",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.country,
+                          border: const OutlineInputBorder(),
                         ),
                         value: country,
                         items: state.countries.map((e) {
@@ -199,62 +192,46 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             ),
                           );
                         }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            state.countries.firstWhere(
-                              (c) => c.name == value,
-                              orElse: () => const CountryEntity(
-                                isoCode: "",
-                                name: "",
-                                phoneCode: "",
-                                flag: "",
-                                currency: "",
-                                latitude: "",
-                                longitude: "",
-                                timezones: [],
-                              ),
-                            );
-                            country = value;
-                          });
-                        },
+                        onChanged: (value) => setState(() => country = value),
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // First name
                       TextFormField(
                         controller: firstNameCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "First legal name",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.firstnameLabel,
+                          border: const OutlineInputBorder(),
                         ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? context.loc.required
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Last name
                       TextFormField(
                         controller: lastNameCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "Second legal name",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.secondnameLabel,
+                          border: const OutlineInputBorder(),
                         ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? context.loc.required
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Vehicle type
                       DropdownButtonFormField(
-                        decoration: const InputDecoration(
-                          labelText: "Vehicle Type",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.vehicleType,
+                          border: const OutlineInputBorder(),
                         ),
                         value: vehicleType,
-
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please select vehicle type";
-                          }
-                          return null;
-                        },
+                        validator: (value) => value == null
+                            ? context.loc.vehicleTypeFieldError
+                            : null,
                         items: state.vehicle.map((e) {
                           return DropdownMenuItem(
                             value: e.id,
@@ -272,173 +249,142 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             ),
                           );
                         }).toList(),
-                        onChanged: (value) {
-                          state.vehicle.firstWhere(
-                            (e) => e.type == value,
-                            orElse: () => const VehicleEntity(
-                              id: "",
-                              type: "",
-                              image: "",
-                              createdAt: "",
-                              updatedAt: "",
-                              speed: 0,
-                            ),
-                          );
-                          setState(() {
-                            vehicleType = value;
-                          });
-                        },
+                        onChanged: (value) =>
+                            setState(() => vehicleType = value),
                       ),
                       SizedBox(height: sh * 0.02),
-                      // Vehicle number
-                      TextFormField(
-                        controller: vehicleNumberCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "Vehicle number",
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
-                      ),
-                      SizedBox(height: sh * 0.02),
-                      // Vehicle license upload
+
+                      // Upload License
                       _buildUploadBox(
-                        label: "Upload license photo",
+                        label: context.loc.uploadLicense,
                         file: vehicleLicenseImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null) {
+                          if (file != null)
                             setState(() => vehicleLicenseImg = file);
-                          }
                         },
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Email
                       TextFormField(
                         controller: emailCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "Email",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.email,
+                          border: const OutlineInputBorder(),
                         ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? context.loc.required
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Phone
                       TextFormField(
                         controller: phoneCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "Phone number",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.phone,
+                          border: const OutlineInputBorder(),
                         ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? context.loc.required
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // NID
                       TextFormField(
                         controller: nidCtrl,
-                        decoration: const InputDecoration(
-                          labelText: "ID number",
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: context.loc.nid,
+                          border: const OutlineInputBorder(),
                         ),
-                        validator: (val) =>
-                            val == null || val.isEmpty ? "Required" : null,
+                        validator: (val) => val == null || val.isEmpty
+                            ? context.loc.required
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
-                      // ID image upload
+
+                      // Upload NID
                       _buildUploadBox(
-                        label: "Upload ID image",
+                        label: context.loc.uploadNid,
                         file: nidImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null) {
-                            setState(() => nidImg = file);
-                          }
+                          if (file != null) setState(() => nidImg = file);
                         },
                       ),
                       SizedBox(height: sh * 0.02),
+
                       // Passwords
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: passwordCtrl,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                labelText: "Password",
-                                border: OutlineInputBorder(),
-                              ),
-                              validator: (val) => val != null && val.length < 6
-                                  ? "Min 6 chars"
-                                  : null,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: TextFormField(
-                              controller: confirmPasswordCtrl,
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                labelText: "Confirm password",
-                                border: OutlineInputBorder(),
-                              ),
-                              validator: (val) => val != passwordCtrl.text
-                                  ? "Not match"
-                                  : (val != null && val.length < 6
-                                        ? "Min 6 chars"
-                                        : null),
-                            ),
-                          ),
-                        ],
+                      TextFormField(
+                        controller: passwordCtrl,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: context.loc.password,
+                          border: const OutlineInputBorder(),
+                        ),
+                        validator: (val) => val != null && val.length < 6
+                            ? context.loc.passwordTooShort
+                            : null,
                       ),
                       SizedBox(height: sh * 0.02),
+
+                      TextFormField(
+                        controller: confirmPasswordCtrl,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: context.loc.rePassword,
+                          border: const OutlineInputBorder(),
+                        ),
+                        validator: (val) {
+                          if (val != passwordCtrl.text) {
+                            return context.loc.passwordNotMatch;
+                          }
+                          if (val != null && val.length < 6) {
+                            return context.loc.passwordTooShort;
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: sh * 0.02),
+
                       // Gender
                       Row(
                         children: [
-                          const Text(
-                            "Gender",
-                            style: TextStyle(
+                          Text(
+                            context.loc.gender,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
                           ),
                           const SizedBox(width: 20),
-                          Row(
-                            children: [
-                              Radio<String>(
-                                value: "female",
-                                groupValue: gender,
-                                onChanged: (val) {
-                                  setState(() => gender = val!);
-                                },
-                              ),
-                              const Text("Female"),
-                            ],
+                          RadioMenuButton<String>(
+                            value: "female",
+                            groupValue: gender,
+                            onChanged: (val) => setState(() => gender = val!),
+                            child: Text(context.loc.female),
                           ),
-                          Row(
-                            children: [
-                              Radio<String>(
-                                value: "male",
-                                groupValue: gender,
-                                onChanged: (val) {
-                                  setState(() => gender = val!);
-                                },
-                              ),
-                              const Text("Male"),
-                            ],
+                          RadioMenuButton<String>(
+                            value: "male",
+                            groupValue: gender,
+                            onChanged: (val) => setState(() => gender = val!),
+                            child: Text(context.loc.male),
                           ),
                         ],
                       ),
                       SizedBox(height: sh * 0.02),
+
                       CustomBtn(
-                        onPressed: () async {
+                        onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // Validate images
                             if (vehicleLicenseImg == null || nidImg == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Please upload both images"),
+                                SnackBar(
+                                  content: Text(
+                                    context.loc.pleaseUploadBothImages,
+                                  ),
                                 ),
                               );
                               return;
@@ -447,27 +393,25 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             context.read<ApplyBloc>().add(
                               GetApplyEvent(
                                 ApplyRequest(
-                                  NIDImg: nidImg,
-                                  vehicleLicense: vehicleLicenseImg,
                                   country: country,
                                   firstName: firstNameCtrl.text,
                                   lastName: lastNameCtrl.text,
                                   vehicleType: vehicleType,
                                   vehicleNumber: vehicleNumberCtrl.text,
-                                  password: passwordCtrl.text,
+                                  nid: nidCtrl.text,
                                   email: emailCtrl.text,
+                                  nidimg: nidImg,
+                                  vehicleLicense: vehicleLicenseImg,
+                                  password: passwordCtrl.text,
+                                  rePassword: confirmPasswordCtrl.text,
                                   gender: gender,
                                   phone: phoneCtrl.text,
-                                  NID: nidCtrl.text,
-                                  rePassword: confirmPasswordCtrl.text,
                                 ),
-
-                                //ظبظلى هنا ياخد file
                               ),
                             );
                           }
                         },
-                        txt: "Continue",
+                        txt: context.loc.continueBtn,
                       ),
                     ],
                   ),
@@ -480,6 +424,3 @@ class _ApplyScreenState extends State<ApplyScreen> {
     );
   }
 }
-
-//    vehicleLicense": vehicleLicenseBase64,
-//    "NIDImg": nidImgBase64,

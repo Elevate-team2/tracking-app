@@ -39,5 +39,39 @@
     "apply": "تقديم طلب",
     "home":"الرئيسية",
     "orders":"الطلبات",
-    "profile":"الملف الشخصي"
+    "profile":"الملف الشخصي",
+     "welcomText":"مرحبا بكم \n في تطبيق الارسال",
+     
+   
+  "apply": "تسجيل",
+  "welcome": "أهلاً بيك!!",
+  "questionInRegister": "عايز تبقى دليفري؟\nانضم لينا",
+  "country": "الدولة",
+  "firstnameLabel": "الاسم الأول",
+  "secondnameLabel": "الاسم التاني",
+  "vehicleType": "نوع المركبة",
+  "vehicleTypeFieldError": "من فضلك اختر نوع المركبة",
+  "vehicleNumber": "رقم المركبة",
+  "uploadLicense": "ارفع صورة الرخصة",
+  "email": "الإيميل",
+  "phone": "رقم التليفون",
+  "nid": "رقم البطاقة",
+  "uploadNid": "ارفع صورة البطاقة",
+  "password": "كلمة المرور",
+  "rePassword": "تأكيد كلمة المرور",
+  "passwordTooShort": "الحد الأدنى ٦ حروف",
+  "passwordNotMatch": "كلمة المرور غير متطابقة",
+  "gender": "النوع",
+  "female": "أنثى",
+  "male": "ذكر",
+  "continueBtn": "متابعة",
+  "pleaseUploadBothImages": "من فضلك ارفع الصورتين",
+  "required": "مطلوب"
+
+
+
+
+    
+
+
 }

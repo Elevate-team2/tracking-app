@@ -35,4 +35,14 @@ abstract class AppWidgetsKeys {
   //apply
   static const String applyScreen="apply_screen";
 
+  static const String sharedPrefrenceKeyLanguage = "appLanguage";
+   static const String homeKey = "nav_home";
+  static const String profileKey = "nav_profile";
+  static const String orderkey = "nav_orders";
+  static const String stackKey1 = "stack1";
+  static const String alignKey1 = "align1";
+  static const String ceenterKey1 = "center1";
+
+
+
 }

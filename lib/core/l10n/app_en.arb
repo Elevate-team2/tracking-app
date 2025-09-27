@@ -39,6 +39,47 @@
     "apply": "Apply",
     "home":"Home",
     "orders":"Orders",
-    "profile":"Profile"
+    "profile":"Profile",
+    "welcomText":"Welcome to\nFlowery rider app",
+    
+  "apply": "Apply",
+  "welcome": "Welcome!!",
+  "questionInRegister": "You want to be a delivery man?\nJoin our team",
+  "country": "Country",
+  "firstnameLabel": "First legal name",
+  "secondnameLabel": "Second legal name",
+  "vehicleType": "Vehicle Type",
+  "vehicleTypeFieldError": "Please select vehicle type",
+  "vehicleNumber": "Vehicle number",
+  "uploadLicense": "Upload license photo",
+  "email": "Email",
+  "phone": "Phone number",
+  "nid": "ID number",
+  "uploadNid": "Upload ID image",
+  "password": "Password",
+  "rePassword": "Confirm password",
+  "passwordTooShort": "Min 6 chars",
+  "passwordNotMatch": "Passwords do not match",
+  "gender": "Gender",
+  "female": "Female",
+  "male": "Male",
+  "continueBtn": "Continue",
+  "pleaseUploadBothImages": "Please upload both images",
+  "required": "Required"
+
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
 
 }

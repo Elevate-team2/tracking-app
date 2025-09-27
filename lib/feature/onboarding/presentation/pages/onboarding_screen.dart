@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
-import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
@@ -50,13 +49,14 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
               ),
               SizedBox(height: context.setHight(20)),
               Text(
-                Constants.welcomeText,
+              context.loc.welcomText,
                 textAlign: TextAlign.start,
-                style: getMediumStyle(
+                style: getBoldStyle(
                   color: AppColors.black,
-                  fontSize: context.setSp(FontSize.s20),
+                  fontSize: context.setSp(FontSize.s22),
                 ),
               ),
+              SizedBox(height: context.setHight(30)),
               SizedBox(
                 height: context.setHight(50),
                 child: ElevatedButton(
@@ -70,7 +70,10 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                     Navigator.pushNamed(context, AppRoute.loginRoute);
                   },
 
-                  child: Text(context.loc.login),
+                  child: Text(context.loc.login, style: getMediumStyle(
+                        color: AppColors.white,
+                        fontSize: context.setSp(FontSize.s16),
+                      ),),
                 ),
               ),
               SizedBox(height: context.setHight(10)),
@@ -93,7 +96,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      AppLocalizations.of(context)!.apply,
+                     context.loc.apply,
                       style: getMediumStyle(
                         color: AppColors.black,
                         fontSize: context.setSp(FontSize.s16),

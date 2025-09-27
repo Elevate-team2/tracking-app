@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
@@ -14,10 +15,10 @@ class ApproveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        key: const Key(Constants.stackKey1),
+        key: const Key(AppWidgetsKeys.stackKey1),
         children: [
           Align(
-             key: const Key(Constants.alignKey1),
+             key: const Key(AppWidgetsKeys.alignKey1),
             alignment: Alignment.bottomCenter,
             child: Image.asset(
               Constants.approveImageUrl,
@@ -27,7 +28,7 @@ class ApproveScreen extends StatelessWidget {
             ),
           ),
           Center(
-            key: const Key(Constants.ceenterKey1),
+            key: const Key(AppWidgetsKeys.ceenterKey1),
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: context.setWidth(20),

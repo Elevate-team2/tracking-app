@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 
 
@@ -15,7 +16,7 @@ class AppLanguageConfig extends ChangeNotifier {
   @preResolve
   Future<void> setSelectedLocal()async {
     final  currentLocal = sharedPreferences.getString(
-      Constants.sharedPrefrenceKeyLanguage,
+      AppWidgetsKeys.sharedPrefrenceKeyLanguage,
     );
     selectedLocal = currentLocal??Constants.enLocal;
   }
@@ -27,7 +28,7 @@ class AppLanguageConfig extends ChangeNotifier {
 
     selectedLocal = currentLocal;
     sharedPreferences.setString(
-      Constants.sharedPrefrenceKeyLanguage,
+      AppWidgetsKeys.sharedPrefrenceKeyLanguage,
       selectedLocal,
     );
     notifyListeners();

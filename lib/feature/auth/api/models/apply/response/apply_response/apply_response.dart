@@ -36,9 +36,9 @@ class Driver {
   @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
   final String? vehicleLicense;
   @JsonKey(name: JsonSerlizationConstants.nid)
-  final String? NID;
+  final String? nId;
   @JsonKey(name: JsonSerlizationConstants.nidImg)
-  final String? NIDImg;
+  final String? nIdImg;
   @JsonKey(name: JsonSerlizationConstants.email)
   final String? email;
   @JsonKey(name: JsonSerlizationConstants.gender)
@@ -50,7 +50,7 @@ class Driver {
   @JsonKey(name: JsonSerlizationConstants.role)
   final String? role;
   @JsonKey(name: JsonSerlizationConstants.id)
-  final String? Id;
+  final String? id;
   @JsonKey(name: JsonSerlizationConstants.createdAt)
   final String? createdAt;
 
@@ -61,14 +61,14 @@ class Driver {
     this.vehicleType,
     this.vehicleNumber,
     this.vehicleLicense,
-    this.NID,
-    this.NIDImg,
+    this.nId,
+    this.nIdImg,
     this.email,
     this.gender,
     this.phone,
     this.photo,
     this.role,
-    this.Id,
+    this.id,
     this.createdAt,
   });
 
@@ -79,15 +79,15 @@ class Driver {
 
   DriverEntity toEntity() {
     return DriverEntity(
-      id: Id!,
+      id: id!,
       country: country!,
       firstName: firstName!,
       lastName: lastName!,
       vehicleType: vehicleType!,
       vehicleNumber: vehicleNumber!,
       vehicleLicense: vehicleLicense!,
-      nid: NID!,
-      nidImg: NIDImg!,
+      nid: nId!,
+      nidImg: nIdImg!,
       email: email!,
       gender: gender!,
       phone: phone!,

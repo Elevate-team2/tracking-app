@@ -10,6 +10,7 @@ abstract class AppTheme {
 
        scaffoldBackgroundColor: AppColors.white,
         appBarTheme: AppBarTheme(
+        surfaceTintColor: Colors.transparent,
         foregroundColor: AppColors.white,
         titleSpacing: 0,
         elevation: 0,

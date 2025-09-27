@@ -43,7 +43,7 @@ class Metadata {
 @JsonSerializable()
 class Vehicles {
   @JsonKey(name: JsonSerlizationConstants.id)
-  final String? Id;
+  final String? id;
   @JsonKey(name: JsonSerlizationConstants.type)
   final String? type;
   @JsonKey(name: JsonSerlizationConstants.image)
@@ -56,7 +56,7 @@ class Vehicles {
   final int? speed;
 
   Vehicles({
-    this.Id,
+    this.id,
     this.type,
     this.image,
     this.createdAt,
@@ -71,7 +71,7 @@ class Vehicles {
 
   VehicleEntity toEntity() {
     return VehicleEntity(
-      id: Id!,
+      id: id!,
       type: type!,
       image: image!,
       createdAt: createdAt!,

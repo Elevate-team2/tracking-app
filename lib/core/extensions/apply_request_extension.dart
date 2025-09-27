@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 
 import '../../feature/auth/api/models/apply/request/apply_request.dart';
 
@@ -6,18 +7,16 @@ extension ApplyRequestMapper on ApplyRequest {
   FormData toFormData() {
     final formData = FormData();
 
-    // الحقول النصية
     toJson().forEach((key, value) {
       if (value != null) {
         formData.fields.add(MapEntry(key, value.toString()));
       }
     });
 
-    // الملفات (أسماء لازم تطابق السيرفر)
     if (vehicleLicense != null) {
       formData.files.add(
         MapEntry(
-          "vehicleLicense", // <-- غير الاسم حسب المطلوب
+          JsonSerlizationConstants.vehicleLicense,
           MultipartFile.fromFileSync(
             vehicleLicense!.path,
             filename: vehicleLicense!.path.split('/').last,
@@ -26,13 +25,13 @@ extension ApplyRequestMapper on ApplyRequest {
       );
     }
 
-    if (NIDImg != null) {
+    if (nidimg != null) {
       formData.files.add(
         MapEntry(
-          "NIDImg", // <-- تأكد من الكابيتال
+          JsonSerlizationConstants.nidImg,
           MultipartFile.fromFileSync(
-            NIDImg!.path,
-            filename: NIDImg!.path.split('/').last,
+            nidimg!.path,
+            filename: nidimg!.path.split('/').last,
           ),
         ),
       );
