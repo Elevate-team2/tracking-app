@@ -7,8 +7,8 @@ import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
 import 'package:tracking_app/feature/auth/api/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
-import 'package:tracking_app/feature/auth/api/models/forget_password_response.dart';
-import 'package:tracking_app/feature/auth/api/models/reset_password_response.dart';
+import 'package:tracking_app/feature/auth/api/models/forget_password/forget_password_response.dart';
+import 'package:tracking_app/feature/auth/api/models/forget_password/reset_password_response.dart';
 
 import 'auth_remote_data_source_impl_test.mocks.dart';
 

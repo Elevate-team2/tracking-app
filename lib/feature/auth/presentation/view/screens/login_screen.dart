@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/core/utils/request_state/request_state.dart';
-import 'package:tracking_app/core/utils/validator.dart';
+import 'package:tracking_app/core/validator/validator.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
-import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/login_view_model/login_states.dart';
-
 import '../../../../../core/extensions/app_localization_extenstion.dart';
 import '../../../../../core/routes/app_route.dart';
 
@@ -28,11 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -65,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           return Scaffold(
+            key:const Key(AppWidgetsKeys.loginScreen),
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -153,14 +148,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             }
                           },
-                           child:  Text(
+                          child: Text(
                             context.loc.continue1,
                             style: getMediumStyle(
                               color: AppColors.white,
                               fontSize: context.setSp(FontSize.s20),
                             ),
-                          ),),
-                      )
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

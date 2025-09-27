@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 
 part 'forget_password_response.g.dart';
-
 @JsonSerializable()
 class ForgetPasswordResponse {
   @JsonKey(name: JsonSerlizationConstants.message)

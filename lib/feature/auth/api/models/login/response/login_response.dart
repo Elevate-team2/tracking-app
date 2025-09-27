@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 
 part 'login_response.g.dart';
 
 @JsonSerializable()
 class LoginResponse {
-  @JsonKey(name: "message")
+  @JsonKey(name: JsonSerlizationConstants.message)
   final String? message;
-  @JsonKey(name: "token")
+  @JsonKey(name: JsonSerlizationConstants.token)
   final String? token;
 
   LoginResponse ({

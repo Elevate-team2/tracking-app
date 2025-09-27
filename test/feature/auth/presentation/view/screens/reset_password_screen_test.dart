@@ -38,6 +38,11 @@ void main() {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        routes: {
+        '/login': (context) => const Scaffold(
+              body: Center(child: Text('Mock Login Screen')),
+            ),
+      },
         home: BlocProvider<ForgetPasswordBloc>.value(
           value: mockForgetPasswordBloc,
           child: ResetPasswordScreen(email: email),

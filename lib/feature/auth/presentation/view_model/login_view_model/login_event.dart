@@ -11,8 +11,6 @@ class GetLoginEvent extends LoginEvent{
   GetLoginEvent(this.request);
 }
 class RememberMeEvent extends LoginEvent{
-  //final LoginRequest request;
-
   final bool isLoggedIn;
 RememberMeEvent(this.isLoggedIn);
 }

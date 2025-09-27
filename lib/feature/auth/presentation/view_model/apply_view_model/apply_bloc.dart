@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
-import 'package:tracking_app/core/utils/request_state/request_state.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';

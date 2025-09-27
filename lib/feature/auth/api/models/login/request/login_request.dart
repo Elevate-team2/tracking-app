@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 
 part 'login_request.g.dart';
 
 @JsonSerializable()
 class LoginRequest {
-  @JsonKey(name: "email")
+  @JsonKey(name: JsonSerlizationConstants.email)
   final String? email;
-  @JsonKey(name: "password")
+  @JsonKey(name: JsonSerlizationConstants.password)
   final String? password;
 
   LoginRequest ({

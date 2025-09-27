@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tracking_app/core/utils/request_state/request_state.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
@@ -51,7 +51,6 @@ class ApplyStates extends Equatable{
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
     countriesState,countries,countryErrorMessage,
     vehicle,vehiclesState,vehicleErrorMessage,

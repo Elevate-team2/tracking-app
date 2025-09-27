@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tracking_app/core/utils/request_state/request_state.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 @immutable
 class LoginStates extends Equatable{

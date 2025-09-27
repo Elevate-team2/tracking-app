@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../feature/auth/api/models/request/apply_request.dart';
+import '../../feature/auth/api/models/apply/request/apply_request.dart';
 
 extension ApplyRequestMapper on ApplyRequest {
   FormData toFormData() {

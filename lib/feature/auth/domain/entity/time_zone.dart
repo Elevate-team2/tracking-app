@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 class Timezone {
   final String zoneName;
   final int gmtOffset;
@@ -13,6 +11,4 @@ class Timezone {
     required this.abbreviation,
     required this.tzName,
   });
-
-
 }

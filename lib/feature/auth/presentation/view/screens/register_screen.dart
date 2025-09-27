@@ -1,22 +1,21 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
-import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
-import '../../../../../core/utils/request_state/request_state.dart';
 import '../../../domain/entity/country_entity.dart';
-
 
 class ApplyScreen extends StatefulWidget {
   const ApplyScreen({super.key});
@@ -49,8 +48,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
   Future<File> _saveTemporaryFile(XFile pickedFile) async {
     final directory = await getApplicationDocumentsDirectory();
     final fileName = "${DateTime.now().millisecondsSinceEpoch}.jpg";
-    final savedFile = await File('${directory.path}/$fileName')
-        .writeAsBytes(await pickedFile.readAsBytes());
+    final savedFile = await File(
+      '${directory.path}/$fileName',
+    ).writeAsBytes(await pickedFile.readAsBytes());
     return savedFile;
   }
 
@@ -119,23 +119,24 @@ class _ApplyScreenState extends State<ApplyScreen> {
       child: BlocConsumer<ApplyBloc, ApplyStates>(
         listener: (context, state) {
           if (state.countriesState == RequestState.success) {
-            Navigator.pushNamed(context,AppRoute.loginRoute);
-            print(state.countries);
+            Navigator.pushNamed(context, AppRoute.loginRoute);
+            debugPrint(state.countries as String?);
           }
           if (state.countriesState == RequestState.error) {
-            print(state.countryErrorMessage);
+            debugPrint(state.countryErrorMessage);
           }
           if (state.vehiclesState == RequestState.success) {
-            print("vehicles===================${state.vehicle}");
+            debugPrint("vehicles===================${state.vehicle}");
           }
           if (state.applyState == RequestState.success) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text("Register Success")));
+            ).showSnackBar(const SnackBar(content: Text("Register Success")));
           }
         },
         builder: (context, state) {
           return Scaffold(
+          key:const Key(AppWidgetsKeys.applyScreen),
             appBar: AppBar(
               backgroundColor: AppColors.white,
               title: const Text(
@@ -200,7 +201,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
-                            final selectedCountry = state.countries.firstWhere(
+                            state.countries.firstWhere(
                               (c) => c.name == value,
                               orElse: () => const CountryEntity(
                                 isoCode: "",
@@ -259,10 +260,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             value: e.id,
                             child: Row(
                               children: [
-Image.network(e.image,
-  width: context.setWidth(60),
-  height: context.setHight(50),
-  fit: BoxFit.scaleDown,),
+                                Image.network(
+                                  e.image,
+                                  width: context.setWidth(60),
+                                  height: context.setHight(50),
+                                  fit: BoxFit.scaleDown,
+                                ),
                                 SizedBox(width: context.setWidth(10)),
                                 Text(e.type),
                               ],
@@ -270,7 +273,7 @@ Image.network(e.image,
                           );
                         }).toList(),
                         onChanged: (value) {
-                          final selectedVehicle = state.vehicle.firstWhere(
+                          state.vehicle.firstWhere(
                             (e) => e.type == value,
                             orElse: () => const VehicleEntity(
                               id: "",
@@ -434,7 +437,7 @@ Image.network(e.image,
                             // Validate images
                             if (vehicleLicenseImg == null || nidImg == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text("Please upload both images"),
                                 ),
                               );

@@ -8,12 +8,14 @@ import 'package:tracking_app/core/extensions/apply_request_extension.dart';
 import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
-import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/time_zone.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
+import 'package:tracking_app/core/constants/constants.dart';
+
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiServices _authApiServices;
@@ -53,16 +55,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Result<String>> forgetPassword(String email) async {
     try {
-      final response = await _authApiServices.forgetPassword({"email": email});
+      final response = await _authApiServices.forgetPassword({
+        Constants.email: email,
+      });
       if (response.info != null && response.info!.isNotEmpty) {
         return SucessResult<String>(response.info!);
       } else {
         final errorMessage =
-            response.error ?? response.message ?? "Unknown error";
+            response.error ?? response.message ?? Constants.unknownError;
         return FailedResult<String>(errorMessage);
       }
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data["error"] ?? dioError.message;
+      final errorMessage =
+          dioError.response?.data[Constants.error] ?? dioError.message;
       return FailedResult<String>(errorMessage);
     } catch (error) {
       return FailedResult<String>(error.toString());
@@ -73,19 +78,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Result<String>> verifyResetCode(String code) async {
     try {
       final response = await _authApiServices.verifyResetCode({
-        "resetCode": code,
+        Constants.resetCode: code,
       });
 
-      if (response['error'] != null &&
-          (response['error'] as String).isNotEmpty) {
-        return FailedResult<String>(response['error']!);
+      if (response[Constants.error] != null &&
+          (response[Constants.error] as String).isNotEmpty) {
+        return FailedResult<String>(response[Constants.error]!);
       }
 
-      final message = response['status'] ?? response['message'] ?? "Success";
+      final message = response[Constants.status] ??
+          response[Constants.message] ??
+          Constants.success;
       return SucessResult<String>(message);
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data['error'] ??
-          dioError.response?.data['message'] ??
+      final errorMessage = dioError.response?.data[Constants.error] ??
+          dioError.response?.data[Constants.message] ??
           dioError.message;
       return FailedResult<String>(errorMessage);
     } catch (error) {
@@ -98,18 +105,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       String email, String newPassword) async {
     try {
       final response = await _authApiServices.resetPassword({
-        "email": email,
-        "newPassword": newPassword,
+        Constants.email: email,
+        Constants.newPassword: newPassword,
       });
       if (response.message != null && response.message!.isNotEmpty) {
         return SucessResult<String>(response.message!);
       } else {
-        final errorMessage = response.error ?? "Unknown error";
+        final errorMessage = response.error ?? Constants.unknownError;
         return FailedResult<String>(errorMessage);
       }
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data['error'] ??
-          dioError.response?.data['message'] ??
+      final errorMessage = dioError.response?.data[Constants.error] ??
+          dioError.response?.data[Constants.message] ??
           dioError.message;
       return FailedResult<String>(errorMessage);
     } catch (error) {
@@ -120,30 +127,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Result<List<CountryEntity>>> getCountries() async {
     try {
-      final response = await rootBundle.loadString("assets/json/country.json");
+      final response = await rootBundle.loadString(Constants.countriesJson);
       final data = jsonDecode(response) as List<dynamic>;
 
       final countries = data.map((json) {
-        final timezonesJson = json["timezones"] as List<dynamic>;
+        final timezonesJson = json[Constants.timezones] as List<dynamic>;
         final times = timezonesJson
             .map(
               (e) => Timezone(
-                zoneName: e["zoneName"],
-                gmtOffset: e["gmtOffset"],
-                gmtOffsetName: e["gmtOffsetName"],
-                abbreviation: e["abbreviation"],
-                tzName: e["tzName"],
+                zoneName: e[Constants.zoneName],
+                gmtOffset: e[Constants.gmtOffset],
+                gmtOffsetName: e[Constants.gmtOffsetName],
+                abbreviation: e[Constants.abbreviation],
+                tzName: e[Constants.tzName],
               ),
             )
             .toList();
         return CountryEntity(
-          isoCode: json["isoCode"],
-          name: json["name"],
-          phoneCode: json["phoneCode"],
-          flag: json["flag"],
-          currency: json["currency"],
-          latitude: json["latitude"],
-          longitude: json["longitude"],
+          isoCode: json[Constants.isoCode],
+          name: json[Constants.name],
+          phoneCode: json[Constants.phoneCode],
+          flag: json[Constants.flag],
+          currency: json[Constants.currency],
+          latitude: json[Constants.latitude],
+          longitude: json[Constants.longitude],
           timezones: times,
         );
       }).toList();

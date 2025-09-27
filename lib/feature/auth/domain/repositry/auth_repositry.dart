@@ -1,10 +1,11 @@
 import '../../../../core/api_result/result.dart';
 import '../../api/models/login/request/login_request.dart';
 import '../../api/models/login/response/login_response.dart';
-import '../../api/models/request/apply_request.dart';
+import '../../api/models/apply/request/apply_request.dart';
 import '../entity/country_entity.dart';
 import '../entity/driver_entity.dart';
 import '../entity/vehicles_entity.dart';
+
 abstract interface class AuthRepositry{
    Future<Result<LoginResponse>> login(LoginRequest request);
      Future<Result<String>> forgetPassword(String email);

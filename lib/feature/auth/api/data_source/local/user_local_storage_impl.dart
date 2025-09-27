@@ -11,7 +11,7 @@ class UserLocalStorageImpl {
     try {
       await storage.write(key: Constants.token, value: token);
     } catch (e) {
-      throw Exception('Failed to save token: $e');
+      throw Exception('${Constants.failedToSaveToken}: $e');
     }
   }
 
@@ -19,7 +19,7 @@ class UserLocalStorageImpl {
     try {
       return await storage.read(key: Constants.token);
     } catch (e) {
-      throw Exception('Failed to get token: $e');
+      throw Exception('${Constants.failedToGetToken}: $e');
     }
   }
 
@@ -27,7 +27,7 @@ class UserLocalStorageImpl {
     try {
       await storage.delete(key: Constants.token);
     } catch (e) {
-      throw Exception('Failed to delete token: $e');
+      throw Exception('${Constants.failedToDeleteToken}: $e');
     }
   }
 
@@ -35,7 +35,7 @@ class UserLocalStorageImpl {
     try {
       return await storage.containsKey(key: Constants.token);
     } catch (e) {
-      throw Exception('Failed to check login status: $e');
+      throw Exception('${Constants.failedToCheckLoginStatus}: $e');
     }
   }
 }

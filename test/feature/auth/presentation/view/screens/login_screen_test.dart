@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
+import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
 
-import 'package:tracking_app/core/utils/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';

@@ -28,4 +28,11 @@ abstract class AppWidgetsKeys {
   static const resetPasswordConfirmButton = 'resetPasswordConfirmButton';
   static const resetPasswordSuccessSnackBar = 'resetPasswordSuccessSnackBar';
   static const resetPasswordErrorSnackBar = 'resetPasswordErrorSnackBar';
+
+  //login
+  static const String loginScreen="login_screen";
+
+  //apply
+  static const String applyScreen="apply_screen";
+
 }

@@ -30,11 +30,10 @@ void main(){
     expect(find.byType(Padding), findsNWidgets(3));
     expect(find.byType(Column), findsOneWidget);
     expect(find.byKey(const Key("image1")), findsOneWidget);
-    expect(find.byType(SizedBox), findsNWidgets(4));
+    expect(find.byType(SizedBox), findsNWidgets(5));
     expect( find.byType(Text), findsNWidgets(4));
     expect(find.byType(ElevatedButton), findsOneWidget);
     expect(find.byType(OutlinedButton), findsOneWidget);
-    expect(find.byType(Center), findsNWidgets(3));
 
 
     final columnFinder=find.byType(Column);

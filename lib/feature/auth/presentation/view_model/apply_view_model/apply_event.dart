@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
-import 'package:tracking_app/feature/auth/api/models/request/apply_request.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 
  abstract class ApplyEvent extends Equatable{
-
 
   @override
   List<Object?> get props => throw UnimplementedError();

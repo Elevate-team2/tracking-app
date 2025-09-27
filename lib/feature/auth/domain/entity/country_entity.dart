@@ -21,7 +21,6 @@ class CountryEntity extends Equatable{
     required this.timezones,
   });
   @override
-  // TODO: implement props
   List<Object?> get props => [isoCode,name,phoneCode
     ,flag,currency,latitude,longitude,timezones
   ];
