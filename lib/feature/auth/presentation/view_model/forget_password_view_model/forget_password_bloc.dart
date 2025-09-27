@@ -6,11 +6,12 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/forget_password_use_case.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/reset_password_use_case.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/verify_reset_code_use_case.dart';
+import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 
-part 'forget_password_event.dart';
 
-@Injectable()
+
+@injectable
 class ForgetPasswordBloc extends Bloc<ForgetPasswordEvent, ForgetPasswordState> {
   final ForgetPasswordUseCase _forgetPasswordUseCase;
   final VerifyResetCodeUseCase _verifyResetCodeUseCase;

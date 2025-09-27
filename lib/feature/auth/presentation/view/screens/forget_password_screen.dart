@@ -11,6 +11,7 @@ import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
+import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
