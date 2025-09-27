@@ -117,7 +117,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               newPassword: _newPasswordController.text,
                             );
                             context.read<ChangePasswordBloc>().add(
-                              SubmitChangePasswordEvent(request: request),
+                              SubmitChangePasswordEvent(request),
                             );
 
                           }
