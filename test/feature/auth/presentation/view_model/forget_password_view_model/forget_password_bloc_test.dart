@@ -8,6 +8,7 @@ import 'package:tracking_app/feature/auth/domain/use_case/forget_password_use_ca
 import 'package:tracking_app/feature/auth/domain/use_case/verify_reset_code_use_case.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/reset_password_use_case.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
+import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 
 import 'forget_password_bloc_test.mocks.dart';

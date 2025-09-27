@@ -10,6 +10,7 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_bloc.dart';
+import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 
 import 'reset_password_screen_test.mocks.dart';
