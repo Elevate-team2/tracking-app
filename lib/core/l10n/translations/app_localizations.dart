@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'E-mail'**
+  /// **'Email'**
   String get email;
 
   /// No description provided for @password.
@@ -281,7 +281,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to'**
+  /// **'Welcome!!'**
   String get welcome;
 
   /// No description provided for @flowery.
@@ -313,6 +313,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @welcomText.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to\nFlowery rider app'**
+  String get welcomText;
+
+  /// No description provided for @questionInRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'You want to be a delivery man?\nJoin our team'**
+  String get questionInRegister;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get country;
+
+  /// No description provided for @firstnameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'First legal name'**
+  String get firstnameLabel;
+
+  /// No description provided for @secondnameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Second legal name'**
+  String get secondnameLabel;
+
+  /// No description provided for @vehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Type'**
+  String get vehicleType;
+
+  /// No description provided for @vehicleTypeFieldError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select vehicle type'**
+  String get vehicleTypeFieldError;
+
+  /// No description provided for @vehicleNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle number'**
+  String get vehicleNumber;
+
+  /// No description provided for @uploadLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload license photo'**
+  String get uploadLicense;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phone;
+
+  /// No description provided for @nid.
+  ///
+  /// In en, this message translates to:
+  /// **'ID number'**
+  String get nid;
+
+  /// No description provided for @uploadNid.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload ID image'**
+  String get uploadNid;
+
+  /// No description provided for @rePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get rePassword;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Min 6 chars'**
+  String get passwordTooShort;
+
+  /// No description provided for @passwordNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordNotMatch;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @female.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// No description provided for @male.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// No description provided for @continueBtn.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueBtn;
+
+  /// No description provided for @pleaseUploadBothImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload both images'**
+  String get pleaseUploadBothImages;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @sucessApply.
+  ///
+  /// In en, this message translates to:
+  /// **'sucessApply'**
+  String get sucessApply;
 }
 
 class _AppLocalizationsDelegate

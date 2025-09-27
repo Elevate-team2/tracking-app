@@ -9,4 +9,6 @@ static const String signinEndPoint="drivers/signin";
 //apply
    static const String applyEndPoint="drivers/apply";
 
+  // change password
+  static const String changePassword = "drivers/change-password";
  }
