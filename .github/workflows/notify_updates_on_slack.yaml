@@ -1,0 +1,48 @@
+name: Slack Notifications for All Updates
+
+on:
+  push:
+    branches:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - closed
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine Event Info
+        id: info
+        run: |
+          SEPARATOR="──────────────────"
+
+          if [ "${{ github.event_name }}" == "push" ]; then
+            COMMIT_MSG="${{ github.event.head_commit.message }}"
+            SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+            echo "message=${SEPARATOR}\n🚀 Push Event\n• Repo: *${{ github.repository }}*\n• Branch: *${{ github.ref_name }}*\n• Actor: *${{ github.actor }}*\n• Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${SHORT_SHA}>\n• Message: ${COMMIT_MSG}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            PR_ACTION="${{ github.event.action }}"
+            PR_NUMBER="${{ github.event.number }}"
+            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+            PR_BASE="${{ github.event.pull_request.base.ref }}"
+            PR_ACTOR="${{ github.event.pull_request.user.login }}"
+            echo "message=${SEPARATOR}\n🔀 Pull Request *${PR_ACTION}*\n• Repo: *${{ github.repository }}*\n• PR: <${{ github.event.pull_request.html_url }}|#${PR_NUMBER}>\n• From: *${PR_BRANCH}* → To: *${PR_BASE}*\n• Actor: *${PR_ACTOR}*\n${SEPARATOR}" >> $GITHUB_OUTPUT
+
+          else
+            echo "message=${SEPARATOR}\n❓ Unknown event: ${{ github.event_name }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send Slack Notification
+        run: |
+          curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+          -H "Content-type: application/json" \
+          --data "{
+            \"channel\":\"C09GFR4UP3N\",
+            \"text\":\"${{ steps.info.outputs.message }}\"
+          }" \
+          https://slack.com/api/chat.postMessage
