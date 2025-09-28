@@ -12,7 +12,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noRouteFound => 'لا يوجد صفحه بهذا الاسم';
 
   @override
-  String get email => 'البريد الالكترونى';
+  String get email => 'الإيميل';
 
   @override
   String get password => 'كلمة المرور';
@@ -102,13 +102,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.';
 
   @override
-  String get welcome => 'مرحباً بك في';
+  String get welcome => 'أهلاً بيك!!';
 
   @override
   String get flowery => 'تطبيق فلاورى للركاب';
 
   @override
-  String get apply => 'تقديم طلب';
+  String get apply => 'تسجيل';
 
   @override
   String get home => 'الرئيسية';
@@ -118,4 +118,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profile => 'الملف الشخصي';
+
+  @override
+  String get welcomText => 'مرحبا بكم \n في تطبيق الارسال';
+
+  @override
+  String get questionInRegister => 'عايز تبقى دليفري؟\nانضم لينا';
+
+  @override
+  String get country => 'الدولة';
+
+  @override
+  String get firstnameLabel => 'الاسم الأول';
+
+  @override
+  String get secondnameLabel => 'الاسم التاني';
+
+  @override
+  String get vehicleType => 'نوع المركبة';
+
+  @override
+  String get vehicleTypeFieldError => 'من فضلك اختر نوع المركبة';
+
+  @override
+  String get vehicleNumber => 'رقم المركبة';
+
+  @override
+  String get uploadLicense => 'ارفع صورة الرخصة';
+
+  @override
+  String get phone => 'رقم التليفون';
+
+  @override
+  String get nid => 'رقم البطاقة';
+
+  @override
+  String get uploadNid => 'ارفع صورة البطاقة';
+
+  @override
+  String get rePassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get passwordTooShort => 'الحد الأدنى ٦ حروف';
+
+  @override
+  String get passwordNotMatch => 'كلمة المرور غير متطابقة';
+
+  @override
+  String get gender => 'النوع';
+
+  @override
+  String get female => 'أنثى';
+
+  @override
+  String get male => 'ذكر';
+
+  @override
+  String get continueBtn => 'متابعة';
+
+  @override
+  String get pleaseUploadBothImages => 'من فضلك ارفع الصورتين';
+
+  @override
+  String get required => 'مطلوب';
+
+  @override
+  String get sucessApply => 'نجحت عمليه التسجيل';
 }

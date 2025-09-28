@@ -1,4 +1,3 @@
-
 sealed class Result<t> {}
 
 class SucessResult<T> extends Result<T> {

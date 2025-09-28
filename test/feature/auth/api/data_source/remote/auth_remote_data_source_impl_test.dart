@@ -236,5 +236,8 @@ void main() {
         verify(mockAuthApiServices.resetPassword(any)).called(1);
       });
     });
+    group("Apply ", (){
+
+    });
   });
 }
