@@ -1,17 +1,6 @@
-name: Slack Notifications
+name: Slack Notification
 
 on:
-  push:
-    branches:
-      - "**"
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - reopened
-      - closed
-      - merged
   workflow_run:
     workflows:
       - "Validate Branch Name"
@@ -29,81 +18,40 @@ jobs:
     if: always()
 
     steps:
-      - name: Determine Event Info
-        id: info
+      - name: Determine Slack Status
+        id: status
         run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            COMMIT_MSG="${{ github.event.head_commit.message }}"
-            echo "message=🚀 *Push Event*\n• Repo: *${{ github.repository }}*\n• Branch: *${{ github.ref_name }}*\n• Actor: *${{ github.actor }}*\n• Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n• Message: ${COMMIT_MSG}" >> $GITHUB_OUTPUT
-            echo "color=#439FE0" >> $GITHUB_OUTPUT
-
-          elif [ "${{ github.event_name }}" == "pull_request" ]; then
-            PR_ACTION="${{ github.event.action }}"
-            PR_NUMBER="${{ github.event.number }}"
-            PR_HEAD="${{ github.event.pull_request.head.ref }}"
-            PR_BASE="${{ github.event.pull_request.base.ref }}"
-            PR_ACTOR="${{ github.event.pull_request.user.login }}"
-
-            if [ "$PR_ACTION" == "closed" ] && [ "${{ github.event.pull_request.merged }}" == "true" ]; then
-              EMOJI="✅"
-              STATUS="merged"
-              COLOR="#2eb886"
-            elif [ "$PR_ACTION" == "closed" ]; then
-              EMOJI="🔴"
-              STATUS="closed"
-              COLOR="#e01e5a"
-            else
-              EMOJI="🔀"
-              STATUS=$PR_ACTION
-              COLOR="#6f42c1"
-            fi
-
-            echo "message=${EMOJI} *Pull Request ${STATUS}*\n• Repo: *${{ github.repository }}*\n• PR: <${{ github.event.pull_request.html_url }}|#${PR_NUMBER}>\n• From: *${PR_HEAD}* → To: *${PR_BASE}*\n• Actor: *${PR_ACTOR}*" >> $GITHUB_OUTPUT
-            echo "color=$COLOR" >> $GITHUB_OUTPUT
-
-          elif [ "${{ github.event_name }}" == "workflow_run" ]; then
-            CONCLUSION="${{ github.event.workflow_run.conclusion }}"
-            if [ "$CONCLUSION" == "success" ]; then
-              EMOJI="✅"
-              COLOR="#36a64f"
-            elif [ "$CONCLUSION" == "failure" ]; then
-              EMOJI="🔴"
-              COLOR="#FF0000"
-            elif [ "$CONCLUSION" == "cancelled" ]; then
-              EMOJI="⚪"
-              COLOR="#AAAAAA"
-            else
-              EMOJI="❓"
-              COLOR="#808080"
-            fi
-            echo "message=${EMOJI} *Workflow:* \`${{ github.event.workflow_run.display_title }}\`\n• Repo: *${{ github.repository }}*\n• Status: *${CONCLUSION}*\n• Branch: *${{ github.event.workflow_run.head_branch }}*\n• Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ <${{ github.event.workflow_run.html_url }}|View Logs>" >> $GITHUB_OUTPUT
-            echo "color=$COLOR" >> $GITHUB_OUTPUT
-
+          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "emoji=✅" >> $GITHUB_OUTPUT
+            echo "color=#36a64f" >> $GITHUB_OUTPUT  
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
+            echo "emoji=🔴" >> $GITHUB_OUTPUT
+            echo "color=#FF0000" >> $GITHUB_OUTPUT  
+          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
+            echo "emoji=⚪" >> $GITHUB_OUTPUT
+            echo "color=#AAAAAA" >> $GITHUB_OUTPUT   
           else
-            echo "message=❓ Unknown event: ${{ github.event_name }}" >> $GITHUB_OUTPUT
-            echo "color=#808080" >> $GITHUB_OUTPUT
+            echo "emoji=❓" >> $GITHUB_OUTPUT
+            echo "color=#808080" >> $GITHUB_OUTPUT   
           fi
 
       - name: Send Slack Notification
         run: |
-          COLOR="${{ steps.info.outputs.color || '#439FE0' }}"
           curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
           -H "Content-type: application/json" \
           --data "{
-            \"channel\": \"C09GFR4UP3N\",
+            \"channel\": \"C09GFR4UP3N\", 
             \"attachments\": [
               {
-                \"color\": \"${COLOR}\",
+                \"color\": \"${{ steps.status.outputs.color }}\",
                 \"blocks\": [
-                  { \"type\": \"divider\" },
                   {
                     \"type\": \"section\",
                     \"text\": {
                       \"type\": \"mrkdwn\",
-                      \"text\": \"${{ steps.info.outputs.message }}\"
+                      \"text\": \"${{ steps.status.outputs.emoji }} *Workflow:* \`${{ github.event.workflow_run.name }}\`\n*Status:* \`${{ github.event.workflow_run.conclusion }}\`\n*Branch:* \`${{ github.event.workflow_run.head_branch }}\`\n*Actor:* \`${{ github.event.workflow_run.actor.login }}\`\n➡️ *Check run:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}|View Logs>\"
                     }
-                  },
-                  { \"type\": \"divider\" }
+                  }
                 ]
               }
             ]
