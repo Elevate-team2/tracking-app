@@ -1,6 +1,17 @@
-name: Slack Notification
+name: Slack Notifications
 
 on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - closed
+      - merged
   workflow_run:
     workflows:
       - "Validate Branch Name"
@@ -18,45 +29,65 @@ jobs:
     if: always()
 
     steps:
-      - name: Determine Slack Status
-        id: status
+      - name: Determine Event Info
+        id: info
         run: |
-          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
-            echo "emoji=✅" >> $GITHUB_OUTPUT
-            echo "color=#36a64f" >> $GITHUB_OUTPUT  
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
-            echo "emoji=🔴" >> $GITHUB_OUTPUT
-            echo "color=#FF0000" >> $GITHUB_OUTPUT  
-          elif [ "${{ github.event.workflow_run.conclusion }}" == "cancelled" ]; then
-            echo "emoji=⚪" >> $GITHUB_OUTPUT
-            echo "color=#AAAAAA" >> $GITHUB_OUTPUT   
+          SEPARATOR="─────────────────"
+
+          if [ "${{ github.event_name }}" == "push" ]; then
+            COMMIT_MSG="${{ github.event.head_commit.message }}"
+            echo "message=${SEPARATOR}\n🚀 *Push Event*\n• Branch: *${{ github.ref_name }}*\n• Actor: *${{ github.actor }}*\n• Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n• Message: ${COMMIT_MSG}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            PR_ACTION="${{ github.event.action }}"
+            PR_NUMBER="${{ github.event.number }}"
+            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+            PR_ACTOR="${{ github.event.pull_request.user.login }}"
+            echo "message=${SEPARATOR}\n🔀 *Pull Request ${PR_ACTION}*\n• PR: <${{ github.event.pull_request.html_url }}|#${PR_NUMBER}>\n• Branch: *${PR_BRANCH}*\n• Actor: *${PR_ACTOR}*\n${SEPARATOR}" >> $GITHUB_OUTPUT
+
+          elif [ "${{ github.event_name }}" == "workflow_run" ]; then
+            CONCLUSION="${{ github.event.workflow_run.conclusion }}"
+            if [ "$CONCLUSION" == "success" ]; then
+              EMOJI="✅"
+              COLOR="#36a64f"
+            elif [ "$CONCLUSION" == "failure" ]; then
+              EMOJI="🔴"
+              COLOR="#FF0000"
+            elif [ "$CONCLUSION" == "cancelled" ]; then
+              EMOJI="⚪"
+              COLOR="#AAAAAA"
+            else
+              EMOJI="❓"
+              COLOR="#808080"
+            fi
+            echo "message=${SEPARATOR}\n${EMOJI} *Workflow:* \`${{ github.event.workflow_run.name }}\`\n• Status: *${CONCLUSION}*\n• Branch: *${{ github.event.workflow_run.head_branch }}*\n• Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}|View Logs>\n${SEPARATOR}" >> $GITHUB_OUTPUT
+            echo "color=$COLOR" >> $GITHUB_OUTPUT
+
           else
-            echo "emoji=❓" >> $GITHUB_OUTPUT
-            echo "color=#808080" >> $GITHUB_OUTPUT   
+            echo "message=${SEPARATOR}\n❓ Unknown event: ${{ github.event_name }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
           fi
 
       - name: Send Slack Notification
         run: |
+          COLOR="${{ steps.info.outputs.color || '#439FE0' }}"
           curl -X POST -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
           -H "Content-type: application/json" \
           --data "{
-            \"channel\":\"C09GFR4UP3N\",
+            \"channel\": \"C09GFR4UP3N\",
             \"attachments\": [
               {
-                \"color\": \"${{ steps.status.outputs.color }}\",
+                \"color\": \"${COLOR}\",
                 \"blocks\": [
                   {
                     \"type\": \"section\",
                     \"text\": {
                       \"type\": \"mrkdwn\",
-                      \"text\": \"${{ steps.status.outputs.emoji }} *Workflow:* \`${{ github.event.workflow_run.name }}\`\n*Status:* \`${{ github.event.workflow_run.conclusion }}\`\n*Branch:* \`${{ github.event.workflow_run.head_branch }}\`\n*Actor:* \`${{ github.event.workflow_run.actor.login }}\`\n➡️ *Check run:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}|Link>\"
+                      \"text\": \"${{ steps.info.outputs.message }}\"
                     }
-                  },
-                  {
-                    \"type\": \"divider\"
                   }
                 ]
               }
             ]
           }" \
           https://slack.com/api/chat.postMessage
+
