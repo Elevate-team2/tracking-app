@@ -39,7 +39,7 @@ class _AppSectionState extends State<AppSection> {
           });
         },
 
-        children: const [HomePage(), OrderPage(), ProfilePage()],
+        children:  [HomePage(), OrderPage(), ProfilePage()],
       ),
 
       bottomNavigationBar: BottomNavigationBar(
