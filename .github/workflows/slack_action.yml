@@ -32,18 +32,34 @@ jobs:
       - name: Determine Event Info
         id: info
         run: |
-          SEPARATOR="─────────────────"
-
           if [ "${{ github.event_name }}" == "push" ]; then
             COMMIT_MSG="${{ github.event.head_commit.message }}"
-            echo "message=${SEPARATOR}\n🚀 *Push Event*\n• Branch: *${{ github.ref_name }}*\n• Actor: *${{ github.actor }}*\n• Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n• Message: ${COMMIT_MSG}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+            echo "message=🚀 *Push Event*\n• Repo: *${{ github.repository }}*\n• Branch: *${{ github.ref_name }}*\n• Actor: *${{ github.actor }}*\n• Commit: <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n• Message: ${COMMIT_MSG}" >> $GITHUB_OUTPUT
+            echo "color=#439FE0" >> $GITHUB_OUTPUT
 
           elif [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_ACTION="${{ github.event.action }}"
             PR_NUMBER="${{ github.event.number }}"
-            PR_BRANCH="${{ github.event.pull_request.head.ref }}"
+            PR_HEAD="${{ github.event.pull_request.head.ref }}"
+            PR_BASE="${{ github.event.pull_request.base.ref }}"
             PR_ACTOR="${{ github.event.pull_request.user.login }}"
-            echo "message=${SEPARATOR}\n🔀 *Pull Request ${PR_ACTION}*\n• PR: <${{ github.event.pull_request.html_url }}|#${PR_NUMBER}>\n• Branch: *${PR_BRANCH}*\n• Actor: *${PR_ACTOR}*\n${SEPARATOR}" >> $GITHUB_OUTPUT
+
+            if [ "$PR_ACTION" == "closed" ] && [ "${{ github.event.pull_request.merged }}" == "true" ]; then
+              EMOJI="✅"
+              STATUS="merged"
+              COLOR="#2eb886"
+            elif [ "$PR_ACTION" == "closed" ]; then
+              EMOJI="🔴"
+              STATUS="closed"
+              COLOR="#e01e5a"
+            else
+              EMOJI="🔀"
+              STATUS=$PR_ACTION
+              COLOR="#6f42c1"
+            fi
+
+            echo "message=${EMOJI} *Pull Request ${STATUS}*\n• Repo: *${{ github.repository }}*\n• PR: <${{ github.event.pull_request.html_url }}|#${PR_NUMBER}>\n• From: *${PR_HEAD}* → To: *${PR_BASE}*\n• Actor: *${PR_ACTOR}*" >> $GITHUB_OUTPUT
+            echo "color=$COLOR" >> $GITHUB_OUTPUT
 
           elif [ "${{ github.event_name }}" == "workflow_run" ]; then
             CONCLUSION="${{ github.event.workflow_run.conclusion }}"
@@ -60,11 +76,12 @@ jobs:
               EMOJI="❓"
               COLOR="#808080"
             fi
-            echo "message=${SEPARATOR}\n${EMOJI} *Workflow:* \`${{ github.event.workflow_run.name }}\`\n• Status: *${CONCLUSION}*\n• Branch: *${{ github.event.workflow_run.head_branch }}*\n• Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}|View Logs>\n${SEPARATOR}" >> $GITHUB_OUTPUT
+            echo "message=${EMOJI} *Workflow:* \`${{ github.event.workflow_run.display_title }}\`\n• Repo: *${{ github.repository }}*\n• Status: *${CONCLUSION}*\n• Branch: *${{ github.event.workflow_run.head_branch }}*\n• Actor: *${{ github.event.workflow_run.actor.login }}*\n➡️ <${{ github.event.workflow_run.html_url }}|View Logs>" >> $GITHUB_OUTPUT
             echo "color=$COLOR" >> $GITHUB_OUTPUT
 
           else
-            echo "message=${SEPARATOR}\n❓ Unknown event: ${{ github.event_name }}\n${SEPARATOR}" >> $GITHUB_OUTPUT
+            echo "message=❓ Unknown event: ${{ github.event_name }}" >> $GITHUB_OUTPUT
+            echo "color=#808080" >> $GITHUB_OUTPUT
           fi
 
       - name: Send Slack Notification
@@ -78,16 +95,17 @@ jobs:
               {
                 \"color\": \"${COLOR}\",
                 \"blocks\": [
+                  { \"type\": \"divider\" },
                   {
                     \"type\": \"section\",
                     \"text\": {
                       \"type\": \"mrkdwn\",
                       \"text\": \"${{ steps.info.outputs.message }}\"
                     }
-                  }
+                  },
+                  { \"type\": \"divider\" }
                 ]
               }
             ]
           }" \
           https://slack.com/api/chat.postMessage
-
