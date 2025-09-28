@@ -16,13 +16,13 @@ void main() async {
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
   runApp(
-    DevicePreview(
-    builder: (context) =>
+   // DevicePreview(
+   // builder: (context) =>
     ChangeNotifierProvider.value(
       value: getIt.get<AppLanguageConfig>(),
       child: const MyApp(),
     ),
-    ),
+    //),
   );
 }
 
@@ -68,8 +68,10 @@ class _MyAppState extends State<MyApp> {
             );
           }
 
-          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
-          final initialRoute = isLoggedIn ? AppRoute.home : AppRoute.onBoarding;
+          final isLoggedIn = snapshot.hasData ?
+          snapshot.data! : false;
+          final initialRoute = isLoggedIn ?
+          AppRoute.home : AppRoute.onBoarding;
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,

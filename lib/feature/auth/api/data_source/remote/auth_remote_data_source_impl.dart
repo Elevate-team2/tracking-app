@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_error/api_error.dart';
 import 'package:tracking_app/core/api_result/result.dart';
@@ -20,7 +21,7 @@ import 'package:tracking_app/core/constants/constants.dart';
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiServices _authApiServices;
 
-  const AuthRemoteDataSourceImpl(this._authApiServices);
+  const AuthRemoteDataSourceImpl(this._authApiServices,);
 
   @override
   Future<Result<LoginResponse>> login(LoginRequest request) async {
@@ -164,7 +165,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Result<DriverEntity>> apply(ApplyRequest request) async {
     try {
       final formData = request.toFormData();
-      final response = await _authApiServices.apply(formData);
+      final response = await _authApiServices.apply(await formData);
       final driver = response.driver!.toEntity();
       return SucessResult(driver);
     } catch (error) {
@@ -176,3 +177,4 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 }
+
