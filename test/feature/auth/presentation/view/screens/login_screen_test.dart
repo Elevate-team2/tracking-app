@@ -43,7 +43,7 @@ void main() {
       supportedLocales: AppLocalizations.supportedLocales,
 
       home: SizeProvider(
-        baseSize: const Size(375, 812), //
+        baseSize: const Size(375, 812),
         height: 812,
         width: 375,
         child: BlocProvider(

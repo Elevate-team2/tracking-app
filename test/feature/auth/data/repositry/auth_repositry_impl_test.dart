@@ -324,7 +324,7 @@ void main() {
       }
       test("return SuccessResult when datasource success when apply",
               ()async{
-        final request=await createRequest();
+        final request= createRequest();
         when(mockAuthRemoteDataSource.apply(request)).thenAnswer((_)async=>
             SucessResult(successResponse));
         final result=await authRepositoryImp.apply(request);
@@ -336,7 +336,7 @@ void main() {
       });
       test("return FailedResult when datasource failed when apply", 
               ()async{
-                final request=await createRequest();
+                final request= createRequest();
 
                 when(mockAuthRemoteDataSource.apply(request)).thenAnswer((_)async=>
                     FailedResult("failed to apply"));

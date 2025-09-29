@@ -62,7 +62,6 @@
 //
 //   Map<String, dynamic> toJson() => _$ApplyRequestToJson(this);
 // }
-import 'dart:io';
 import 'package:json_annotation/json_annotation.dart';
 import 'personal_info.dart';
 import 'location_info.dart';

@@ -309,7 +309,7 @@ type: "Motor Cycle",
       });
     });
 group("get all countries", (){
-  final countriesJson = '''
+   const countriesJson = '''
     [
        {
     "isoCode": "AF",
@@ -533,7 +533,7 @@ group("get all countries", (){
      
       });
       test("return FailedResult when API call failed on dio Exception", ()async{
-      final body=await createRequest();
+      final body=createRequest();
       final dioException=DioException(requestOptions: RequestOptions
         (
         path: ""

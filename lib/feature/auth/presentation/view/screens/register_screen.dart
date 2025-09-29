@@ -264,11 +264,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                       TextFormField(
                         controller: vehicleNumberCtrl,
                         decoration: InputDecoration(
-                          labelText: context.loc.secondnameLabel,
+                          labelText: context.loc.vehicleNumber,
                           border: const OutlineInputBorder(),
-
                         ),
-                        validator: Validator.validatePhoneNumber,
+                        validator: Validator.validateNumber,
                       ),
                       SizedBox(height: sh * 0.02),
 
