@@ -17,7 +17,7 @@ abstract class ProfileApiServices {
 
   @PUT(EndPointsConstants.uploadDriverPhoto)
   @MultiPart()
-  Future<String> uploadDriverPhoto(@Part(name: "photo") MultipartFile photo,);
+  Future<String> uploadDriverPhoto(@Part(name: "photo") File photo,);
   
   @PUT(EndPointsConstants.editDriverProfile)
   Future<EditProfileResponse> editProfile(@Body() EditProfileRequest request);

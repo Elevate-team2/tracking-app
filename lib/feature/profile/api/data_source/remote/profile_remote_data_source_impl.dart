@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/safe_api_call/safe_api_call.dart';
@@ -15,15 +14,14 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<Result<String>> uploadDriverPhoto(File photo) async {
-    final multipartFile = await MultipartFile.fromFile(photo.path, filename: "driver_photo.jpg");
-    return safeApiCall(
-          () => _profileApiServices.uploadDriverPhoto(multipartFile),
+    return safeCall(
+          () => _profileApiServices.uploadDriverPhoto(photo),
     );
   }
 
   @override
   Future<Result<EditProfileEntity>> editProfile(EditProfileRequest request) {
-   return safeApiCall(() async {
+   return safeCall(() async {
       final response = await _profileApiServices.editProfile(request);
       return response.toEntity();
     });

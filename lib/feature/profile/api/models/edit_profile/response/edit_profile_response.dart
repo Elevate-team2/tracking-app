@@ -12,10 +12,7 @@ class EditProfileResponse {
   @JsonKey(name: JsonSerlizationConstants.driver)
   final DriverModel? driver;
 
-  EditProfileResponse ({
-    this.message,
-    this.driver,
-  });
+  EditProfileResponse({this.message, this.driver});
 
   factory EditProfileResponse.fromJson(Map<String, dynamic> json) {
     return _$EditProfileResponseFromJson(json);
@@ -25,25 +22,24 @@ class EditProfileResponse {
     return _$EditProfileResponseToJson(this);
   }
 
-  EditProfileEntity toEntity(){
+  EditProfileEntity toEntity() {
+    if (driver == null) {
+      throw Exception("Driver data is missing in response");
+    }
     return EditProfileEntity(
-      id: driver!.id!,
-      country: driver!.country!,
-      firstName: driver!.firstName!,
-      lastName: driver!.lastName!,
-      vehicleType: driver!.vehicleType!,
-      vehicleNumber: driver!.vehicleNumber!,
-      vehicleLicense: driver!.vehicleLicense!,
-      nid: driver!.nId!,
-      nidImg: driver!.nIdImg!,
-      email: driver!.email!,
-      gender: driver!.gender!,
-      phone: driver!.phone!,
-      photo:driver!. photo!,
+      id: driver!.id ?? "",
+      country: driver!.country ?? "",
+      firstName: driver!.firstName ?? "",
+      lastName: driver!.lastName ?? "",
+      vehicleType: driver!.vehicleType ?? "",
+      vehicleNumber: driver!.vehicleNumber ?? "",
+      vehicleLicense: driver!.vehicleLicense ?? "",
+      nid: driver!.nId ?? "",
+      nidImg: driver!.nIdImg ?? "",
+      email: driver!.email ?? "",
+      gender: driver!.gender ?? "",
+      phone: driver!.phone ?? "",
+      photo: driver!.photo ?? "",
     );
   }
-
 }
-
-
-

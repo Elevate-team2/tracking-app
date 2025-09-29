@@ -8,7 +8,7 @@ class UploadDriverPhotoUseCase {
   final ProfileRepository _profileRepository;
   UploadDriverPhotoUseCase(this._profileRepository);
 
-  Future<Result<String>> cal(File photo) async {
+  Future<Result<String>> call(File photo) async {
     return await _profileRepository.uploadDriverPhoto(photo);
   }
 }

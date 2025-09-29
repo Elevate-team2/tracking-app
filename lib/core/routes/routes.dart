@@ -9,6 +9,8 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/approve_scre
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
 
 abstract class Routes {
@@ -66,6 +68,30 @@ case (AppRoute.loginRoute):
             return const ApplyScreen();
           },
         );
+
+      case AppRoute.editProfileScreen:
+        return MaterialPageRoute(builder: (context) {
+          // final user = settings.arguments as LoggedInUserEntity;
+          return const EditProfileScreen(user:
+             LoggedInUserEntity(
+            id: "1",
+            firstName: "Rana",
+            lastName: "Gebril",
+            email: "ranagebril5@gmail.com",
+            phone: "+201147124052",
+            photo: "",
+            role: "driver",
+            country: "Egypt",
+            vehicleType: "Car",
+            vehicleNumber: "152004",
+            vehicleLicense: "",
+            nid: "12345678912345",
+            nidImg: "",
+            gender: "female",
+            createdAt: "DateTime.now()",
+          )
+          ,);
+        },);
 
       default:
         return MaterialPageRoute(
