@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/profile/domain/entity/edit_profile_entity.dart';
 part 'driver_model.g.dart';
 
 @JsonSerializable()

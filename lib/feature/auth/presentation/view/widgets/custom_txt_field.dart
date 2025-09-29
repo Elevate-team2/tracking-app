@@ -20,7 +20,7 @@ final bool isPassword;
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isPassword,
-      obscuringCharacter: "*",
+      obscuringCharacter: "★",
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
