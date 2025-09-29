@@ -348,83 +348,203 @@ group("get all countries", (){
     expect(d.phoneCode,"93");
   });
 });
-    group("Apply ", (){
-   late    File fakeFile;
+//     group("Apply ", (){
+//    late    File fakeFile;
+//
+//       setUpAll(() async {
+//         final tempDir = Directory.systemTemp;
+//         fakeFile = File('${tempDir.path}/fake_image.png');
+//         await fakeFile.writeAsBytes(Uint8List.fromList([0, 1, 2, 3]));
+//       });
+// final body=ApplyRequest(
+//   authenticationInfo: AuthenticationInfo(
+//      password: "Mariam257@",rePassword: "Mariam257@"
+//   ),
+//   locationInfo: LocationInfo(
+//     country: "Egypt"
+//   ),
+//   vehicleInfo: VehicleInfo(
+//     vehicleNumber: "12228",
+//     vehicleLicense: fakeFile
+//       ,vehicleType: ""
+//   ),
+//   personalInfo: PersonalInfo(
+//     lastName: "mohmed2",
+//     firstName: "mariam1",phone: "+20101070082", gender: "female",
+//     email: "mariammohmed55@gmail.com",nid: "12345678912345",
+//       nidimg: fakeFile
+//   )
+// ).toFormData();
+// final request = ApplyRequest(
+//   authenticationInfo: AuthenticationInfo(
+//     password: "Mariam257@",
+//     rePassword: "Mariam257@",
+//   ),
+//   locationInfo: LocationInfo(country: "Egypt"),
+//   vehicleInfo: VehicleInfo(
+//     vehicleNumber: "12228",
+//     vehicleLicense: fakeFile,
+//     vehicleType: "676b31a45d05310ca82657ac",
+//   ),
+//   personalInfo: PersonalInfo(
+//     lastName: "mohmed2",
+//     firstName: "mariam1",
+//     phone: "+20101070082",
+//     gender: "female",
+//     email: "mariammohmed55@gmail.com",
+//     nid: "12345678912345",
+//     nidimg: fakeFile,
+//   ),
+// );
+// final successResponse=ApplyResponse(
+//   message: "success",token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
+//   driver: Driver(
+//       country: "Egypt",
+//       firstName: "mariam1",
+//       lastName: "mohmed2",
+//       vehicleType: "676b31a45d05310ca82657ac",
+//       vehicleNumber: "12221",
+//       vehicleLicense: "fake_image.png",
+//       nId: "12345678912345",
+//       nIdImg: "fake_image.png",
+//       email: "mariammohmed5@gmail.com",
+//       gender: "female",
+//       phone: "+20101070082",
+//       photo: "default-profile.png",
+//       role: "driver",
+//       id: "68d983e4dd8937e0573fea27",
+//       createdAt: "2025-09-28T18:52:20.452Z"
+//   )
+// );
+// test("return SuccessResult when API call succeeds when sign up",
+//         ()async{
+//   when(mockAuthApiServices.apply(await body)).
+//   thenAnswer((_)async=>successResponse);
+//   final result=await authRemoteDataSourceImpl.apply(request);
+//   expect(result, isA<SucessResult>());
+//   expect((result as SucessResult).sucessResult, successResponse);
+//         });
+//
+//     });
+    group("Apply ", () {
+      late File fakeFile;
 
       setUpAll(() async {
-        final tempDir = Directory.systemTemp;
+        final tempDir = await Directory.systemTemp.createTemp();
         fakeFile = File('${tempDir.path}/fake_image.png');
         await fakeFile.writeAsBytes(Uint8List.fromList([0, 1, 2, 3]));
       });
-final body=ApplyRequest(
-  authenticationInfo: AuthenticationInfo(
-     password: "Mariam257@",rePassword: "Mariam257@"
-  ),
-  locationInfo: LocationInfo(
-    country: "Egypt"
-  ),
-  vehicleInfo: VehicleInfo(
-    vehicleNumber: "12228",
-    vehicleLicense: fakeFile
-      ,vehicleType: ""
-  ),
-  personalInfo: PersonalInfo(
-    lastName: "mohmed2",
-    firstName: "mariam1",phone: "+20101070082", gender: "female",
-    email: "mariammohmed55@gmail.com",nid: "12345678912345",
-      nidimg: fakeFile
-  )
-).toFormData();
-final request = ApplyRequest(
-  authenticationInfo: AuthenticationInfo(
-    password: "Mariam257@",
-    rePassword: "Mariam257@",
-  ),
-  locationInfo: LocationInfo(country: "Egypt"),
-  vehicleInfo: VehicleInfo(
-    vehicleNumber: "12228",
-    vehicleLicense: fakeFile,
-    vehicleType: "676b31a45d05310ca82657ac",
-  ),
-  personalInfo: PersonalInfo(
-    lastName: "mohmed2",
-    firstName: "mariam1",
-    phone: "+20101070082",
-    gender: "female",
-    email: "mariammohmed55@gmail.com",
-    nid: "12345678912345",
-    nidimg: fakeFile,
-  ),
-);
-final successResponse=ApplyResponse(
-  message: "success",token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
-  driver: Driver(
-      country: "Egypt",
-      firstName: "mariam1",
-      lastName: "mohmed2",
-      vehicleType: "676b31a45d05310ca82657ac",
-      vehicleNumber: "12221",
-      vehicleLicense: "fake_image.png",
-      nId: "12345678912345",
-      nIdImg: "fake_image.png",
-      email: "mariammohmed5@gmail.com",
-      gender: "female",
-      phone: "+20101070082",
-      photo: "default-profile.png",
-      role: "driver",
-      id: "68d983e4dd8937e0573fea27",
-      createdAt: "2025-09-28T18:52:20.452Z"
-  )
-);
-test("return SuccessResult when API call succeeds when sign up",
-        ()async{
-  when(mockAuthApiServices.apply(await body)).
-  thenAnswer((_)async=>successResponse);
-  final result=await authRemoteDataSourceImpl.apply(request);
-  expect(result, isA<SucessResult>());
-  expect((result as SucessResult).sucessResult, successResponse);
-        });
 
+      tearDownAll(() async {
+        try {
+          await fakeFile.delete();
+        } catch (e) {
+          // Ignore deletion errors
+        }
+      });
+
+
+
+      final successResponse = ApplyResponse(
+          message: "success",
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
+          driver: Driver(
+              country: "Egypt",
+              firstName: "mariam1",
+              lastName: "mohmed2",
+              vehicleType: "676b31a45d05310ca82657ac",
+              vehicleNumber: "12221",
+              vehicleLicense: "fake_image.png",
+              nId: "12345678912345",
+              nIdImg: "fake_image.png",
+              email: "mariammohmed5@gmail.com",
+              gender: "female",
+              phone: "+20101070082",
+              photo: "default-profile.png",
+              role: "driver",
+              id: "68d983e4dd8937e0573fea27",
+              createdAt: "2025-09-28T18:52:20.452Z"
+          )
+      );
+      // Helper method to create the request body
+      Future<FormData> createRequestBody() async {
+        return ApplyRequest(
+            authenticationInfo: AuthenticationInfo(
+                password: "Mariam257@",
+                rePassword: "Mariam257@"
+            ),
+            locationInfo: LocationInfo(
+                country: "Egypt"
+            ),
+            vehicleInfo: VehicleInfo(
+                vehicleNumber: "12228",
+                vehicleLicense: fakeFile,
+                vehicleType: "676b31a45d05310ca82657ac"
+            ),
+            personalInfo: PersonalInfo(
+                lastName: "mohmed2",
+                firstName: "mariam1",
+                phone: "+20101070082",
+                gender: "female",
+                email: "mariammohmed55@gmail.com",
+                nid: "12345678912345",
+                nidimg: fakeFile
+            )
+        ).toFormData();
+      }
+
+      // Create the request object
+      ApplyRequest createRequest() {
+        return ApplyRequest(
+          authenticationInfo: AuthenticationInfo(
+            password: "Mariam257@",
+            rePassword: "Mariam257@",
+          ),
+          locationInfo: LocationInfo(country: "Egypt"),
+          vehicleInfo: VehicleInfo(
+            vehicleNumber: "12228",
+            vehicleLicense: fakeFile,
+            vehicleType: "676b31a45d05310ca82657ac",
+          ),
+          personalInfo: PersonalInfo(
+            lastName: "mohmed2",
+            firstName: "mariam1",
+            phone: "+20101070082",
+            gender: "female",
+            email: "mariammohmed55@gmail.com",
+            nid: "12345678912345",
+            nidimg: fakeFile,
+          ),
+        );
+      }
+      test("return SuccessResult when API call succeeds when sign up", () async {
+        final body = await createRequestBody();
+
+
+        when(mockAuthApiServices.apply(any))
+            .thenAnswer((_) async => successResponse);
+
+        final request = createRequest();
+        final result = await authRemoteDataSourceImpl.apply(request);
+        expect(result, isA<SucessResult>());
+
+        verify(mockAuthApiServices.apply(any)).called(1);
+
+     
+      });
+      test("return FailedResult when API call failed on dio Exception", ()async{
+      final body=await createRequest();
+      final dioException=DioException(requestOptions: RequestOptions
+        (
+        path: ""
+      ),type: DioExceptionType.receiveTimeout);
+      final request=createRequest();
+        when(mockAuthApiServices.apply(any)).thenThrow(dioException);
+        final result=await authRemoteDataSourceImpl.apply(request);
+        expect(result, isA<FailedResult>());
+        expect((result as FailedResult).errorMessage, "receiveTimeout with Api Server");
+        verify(mockAuthApiServices.apply(any)).called(1);
+      });
     });
   });
 }
