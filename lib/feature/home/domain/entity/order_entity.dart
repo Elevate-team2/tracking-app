@@ -11,7 +11,6 @@ class OrderEntity {
     ShippingAddressEntity shippingAddress;
     String paymentType;
     bool isPaid;
-
     bool isDelivered;
     String state;
     String orderNumber;
@@ -33,6 +32,9 @@ class OrderEntity {
     });
 
 }
+
+
+
 
 
 

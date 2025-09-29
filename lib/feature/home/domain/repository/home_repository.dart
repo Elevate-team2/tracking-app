@@ -3,6 +3,7 @@ import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 
 abstract interface class HomeRepository {
   Future<Result<List<OrderEntity>?>> getAllPendingOrders();
-  Future<Result<List<OrderEntity>?>> getAllLocalOrders();
-  
+  Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders);
+  Future<Result<List<OrderEntity>?>> getAllSavedOrders();
+  Future<Result<void>> deleteOrder(String orderId);
 }

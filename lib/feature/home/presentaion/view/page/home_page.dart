@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -34,30 +35,44 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: BlocProvider.value(
-          value: _homeViewModel..add(GetAllPaindingOrdersEvent()),
-          child: BlocBuilder<HomeViewModel, HomeStates>(
-            builder: (context, state) {
-              if (state.isLoading == true) {
-                return const CommonLoading();
-              }
-              if (state.errorMessage != null) {
-                state.copyWith(errorMessage: null);
-                return Center(child: Text(state.errorMessage!));
-              }
-              if (state.orders != null) {
-                if (state.orders!.isEmpty) {
-                  return const CustumError(errorMessage: "No Orders Found");
-                }
+      body: RefreshIndicator(
+          onRefresh: () async {
 
-
-                return OrderCards(orders: state.orders!,);
-              }
-
-              return const CustumError(errorMessage: "unExpected Error found");
-            },
+          _homeViewModel.add(RefreshOrdersEvent());
+          await Future.delayed(const Duration(milliseconds: 500));
+        },
+        child: SingleChildScrollView(
+          physics:const  AlwaysScrollableScrollPhysics(),
+          child: SizedBox(
+            height: context.setHight(650),
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child:
+               BlocProvider.value(
+                value: _homeViewModel..add(GetOrdersEvent()),
+                child: BlocBuilder<HomeViewModel, HomeStates>(
+                  builder: (context, state) {
+                    if (state.isLoading == true) {
+                      return const CommonLoading();
+                    }
+                    if (state.errorMessage != null) {
+                      state.copyWith(errorMessage: null);
+                      return Center(child: Text(state.errorMessage!));
+                    }
+                    if (state.orders != null) {
+                      if (state.orders!.isEmpty) {
+                        return const CustumError(errorMessage: "No Orders Found");
+                      }
+            
+            
+                      return OrderCards(orders: state.orders!,);
+                    }
+            
+                    return const CustumError(errorMessage: "unExpected Error found");
+                  },
+                ),
+              ),
+            ),
           ),
         ),
       ),

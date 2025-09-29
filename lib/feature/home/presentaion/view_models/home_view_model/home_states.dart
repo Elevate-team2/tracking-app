@@ -6,7 +6,7 @@ class HomeStates {
    String? errorMessage;
 
    HomeStates({
-    this.isLoading = false,
+    this.isLoading = true,
     this.orders,
     this.errorMessage,
   });

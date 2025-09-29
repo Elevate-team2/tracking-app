@@ -18,7 +18,17 @@ class HomeRepositoryImp implements HomeRepository {
   }
 
   @override
-  Future<Result<List<OrderEntity>?>> getAllLocalOrders() async {
-    return await _homeLocalDataSource.getAllLocalOrders();
+  Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders) async {
+    return await _homeLocalDataSource.saveDataToLocalStorage(orders);
+  }
+
+  @override
+  Future<Result<List<OrderEntity>?>> getAllSavedOrders() async {
+    return await _homeLocalDataSource.getAllSavedOrders();
+  }
+
+  @override
+  Future<Result<void>> deleteOrder(String orderId) async {
+    return await _homeLocalDataSource.deleteOrder(orderId);
   }
 }

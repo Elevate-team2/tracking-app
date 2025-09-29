@@ -4,12 +4,12 @@ import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/repository/home_repository.dart';
 
 @injectable
-class GetAllLocalOrdersUseCase {
+class GetAllSavedOrdersUseCase {
   final HomeRepository _homeRepository;
 
-  GetAllLocalOrdersUseCase(this._homeRepository);
+  GetAllSavedOrdersUseCase(this._homeRepository);
 
-  Future<Result<List<OrderEntity>?>> getAllLocalOrders() async {
-    return await _homeRepository.getAllLocalOrders();
+    Future<Result<List<OrderEntity>?>> getAllSavedOrders() async {
+    return await _homeRepository.getAllSavedOrders();
   }
 }

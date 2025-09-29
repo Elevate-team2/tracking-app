@@ -8,18 +8,20 @@ class CustumError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children:  [
-        const SizedBox(height: 180.0),
-        const Icon(CupertinoIcons.info_circle_fill, size: 60, color: AppColors.pink),
-        const SizedBox(height: 20.0),
-        Text(
-          errorMessage,
-          style: getBoldStyle(color: AppColors.gray, fontSize: 20),
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:  [
+         
+          const Icon(CupertinoIcons.info_circle_fill, size: 60, color: AppColors.pink),
+          const SizedBox(height: 20.0),
+          Text(
+            errorMessage,
+            style: getBoldStyle(color: AppColors.gray, fontSize: 20),
+          ),
+        ],
+      ),
     );
   }
 }

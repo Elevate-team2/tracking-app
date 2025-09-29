@@ -57,7 +57,7 @@ class OrderCards extends StatelessWidget {
 
                     SizedBox(height: 10),
 
-                    CustumBtn(price: order.totalPrice,),
+                    CustumBtn(order: order,),
                   ],
                 ),
               );
