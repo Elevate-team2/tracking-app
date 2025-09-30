@@ -22,7 +22,7 @@ provideDummy<Result<List<CountryEntity>>>(FailedResult("errorMessage"));
         phoneCode: "93", flag: "🇦🇫", currency: "AFN",
         latitude: "33.00000000", longitude: "65.00000000",
         timezones: [
-          Timezone(zoneName: "Asia\/Kabul",
+          Timezone(zoneName: "Asia/Kabul",
               gmtOffset: 16200,
               gmtOffsetName: "UTC+04:30",
               abbreviation: "AFT",

@@ -128,6 +128,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
             ).showSnackBar(SnackBar(content: Text(context.loc.sucessApply)));
             Navigator.of(context).pushNamed(AppRoute.loginRoute);
           }
+          if (state.applyState == RequestState.error) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.applyErrorMessage!)));
+            Navigator.of(context).pushNamed(AppRoute.loginRoute);
+          }
         },
         builder: (context, state) {
           return Scaffold(

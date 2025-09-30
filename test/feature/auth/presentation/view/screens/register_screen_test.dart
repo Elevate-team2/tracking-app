@@ -65,7 +65,7 @@ void main() {
 
       expect(find.byType(TextFormField), findsWidgets);
       expect(find.text("First legal name"), findsOneWidget);
-      expect(find.text("Second legal name"), findsNWidgets(2));
+      expect(find.text("Second legal name"), findsNWidgets(1));
       expect(find.text("Email"), findsOneWidget);
       expect(find.text("Phone number"), findsOneWidget);
     });

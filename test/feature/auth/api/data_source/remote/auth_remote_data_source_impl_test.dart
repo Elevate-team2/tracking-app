@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
-import 'package:tracking_app/core/extensions/apply_request_extension.dart';
 import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
 import 'package:tracking_app/feature/auth/api/data_source/remote/auth_remote_data_source_impl.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
@@ -20,7 +19,6 @@ import 'package:tracking_app/feature/auth/api/models/login/response/login_respon
 import 'package:tracking_app/feature/auth/api/models/forget_password/forget_password_response.dart';
 import 'package:tracking_app/feature/auth/api/models/forget_password/reset_password_response.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/feature/auth/domain/entity/time_zone.dart';
 
 import 'auth_remote_data_source_impl_test.mocks.dart';
 import 'package:flutter/services.dart';
@@ -321,7 +319,7 @@ group("get all countries", (){
     "longitude": "65.00000000",
     "timezones": [
       {
-        "zoneName": "Asia\/Kabul",
+        "zoneName": "Asia/Kabul",
         "gmtOffset": 16200,
         "gmtOffsetName": "UTC+04:30",
         "abbreviation": "AFT",
@@ -331,12 +329,12 @@ group("get all countries", (){
   }
     ]
   ''';
-  final List<CountryEntity> countries=[
-    const CountryEntity(isoCode: "AF", name: "Afghanistan", phoneCode: "93", flag: "🇦🇫", currency: "AFN",
-        latitude: "33.00000000", longitude: "65.00000000", timezones: [
-          Timezone(zoneName: "Asia\/Kabul", gmtOffset: 16200, gmtOffsetName: "UTC+04:30", abbreviation: "AFT", tzName: "Afghanistan Time")
-        ])
-  ];
+  // final List<CountryEntity> countries=[
+  //   const CountryEntity(isoCode: "AF", name: "Afghanistan", phoneCode: "93", flag: "🇦🇫", currency: "AFN",
+  //       latitude: "33.00000000", longitude: "65.00000000", timezones: [
+  //         Timezone(zoneName: "Asia/Kabul", gmtOffset: 16200, gmtOffsetName: "UTC+04:30", abbreviation: "AFT", tzName: "Afghanistan Time")
+  //       ])
+  // ];
   test("Should return ApiSuccessResult when load json", ()async{
     when(mockAssetBundle.loadString("assets/json/country.json")).
     thenAnswer((_)async=>countriesJson);
@@ -467,31 +465,31 @@ group("get all countries", (){
           )
       );
       // Helper method to create the request body
-      Future<FormData> createRequestBody() async {
-        return ApplyRequest(
-            authenticationInfo: AuthenticationInfo(
-                password: "Mariam257@",
-                rePassword: "Mariam257@"
-            ),
-            locationInfo: LocationInfo(
-                country: "Egypt"
-            ),
-            vehicleInfo: VehicleInfo(
-                vehicleNumber: "12228",
-                vehicleLicense: fakeFile,
-                vehicleType: "676b31a45d05310ca82657ac"
-            ),
-            personalInfo: PersonalInfo(
-                lastName: "mohmed2",
-                firstName: "mariam1",
-                phone: "+20101070082",
-                gender: "female",
-                email: "mariammohmed55@gmail.com",
-                nid: "12345678912345",
-                nidimg: fakeFile
-            )
-        ).toFormData();
-      }
+      // Future<FormData> createRequestBody() async {
+      //   return ApplyRequest(
+      //       authenticationInfo: AuthenticationInfo(
+      //           password: "Mariam257@",
+      //           rePassword: "Mariam257@"
+      //       ),
+      //       locationInfo: LocationInfo(
+      //           country: "Egypt"
+      //       ),
+      //       vehicleInfo: VehicleInfo(
+      //           vehicleNumber: "12228",
+      //           vehicleLicense: fakeFile,
+      //           vehicleType: "676b31a45d05310ca82657ac"
+      //       ),
+      //       personalInfo: PersonalInfo(
+      //           lastName: "mohmed2",
+      //           firstName: "mariam1",
+      //           phone: "+20101070082",
+      //           gender: "female",
+      //           email: "mariammohmed55@gmail.com",
+      //           nid: "12345678912345",
+      //           nidimg: fakeFile
+      //       )
+      //   ).toFormData();
+      // }
 
       // Create the request object
       ApplyRequest createRequest() {
@@ -518,7 +516,6 @@ group("get all countries", (){
         );
       }
       test("return SuccessResult when API call succeeds when sign up", () async {
-        final body = await createRequestBody();
 
 
         when(mockAuthApiServices.apply(any))
@@ -533,7 +530,6 @@ group("get all countries", (){
      
       });
       test("return FailedResult when API call failed on dio Exception", ()async{
-      final body=createRequest();
       final dioException=DioException(requestOptions: RequestOptions
         (
         path: ""

@@ -69,8 +69,8 @@ void main() {
     });
 
     test('should handle empty AllVehiclesResponse', () {
-      // Arrange
-      final json = {};
+
+
 
       // Act
       final response = AllVehiclesResponse.fromJson({});

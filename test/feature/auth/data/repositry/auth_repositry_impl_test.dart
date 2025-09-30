@@ -1,11 +1,8 @@
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
-import 'package:tracking_app/core/extensions/apply_request_extension.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/auth_info.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/location_info.dart';
@@ -206,7 +203,7 @@ void main() {
         const    CountryEntity(isoCode: "AF", name: "Afghanistan", phoneCode: "93", flag: "🇦🇫", currency: "AFN",
             latitude: "33.00000000", longitude: "65.00000000", timezones: [
                Timezone(
-                zoneName: "Asia\/Kabul",
+                zoneName: "Asia/Kabul",
                 gmtOffset: 16200,
                 gmtOffsetName: "UTC+04:30",
                 abbreviation: "AFT",
@@ -256,31 +253,31 @@ void main() {
       //     // Ignore deletion errors
       //   }
       // });
-      Future<FormData> createRequestBody() async {
-        return ApplyRequest(
-            authenticationInfo: AuthenticationInfo(
-                password: "Mariam257@",
-                rePassword: "Mariam257@"
-            ),
-            locationInfo: LocationInfo(
-                country: "Egypt"
-            ),
-            vehicleInfo: VehicleInfo(
-                vehicleNumber: "12228",
-                vehicleLicense: File("fake_image.png"),
-                vehicleType: "676b31a45d05310ca82657ac"
-            ),
-            personalInfo: PersonalInfo(
-                lastName: "mohmed2",
-                firstName: "mariam1",
-                phone: "+20101070082",
-                gender: "female",
-                email: "mariammohmed55@gmail.com",
-                nid: "12345678912345",
-                nidimg: File("fake_image.png")
-            )
-        ).toFormData();
-      }
+      // Future<FormData> createRequestBody() async {
+      //   return ApplyRequest(
+      //       authenticationInfo: AuthenticationInfo(
+      //           password: "Mariam257@",
+      //           rePassword: "Mariam257@"
+      //       ),
+      //       locationInfo: LocationInfo(
+      //           country: "Egypt"
+      //       ),
+      //       vehicleInfo: VehicleInfo(
+      //           vehicleNumber: "12228",
+      //           vehicleLicense: File("fake_image.png"),
+      //           vehicleType: "676b31a45d05310ca82657ac"
+      //       ),
+      //       personalInfo: PersonalInfo(
+      //           lastName: "mohmed2",
+      //           firstName: "mariam1",
+      //           phone: "+20101070082",
+      //           gender: "female",
+      //           email: "mariammohmed55@gmail.com",
+      //           nid: "12345678912345",
+      //           nidimg: File("fake_image.png")
+      //       )
+      //   ).toFormData();
+      // }
       const successResponse=  DriverEntity(
     country: "Egypt",
     firstName: "mariam1",
