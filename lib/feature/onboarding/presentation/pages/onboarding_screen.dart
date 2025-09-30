@@ -57,14 +57,22 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                 ),
               ),
               SizedBox(height: context.setHight(30)),
-              SizedBox(
-                height: context.setHight(50),
-                child: ElevatedButton(
+
+                ElevatedButton(
+
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                    ),
+                    padding:const EdgeInsets.symmetric(
+                      vertical: 16
+                    ),
+                    
                     textStyle: getMediumStyle(
                       color: AppColors.white,
                       fontSize: context.setSp(FontSize.s20),
                     ),
+                    
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoute.loginRoute);
@@ -75,22 +83,22 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                         fontSize: context.setSp(FontSize.s16),
                       ),),
                 ),
-              ),
-              SizedBox(height: context.setHight(10)),
-              SizedBox(
-                height: context.setHight(50),
-                child: OutlinedButton(
+
+              SizedBox(height: context.setHight(20)),
+
+
+                OutlinedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoute.changePassword);
                   },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: AppColors.black),
                     padding: EdgeInsets.symmetric(
-                      vertical: context.setHight(20),
+                      vertical: context.setHight(12),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                        context.setMinSize(20),
+                        context.setMinSize(30),
                       ),
                     ),
                   ),
@@ -104,7 +112,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
                     ),
                   ),
                 ),
-              ),
+
               SizedBox(height: context.setHight(120)),
               Center(
                 child: Text(
