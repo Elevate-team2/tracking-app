@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_request.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_response.dart';
@@ -9,19 +10,14 @@ import 'package:tracking_app/feature/profile/presentation/view_model/change_pass
 import 'package:tracking_app/feature/profile/presentation/view_model/change_password_event.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/change_password_state.dart';
 
-class MockChangePasswordUseCase extends Mock implements ChangePasswordUseCase {}
+@GenerateMocks([ChangePasswordUseCase])
+import 'change_password_bloc_test.mocks.dart';
 
 void main() {
   late MockChangePasswordUseCase mockUseCase;
-  late ChangePasswordBloc bloc;
 
   setUp(() {
     mockUseCase = MockChangePasswordUseCase();
-    bloc = ChangePasswordBloc(mockUseCase);
-  });
-
-  tearDown(() {
-    bloc.close();
   });
 
   final request = ChangePasswordRequest(
@@ -32,36 +28,36 @@ void main() {
   final successResponse = ChangePasswordResponse(message: "Password changed");
 
   blocTest<ChangePasswordBloc, ChangePasswordState>(
-    'emits [Loading, Success] when changePasswordUseCase returns SucessResult',
+    'emits [Loading, Success] when useCase returns SucessResult',
     build: () {
-      when(() => mockUseCase.call(request))
+      when(mockUseCase.call(request))
           .thenAnswer((_) async => SucessResult(successResponse));
-      return bloc;
+      return ChangePasswordBloc(mockUseCase);
     },
     act: (bloc) => bloc.add(SubmitChangePasswordEvent(request)),
     expect: () => [
       ChangePasswordLoading(),
-      ChangePasswordSuccess("Password changed"),
+      const ChangePasswordSuccess("Password changed"),
     ],
     verify: (_) {
-      verify(() => mockUseCase.call(request)).called(1);
+      verify(mockUseCase.call(request)).called(1);
     },
   );
 
   blocTest<ChangePasswordBloc, ChangePasswordState>(
-    'emits [Loading, Failure] when changePasswordUseCase returns FailedResult',
+    'emits [Loading, Failure] when useCase returns FailedResult',
     build: () {
-      when(() => mockUseCase.call(request))
+      when(mockUseCase.call(request))
           .thenAnswer((_) async => FailedResult("Error occurred"));
-      return bloc;
+      return ChangePasswordBloc(mockUseCase);
     },
     act: (bloc) => bloc.add(SubmitChangePasswordEvent(request)),
     expect: () => [
       ChangePasswordLoading(),
-      ChangePasswordFailure("Error occurred"),
+      const ChangePasswordFailure("Error occurred"),
     ],
     verify: (_) {
-      verify(() => mockUseCase.call(request)).called(1);
+      verify(mockUseCase.call(request)).called(1);
     },
   );
 }
