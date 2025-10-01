@@ -41,7 +41,7 @@ class AddressContainer extends StatelessWidget {
       children: [
         Text(_containerName,style: getRegularStyle(color: AppColors.black,fontSize: context.setSp(FontSize.s13)),),
         Padding(
-          padding:  EdgeInsets.symmetric(vertical: (8)),
+          padding:  const EdgeInsets.symmetric(vertical: (8)),
           child: InkWell(
             onTap: () {
               // if type is user then go to map user and driver
