@@ -12,7 +12,7 @@ void main() {
   const String passwordsMismatch = 'Passwords do not match';
   const String invalidUsername = 'Enter a valid username';
   const String numbersOnly = 'Enter numbers only';
-  const String phoneLengthError = 'Value must be 11 digits';
+  const String phoneLengthError = 'Value must be 11 digits after country code';
 
   group('Validator', () {
     group('validateEmail', () {
@@ -110,12 +110,12 @@ void main() {
         expect(Validator.validatePhoneNumber('123abc'), numbersOnly);
       });
 
-      test('returns error when phone number is not 11 digits', () {
-        expect(Validator.validatePhoneNumber('123456789'), phoneLengthError);
+      test('returns error when phone number is not 11 digits afer country code', () {
+        expect(Validator.validatePhoneNumber('+20123456789'), phoneLengthError);
       });
 
       test('returns null when phone number is valid', () {
-        expect(Validator.validatePhoneNumber('01234567890'), null);
+        expect(Validator.validatePhoneNumber('+201234567890'), null);
       });
     });
   });
