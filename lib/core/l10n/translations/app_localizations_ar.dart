@@ -184,4 +184,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sucessApply => 'نجحت عمليه التسجيل';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصى ';
+
+  @override
+  String get vehicleNumberRequired => 'مطلوب رقم المركبة ';
+
+  @override
+  String get vehicleLicense => 'رخصة القيادة ';
+
+  @override
+  String get editProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get profileUpdated => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get noChanges => 'لا يوجد تغييرات';
+
+  @override
+  String get update => 'تحديث';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get noImageSelected => 'لم يتم اختيار صورة';
+
+  @override
+  String get failedToPickImage => 'فشل في اختيار الصورة';
+
+  @override
+  String get updateVehicleInformation => '✅ تم تحديث بيانات المركبة بنجاح';
 }

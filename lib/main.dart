@@ -16,13 +16,13 @@ void main() async {
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
   runApp(
-    DevicePreview(
-    builder: (context) =>
+   // DevicePreview(
+    //builder: (context) =>
     ChangeNotifierProvider.value(
       value: getIt.get<AppLanguageConfig>(),
       child: const MyApp(),
     ),
-    ),
+    //),
   );
 }
 
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
-            initialRoute: initialRoute,
+            initialRoute: AppRoute.editVehicleScreen,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

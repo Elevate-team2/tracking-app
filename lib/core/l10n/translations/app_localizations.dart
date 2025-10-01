@@ -443,8 +443,74 @@ abstract class AppLocalizations {
   /// No description provided for @sucessApply.
   ///
   /// In en, this message translates to:
-  /// **'sucessApply'**
+  /// **'✅ sucess Apply'**
   String get sucessApply;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @vehicleNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Number Required'**
+  String get vehicleNumberRequired;
+
+  /// No description provided for @vehicleLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License'**
+  String get vehicleLicense;
+
+  /// No description provided for @editProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfileTitle;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profileUpdated;
+
+  /// No description provided for @noChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes detected'**
+  String get noChanges;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// No description provided for @noImageSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No image selected'**
+  String get noImageSelected;
+
+  /// No description provided for @failedToPickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image'**
+  String get failedToPickImage;
+
+  /// No description provided for @updateVehicleInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ update Vehicle Information'**
+  String get updateVehicleInformation;
 }
 
 class _AppLocalizationsDelegate

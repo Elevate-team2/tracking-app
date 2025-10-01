@@ -13,6 +13,9 @@ class CustomBtn extends StatelessWidget {
     return ElevatedButton(
         style:ElevatedButton.styleFrom(
             backgroundColor: bg,
+            textStyle:const TextStyle(
+              inherit: false
+            ),
             foregroundColor: AppColors.white,
             fixedSize: Size(MediaQuery.of(context).size.width, 50),
             shape: RoundedRectangleBorder(

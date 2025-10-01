@@ -11,6 +11,7 @@ import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_sc
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 
 
 abstract class Routes {
@@ -46,7 +47,11 @@ case (AppRoute.loginRoute):
         return MaterialPageRoute(
           builder: (context) => VerifyResetCodeScreen(email: email),
         );
+      case AppRoute.editVehicleScreen:
 
+        return MaterialPageRoute(
+          builder: (context) => const EditVehicleInfo(),
+        );
       case AppRoute.resetPasswordScreen:
         final email = settings.arguments as String;
         return MaterialPageRoute(

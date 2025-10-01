@@ -66,12 +66,18 @@
   "continueBtn": "Continue",
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
-  "sucessApply":"sucessApply",
+  "sucessApply":"✅ sucess Apply",
+  "editProfile": "Edit profile",
+  "vehicleNumberRequired": "Vehicle Number Required",
+  "vehicleLicense": "Vehicle License",
+
+
   "editProfileTitle": "Edit profile",
     "profileUpdated": "Profile updated successfully",
     "noChanges": "No changes detected",
     "update": "Update",
     "changePassword": "Change password",
     "noImageSelected": "No image selected",
-    "failedToPickImage": "Failed to pick image"
+    "failedToPickImage": "Failed to pick image",
+  "updateVehicleInformation": "✅ update Vehicle Information"
 }

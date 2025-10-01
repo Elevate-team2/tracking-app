@@ -24,9 +24,11 @@ void main() {
     when(mockForgetPasswordBloc.state)
         .thenReturn(const ForgetPasswordState());
     when(mockForgetPasswordBloc.stream)
-        .thenAnswer((_) => Stream.fromIterable([const ForgetPasswordState()]));
+        .thenAnswer((_) => Stream.fromIterable
+      ([const ForgetPasswordState()]));
 
-    getIt.registerFactory<ForgetPasswordBloc>(() => mockForgetPasswordBloc);
+    getIt.registerFactory<ForgetPasswordBloc>(()
+    => mockForgetPasswordBloc);
   });
 
   tearDown(getIt.reset);
@@ -41,7 +43,8 @@ void main() {
         supportedLocales: AppLocalizations.supportedLocales,
         onGenerateRoute: (settings) {
           if (settings.name == "verifyCodeScreen") {
-            return MaterialPageRoute(builder: (_) => const Scaffold());
+            return MaterialPageRoute(builder: (_) =>
+            const Scaffold());
           }
           return null;
         },

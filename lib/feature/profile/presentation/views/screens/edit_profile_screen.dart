@@ -223,7 +223,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               phone: _phoneController.text,
                             );
 
-                            context.read<EditProfileBloc>().add(
+                            context.read<EditProfileBloc>()
+                                .add(
                               EditBtnSubmitEvent(request),
                             );
                           },

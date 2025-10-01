@@ -184,5 +184,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get required => 'Required';
 
   @override
-  String get sucessApply => 'sucessApply';
+  String get sucessApply => '✅ sucess Apply';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get vehicleNumberRequired => 'Vehicle Number Required';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
+  String get editProfileTitle => 'Edit profile';
+
+  @override
+  String get profileUpdated => 'Profile updated successfully';
+
+  @override
+  String get noChanges => 'No changes detected';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get noImageSelected => 'No image selected';
+
+  @override
+  String get failedToPickImage => 'Failed to pick image';
+
+  @override
+  String get updateVehicleInformation => '✅ update Vehicle Information';
 }

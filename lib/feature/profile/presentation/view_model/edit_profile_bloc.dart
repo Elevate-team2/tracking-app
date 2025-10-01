@@ -80,7 +80,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     Emitter<EditProfileState> emit,
   ) async {
     emit(state.copyWith(editProfileRequestState: RequestState.loading));
-    final result = await _editProfileUseCase.call(event.request);
+    final result = await _editProfileUseCase.
+    call(event.request);
 
     switch (result) {
       case SucessResult<EditProfileEntity>():
