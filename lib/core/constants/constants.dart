@@ -43,4 +43,5 @@ abstract class Constants {
   static const String failedToGetToken = "Failed to get token";
   static const String failedToDeleteToken = "Failed to delete token";
   static const String failedToCheckLoginStatus = "Failed to check login status";
+  static const String orderRef = "orders";
 }

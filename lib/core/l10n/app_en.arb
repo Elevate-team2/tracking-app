@@ -71,7 +71,20 @@
 "vehicleNumberRequired": "Vehicle Number Required",
   "vehicleLicense": "Vehicle License",
 
-  "update": "Update"
+  "update": "Update",
+  
+
+  "floweryRider":"Flowery rider",
+  "processCompletedSuccessfully":"process completed successfully",
+  "noOrdersFound":"No Orders Found",
+  "unExpectedErrorfound":"unExpected Error found",
+   "flowerOrder": "Flower order",
+   "pickupAddress":"Pickup address",
+   "userAddress":"User address",
+   "egp":"EGP",
+   "reject":"Reject",
+   "accept":"Accept"
+
 
 
 

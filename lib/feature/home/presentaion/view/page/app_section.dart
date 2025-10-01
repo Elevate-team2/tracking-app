@@ -31,7 +31,10 @@ class _AppSectionState extends State<AppSection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
+      body: 
+      
+      
+      PageView(
         controller: _pageController,
         onPageChanged: (newPage) {
           setState(() {
@@ -39,7 +42,7 @@ class _AppSectionState extends State<AppSection> {
           });
         },
 
-        children: const [HomePage(), OrderPage(), ProfilePage()],
+        children:  const [HomePage(), OrderPage(), ProfilePage()],
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -68,6 +71,10 @@ class _AppSectionState extends State<AppSection> {
           ),
         ],
       ),
+   
+   
+   
+   
     );
   }
 }

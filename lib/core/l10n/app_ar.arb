@@ -71,7 +71,22 @@
 "editProfile": "تعديل الملف الشخصى ",
   "vehicleNumberRequired": "مطلوب رقم المركبة ",
   "vehicleLicense": "رخصة القيادة ",
-  "update": "تحديث "
+  "update": "تحديث ",
+
+  
+
+"floweryRider": "موصل الزهور",
+"processCompletedSuccessfully": "تمت العملية بنجاح",
+"noOrdersFound": "لا توجد طلبات",
+"unExpectedErrorfound": "حدث خطأ غير متوقع",
+"flowerOrder": "طلب زهور",
+"pickupAddress": "عنوان الاستلام",
+"userAddress": "عنوان المستخدم",
+"egp": "ج.م",
+"reject": "رفض",
+"accept": "قبول"
+
+
 
 
 
