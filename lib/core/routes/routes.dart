@@ -36,9 +36,7 @@ case (AppRoute.loginRoute):
       case (AppRoute.onBoarding):
         return MaterialPageRoute(builder: (context)=>
         const    OnBoarddingScreen());
-      case (AppRoute.editVehicleInfoScreen):
-        return MaterialPageRoute(builder: (context)=>
-        const    EditVehicleInfo());
+
 
       case AppRoute.forgetPasswordScreen:
        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
