@@ -46,4 +46,12 @@ abstract class Constants {
 
   static const String authorizationHeader = 'Authorization';
   static const String bearerPrefix = 'Bearer ';
+
+  static const String male="male";
+  static const String female="female";
+  static const String noImgSelected="No image selected";
+  static const String failedPickImg="Failed to pick image";
+  static const String maskedPass="★★★★★★";
+
+
 }

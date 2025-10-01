@@ -77,7 +77,7 @@ case (AppRoute.loginRoute):
             firstName: "Rana",
             lastName: "Gebril",
             email: "ranagebril5@gmail.com",
-            phone: "+201147124052",
+            phone: "01147124052",
             photo: "",
             role: "driver",
             country: "Egypt",

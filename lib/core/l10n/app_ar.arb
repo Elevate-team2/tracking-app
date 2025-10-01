@@ -67,12 +67,13 @@
   "continueBtn": "متابعة",
   "pleaseUploadBothImages": "من فضلك ارفع الصورتين",
   "required": "مطلوب",
-   "sucessApply":"نجحت عمليه التسجيل"
-
-
-
-
-    
-
+   "sucessApply":"نجحت عمليه التسجيل",
+    "editProfileTitle": "تعديل الملف الشخصي",
+     "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+     "noChanges": "لا يوجد تغييرات",
+     "update": "تحديث",
+     "changePassword": "تغيير كلمة المرور",
+     "noImageSelected": "لم يتم اختيار صورة",
+     "failedToPickImage": "فشل في اختيار الصورة"
 
 }

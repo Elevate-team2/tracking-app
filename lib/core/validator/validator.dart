@@ -60,6 +60,9 @@ class Validator {
   static String? validateFullName(String? val) {
     if (val == null || val.isEmpty) {
       return fieldRequired;
+    }
+    if (val.trim().length < 3) {
+      return 'at least 3 characters long';
     } else {
       return null;
     }
@@ -70,8 +73,8 @@ class Validator {
       return fieldRequired;
     } else if (int.tryParse(val.trim()) == null) {
       return 'Enter numbers only';
-    } else if (val.trim().length != 11) {
-      return 'Value must be 11 digits';
+    } else if (val.trim().length != 13) {
+      return 'Value must be 11 digits after country code';
     } else {
       return null;
     }

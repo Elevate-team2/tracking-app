@@ -1,11 +1,14 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
+import 'package:tracking_app/core/constants/constants.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
+import 'package:tracking_app/core/theme/app_theme.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
@@ -13,6 +16,8 @@ import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_f
 import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_bloc.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/gender_section.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/profile_photo_section.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final LoggedInUserEntity user;
@@ -24,9 +29,9 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  File? _selectedPhoto;
   String? _selectedGender;
-  final ImagePicker _picker = ImagePicker();
+
+  final _formKey = GlobalKey<FormState>();
 
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
@@ -44,26 +49,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
-  void dispose(){
-    super.dispose();
+  void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
+    super.dispose();
   }
 
-
-  Future<void> _pickImage(BuildContext context) async {
-    final image = await _picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 80,
-    );
-
-    if (image != null) {
-      setState(() {
-        _selectedPhoto = File(image.path);
-      });
-    }
+  bool _hasChanges() {
+    return _firstNameController.text != widget.user.firstName ||
+        _lastNameController.text != widget.user.lastName ||
+        _emailController.text != widget.user.email ||
+        _phoneController.text != widget.user.phone ||
+        _selectedGender != widget.user.gender;
   }
 
   @override
@@ -74,185 +73,166 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         listener: (context, state) {
           if (state.editProfileRequestState == RequestState.success) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Profile updated successfully")),
+              SnackBar(
+                  key:const Key(AppWidgetsKeys.profileUpdatedSnackBar),
+                  content: Text(context.loc.profileUpdated)),
             );
           } else if (state.editProfileRequestState == RequestState.error) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.editProfileErrorMessage ?? "Error")),
+              SnackBar(
+                  key:const Key(AppWidgetsKeys.errorSnackBarEditProfile),
+                  content: Text(state.editProfileErrorMessage ?? context.loc.error)),
             );
           }
         },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text("Edit profile"),
+              key: const Key(AppWidgetsKeys.editProfileAppBar),
+              title: Text(context.loc.editProfileTitle),
               leading: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
-                  child: Icon(Icons.arrow_back_ios, size: context.setSp(20)),
+                  child: Icon(Icons.arrow_back_ios, size: context.setWidth(20)),
                 ),
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // ==== Profile Photo ====
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundImage: _selectedPhoto != null
-                            ? FileImage(_selectedPhoto!)
-                            : (widget.user.photo.isNotEmpty)
-                            ? NetworkImage(widget.user.photo)
-                            : const AssetImage("assets/images/profile.png"),
-                        backgroundColor: Colors.transparent,
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          _pickImage(context);
-                          context.read<EditProfileBloc>().add(
-                            UploadDriverPhotoEvent(_selectedPhoto!),
-                          );
-                        },
-                        icon: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightPink,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(Icons.camera_alt_outlined),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 25),
-
-                  // ==== Name Fields ====
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomTxtField(
-                          hintTxt: "First name",
-                          lbl: "First name",
-                          controller: _firstNameController,
-                          validator: Validator.validateUsername,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: CustomTxtField(
-                          hintTxt: "Last name",
-                          lbl: "Last name",
-                          controller: _lastNameController,
-                          validator: Validator.validateUsername,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-
-                  // ==== Email ====
-                  CustomTxtField(
-                    hintTxt: "Email",
-                    lbl: "Email",
-                    controller: _emailController,
-                    validator: Validator.validateEmail,
-                  ),
-                  const SizedBox(height: 15),
-
-                  // ==== Phone ====
-                  CustomTxtField(
-                    hintTxt: "Phone",
-                    lbl: "Phone",
-                    controller: _phoneController,
-                    validator: Validator.validatePhoneNumber,
-                  ),
-                  const SizedBox(height: 15),
-
-                  // ==== Password Placeholder ====
-                  TextFormField(
-                    initialValue: "★★★★★★",
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      label: const Text("Password"),
-                      suffix: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "change password",
-                          style: getRegularStyle(
-                            color: AppColors.pink,
-                            fontSize: FontSize.s14,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-
-                  // ==== Gender ====
-                  Row(
-                    children: [
-                      Text(
-                        "Gender",
-                        style: getMediumStyle(
-                          color: AppColors.black,
-                          fontSize: FontSize.s16,
-                        ),
-                      ),
-                      const SizedBox(width: 15.0),
-
-                      Radio<String>(
-                        value: 'female',
-
-                        groupValue: widget.user.gender,
-                        activeColor: AppColors.pink,
-                        fillColor: widget.user.gender == "female"
-                            ? WidgetStateProperty.all(AppColors.pink)
-                            : WidgetStateProperty.all(AppColors.black),
-                      ),
-                      const Text("Female"),
-                      Radio<String>(
-                        value: 'male',
-                        groupValue: _selectedGender,
-                        activeColor: AppColors.pink,
-                        fillColor: widget.user.gender == "male"
-                            ? WidgetStateProperty.all(AppColors.pink)
-                            : WidgetStateProperty.all(AppColors.black),
-                      ),
-                      const Text("Male"),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-
-                  // ==== Submit Button ====
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final request = EditProfileRequest(
-                          firstName: _firstNameController.text,
-                          lastName: _lastNameController.text,
-                          email: _emailController.text,
-                          phone: _phoneController.text,
-                        );
-
+              padding: EdgeInsets.all(context.setWidth(16)),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // ==== Profile Photo ====
+                    ProfilePhotoSection(
+                      photoUrl: widget.user.photo,
+                      selectedPhoto: state.selectedPhoto,
+                      onPickPhoto: () {
                         context.read<EditProfileBloc>().add(
-                          EditBtnSubmitEvent(request),
+                          PickImageEvent(ImageSource.gallery),
                         );
                       },
-                      child:
-                          state.editProfileRequestState == RequestState.loading
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text("Update"),
                     ),
-                  ),
-                ],
+                    SizedBox(height: context.setHight(25)),
+
+                    // ==== Name Fields ====
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomTxtField(
+                            key: const Key(AppWidgetsKeys.firstNameField),
+                            hintTxt: context.loc.firstnameLabel,
+                            lbl: context.loc.firstnameLabel,
+                            controller: _firstNameController,
+                            validator: Validator.validateFullName,
+                          ),
+                        ),
+                        SizedBox(width: context.setWidth(10)),
+                        Expanded(
+                          child: CustomTxtField(
+                            key: const Key(AppWidgetsKeys.lastNameField),
+                            hintTxt: context.loc.secondnameLabel,
+                            lbl: context.loc.secondnameLabel,
+                            controller: _lastNameController,
+                            validator: Validator.validateFullName,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: context.setHight(15)),
+
+                    // ==== Email ====
+                    CustomTxtField(
+                      key: const Key(AppWidgetsKeys.emailField),
+                      hintTxt: context.loc.email,
+                      lbl: context.loc.email,
+                      controller: _emailController,
+                      validator: Validator.validateEmail,
+                    ),
+                    SizedBox(height: context.setHight(15)),
+
+                    // ==== Phone ====
+                    CustomTxtField(
+                      key: const Key(AppWidgetsKeys.phoneField),
+                      hintTxt: context.loc.phone,
+                      lbl: context.loc.phone,
+                      controller: _phoneController,
+                      validator: Validator.validatePhoneNumber,
+                    ),
+                    SizedBox(height: context.setHight(15)),
+
+                    // ==== Password Placeholder ====
+                    TextFormField(
+                      key: const Key(AppWidgetsKeys.passwordField),
+                      initialValue: Constants.maskedPass,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        label: Text(context.loc.password),
+                        suffix: InkWell(
+                          key: const Key(AppWidgetsKeys.changePasswordButton),
+                          onTap: () {},
+                          child: Text(
+                            context.loc.changePassword,
+                            style: getRegularStyle(
+                              color: AppColors.pink,
+                              fontSize: context.setSp(FontSize.s14),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: context.setHight(15)),
+
+                    // ==== Gender ====
+                    GenderSection(selectedGender: _selectedGender),
+                    SizedBox(height: context.setHight(20)),
+
+                    // ==== Submit Button ====
+                    SizedBox(
+                      width: double.infinity,
+                      child: SizedBox(
+                        height: context.setHight(50),
+                        child: ElevatedButton(
+                          key: const Key(AppWidgetsKeys.editButton),
+                          style: AppTheme.lightTheme.elevatedButtonTheme.style
+                              ?.copyWith(
+                            backgroundColor: WidgetStatePropertyAll(
+                              (!_hasChanges())
+                                  ? AppColors.black[30]
+                                  : AppColors.pink,
+                            ),
+                          ),
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) return;
+
+                            if (!_hasChanges()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  key:const Key(AppWidgetsKeys.noChangesSnackBar),
+                                    content: Text(context.loc.noChanges)),
+                              );
+                              return;
+                            }
+
+                            final request = EditProfileRequest(
+                              firstName: _firstNameController.text,
+                              lastName: _lastNameController.text,
+                              email: _emailController.text,
+                              phone: _phoneController.text,
+                            );
+
+                            context.read<EditProfileBloc>().add(
+                              EditBtnSubmitEvent(request),
+                            );
+                          },
+                          child: Text(context.loc.update),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
