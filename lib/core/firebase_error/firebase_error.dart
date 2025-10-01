@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 
 class FirebaseErrorHandler extends FailedResult {
