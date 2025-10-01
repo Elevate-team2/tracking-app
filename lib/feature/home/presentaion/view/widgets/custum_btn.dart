@@ -24,7 +24,7 @@ class CustumBtn extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "EGP ${order.totalPrice}",
+            "EGP ${order.orderInfoEntity.totalPrice}",
             style: getBoldStyle(color: AppColors.black, fontSize: FontSize.s18),
           ),
           ElevatedButton(

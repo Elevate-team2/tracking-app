@@ -4,6 +4,8 @@ import 'package:tracking_app/feature/home/api/models/remote_order_item_model.dar
 import 'package:tracking_app/feature/home/api/models/remote_shipping_address_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_store_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_user_model.dart';
+import 'package:tracking_app/feature/home/domain/entity/order_info_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/payment_info_entity.dart';
 part 'remote_order_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -67,18 +69,12 @@ class RemoteOrderModel {
       id: id ?? '',
       user: user!.toEntity(),
       orderItems: orderItems?.map((order) => order.toEntity()).toList()??[],
-      totalPrice: totalPrice ?? 0,
+      orderInfoEntity: OrderInfoEntity(isDelivered ?? false,  state ?? '',  
+      orderNumber ?? '', createdAt ?? '', updatedAt ?? '',  v ?? -1,  totalPrice ?? 0),
       shippingAddress: RemoteShippingAddressModel.toEntity(shippingAddress),
-      paymentType: paymentType ?? '',
-      isPaid: isPaid ?? false,
-      isDelivered: isDelivered ?? false,
-      state: state ?? '',
-      orderNumber: orderNumber ?? '',
+      paymentInfoEntity: PaymentInfoEntity( paymentType ?? '',  paidAt ?? '',  isPaid ?? false,),
       store: store!.toEntity(),
-      createdAt: createdAt ?? '',
-      updatedAt: updatedAt ?? '',
-      v: v ?? -1,
-      paidAt: paidAt ?? '',
+      
     );
   }
 
@@ -89,20 +85,20 @@ class RemoteOrderModel {
       orderItems: entity.orderItems
           .map(RemoteOrderItemModel.fromEntity)
           .toList(),
-      totalPrice: entity.totalPrice,
+      totalPrice: entity.orderInfoEntity.totalPrice,
       shippingAddress: RemoteShippingAddressModel.fromEntity(
         entity.shippingAddress,
       ),
-      paymentType: entity.paymentType,
-      isPaid: entity.isPaid,
-      isDelivered: entity.isDelivered,
-      state: entity.state,
-      orderNumber: entity.orderNumber,
+      paymentType: entity.paymentInfoEntity.paymentType,
+      isPaid: entity.paymentInfoEntity.isPaid,
+      isDelivered: entity.orderInfoEntity.isDelivered,
+      state: entity.orderInfoEntity.state,
+      orderNumber: entity.orderInfoEntity.orderNumber,
       store: RemoteStoreModel.fromEntity(entity.store),
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-      paidAt: entity.paidAt,
-      v: entity.v
+      createdAt: entity.orderInfoEntity.createdAt,
+      updatedAt: entity.orderInfoEntity.updatedAt,
+      paidAt: entity.paymentInfoEntity.paidAt,
+      v: entity.orderInfoEntity.v
     );
   }
 }
