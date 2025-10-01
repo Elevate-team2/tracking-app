@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
-import 'package:tracking_app/core/theme/font_style_manger.dart';
 
 class CustomBtn extends StatelessWidget {
   const CustomBtn({super.key,required this.onPressed,
