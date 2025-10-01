@@ -127,7 +127,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(context.loc.sucessApply)));
-            Navigator.of(context).pushNamed(AppRoute.loginRoute);
+            Navigator.of(context).pushNamed(AppRoute.approveScreen);
           }
           if (state.applyState == RequestState.error) {
             ScaffoldMessenger.of(
@@ -336,8 +336,14 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         file: nidImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null) setState(() => nidImg = file);
-                        },
+                          if (file != null)
+                            {
+                            setState(() {
+                              nidImg=file;
+
+                            });
+                            }
+                        }
                       ),
                       SizedBox(height: sh * 0.02),
 
@@ -425,6 +431,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                   ),
                                   locationInfo: LocationInfo(
                                     country: country,
+
                                   ),
                                   personalInfo: PersonalInfo(
                                     gender: gender,
@@ -432,6 +439,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                     nid: nidCtrl.text,
                                     email: emailCtrl.text,
                                     nidimg: nidImg,
+
                                     firstName: firstNameCtrl.text,
                                     lastName: lastNameCtrl.text,
                                   ),
@@ -439,7 +447,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                     vehicleType: vehicleType,
                                     vehicleNumber: vehicleNumberCtrl.text,
                                     vehicleLicense: vehicleLicenseImg,
-
                                   ),
 
                                   // country: country,

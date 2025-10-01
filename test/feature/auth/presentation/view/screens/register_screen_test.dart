@@ -44,7 +44,7 @@ void main() {
           child: const ApplyScreen(),
         ),
         routes: {
-      AppRoute.loginRoute: (_) => const Scaffold(
+      AppRoute.approveScreen: (_) => const Scaffold(
             body: Text('Login Screen'),
           ),
     },
@@ -89,7 +89,8 @@ void main() {
     });
 
     testWidgets("Show SnackBar on success", (tester) async {
-      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+      final l10n = await AppLocalizations.delegate.
+      load(const Locale('en'));
 
       when(
         mockApplyBloc.state,
