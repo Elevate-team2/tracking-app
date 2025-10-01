@@ -24,10 +24,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Text(
             "Flowery rider",
             style: getLightStyle(color: AppColors.pink, fontSize: FontSize.s24),
@@ -36,39 +38,57 @@ class _HomePageState extends State<HomePage> {
       ),
 
       body: RefreshIndicator(
-          onRefresh: () async {
-
+        onRefresh: () async {
           _homeViewModel.add(RefreshOrdersEvent());
           await Future.delayed(const Duration(milliseconds: 500));
         },
         child: SingleChildScrollView(
-          physics:const  AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: SizedBox(
             height: context.setHight(650),
             child: Padding(
               padding: const EdgeInsets.all(18.0),
-              child:
-               BlocProvider.value(
+              child: BlocProvider.value(
                 value: _homeViewModel..add(GetOrdersEvent()),
-                child: BlocBuilder<HomeViewModel, HomeStates>(
+                child: BlocConsumer<HomeViewModel, HomeStates>(
+                  listener: (context, state) {
+                   
+                    if (state.processCompleted == true) {
+
+                      //Navigator to anthor page
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("process completed successfully"),
+                        ),
+                      );
+                      state.copyWith(processCompleted: null);
+                    }
+                    if (state.errorMessage != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.errorMessage!)),
+                      );
+                      state.copyWith(errorMessage: null);
+                    }
+                  
+                  },
                   builder: (context, state) {
                     if (state.isLoading == true) {
                       return const CommonLoading();
                     }
-                    if (state.errorMessage != null) {
-                      state.copyWith(errorMessage: null);
-                      return Center(child: Text(state.errorMessage!));
-                    }
+
                     if (state.orders != null) {
                       if (state.orders!.isEmpty) {
-                        return const CustumError(errorMessage: "No Orders Found");
+                        return const CustumError(
+                          errorMessage: "No Orders Found",
+                        );
                       }
-            
-            
-                      return OrderCards(orders: state.orders!,);
+
+                      return OrderCards(orders: state.orders!);
                     }
-            
-                    return const CustumError(errorMessage: "unExpected Error found");
+
+                    return const CustumError(
+                      errorMessage: "unExpected Error found",
+                    );
                   },
                 ),
               ),

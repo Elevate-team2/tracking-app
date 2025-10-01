@@ -23,6 +23,10 @@ class OrderLocalModel {
   late String state;
   late String orderNumber;
   late StoreLocalModel store;
+   late String paidAt;
+  late String createdAt;
+  late String updatedAt;
+  late int v;
 
   static OrderLocalModel toLocalModel(OrderEntity entity) {
     return OrderLocalModel()
@@ -40,6 +44,8 @@ class OrderLocalModel {
       ..isDelivered = entity.isDelivered
       ..state = entity.state
       ..orderNumber = entity.orderNumber
+      ..createdAt=entity.createdAt
+      ..updatedAt=entity.updatedAt..v=entity.v..paidAt=entity.paidAt
       ..store = StoreLocalModel.fromEntity(entity.store);
   }
 
@@ -56,6 +62,10 @@ class OrderLocalModel {
       state: state,
       orderNumber: orderNumber,
       store: store.toEntity(),
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      v: v,
+      paidAt: paidAt,
     );
   }
 }

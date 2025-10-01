@@ -4,7 +4,8 @@ abstract class Constants {
   static const String arLocal = "ar";
   static const String contentType = "content-Type";
   static const String appJson = "application/json";
-  static const String onboardingphoto = "assets/images/delivery-service-delivery-man-3qnPlWnOuR.png";
+  static const String onboardingphoto =
+      "assets/images/delivery-service-delivery-man-3qnPlWnOuR.png";
   static const String approveImageUrl = "assets/images/wave.png";
   static const String token = "token";
   static const String email = "email";
@@ -32,7 +33,7 @@ abstract class Constants {
   static const String abbreviation = "abbreviation";
   static const String tzName = "tzName";
 
-//onboarding
+  //onboarding
   static const String unknown = "Unknown";
   static const String zeroVersion = "0.0.0";
   static const String welcomeText = "Welcome to\nFlowery rider app";
@@ -43,4 +44,5 @@ abstract class Constants {
   static const String failedToGetToken = "Failed to get token";
   static const String failedToDeleteToken = "Failed to delete token";
   static const String failedToCheckLoginStatus = "Failed to check login status";
+  static const String orderRef = "orders";
 }

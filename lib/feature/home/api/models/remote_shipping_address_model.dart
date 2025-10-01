@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/home/domain/entity/shipping_address_entity.dart';
-part 'shipping_address_model.g.dart';
 
-@JsonSerializable()
-class ShippingAddressModel {
+part 'remote_shipping_address_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class RemoteShippingAddressModel {
   @JsonKey(name: "street")
   String? street;
   @JsonKey(name: "city")
@@ -15,7 +16,7 @@ class ShippingAddressModel {
   @JsonKey(name: "long")
   String? long;
 
-  ShippingAddressModel({
+  RemoteShippingAddressModel({
     this.street,
     this.city,
     this.phone,
@@ -23,13 +24,14 @@ class ShippingAddressModel {
     this.long,
   });
 
-  factory ShippingAddressModel.fromJson(Map<String, dynamic> json) =>
-      _$ShippingAddressModelFromJson(json);
+  factory RemoteShippingAddressModel.fromJson(Map<String, dynamic> json) =>
+      _$RemoteShippingAddressModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ShippingAddressModelToJson(this);
+  Map<String, dynamic> toJson() => _$RemoteShippingAddressModelToJson(this);
 
-  static ShippingAddressEntity shippingAddressModelToEntity(
-    ShippingAddressModel? model,
+
+  static ShippingAddressEntity toEntity(
+    RemoteShippingAddressModel? model,
   ) {
     if (model == null) {
       return ShippingAddressEntity(
@@ -47,6 +49,17 @@ class ShippingAddressModel {
       phone: model.phone ?? "",
       lat: model.lat ?? "",
       long: model.long ?? "",
+    );
+  }
+
+
+  factory RemoteShippingAddressModel.fromEntity(ShippingAddressEntity entity) {
+    return RemoteShippingAddressModel(
+      street: entity.street,
+      city: entity.city,
+      phone: entity.phone,
+      lat: entity.lat,
+      long: entity.long,
     );
   }
 }

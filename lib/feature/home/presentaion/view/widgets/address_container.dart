@@ -46,17 +46,17 @@ class AddressContainer extends StatelessWidget {
               // need information about driver,user,stor
             },
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: AppColors.white,
 
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
-                    color: AppColors.lightGray.withOpacity(0.3),
+                    color: AppColors.lightGray30,
                     blurRadius: 1,
                     spreadRadius: 1,
-                    offset: const Offset(0, 0),
+                    offset: Offset(0, 0),
                   ),
                 ],
               ),
@@ -77,9 +77,14 @@ class AddressContainer extends StatelessWidget {
                             //////  ROW OF ADDRESS  ///////////
                             Row(
                               children: [
-                                Icon(Icons.location_on_outlined),
+                                const Icon(Icons.location_on_outlined),
 
-                                 Text(address),
+                                 SizedBox(
+                                  
+                                  width: 220,
+                                   child: Text(address,
+                                   maxLines: 1,overflow:TextOverflow.ellipsis ,),
+                                 ),
                               ],
                             ),
                           ],

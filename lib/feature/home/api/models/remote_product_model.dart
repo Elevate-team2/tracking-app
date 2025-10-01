@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/home/domain/entity/product_entity.dart';
-part 'product_model.g.dart';
+part 'remote_product_model.g.dart';
 
-@JsonSerializable()
-class ProductModel {
+@JsonSerializable(explicitToJson: true)
+class RemoteProductModel {
   @JsonKey(name: "_id")
   String? id;
   @JsonKey(name: "title")
@@ -41,7 +41,7 @@ class ProductModel {
   @JsonKey(name: "rateCount")
   int? rateCount;
 
-  ProductModel({
+  RemoteProductModel({
     this.id,
     this.title,
     this.slug,
@@ -62,12 +62,11 @@ class ProductModel {
     this.rateCount,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductModelFromJson(json);
+  factory RemoteProductModel.fromJson(Map<String, dynamic> json) =>
+      _$RemoteProductModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
-
-  static ProductEntity productModelToEntity(ProductModel? model) {
+  Map<String, dynamic> toJson() => _$RemoteProductModelToJson(this);
+ static ProductEntity toEntity(RemoteProductModel? model) {
     if (model == null) {
       return ProductEntity(
         id: '674511e790ab40a06854034b',
@@ -93,17 +92,35 @@ class ProductModel {
       title: model.title ?? '',
       slug: model.slug ?? '',
       description: model.description ?? '',
-      imgCover: model.imgCover ?? '44da12d8-4017-4e97-b654-ae76b5c8af48-cover_image.png',
+      imgCover: model.imgCover ?? '',
       images: model.images ?? [
-          "66c36d5d-c067-46d9-b339-d81be57e0149-image_one.png",
-          "f27e1903-74cf-4ed6-a42c-e43e35b6dd14-image_three.png",
-          "500fe197-0e16-4b01-9a0d-031ccb032714-image_two.png",
+          ""
         ],
-      price: model.price ?? 999,
+      price: model.price ?? 0,
       priceAfterDiscount: model.priceAfterDiscount,
       quantity: model.quantity ?? 0,
       category: model.category ?? '',
       occasion: model.occasion ?? '',
     );
   }
+
+
+
+  factory RemoteProductModel.fromEntity(ProductEntity entity) {
+    return RemoteProductModel(
+      id: entity.id,
+      title: entity.title,
+      slug: entity.slug,
+      description: entity.description,
+      imgCover: entity.imgCover,
+      images: entity.images,
+      price: entity.price,
+      priceAfterDiscount: entity.priceAfterDiscount,
+      quantity: entity.quantity,
+      category: entity.category,
+      occasion: entity.occasion,
+    );
+  }
+
+
 }

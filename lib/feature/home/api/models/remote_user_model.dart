@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/home/domain/entity/user_entity.dart';
-part 'user_model.g.dart';
 
-@JsonSerializable()
-class UserModel {
+part 'remote_user_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class RemoteUserModel {
   @JsonKey(name: "_id")
   String? id;
   @JsonKey(name: "firstName")
@@ -27,7 +28,7 @@ class UserModel {
   @JsonKey(name: "resetCodeVerified")
   bool? resetCodeVerified;
 
-  UserModel({
+  RemoteUserModel({
     this.id,
     this.firstName,
     this.lastName,
@@ -41,32 +42,33 @@ class UserModel {
     this.resetCodeVerified,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory RemoteUserModel.fromJson(Map<String, dynamic> json) =>
+      _$RemoteUserModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() => _$RemoteUserModelToJson(this);
 
-  static UserEntity userModelToEntity(UserModel? model) {
-    if (model == null) {
-      return UserEntity(
-        id: 'fakeUserId123',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'johndoe@example.com',
-        gender: 'Male',
-        phone: '01000000000',
-        photo: '',
-      );
-    }
-
+  UserEntity toEntity() {
     return UserEntity(
-      id: model.id ?? '',
-      firstName: model.firstName ?? '',
-      lastName: model.lastName ?? '',
-      email: model.email ?? '',
-      gender: model.gender ?? '',
-      phone: model.phone ?? '',
-      photo: model.photo ?? '',
+      id: id ?? '',
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      email: email ?? '',
+      gender: gender ?? '',
+      phone: phone ?? '',
+      photo: photo ?? '',
+    );
+  }
+
+
+  factory RemoteUserModel.fromEntity(UserEntity entity) {
+    return RemoteUserModel(
+      id: entity.id,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+      email: entity.email,
+      gender: entity.gender,
+      phone: entity.phone,
+      photo: entity.photo,
     );
   }
 }

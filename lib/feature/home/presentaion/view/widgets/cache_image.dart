@@ -17,8 +17,8 @@ class CacheImage extends StatelessWidget {
           width: 50,
           height: 50,
           placeholder: (context, url) =>
-              Center(child: CircularProgressIndicator(strokeWidth: 2)),
-          errorWidget: (context, url, error) => Icon(
+              const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          errorWidget: (context, url, error) => const Icon(
             Icons.image_not_supported_rounded,
             color: Colors.grey,
             size: 24.0,

@@ -2,10 +2,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/start_order_response_entity.dart';
+import 'package:tracking_app/feature/home/domain/usecase/add_data_to_remote.dart';
 import 'package:tracking_app/feature/home/domain/usecase/delete_local_order.dart';
 import 'package:tracking_app/feature/home/domain/usecase/get_all_pending_orders.dart';
 import 'package:tracking_app/feature/home/domain/usecase/get_all_saved_orders.dart';
+import 'package:tracking_app/feature/home/domain/usecase/get_data_from_remote.dart';
 import 'package:tracking_app/feature/home/domain/usecase/save_data_to_local.dart';
+import 'package:tracking_app/feature/home/domain/usecase/update_order_state.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_states.dart';
 
@@ -15,19 +20,110 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   final SaveDataToLocalUseCase _saveDataToLocalUseCase;
   final GetAllSavedOrdersUseCase _getAllSavedOrdersUseCase;
   final DeleteLocalOrderUseCase _deleteLocalOrderUseCase;
+  final UpdateOrderStateUseCase _updateOrderStateUseCase;
+  final AddDataToRemoteUseCase _addDataToRemoteUseCase;
+  final GetDataFromRemoteUseCase _getDataFromRemoteUseCase;
   bool firtTime = true;
-  int count = 0;
   HomeViewModel(
     this._getAllPendingOrdersUseCase,
     this._saveDataToLocalUseCase,
     this._getAllSavedOrdersUseCase,
     this._deleteLocalOrderUseCase,
+    this._updateOrderStateUseCase,
+    this._addDataToRemoteUseCase,
+    this._getDataFromRemoteUseCase,
   ) : super(HomeStates()) {
     on<GetAllPaindingOrdersEvent>(_getAllPedningOrders);
     on<GetAllLocalOrdersEvent>(_getLocalOrders);
     on<GetOrdersEvent>(_getOrders);
     on<DeleteOrderLocalyEvent>(_deleteOrderLocaly);
     on<RefreshOrdersEvent>(_refreshOrders);
+    on<StartOrderEvent>(_startOrder);
+    on<AddDataToRemoteEvent>(_addDataToRemote);
+    on<StartProgressEvnet>(_startOrderProcess);
+    on<GetDataFromRemoteEvent>(_getDataFromRemote);
+  }
+
+  // add to firebase
+  //--> if sucess then go and call startorderendpoint
+  //---> if sucess then go and call getallpending orders to update screen for user
+  //--->if sucess go to anthor screen
+  //----> else go to home page and say that somthing went wrong please reload the page
+  //----> else go and delete data from firebase
+  //--else  show wrong
+
+  Future<void> _startOrderProcess(
+    StartProgressEvnet event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true));
+
+    final res = await _addDataToRemoteUseCase.addDateToRemote(
+      event.remoteDataEntity,
+    );
+    //final res = FailedResult("error in remote");   to test if error happened
+
+    switch (res) {
+      case SucessResult<void>():
+        emit(state.copyWith(addedToRemote: true)); //1
+        final startRes = await _updateOrderStateUseCase.startOrder(
+          event.remoteDataEntity.orderEntity.id,
+        );
+
+        // final startRes = FailedResult<StartOrderResponseEntity>("error in start order ");   to test if error happend
+
+        switch (startRes) {
+          case SucessResult<StartOrderResponseEntity>():
+            emit(state.copyWith(orderStarted: true)); //2
+
+            final ordersRes = await _getAllPendingOrdersUseCase
+                .getAllPendingOrders();
+            // final ordersRes = FailedResult<List<OrderEntity>?>("error");  to test error
+
+            switch (ordersRes) {
+              case SucessResult<List<OrderEntity>?>():
+                _saveDataToLocalUseCase.saveDataToLocalStorage(
+                  ordersRes.sucessResult,
+                );
+                emit(
+                  //3
+                  state.copyWith(
+                    isLoading: false,
+                    orders: ordersRes.sucessResult,
+                    processCompleted: true,
+                  ),
+                );
+
+              case FailedResult<List<OrderEntity>?>():
+                emit(
+                  state.copyWith(
+                    isLoading: false,
+                    processCompleted: false,
+                    errorMessage:
+                        "Order started but refreshing orders failed. Please reload.",
+                  ),
+                );
+            }
+
+          case FailedResult<StartOrderResponseEntity>():
+            emit(
+              state.copyWith(
+                isLoading: false,
+                errorMessage: startRes.errorMessage,
+                orderStarted: false,
+              ),
+            );
+        }
+
+      case FailedResult<void>():
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: res.errorMessage,
+            addedToRemote: false,
+          ),
+        );
+    }
   }
 
   void _getOrders(GetOrdersEvent event, Emitter<HomeStates> emit) async {
@@ -43,8 +139,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     GetAllPaindingOrdersEvent event,
     Emitter emit,
   ) async {
-    count++;
-    print(count);
+   
     emit(state.copyWith(isLoading: true));
     final res = await _getAllPendingOrdersUseCase.getAllPendingOrders();
 
@@ -73,9 +168,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     GetAllLocalOrdersEvent event,
     Emitter emit,
   ) async {
-    count++;
-    print(count);
-    print("local");
+   
     final res = await _getAllSavedOrdersUseCase.getAllSavedOrders();
     switch (res) {
       case SucessResult<List<OrderEntity>?>():
@@ -101,8 +194,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     DeleteOrderLocalyEvent event,
     Emitter emit,
   ) async {
-    count++;
-    print(count);
+   
     final res = await _deleteLocalOrderUseCase.deleteOrder(event.orderId);
 
     switch (res) {
@@ -121,6 +213,51 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   }
 
   void _refreshOrders(RefreshOrdersEvent event, emit) async {
-   await  _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
+    await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
+  }
+
+  Future<void> _startOrder(StartOrderEvent event, Emitter emit) async {
+    final res = await _updateOrderStateUseCase.startOrder(event.orderId);
+    switch (res) {
+      case SucessResult<StartOrderResponseEntity>():
+        emit(state.copyWith(orderStarted: true));
+
+      // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
+      case FailedResult<StartOrderResponseEntity>():
+        emit(state.copyWith(errorMessage: res.errorMessage));
+    }
+  }
+
+  Future<void> _addDataToRemote(
+    AddDataToRemoteEvent event,
+    Emitter emit,
+  ) async {
+    final res = await _addDataToRemoteUseCase.addDateToRemote(
+      event.remoteDataEntity,
+    );
+    switch (res) {
+      case SucessResult<void>():
+        emit(state.copyWith(addedToRemote: true));
+      case FailedResult<void>():
+       emit(state.copyWith(errorMessage: res.errorMessage));
+      
+    }
+  }
+
+  Future<void> _getDataFromRemote(
+    GetDataFromRemoteEvent event,
+    Emitter emit,
+  ) async {
+    await emit.forEach<Result<RemoteDataEntity>>(
+      _getDataFromRemoteUseCase.getOrderFromRemote(event.orderId),
+      onData: (data) {
+        switch (data) {
+          case SucessResult<RemoteDataEntity>():
+            return state.copyWith(remoteData: data.sucessResult);
+          case FailedResult<RemoteDataEntity>():
+            return state.copyWith(errorMessage: data.errorMessage);
+        }
+      },
+    );
   }
 }

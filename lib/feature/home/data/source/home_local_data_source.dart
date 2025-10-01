@@ -5,5 +5,6 @@ abstract interface class HomeLocalDataSource {
  
   Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders);
   Future<Result<List<OrderEntity>?>> getAllSavedOrders();
-   Future<Result<void>> deleteOrder(String orderId);
+  Future<Result<void>> deleteOrder(String orderId);
+  
 }

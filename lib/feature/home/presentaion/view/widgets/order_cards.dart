@@ -22,18 +22,18 @@ class OrderCards extends StatelessWidget {
             itemBuilder: (context, index) {
               final order = orders[index];
               return Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                padding: EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: AppColors.white,
 
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
-                      color: AppColors.lightGray.withOpacity(0.3),
+                      color: AppColors.lightGray30,
                       blurRadius: 1,
                       spreadRadius: 1,
-                      offset: const Offset(0, 0),
+                      offset: Offset(0, 0),
                     ),
                   ],
                 ),
@@ -52,10 +52,10 @@ class OrderCards extends StatelessWidget {
                       ),
                     ),
                     AddressContainer(AddressType.store, "Pickup address", order),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     AddressContainer(AddressType.user,"User address",order),
 
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
                     CustumBtn(order: order,),
                   ],
