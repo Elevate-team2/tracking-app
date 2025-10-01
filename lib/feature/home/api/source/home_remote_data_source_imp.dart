@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/constants/constants.dart';
+import 'package:tracking_app/core/safe_api_call/safe_api_call.dart';
 import 'package:tracking_app/feature/home/api/client/api%20_service/home_api_service.dart';
 import 'package:tracking_app/feature/home/data/source/home_remote_data_source.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
@@ -19,55 +20,29 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
 
   @override
   Future<Result<List<OrderEntity>?>> getAllPendingOrders() async {
-    try {
+    return safeCall(() async {
       final pendingOrderResponse = await _homeApiService.getAllPendingOrders();
-      final orderEntity = pendingOrderResponse.orders!
-          .map((order)=>order.toEntity())
+      return pendingOrderResponse.orders!
+          .map((order) => order.toEntity())
           .toList();
-
-      return SucessResult(orderEntity);
-    } on DioException catch (dioError) {
-      final errorMessage =
-          dioError.response?.data[Constants.error] ??
-          dioError.response?.data[Constants.message] ??
-          dioError.message;
-      return FailedResult(errorMessage);
-    } catch (error) {
-      return FailedResult(error.toString());
-    }
+    });
   }
 
   @override
   Future<Result<StartOrderResponseEntity>> startOrder(String orderId) async {
-    try {
+    return safeCall(() async {
       final orderResponse = await _homeApiService.startOrder(orderId);
-
-      final updateStateOrderEntity = orderResponse.orders.toEntity();
-
-      return SucessResult(updateStateOrderEntity);
-    } on DioException catch (dioError) {
-      final errorMessage =
-          dioError.response?.data[Constants.error] ??
-          dioError.response?.data[Constants.message] ??
-          dioError.message;
-      return FailedResult(errorMessage);
-    } catch (error) {
-     
-      return FailedResult(error.toString());
-    }
+      return orderResponse.orders.toEntity();
+    });
   }
 
   @override
   Future<Result<void>> addDateToRemote(RemoteDataEntity remoteData) async {
-    try {
+    return await safeCall(() async {
       await _homeFirebaseService.addOrders(
         RemoteDataModel.fromEntity(remoteData),
       );
-
-      return SucessResult(null);
-    } catch (error) {
-      return FailedResult(error.toString());
-    }
+    });
   }
 
   @override

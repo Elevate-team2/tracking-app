@@ -30,7 +30,7 @@ void main(){
     expect(find.byType(Padding), findsNWidgets(3));
     expect(find.byType(Column), findsOneWidget);
     expect(find.byKey(const Key("image1")), findsOneWidget);
-    expect(find.byType(SizedBox), findsNWidgets(6));
+    expect(find.byType(SizedBox), findsNWidgets(4));
     expect( find.byType(Text), findsNWidgets(4));
     expect(find.byType(ElevatedButton), findsOneWidget);
     expect(find.byType(OutlinedButton), findsOneWidget);

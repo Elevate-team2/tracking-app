@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 
 
-abstract class AppTheme {
+ class AppTheme {
   static ThemeData getTheme(ColorScheme colors) {
     return ThemeData(
       colorScheme: colors,
@@ -25,11 +25,12 @@ abstract class AppTheme {
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius:BorderRadius.circular(20)),
           backgroundColor: AppColors.pink[50],
           foregroundColor: AppColors.white,
           textStyle: GoogleFonts.roboto(
-            fontSize: 20,
+           // fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
         ),

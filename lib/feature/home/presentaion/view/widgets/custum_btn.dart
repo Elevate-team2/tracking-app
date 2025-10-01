@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/enums/address_type.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -24,8 +26,8 @@ class CustumBtn extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "EGP ${order.orderInfoEntity.totalPrice}",
-            style: getBoldStyle(color: AppColors.black, fontSize: FontSize.s18),
+            " ${context.loc.egp} ${order.orderInfoEntity.totalPrice}",
+            style: getBoldStyle(color: AppColors.black, fontSize: context.setSp(FontSize.s18)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -38,10 +40,10 @@ class CustumBtn extends StatelessWidget {
                _homeViewModel.add(DeleteOrderLocalyEvent(order.id));
             },
             child: Text(
-              "Reject",
+              context.loc.reject,
               style: getRegularStyle(
                 color: AppColors.pink,
-                fontSize: FontSize.s18,
+                fontSize: context.setSp(FontSize.s16),
               ),
             ),
           ),
@@ -65,13 +67,19 @@ class CustumBtn extends StatelessWidget {
                   role: "driver",
                   createdAt: "2025-01-01T10:00:00.000Z",
                 ),
-                order.copyWith(state: OrderStates.inProgress.name),
+                order.copyWith(orderInfoEntity: order.orderInfoEntity.copyWith(state: OrderStates.inProgress.name)),
               );
 
               _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
               // _homeViewModel.add(StartOrderEvent(order.id));
             },
-            child: const Text("Accept"),
+            child:Text(
+              context.loc.accept,
+              style: getRegularStyle(
+                color: AppColors.white,
+                fontSize: context.setSp(FontSize.s16),
+              ),
+            ),
           ),
         ],
       ),

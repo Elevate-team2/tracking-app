@@ -9,4 +9,5 @@ abstract class AppRoute {
   static const String onBoarding= "onBoarding";
  //ApplyScreen
  static  const applyScreen="ApplyScreen";
+
 }

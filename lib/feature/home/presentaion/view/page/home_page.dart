@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
@@ -29,10 +30,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
+          padding:  EdgeInsets.symmetric(horizontal: context.setWidth(18)),
           child: Text(
-            "Flowery rider",
-            style: getLightStyle(color: AppColors.pink, fontSize: FontSize.s24),
+            context.loc.floweryRider,
+            style: getLightStyle(color: AppColors.pink, fontSize:context.setSp( FontSize.s24)),
           ),
         ),
       ),
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox(
             height: context.setHight(650),
             child: Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding:  EdgeInsets.all(context.setWidth(18)),
               child: BlocProvider.value(
                 value: _homeViewModel..add(GetOrdersEvent()),
                 child: BlocConsumer<HomeViewModel, HomeStates>(
@@ -57,8 +58,8 @@ class _HomePageState extends State<HomePage> {
 
                       //Navigator to anthor page
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("process completed successfully"),
+                         SnackBar(
+                          content: Text(context.loc.processCompletedSuccessfully),
                         ),
                       );
                       state.copyWith(processCompleted: null);
@@ -78,16 +79,16 @@ class _HomePageState extends State<HomePage> {
 
                     if (state.orders != null) {
                       if (state.orders!.isEmpty) {
-                        return const CustumError(
-                          errorMessage: "No Orders Found",
+                        return  CustumError(
+                          errorMessage: context.loc.noOrdersFound,
                         );
                       }
 
                       return OrderCards(orders: state.orders!);
                     }
 
-                    return const CustumError(
-                      errorMessage: "unExpected Error found",
+                    return  CustumError(
+                      errorMessage: context.loc.unExpectedErrorfound,
                     );
                   },
                 ),

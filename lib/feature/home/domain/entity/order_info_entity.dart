@@ -1,5 +1,5 @@
 class OrderInfoEntity {
-   final int totalPrice;
+  final int totalPrice;
   final bool isDelivered;
   final String state;
   final String orderNumber;
@@ -13,6 +13,27 @@ class OrderInfoEntity {
     this.orderNumber,
     this.createdAt,
     this.updatedAt,
-    this.v, this.totalPrice,
+    this.v,
+    this.totalPrice,
   );
+
+  OrderInfoEntity copyWith({
+    int? totalPrice,
+    bool? isDelivered,
+    String? state,
+    String? orderNumber,
+    String? createdAt,
+    String? updatedAt,
+    int? v,
+  }) {
+    return OrderInfoEntity(
+      isDelivered ?? this.isDelivered,
+      state ?? this.state,
+      orderNumber ?? this.orderNumber,
+      createdAt ?? this.createdAt,
+      updatedAt ?? this.updatedAt,
+      v ?? this.v,
+      totalPrice ?? this.totalPrice,
+    );
+  }
 }

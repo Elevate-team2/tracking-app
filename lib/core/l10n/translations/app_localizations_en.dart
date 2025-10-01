@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noRouteFound => 'No Route Found';
 
   @override
-  String get email => 'E-mail';
+  String get email => 'Email';
 
   @override
   String get password => 'Password';
@@ -102,7 +102,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Thank you for providing your application, we will review your application and will get back to you soon.';
 
   @override
-  String get welcome => 'Welcome to';
+  String get welcome => 'Welcome!!';
 
   @override
   String get flowery => 'Flowery rider app';
@@ -118,4 +118,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get welcomText => 'Welcome to\nFlowery rider app';
+
+  @override
+  String get questionInRegister =>
+      'You want to be a delivery man?\nJoin our team';
+
+  @override
+  String get country => 'Country';
+
+  @override
+  String get firstnameLabel => 'First legal name';
+
+  @override
+  String get secondnameLabel => 'Second legal name';
+
+  @override
+  String get vehicleType => 'Vehicle Type';
+
+  @override
+  String get vehicleTypeFieldError => 'Please select vehicle type';
+
+  @override
+  String get vehicleNumber => 'Vehicle number';
+
+  @override
+  String get uploadLicense => 'Upload license photo';
+
+  @override
+  String get phone => 'Phone number';
+
+  @override
+  String get nid => 'ID number';
+
+  @override
+  String get uploadNid => 'Upload ID image';
+
+  @override
+  String get rePassword => 'Confirm password';
+
+  @override
+  String get passwordTooShort => 'Min 6 chars';
+
+  @override
+  String get passwordNotMatch => 'Passwords do not match';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get female => 'Female';
+
+  @override
+  String get male => 'Male';
+
+  @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get pleaseUploadBothImages => 'Please upload both images';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get sucessApply => 'sucess Apply';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get vehicleNumberRequired => 'Vehicle Number Required';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
+  String get update => 'Update';
 }

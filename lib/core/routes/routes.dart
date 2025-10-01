@@ -10,34 +10,33 @@ import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 
-
 abstract class Routes {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   static Route onGenerate(RouteSettings settings) {
-    final url = Uri.parse(settings.name ??   '/');
+    final url = Uri.parse(settings.name ?? '/');
 
     switch (url.path) {
-
       case AppRoute.home:
-       return MaterialPageRoute(
+        return MaterialPageRoute(
           builder: (context) {
-
-            return const  AppSection();
+            return const AppSection();
           },
         );
 
+      case (AppRoute.loginRoute):
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
 
-case (AppRoute.loginRoute):
-  return MaterialPageRoute(builder: (context)=>
-  const   LoginScreen());
-  
       case (AppRoute.onBoarding):
-        return MaterialPageRoute(builder: (context)=>
-        const    OnBoarddingScreen());
+        return MaterialPageRoute(
+          builder: (context) => const OnBoarddingScreen(),
+        );
 
       case AppRoute.forgetPasswordScreen:
-       return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
+        return MaterialPageRoute(
+          builder: (context) => const ForgetPasswordScreen(),
+        );
 
       case AppRoute.verifyCodeScreen:
         final email = settings.arguments as String;
@@ -51,17 +50,16 @@ case (AppRoute.loginRoute):
           builder: (context) => ResetPasswordScreen(email: email),
         );
 
-        case AppRoute.approveScreen:
-      return MaterialPageRoute(
+      case AppRoute.approveScreen:
+        return MaterialPageRoute(
           builder: (context) {
-            return const  ApproveScreen();
+            return const ApproveScreen();
           },
         );
 
-        case (AppRoute.applyScreen):
+      case (AppRoute.applyScreen):
         return MaterialPageRoute(
           builder: (context) {
-
             return const ApplyScreen();
           },
         );
@@ -69,8 +67,9 @@ case (AppRoute.loginRoute):
       default:
         return MaterialPageRoute(
           builder: (context) {
-
-            return Scaffold(body: Center(child: Text(context.loc.noRouteFound)));
+            return Scaffold(
+              body: Center(child: Text(context.loc.noRouteFound)),
+            );
           },
         );
     }
