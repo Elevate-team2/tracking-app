@@ -443,8 +443,32 @@ abstract class AppLocalizations {
   /// No description provided for @sucessApply.
   ///
   /// In en, this message translates to:
-  /// **'sucessApply'**
+  /// **'sucess Apply'**
   String get sucessApply;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @vehicleNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Number Required'**
+  String get vehicleNumberRequired;
+
+  /// No description provided for @vehicleLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License'**
+  String get vehicleLicense;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
 }
 
 class _AppLocalizationsDelegate

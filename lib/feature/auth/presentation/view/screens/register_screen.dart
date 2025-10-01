@@ -102,7 +102,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
             Expanded(
               child: file == null
                   ? Text(label, style: const TextStyle(color: Colors.grey))
-                  : Image.file(file, height: 60, fit: BoxFit.cover),
+                  : Image.file(file, height: 60,
+                  fit: BoxFit.cover),
             ),
             const Icon(Icons.upload, color: Colors.black54),
           ],

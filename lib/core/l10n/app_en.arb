@@ -66,11 +66,12 @@
   "continueBtn": "Continue",
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
-  "sucessApply":"sucessApply"
+  "sucessApply":"sucess Apply",
+  "editProfile": "Edit profile",
+"vehicleNumberRequired": "Vehicle Number Required",
+  "vehicleLicense": "Vehicle License",
 
-
-    
-  
+  "update": "Update"
 
 
 

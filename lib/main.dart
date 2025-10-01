@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
-            initialRoute: initialRoute,
+            initialRoute: AppRoute.editVehicleInfoScreen,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

@@ -184,5 +184,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get required => 'Required';
 
   @override
-  String get sucessApply => 'sucessApply';
+  String get sucessApply => 'sucess Apply';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get vehicleNumberRequired => 'Vehicle Number Required';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
+  String get update => 'Update';
 }

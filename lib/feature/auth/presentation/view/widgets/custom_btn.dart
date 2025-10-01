@@ -13,6 +13,11 @@ class CustomBtn extends StatelessWidget {
     return ElevatedButton(
         style:ElevatedButton.styleFrom(
             backgroundColor: bg,
+            textStyle: const TextStyle(
+              inherit: false,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
             foregroundColor: AppColors.white,
             fixedSize: Size(MediaQuery.of(context).size.width, 50),
             shape: RoundedRectangleBorder(
@@ -20,8 +25,6 @@ class CustomBtn extends StatelessWidget {
             )
         ) ,
         onPressed: onPressed,
-        child: Text(txt,style: getMediumStyle(
-            fontSize: 16.0,
-            color: AppColors.white),));
+        child: Text(txt));
   }
 }

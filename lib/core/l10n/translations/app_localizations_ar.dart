@@ -184,4 +184,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sucessApply => 'نجحت عمليه التسجيل';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصى ';
+
+  @override
+  String get vehicleNumberRequired => 'مطلوب رقم المركبة ';
+
+  @override
+  String get vehicleLicense => 'رخصة القيادة ';
+
+  @override
+  String get update => 'تحديث ';
 }

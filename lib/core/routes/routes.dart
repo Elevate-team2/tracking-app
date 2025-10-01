@@ -9,6 +9,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/approve_scre
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 
 
 abstract class Routes {
@@ -35,6 +36,9 @@ case (AppRoute.loginRoute):
       case (AppRoute.onBoarding):
         return MaterialPageRoute(builder: (context)=>
         const    OnBoarddingScreen());
+      case (AppRoute.editVehicleInfoScreen):
+        return MaterialPageRoute(builder: (context)=>
+        const    EditVehicleInfo());
 
       case AppRoute.forgetPasswordScreen:
        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
