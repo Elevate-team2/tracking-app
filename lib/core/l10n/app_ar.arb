@@ -68,10 +68,16 @@
   "pleaseUploadBothImages": "من فضلك ارفع الصورتين",
   "required": "مطلوب",
    "sucessApply":"نجحت عمليه التسجيل",
+    "editProfileTitle": "تعديل الملف الشخصي",
+     "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+     "noChanges": "لا يوجد تغييرات",
+     "update": "تحديث",
+     "changePassword": "تغيير كلمة المرور",
+     "noImageSelected": "لم يتم اختيار صورة",
+     "failedToPickImage": "فشل في اختيار الصورة",
 "editProfile": "تعديل الملف الشخصى ",
   "vehicleNumberRequired": "مطلوب رقم المركبة ",
   "vehicleLicense": "رخصة القيادة ",
-  "update": "تحديث "
 
 
 

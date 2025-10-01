@@ -66,12 +66,17 @@
   "continueBtn": "Continue",
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
-  "sucessApply":"sucess Apply",
-  "editProfile": "Edit profile",
+  "sucessApply":"sucessApply",
+  "editProfileTitle": "Edit profile",
+    "profileUpdated": "Profile updated successfully",
+    "noChanges": "No changes detected",
+    "update": "Update",
+    "changePassword": "Change password",
+    "noImageSelected": "No image selected",
+    "failedToPickImage": "Failed to pick image",
 "vehicleNumberRequired": "Vehicle Number Required",
   "vehicleLicense": "Vehicle License",
 
-  "update": "Update"
 
 
 

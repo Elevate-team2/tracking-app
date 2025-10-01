@@ -18,4 +18,15 @@ class EditBtnSubmitEvent extends EditProfileEvent{
   List<Object?> get props => [request];
 }
 
+class PickImageEvent extends EditProfileEvent {
+  final ImageSource source;
+  PickImageEvent(this.source);
+
+  @override
+  List<Object?> get props => [source];
+}
+
+
+
+
 

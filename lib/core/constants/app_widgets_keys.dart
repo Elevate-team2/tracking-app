@@ -43,6 +43,30 @@ abstract class AppWidgetsKeys {
   static const String alignKey1 = "align1";
   static const String ceenterKey1 = "center1";
 
+  // edit profile
+  static const editProfileAppBar = 'editProfileAppBar';
+  static const backButton = 'backButton';
+  static const profilePhoto = 'profilePhoto';
+  static const firstNameField = 'firstNameField';
+  static const lastNameField = 'lastNameField';
+  static const emailField = 'emailField';
+  static const phoneField = 'phoneField';
+  static const passwordField = 'passwordField';
+  static const changePasswordButton = 'changePasswordButton';
+  static const genderSection = 'genderSection';
+  static const editButton = 'editBtn';
+  static const noChangesSnackBar = 'noChangesSnackBar';
+  static const profileUpdatedSnackBar = 'profileUpdatedSnackBar';
+  static const errorSnackBarEditProfile = 'editProfileErrorSnackBar';
+
+  //gender section
+ static const femaleRadio="femaleRadio";
+  static const maleRadio="maleRadio";
+
+  //photo section
+ static const photoStack="photoStack";
+ static const photoAvatar="photoAvatar";
+ static const photoSelectIcon="photoSelectIcon";
 
 
 }

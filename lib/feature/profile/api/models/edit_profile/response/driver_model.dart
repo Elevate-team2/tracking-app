@@ -1,64 +1,42 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-part 'driver_model.g.dart';
+import 'package:tracking_app/feature/profile/api/models/driver_contact_info.dart';
+import 'package:tracking_app/feature/profile/api/models/driver_info.dart';
+import 'package:tracking_app/feature/profile/api/models/location_info.dart';
+import 'package:tracking_app/feature/profile/api/models/nid_info.dart';
+import 'package:tracking_app/feature/profile/api/models/vehicle_info.dart';
+import 'package:tracking_app/feature/profile/domain/entity/driver_all_info_entity.dart';
 
-@JsonSerializable()
 class DriverModel {
-  @JsonKey(name: JsonSerlizationConstants.country)
-  final String? country;
-  @JsonKey(name: JsonSerlizationConstants.firstName)
-  final String? firstName;
-  @JsonKey(name: JsonSerlizationConstants.lastName)
-  final String? lastName;
-  @JsonKey(name: JsonSerlizationConstants.vehicleType)
-  final String? vehicleType;
-  @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
-  final String? vehicleNumber;
-  @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
-  final String? vehicleLicense;
-  @JsonKey(name: JsonSerlizationConstants.nid)
-  final String? nId;
-  @JsonKey(name: JsonSerlizationConstants.nidImg)
-  final String? nIdImg;
-  @JsonKey(name: JsonSerlizationConstants.email)
-  final String? email;
-  @JsonKey(name: JsonSerlizationConstants.gender)
-  final String? gender;
-  @JsonKey(name: JsonSerlizationConstants.phone)
-  final String? phone;
-  @JsonKey(name: JsonSerlizationConstants.photo)
-  final String? photo;
-  @JsonKey(name: JsonSerlizationConstants.role)
-  final String? role;
-  @JsonKey(name: JsonSerlizationConstants.id)
-  final String? id;
-  @JsonKey(name: JsonSerlizationConstants.createdAt)
-  final String? createdAt;
+  final DriverInfo? info;
+  final DriverContactInfo? contact;
+  final VehicleInfo? vehicle;
+  final LocationInfo? location;
+  final NationalIdInfo? nid;
 
-  DriverModel ({
-    this.country,
-    this.firstName,
-    this.lastName,
-    this.vehicleType,
-    this.vehicleNumber,
-    this.vehicleLicense,
-    this.nId,
-    this.nIdImg,
-    this.email,
-    this.gender,
-    this.phone,
-    this.photo,
-    this.role,
-    this.id,
-    this.createdAt,
+  DriverModel({
+    this.info,
+    this.contact,
+    this.vehicle,
+    this.location,
+    this.nid,
   });
 
   factory DriverModel.fromJson(Map<String, dynamic> json) {
-    return _$DriverModelFromJson(json);
+    return DriverModel(
+      info: DriverInfo.fromJson(json),
+      contact: DriverContactInfo.fromJson(json),
+      vehicle: VehicleInfo.fromJson(json),
+      location: LocationInfo.fromJson(json),
+      nid: NationalIdInfo.fromJson(json),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    return _$DriverModelToJson(this);
+  DriverAllInfoEntity toEntity() {
+    return DriverAllInfoEntity(
+      info: info?.toEntity(),
+      contact: contact?.toEntity(),
+      vehicle: vehicle?.toEntity(),
+      location: location?.toEntity(),
+      nid: nid?.toEntity(),
+    );
   }
-
 }

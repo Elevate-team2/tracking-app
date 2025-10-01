@@ -1,105 +1,99 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
-
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
+import '../../../../../domain/entity/driver_entity.dart';
 
 part 'apply_response.g.dart';
 
 @JsonSerializable()
 class ApplyResponse {
-  @JsonKey(name: "message")
+  @JsonKey(name: JsonSerlizationConstants.message)
   final String? message;
-  @JsonKey(name: "driver")
+  @JsonKey(name: JsonSerlizationConstants.driver)
   final Driver? driver;
-  @JsonKey(name: "token")
+  @JsonKey(name: JsonSerlizationConstants.token)
   final String? token;
 
-  ApplyResponse ({
-    this.message,
-    this.driver,
-    this.token,
-  });
+  ApplyResponse({this.message, this.driver, this.token});
 
-  factory ApplyResponse.fromJson(Map<String, dynamic> json) {
-    return _$ApplyResponseFromJson(json);
-  }
+  factory ApplyResponse.fromJson(Map<String, dynamic> json) =>
+      _$ApplyResponseFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return _$ApplyResponseToJson(this);
-  }
+  Map<String, dynamic> toJson() => _$ApplyResponseToJson(this);
 }
 
 @JsonSerializable()
 class Driver {
-  @JsonKey(name: "country")
+  @JsonKey(name: JsonSerlizationConstants.country)
   final String? country;
-  @JsonKey(name: "firstName")
+  @JsonKey(name: JsonSerlizationConstants.firstName)
   final String? firstName;
-  @JsonKey(name: "lastName")
+  @JsonKey(name: JsonSerlizationConstants.lastName)
   final String? lastName;
-  @JsonKey(name: "vehicleType")
+  @JsonKey(name: JsonSerlizationConstants.vehicleType)
   final String? vehicleType;
-  @JsonKey(name: "vehicleNumber")
+  @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
   final String? vehicleNumber;
-  @JsonKey(name: "vehicleLicense")
+  @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
   final String? vehicleLicense;
-  @JsonKey(name: "NID")
-  final String? NID;
-  @JsonKey(name: "NIDImg")
-  final String? NIDImg;
-  @JsonKey(name: "email")
+  @JsonKey(name: JsonSerlizationConstants.nid)
+  final String? nId;
+  @JsonKey(name: JsonSerlizationConstants.nidImg)
+  final String? nIdImg;
+  @JsonKey(name: JsonSerlizationConstants.email)
   final String? email;
-  @JsonKey(name: "gender")
+  @JsonKey(name: JsonSerlizationConstants.gender)
   final String? gender;
-  @JsonKey(name: "phone")
+  @JsonKey(name: JsonSerlizationConstants.phone)
   final String? phone;
-  @JsonKey(name: "photo")
+  @JsonKey(name: JsonSerlizationConstants.photo)
   final String? photo;
-  @JsonKey(name: "role")
+  @JsonKey(name: JsonSerlizationConstants.role)
   final String? role;
-  @JsonKey(name: "_id")
-  final String? Id;
-  @JsonKey(name: "createdAt")
+  @JsonKey(name: JsonSerlizationConstants.id)
+  final String? id;
+  @JsonKey(name: JsonSerlizationConstants.createdAt)
   final String? createdAt;
 
-  Driver ({
+  Driver({
     this.country,
     this.firstName,
     this.lastName,
     this.vehicleType,
     this.vehicleNumber,
     this.vehicleLicense,
-    this.NID,
-    this.NIDImg,
+    this.nId,
+    this.nIdImg,
     this.email,
     this.gender,
     this.phone,
     this.photo,
     this.role,
-    this.Id,
+    this.id,
     this.createdAt,
   });
 
-  factory Driver.fromJson(Map<String, dynamic> json) {
-    return _$DriverFromJson(json);
-  }
+  factory Driver.fromJson(Map<String, dynamic> json) =>
+      _$DriverFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return _$DriverToJson(this);
-  }
-  DriverEntity toEntity(){
-    return DriverEntity(id: Id!,
-        country: country!,
-        firstName: firstName!,
-        lastName: lastName!,
-        vehicleType: vehicleType!,
-        vehicleNumber: vehicleNumber!,
-        vehicleLicense: vehicleLicense!,
-        nid: NID!,
-        nidImg: NIDImg!, email: email!, gender: gender!,
-        phone: phone!,
-        photo: photo!,
-        role: role!,
-        createdAt: createdAt!);
+  Map<String, dynamic> toJson() => _$DriverToJson(this);
+
+  DriverEntity toEntity() {
+    return DriverEntity(
+      id: id!,
+      country: country!,
+      firstName: firstName!,
+      lastName: lastName!,
+      vehicleType: vehicleType!,
+      vehicleNumber: vehicleNumber!,
+      vehicleLicense: vehicleLicense!,
+      nid: nId!,
+      nidImg: nIdImg!,
+      email: email!,
+      gender: gender!,
+      phone: phone!,
+      photo: photo!,
+      role: role!,
+      createdAt: createdAt!,
+    );
   }
 }
-
