@@ -1,10 +1,13 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/profile/api/models/driver_contact_info.dart';
 import 'package:tracking_app/feature/profile/api/models/driver_info.dart';
 import 'package:tracking_app/feature/profile/api/models/location_info.dart';
 import 'package:tracking_app/feature/profile/api/models/nid_info.dart';
 import 'package:tracking_app/feature/profile/api/models/vehicle_info.dart';
 import 'package:tracking_app/feature/profile/domain/entity/driver_all_info_entity.dart';
+part 'driver_model.g.dart';
 
+@JsonSerializable()
 class DriverModel {
   final DriverInfo? info;
   final DriverContactInfo? contact;
