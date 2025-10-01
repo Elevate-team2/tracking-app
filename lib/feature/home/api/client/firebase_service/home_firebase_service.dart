@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/constants/constants.dart';
-import 'package:tracking_app/feature/home/remote/models/remote_data_model.dart';
-// import 'todo_model.dart';
-
-
+import 'package:tracking_app/feature/home/api/models/remote_data_model.dart';
 
 @injectable
 class HomeFirebaseService {
