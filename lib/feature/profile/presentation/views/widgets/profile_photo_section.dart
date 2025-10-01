@@ -20,6 +20,17 @@ class ProfilePhotoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ImageProvider backgroundImage;
+
+    if (selectedPhoto != null) {
+      backgroundImage = FileImage(selectedPhoto!);
+    } else if (photoUrl?.isNotEmpty ?? false) {
+      backgroundImage = NetworkImage(photoUrl!);
+    } else {
+      backgroundImage = const AssetImage(ImgAssets.defaultUserPhoto);
+    }
+
     return Stack(
       key: const Key(AppWidgetsKeys.photoStack),
       alignment: Alignment.bottomRight,
@@ -27,11 +38,7 @@ class ProfilePhotoSection extends StatelessWidget {
         CircleAvatar(
           key: const Key(AppWidgetsKeys.photoAvatar),
           radius: context.setWidth(60),
-          backgroundImage: selectedPhoto != null
-              ? FileImage(selectedPhoto!)
-              : (photoUrl?.isNotEmpty ?? false)
-              ? NetworkImage(photoUrl!)
-              : const AssetImage(ImgAssets.defaultUserPhoto) as ImageProvider,
+          backgroundImage: backgroundImage,
           backgroundColor: AppColors.white,
         ),
         IconButton(
