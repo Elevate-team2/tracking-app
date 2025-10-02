@@ -469,6 +469,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update'**
   String get update;
+
+  /// No description provided for @floweryRider.
+  ///
+  /// In en, this message translates to:
+  /// **'Flowery rider'**
+  String get floweryRider;
+
+  /// No description provided for @processCompletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'process completed successfully'**
+  String get processCompletedSuccessfully;
+
+  /// No description provided for @noOrdersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Orders Found'**
+  String get noOrdersFound;
+
+  /// No description provided for @unExpectedErrorfound.
+  ///
+  /// In en, this message translates to:
+  /// **'unExpected Error found'**
+  String get unExpectedErrorfound;
+
+  /// No description provided for @flowerOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Flower order'**
+  String get flowerOrder;
+
+  /// No description provided for @pickupAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup address'**
+  String get pickupAddress;
+
+  /// No description provided for @userAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'User address'**
+  String get userAddress;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @orderDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order details'**
+  String get orderDetailsTitle;
+
+  /// No description provided for @arrivedAtPickupPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived at Pickup point'**
+  String get arrivedAtPickupPoint;
+
+  /// No description provided for @startDeliver.
+  ///
+  /// In en, this message translates to:
+  /// **'Start deliver'**
+  String get startDeliver;
+
+  /// No description provided for @arrivedToUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived to User'**
+  String get arrivedToUser;
+
+  /// No description provided for @deliverToUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to the user'**
+  String get deliverToUser;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get paymentMethod;
+
+  /// No description provided for @statusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status :'**
+  String get statusLabel;
+
+  /// No description provided for @orderIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID :'**
+  String get orderIdLabel;
 }
 
 class _AppLocalizationsDelegate

@@ -42,3 +42,15 @@ class GetDataFromRemoteEvent extends HomeEvents {
   String orderId;
   GetDataFromRemoteEvent(this.orderId);
 }
+
+class CallUserEvent extends HomeEvents {
+  final String phoneNumber;
+  CallUserEvent(this.phoneNumber);
+}
+
+class WhatsAppUserEvent extends HomeEvents {
+  final String phoneNumber;
+  final String? message;
+  WhatsAppUserEvent(this.phoneNumber, {this.message});
+}
+

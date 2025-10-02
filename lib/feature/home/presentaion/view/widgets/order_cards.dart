@@ -82,9 +82,17 @@ class MyOrderCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                AddressContainer(AddressType.store, context.loc.pickupAddress, order),
+                AddressContainer(
+                  addressType: AddressType.store,
+                  containerName:context.loc.pickupAddress,
+                  orderEntity:order,
+                  fromOrderDetails: false,),
                  SizedBox(height:context.setHight(15) ),
-                AddressContainer(AddressType.user,context.loc.userAddress,order),
+                AddressContainer(
+                  addressType:AddressType.user,
+                  containerName: context.loc.userAddress,
+                  orderEntity:order,
+                  fromOrderDetails: false,),
           
                 SizedBox(height:context.setHight(10) ),
           

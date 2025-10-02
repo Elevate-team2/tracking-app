@@ -7,6 +7,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
+import 'package:tracking_app/feature/home/presentaion/view/page/order_details_screen.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 
@@ -63,6 +64,13 @@ abstract class Routes {
             return const ApplyScreen();
           },
         );
+
+      case AppRoute.orderDetails:
+        final orderId = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (context) {
+              return OrderDetailsScreen(orderId: orderId);
+            },);
 
       default:
         return MaterialPageRoute(

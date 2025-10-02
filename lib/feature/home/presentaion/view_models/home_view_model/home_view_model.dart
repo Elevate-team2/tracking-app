@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/start_order_response_entity.dart';
@@ -13,6 +14,7 @@ import 'package:tracking_app/feature/home/domain/usecase/save_data_to_local.dart
 import 'package:tracking_app/feature/home/domain/usecase/update_order_state.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_states.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @singleton
 class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
@@ -42,6 +44,8 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     on<AddDataToRemoteEvent>(_addDataToRemote);
     on<StartProgressEvnet>(_startOrderProcess);
     on<GetDataFromRemoteEvent>(_getDataFromRemote);
+    on<CallUserEvent>(_callUser);
+    on<WhatsAppUserEvent>(_openWhatsApp);
   }
 
   // add to firebase
@@ -91,6 +95,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
                     isLoading: false,
                     orders: ordersRes.sucessResult,
                     processCompleted: true,
+                    remoteData: event.remoteDataEntity,
                   ),
                 );
 
@@ -260,4 +265,32 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       },
     );
   }
+
+  Future<void> _callUser(
+      CallUserEvent event, Emitter<HomeStates> emit) async {
+    final Uri uri = Uri(scheme: 'tel', path: "0${event.phoneNumber}");
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      emit(state.copyWith(errorMessage: Constants.callError));
+    }
+  }
+
+  Future<void> _openWhatsApp(
+      WhatsAppUserEvent event, Emitter<HomeStates> emit) async {
+    final phone = event.phoneNumber.startsWith("0")
+        ? "2${event.phoneNumber.substring(1)}"
+        : event.phoneNumber;
+
+    final Uri uri = Uri.parse(
+      "https://wa.me/$phone${event.message != null ? "?text=${Uri.encodeComponent(event.message!)}" : ""}",
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      emit(state.copyWith(errorMessage: Constants.whatsAppError));
+    }
+  }
+
 }
