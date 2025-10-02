@@ -3,7 +3,6 @@
 //     final getLoggedUserResponse = getLoggedUserResponseFromJson(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
 
 import 'package:tracking_app/feature/auth/api/models/apply/response/apply_response/apply_response.dart';
 

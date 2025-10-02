@@ -1,41 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_state.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/custom_logout_row.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/custom_row.dart';
-import 'package:tracking_app/feature/profile/presentation/views/widgets/details_widget.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/profile_container.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/personal_info_card.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/vechical_info_card.dart';
 
 import '../../../../../core/constants/constants.dart';
-import '../widgets/Vehicle_Details_Widget.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ProfileBloc _profileBloc = getIt.get<ProfileBloc>();
+
+  @override
+  void initState() {
+    _profileBloc.add(GetLoggedDriverEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar:
-      AppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: IconButton(
-          icon:  Icon(Icons.arrow_back, color:Theme.of(context).appBarTheme.iconTheme?.color),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Profile', style: Theme.of(context).appBarTheme.titleTextStyle),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        title: const Text('Profile'),
         actions: [
           IconButton(
-            icon:  Icon(Icons.notifications_none_outlined, color:Theme.of(context).appBarTheme.iconTheme?.color),
+            icon: Icon(
+              Icons.notifications_none_outlined,
+              color: Theme.of(context).appBarTheme.iconTheme?.color,
+            ),
             onPressed: () {
               // Handle settings action
             },
           ),
         ],
       ),
-      body: Column(
-        children: [
-          DriverDetailsWidget(title: "ahmed", detail:"ahmed@gmail.com", number: "01023456789", imagePath: "assets/images/profile.png"),
-         VehicleDetailsWidget(title: "Vehicle", detail:"Truck", number: "12345"),
-          CustomLanguageRow(svgPath:Constants.languageicon , title: "Language", detail: "English"),
-          CustomLogoutRow(title: "Logout"),
-        ],
+
+      body: BlocProvider.value(
+        value: _profileBloc,
+        child: BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state.driver != null) {
+              final DriverEntity driver = state.driver!;
+              return Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    ProfileContainer(
+                      containerChild: PersonalInfoCard(driverEntity: driver),
+                    ),
+                    ProfileContainer(
+                      containerChild: VechicalInfoCard(driverEntity: driver),
+                    ),
+                    CustomLanguageRow(
+                      svgPath: Constants.languageicon,
+                      title: "Language",
+                      detail: "English",
+                    ),
+                    CustomLogoutRow(title: "Logout"),
+                  ],
+                ),
+              );
+            }
+            if (state.errorMessage != null) {
+              return Center(child: Text(state.errorMessage!));
+            }
+            return const SizedBox(child: Text("oops"));
+          },
+        ),
       ),
     );
   }

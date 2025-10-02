@@ -4,6 +4,7 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/home_page.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/order_page.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/profile_page.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 
 class AppSection extends StatefulWidget {
   const AppSection({super.key});
@@ -39,7 +40,7 @@ class _AppSectionState extends State<AppSection> {
           });
         },
 
-        children: const [HomePage(), OrderPage(), ProfilePage()],
+        children: const [HomePage(), OrderPage(), ProfileScreen()],
       ),
 
       bottomNavigationBar: BottomNavigationBar(

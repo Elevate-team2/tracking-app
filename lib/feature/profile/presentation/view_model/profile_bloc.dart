@@ -18,16 +18,19 @@
 // }
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/get_logged_driver.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_state.dart';
 
+
+@injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetLoggedDriverUseCase _getLoggedDriverUseCase;
 
-  ProfileBloc(this._getLoggedDriverUseCase) : super(ProfileState()) {
+  ProfileBloc(this._getLoggedDriverUseCase) : super(const ProfileState()) {
     on<GetLoggedDriverEvent>(_getLoggedDriver);
   }
 

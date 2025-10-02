@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CustomLogoutRow extends StatelessWidget{
 
@@ -7,18 +6,21 @@ class CustomLogoutRow extends StatelessWidget{
   CustomLogoutRow({super.key,required this.title});
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(Icons.logout, size: 20, color: Theme.of(context).iconTheme.color),
-        SizedBox(width: 5),
-        Text(
-          // AppLocalizations.of(context)!.language,
-          title,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const Spacer(),
-        Icon(Icons.logout, size: 40, color: Theme.of(context).iconTheme.color),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Icon(Icons.logout, size: 15,color: Theme.of(context).iconTheme.color),
+          const SizedBox(width: 5),
+          Text(
+            // AppLocalizations.of(context)!.language,
+            title,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const Spacer(),
+          Icon(Icons.logout, color: Theme.of(context).iconTheme.color),
+        ],
+      ),
     );
   }
 

@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:tracking_app/core/constants/end_points_constants.dart';
-import 'package:tracking_app/feature/profile/api/models/driver_contact_info.dart';
-import 'package:tracking_app/feature/profile/api/models/driver_info.dart';
 import 'package:tracking_app/feature/profile/api/models/get_logged_user_response.dart';
-import 'package:tracking_app/feature/profile/api/models/vehicle_info.dart';
 
 part 'profile_api_services.g.dart';
 
