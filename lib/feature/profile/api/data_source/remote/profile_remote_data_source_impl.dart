@@ -39,9 +39,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   
   }
 
- 
-}
-
   @override
   Future<Result<String>> uploadDriverPhoto(File photo) async {
     return safeCall(
@@ -51,10 +48,11 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<Result<EditProfileEntity>> editProfile(EditProfileRequest request) {
-   return safeCall(() async {
+    return safeCall(() async {
       final response = await _profileApiServices.editProfile(request);
       return response.toEntity();
     });
   }
-
+ 
 }
+

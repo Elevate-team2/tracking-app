@@ -1,9 +1,5 @@
 {
     "@@locale": "ar",
-    "noRouteFound":"لا يوجد صفحه بهذا الاسم",
-     "email": "البريد الإلكتروني",
-      "password": "كلمة المرور",
-      "forgetPassword": "نسيت كلمة المرور",
       "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
       "enterEmail": "أدخل بريدك الإلكتروني",
       "confirm": "تأكيد",
@@ -13,8 +9,8 @@
       "verify": "تحقق",
       "didNotReceiveCode": "لم يصلك الرمز؟",
       "resend": "إعادة إرسال",
-      "success": "تم بنجاح ✅",
-      "error": "خطأ ❌",
+      "success": "تم بنجاح :white_check_mark:",
+      "error": "خطأ :x:",
       "resetPasswordTitle": "إعادة تعيين كلمة المرور",
       "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
       "newPassword": "كلمة المرور الجديدة",
@@ -25,24 +21,18 @@
     "noRouteFound":"لا يوجد صفحه بهذا الاسم",
     "enterYourEmail": "ادخل بريدك الالكترونى",
     "enterYourPassword": "ادخل كلمة المرور",
-    "email": "البريد الالكترونى",
-    "password": "كلمة المرور",
     "login": "تسجيل الدخول",
     "continue1": "المتابعة",
     "forgetPassword": "هل نسيت كلمة السر",
     "rememberMe": "ذكرنى",
-    "successLogin": "✅ تم تسجيل الدخول بنجاح",
+    "successLogin": ":white_check_mark: تم تسجيل الدخول بنجاح",
     "submitted": "تم إرسال طلبك بنجاح!",
     "thankYou": "شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.",
-    "welcome": "مرحباً بك في",
     "flowery": "تطبيق فلاورى للركاب",
-    "apply": "تقديم طلب",
     "home":"الرئيسية",
     "orders":"الطلبات",
     "profile":"الملف الشخصي",
      "welcomText":"مرحبا بكم \n في تطبيق الارسال",
-     
-   
   "apply": "تسجيل",
   "welcome": "أهلاً بيك!!",
   "questionInRegister": "عايز تبقى دليفري؟\nانضم لينا",
@@ -52,8 +42,6 @@
   "vehicleType": "نوع المركبة",
   "vehicleTypeFieldError": "من فضلك اختر نوع المركبة",
   "vehicleNumber": "رقم المركبة",
-  "vehicleNumberRequired": "مطلوب رقم المركبة",
-  "vehicleLicense": "رخصة القيادة",
   "uploadLicense": "ارفع صورة الرخصة",
   "email": "الإيميل",
   "phone": "رقم التليفون",
@@ -69,26 +57,13 @@
   "continueBtn": "متابعة",
   "pleaseUploadBothImages": "من فضلك قم برفع الصورتين",
   "required": "مطلوب",
-   "sucessApply":"نجحت عمليه التسجيل",
-   
   "logout": "تسجيل الخروج",
   "english": "الإنجليزية",
   "arabic": "العربية",
   "language": "اللغة",
   "confirmLogout": "تأكيد تسجيل الخروج",
   "cancel": "إلغاء",
-  "vehicalInfo": "معلومات المركبة"
-
-
-
-
-
-
-    
-
-
-}
-  "update": "تحديث",
+  "vehicalInfo": "معلومات المركبة",
    "sucessApply":"نجحت عمليه التسجيل",
     "editProfileTitle": "تعديل الملف الشخصي",
      "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
@@ -99,5 +74,4 @@
      "failedToPickImage": "فشل في اختيار الصورة",
   "vehicleNumberRequired": "مطلوب رقم المركبة ",
   "vehicleLicense": "رخصة القيادة "
-
 }

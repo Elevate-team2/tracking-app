@@ -6,6 +6,7 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/feature/profile/domain/entity/driver_all_info_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_state.dart';
@@ -35,10 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         title: Text(context.loc.profile),
         actions: [
           IconButton(
@@ -73,7 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     ProfileContainer(
                       onClick: () {
-                        //go to edit profile
+                        Navigator.pushNamed(context, AppRoute.editProfileScreen,
+                        arguments: state.driver);
                       },
                       containerChild: PersonalInfoCard(driverEntity: driver),
                     ),
@@ -100,4 +98,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-  
+
+
+
