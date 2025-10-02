@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                       containerChild: VechicalInfoCard(driverEntity: driver),
                     ),
-                    CustomLanguageRow(),
+                    const CustomLanguageRow(),
                     CustomLogoutRow( profileBloc: _profileBloc),
                   ],
                 ),

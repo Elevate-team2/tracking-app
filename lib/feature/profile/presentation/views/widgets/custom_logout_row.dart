@@ -10,7 +10,7 @@ import 'package:tracking_app/feature/profile/presentation/views/widgets/custum_d
 class CustomLogoutRow extends StatelessWidget {
   final ProfileBloc _profileBloc;
 
-  CustomLogoutRow({
+  const CustomLogoutRow({
     super.key,
  
     required ProfileBloc profileBloc,

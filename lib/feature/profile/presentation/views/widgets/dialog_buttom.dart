@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
-import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';

@@ -11,6 +11,8 @@ import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/custum_bottom_sheet.dart';
 
 class CustomLanguageRow extends StatelessWidget {
+  const CustomLanguageRow({super.key});
+
   @override
   Widget build(BuildContext context) {
     final appLanConfig = getIt.get<AppLanguageConfig>();

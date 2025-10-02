@@ -20,16 +20,15 @@
     "newPassword": "New password",
     "enterNewPassword": "Enter new password",
     "confirmPassword": "Confirm password",
-    "confirm": "Confirm",
+  
     "successReset": "Password reset successfully",
     "errorReset": "Something went wrong",
     "enterYourEmail": "Enter your E-mail",
     "enterYourPassword": "Enter your Password",
-    "email": "E-mail",
-    "password": "Password",
+
     "login": "Login",
     "continue1": "Continue",
-    "forgetPassword": "Forget Password",
+
     "rememberMe": "Remember Me",
     "successLogin": "✅ Success Login",
     "submitted":"Your application has been submitted!",
@@ -43,7 +42,7 @@
     "welcomText":"Welcome to\nFlowery rider app",
     
 
-  "welcome": "Welcome!!",
+
   "questionInRegister": "You want to be a delivery man?\nJoin our team",
   "country": "Country",
   "firstnameLabel": "First legal name",
@@ -52,11 +51,11 @@
   "vehicleTypeFieldError": "Please select vehicle type",
   "vehicleNumber": "Vehicle number",
   "uploadLicense": "Upload license photo",
-  "email": "Email",
+
   "phone": "Phone number",
   "nid": "ID number",
   "uploadNid": "Upload ID image",
-  "password": "Password",
+
   "rePassword": "Confirm password",
   "passwordTooShort": "Min 6 chars",
   "passwordNotMatch": "Passwords do not match",
@@ -66,7 +65,15 @@
   "continueBtn": "Continue",
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
-  "sucessApply":"sucessApply"
+  "sucessApply":"sucessApply",
+
+  "logout":"Logout",
+  "english":"English",
+  "arabic":"Arabic",
+  "language":"Language",
+  "confirmLogout":"Confirm Logout",
+  "cancel":"Cancel",
+  "vehicalInfo":"Vehical info"
 
 
     

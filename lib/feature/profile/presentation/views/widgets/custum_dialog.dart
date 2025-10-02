@@ -5,9 +5,7 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/dialog_buttom.dart';
-import '../../../../../core/l10n/translations/app_localizations.dart';
 
 class CustumDialog extends StatelessWidget {
   final ProfileBloc profileBloc;
