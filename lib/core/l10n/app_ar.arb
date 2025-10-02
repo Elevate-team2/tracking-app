@@ -1,46 +1,52 @@
 {
-    "@@locale": "ar",
+  "@@locale": "ar",
 
+  "noRouteFound": "لا يوجد صفحه بهذا الاسم",
 
+  "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
+  "enterEmail": "أدخل بريدك الإلكتروني",
+  "enterYourEmail": "ادخل بريدك الالكترونى",
+  "enterYourPassword": "ادخل كلمة المرور",
 
+  "verifyCode": "تحقق من الرمز",
+  "emailVerification": "التحقق من البريد الإلكتروني",
+  "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
+  "verify": "تحقق",
+  "didNotReceiveCode": "لم يصلك الرمز؟",
+  "resend": "إعادة إرسال",
 
-      "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
-      "enterEmail": "أدخل بريدك الإلكتروني",
-      "confirm": "تأكيد",
-      "verifyCode": "تحقق من الرمز",
-      "emailVerification": "التحقق من البريد الإلكتروني",
-      "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
-      "verify": "تحقق",
-      "didNotReceiveCode": "لم يصلك الرمز؟",
-      "resend": "إعادة إرسال",
-      "success": "تم بنجاح ✅",
-      "error": "خطأ ❌",
-      "resetPasswordTitle": "إعادة تعيين كلمة المرور",
-      "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
-      "newPassword": "كلمة المرور الجديدة",
-      "enterNewPassword": "أدخل كلمة المرور الجديدة",
-      "confirmPassword": "تأكيد كلمة المرور",
-      "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
-      "errorReset": "حدث خطأ ما",
-    "noRouteFound":"لا يوجد صفحه بهذا الاسم",
-    "enterYourEmail": "ادخل بريدك الالكترونى",
-    "enterYourPassword": "ادخل كلمة المرور",
-    "login": "تسجيل الدخول",
-    "continue1": "المتابعة",
-    "forgetPassword": "هل نسيت كلمة السر",
-    "rememberMe": "ذكرنى",
-    "successLogin": "✅ تم تسجيل الدخول بنجاح",
-    "submitted": "تم إرسال طلبك بنجاح!",
-    "thankYou": "شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.",
-    "welcome": "مرحباً بك في",
-    "flowery": "تطبيق فلاورى للركاب",
-    "home":"الرئيسية",
-    "orders":"الطلبات",
-    "profile":"الملف الشخصي",
-     "welcomText":"مرحبا بكم \n في تطبيق الارسال",
-     
-   
+  "success": "تم بنجاح ✅",
+  "error": "خطأ ❌",
+
+  "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+  "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
+  "newPassword": "كلمة المرور الجديدة",
+  "enterNewPassword": "أدخل كلمة المرور الجديدة",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "confirm": "تأكيد",
+  "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
+  "errorReset": "حدث خطأ ما",
+
+  "login": "تسجيل الدخول",
+  "continue1": "المتابعة",
+  "forgetPassword": "هل نسيت كلمة السر",
+  "rememberMe": "ذكرنى",
+  "successLogin": "✅ تم تسجيل الدخول بنجاح",
+
+  "submitted": "تم إرسال طلبك بنجاح!",
+  "thankYou": "شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.",
+
+  "flowery": "تطبيق فلاورى للركاب",
+  "welcome": "مرحباً بك",
+  "welcomText": "مرحبا بكم \n في تطبيق الارسال",
+
+  "home": "الرئيسية",
+  "orders": "الطلبات",
+  "profile": "الملف الشخصي",
+
   "apply": "تسجيل",
+  "successApply": "نجحت عملية التسجيل",
+
   "questionInRegister": "عايز تبقى دليفري؟\nانضم لينا",
   "country": "الدولة",
   "firstnameLabel": "الاسم الأول",
@@ -48,30 +54,29 @@
   "vehicleType": "نوع المركبة",
   "vehicleTypeFieldError": "من فضلك اختر نوع المركبة",
   "vehicleNumber": "رقم المركبة",
+  "vehicleNumberRequired": "مطلوب رقم المركبة",
+  "vehicleLicense": "رخصة القيادة",
+
   "uploadLicense": "ارفع صورة الرخصة",
+  "uploadNid": "ارفع صورة البطاقة",
+
   "email": "الإيميل",
   "phone": "رقم التليفون",
   "nid": "رقم البطاقة",
-  "uploadNid": "ارفع صورة البطاقة",
+
   "password": "كلمة المرور",
   "rePassword": "تأكيد كلمة المرور",
   "passwordTooShort": "الحد الأدنى ٦ حروف",
   "passwordNotMatch": "كلمة المرور غير متطابقة",
+
   "gender": "النوع",
   "female": "أنثى",
   "male": "ذكر",
+
   "continueBtn": "متابعة",
   "pleaseUploadBothImages": "من فضلك ارفع الصورتين",
   "required": "مطلوب",
-   "sucessApply":"نجحت عمليه التسجيل",
-"editProfile": "تعديل الملف الشخصى ",
-  "vehicleNumberRequired": "مطلوب رقم المركبة ",
-  "vehicleLicense": "رخصة القيادة ",
-  "update": "تحديث "
 
-
-
-
-
-
+  "editProfile": "تعديل الملف الشخصى",
+  "update": "تحديث"
 }

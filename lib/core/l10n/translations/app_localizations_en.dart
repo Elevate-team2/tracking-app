@@ -15,12 +15,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get password => 'Password';
-
-  @override
-  String get forgetPassword => 'Forget Password';
-
-  @override
   String get pleaseEnterEmail =>
       'Please enter your email associated with your account';
 
@@ -28,16 +22,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterEmail => 'Enter your email';
 
   @override
-  String get confirm => 'Confirm';
-
-  @override
-  String get verifyCode => 'Verify Code';
-
-  @override
   String get emailVerification => 'Email Verification';
 
   @override
   String get enterCodeEmail => 'Please enter the code sent to your email';
+
+  @override
+  String get verifyCode => 'Verify Code';
 
   @override
   String get verify => 'Verify';
@@ -71,22 +62,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmPassword => 'Confirm password';
 
   @override
+  String get confirm => 'Confirm';
+
+  @override
   String get successReset => 'Password reset successfully';
 
   @override
   String get errorReset => 'Something went wrong';
 
   @override
-  String get enterYourEmail => 'Enter your E-mail';
+  String get enterYourPassword => 'Enter your Password';
 
   @override
-  String get enterYourPassword => 'Enter your Password';
+  String get password => 'Password';
+
+  @override
+  String get passwordTooShort => 'Min 6 chars';
+
+  @override
+  String get passwordNotMatch => 'Passwords do not match';
 
   @override
   String get login => 'Login';
 
   @override
-  String get continue1 => 'Continue';
+  String get continueBtn => 'Continue';
+
+  @override
+  String get forgetPassword => 'Forget Password';
 
   @override
   String get rememberMe => 'Remember Me';
@@ -99,10 +102,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thankYou =>
-      'Thank you for providing your application, we will review your application and will get back to you soon.';
-
-  @override
-  String get welcome => 'Welcome!!';
+      'Thank you for providing your application, we will review your application and get back to you soon.';
 
   @override
   String get flowery => 'Flowery rider app';
@@ -121,6 +121,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomText => 'Welcome to\nFlowery rider app';
+
+  @override
+  String get welcome => 'Welcome!!';
 
   @override
   String get questionInRegister =>
@@ -145,6 +148,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vehicleNumber => 'Vehicle number';
 
   @override
+  String get vehicleNumberRequired => 'Vehicle Number Required';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
   String get uploadLicense => 'Upload license photo';
 
   @override
@@ -157,15 +166,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uploadNid => 'Upload ID image';
 
   @override
-  String get rePassword => 'Confirm password';
-
-  @override
-  String get passwordTooShort => 'Min 6 chars';
-
-  @override
-  String get passwordNotMatch => 'Passwords do not match';
-
-  @override
   String get gender => 'Gender';
 
   @override
@@ -175,25 +175,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get male => 'Male';
 
   @override
-  String get continueBtn => 'Continue';
-
-  @override
   String get pleaseUploadBothImages => 'Please upload both images';
 
   @override
   String get required => 'Required';
 
   @override
-  String get sucessApply => 'sucess Apply';
+  String get sucessApply => 'Success Apply';
 
   @override
   String get editProfile => 'Edit profile';
-
-  @override
-  String get vehicleNumberRequired => 'Vehicle Number Required';
-
-  @override
-  String get vehicleLicense => 'Vehicle License';
 
   @override
   String get update => 'Update';

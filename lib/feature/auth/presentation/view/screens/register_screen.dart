@@ -365,7 +365,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         controller: confirmPasswordCtrl,
                         obscureText: true,
                         decoration: InputDecoration(
-                          labelText: context.loc.rePassword,
+                          labelText: context.loc.resetPasswordSubtitle,
                           border: const OutlineInputBorder(),
                         ),
                         validator: (val) {
