@@ -89,7 +89,7 @@ class _OnBoarddingScreenState extends State<OnBoarddingScreen> {
 
                 OutlinedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoute.changePassword);
+                    Navigator.pushNamed(context, AppRoute.applyScreen);
                   },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: AppColors.black),

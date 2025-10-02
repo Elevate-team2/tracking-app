@@ -1,50 +1,56 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_request.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_response.dart';
 import 'package:tracking_app/feature/profile/domain/repository/profile_repository.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/use_case.dart';
 
-class MockProfileRepository extends Mock implements ProfileRepository {}
+import 'change_password_use_case_test.mocks.dart';
 
+@GenerateMocks([ProfileRepository])
 void main() {
-  late MockProfileRepository repository;
-  late ChangePasswordUseCase useCase;
+  late ChangePasswordUseCase changePasswordUseCase;
+  late MockProfileRepository mockProfileRepository;
 
   setUp(() {
-    repository = MockProfileRepository();
-    useCase = ChangePasswordUseCase(repository);
+    mockProfileRepository = MockProfileRepository();
+    changePasswordUseCase = ChangePasswordUseCase(mockProfileRepository);
+
+    provideDummy<Result<ChangePasswordResponse>>(
+      FailedResult<ChangePasswordResponse>("Dummy Error"),
+    );
   });
 
-  test("should return success when repo succeed", () async {
-    final request =
-    ChangePasswordRequest(password: "1234", newPassword: "5678");
-
-    final response = ChangePasswordResponse(message: "Password changed");
-
-    when(() => repository.changePassword(request)).thenAnswer(
-          (_) async => SucessResult(response),
+  group("Change Password UseCase Test", () {
+    final request = ChangePasswordRequest(
+      password: "1234",
+      newPassword: "5678",
     );
 
-    final result = await useCase(request);
+    final successResponse = ChangePasswordResponse(message: "Password changed");
 
-    expect(result, isA<SucessResult<ChangePasswordResponse>>());
-    expect((result as SucessResult).sucessResult.message, "Password changed");
-    verify(() => repository.changePassword(request)).called(1);
-  });
+    test("return SuccessResult when ProfileRepository success", () async {
+      when(mockProfileRepository.changePassword(request))
+          .thenAnswer((_) async => SucessResult(successResponse));
 
-  test("should return failure when repo fails", () async {
-    final request =
-    ChangePasswordRequest(password: "1234", newPassword: "5678");
+      final result = await changePasswordUseCase(request);
 
-    when(() => repository.changePassword(request)).thenAnswer(
-          (_) async => FailedResult("Error"),
-    );
+      expect(result, isA<SucessResult<ChangePasswordResponse>>());
+      expect((result as SucessResult).sucessResult.message, "Password changed");
+      verify(mockProfileRepository.changePassword(request)).called(1);
+    });
 
-    final result = await useCase(request);
+    test("return FailedResult when ProfileRepository fails", () async {
+      when(mockProfileRepository.changePassword(request))
+          .thenAnswer((_) async => FailedResult("Error"));
 
-    expect(result, isA<FailedResult>());
-    expect((result as FailedResult).errorMessage, "Error");
+      final result = await changePasswordUseCase(request);
+
+      expect(result, isA<FailedResult<ChangePasswordResponse>>());
+      expect((result as FailedResult).errorMessage, "Error");
+      verify(mockProfileRepository.changePassword(request)).called(1);
+    });
   });
 }

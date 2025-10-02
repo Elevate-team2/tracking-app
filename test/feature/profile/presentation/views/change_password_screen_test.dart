@@ -13,6 +13,7 @@ void main() {
   late MockChangePasswordBloc mockBloc;
 
   setUp(() {
+
     mockBloc = MockChangePasswordBloc();
   });
 
