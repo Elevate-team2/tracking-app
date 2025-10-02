@@ -14,8 +14,9 @@ abstract class ProfileApiServices {
   @factoryMethod
   factory ProfileApiServices(Dio dio) = _ProfileApiServices;
 
-  @POST(EndPointsConstants.changePassword)
+  @PATCH(EndPointsConstants.changePassword)
   Future<ChangePasswordResponse> changePassword(
       @Body() ChangePasswordRequest request,
       );
+
 }

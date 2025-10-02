@@ -8,17 +8,12 @@ import '../data_source/remote/profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRepository)
 class ProfileRepositoryImpl implements ProfileRepository {
-  final ProfileRemoteDataSource remoteDataSource;
+  final ProfileRemoteDataSource _remoteDataSource;
 
-  ProfileRepositoryImpl(this.remoteDataSource);
+  ProfileRepositoryImpl(this._remoteDataSource);
 
   @override
   Future<Result<ChangePasswordResponse>> changePassword(ChangePasswordRequest request) async {
-    try {
-      final response = await remoteDataSource.changePassword(request);
-      return SucessResult(response);
-    } catch (e) {
-      return FailedResult(e.toString());
-    }
+   return await _remoteDataSource.changePassword(request);
   }
 }

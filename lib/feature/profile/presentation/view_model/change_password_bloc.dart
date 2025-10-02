@@ -25,7 +25,9 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
 
     if (response is SucessResult<ChangePasswordResponse>) {
       final ChangePasswordResponse data = response.sucessResult;
-      emit(ChangePasswordSuccess(data.message));
+      emit(ChangePasswordSuccess(
+
+          data.message));
     } else if (response is FailedResult<ChangePasswordResponse>) {
       emit(ChangePasswordFailure(response.errorMessage));
     } else {
