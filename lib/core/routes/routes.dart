@@ -7,8 +7,10 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
+import 'package:tracking_app/feature/home/presentaion/view/page/profile_page.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 
 
 abstract class Routes {
@@ -63,6 +65,13 @@ case (AppRoute.loginRoute):
           builder: (context) {
 
             return const ApplyScreen();
+          },
+        );
+        case (AppRoute.profile):
+        return MaterialPageRoute(
+          builder: (context) {
+
+            return const ProfileScreen();
           },
         );
 

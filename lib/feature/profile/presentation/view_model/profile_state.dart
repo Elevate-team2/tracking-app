@@ -1,105 +1,119 @@
-part of 'profile_bloc.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:flutter/material.dart';
+// import 'package:tracking_app/feature/profile/domain/entity/driver_info_entity.dart';
 
-@immutable
-sealed class ProfileState  extends Equatable{}
+// @immutable
+// sealed class ProfileState  extends Equatable{}
 
-final class GetDriverInfo extends ProfileState {
-  final String?errormsg;
- final bool? isLoading;
-  final DriverInfoEntity? driverInfo;
+// final class GetDriverInfo extends ProfileState {
+//   final String?errormsg;
+//  final bool? isLoading;
+//   final DriverInfoEntity? driverInfo;
 
+//   GetDriverInfo({this.errormsg,
+//     this.isLoading = false,
+//     this.driverInfo,
 
-  GetDriverInfo({this.errormsg,
-    this.isLoading = false,
-    this.driverInfo,
+//   });
 
+//   GetDriverInfo copywith({
+//     String?errormsg,
+//     bool? isLoading,
+//     DriverInfoEntity? driverInfo,
+
+//   }) {
+//     return GetDriverInfo(errormsg: errormsg,
+//         isLoading: isLoading,
+//         driverInfo: driverInfo,
+
+//     );
+//   }
+
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => throw UnimplementedError();
+
+// }
+// final class GetaDriverContactInfo extends ProfileState {
+//  final String?errormsg;
+//   final bool? isLoading;
+
+//     final DriverContactInfoEntity? driverContactInfo;
+
+//   GetaDriverContactInfo({this.errormsg,
+//     this.isLoading = false,
+//     this.driverContactInfo,
+
+//   }) ;
+
+//   GetaDriverContactInfo copywith({
+//     String?errormsg,
+//     bool? isLoading,
+
+//     DriverContactInfoEntity? driverContactInfo,
+
+//   }) {
+//     return GetaDriverContactInfo(errormsg: errormsg,
+//       isLoading: isLoading,
+//      driverContactInfo: driverContactInfo
+//       // driverContactInfo: driverContactInfo,
+//       //vehicleInfo: vehicleInfo
+//     );
+//   }
+
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => throw UnimplementedError();
+
+// }
+// final class GetVehicleInfo extends ProfileState {
+//    final String?errormsg;
+//  final bool? isLoading;
+//    final VehicleInfoEntity ? vehicleInfo;
+
+//  GetVehicleInfo({this.errormsg,
+//   this.isLoading = false,
+//   this.vehicleInfo
+// });
+
+// GetVehicleInfo copywith({
+//   String?errormsg,
+//   bool? isLoading,
+//   VehicleInfoEntity? vehicleInfo,
+// }) {
+//   return GetVehicleInfo(errormsg: errormsg,
+//     isLoading: isLoading,
+//    vehicleInfo: vehicleInfo
+//   );
+// }
+
+// @override
+// // TODO: implement props
+// List<Object?> get props => throw UnimplementedError();
+
+// }
+
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+class ProfileState {
+  final DriverEntity? driver;
+  final bool isLoading;
+  final String? errorMessage;
+
+  const ProfileState({
+    this.driver,
+    this.isLoading = true,
+    this.errorMessage,
   });
 
-  GetDriverInfo copywith({
-    String?errormsg,
+  ProfileState copyWith({
+    DriverEntity? driver,
     bool? isLoading,
-    DriverInfoEntity? driverInfo,
-
+    String? errorMessage,
   }) {
-    return GetDriverInfo(errormsg: errormsg,
-        isLoading: isLoading,
-        driverInfo: driverInfo,
-
+    return ProfileState(
+      driver: driver ,
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ,
     );
   }
-
-
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
-
 }
-final class GetaDriverContactInfo extends ProfileState {
- final String?errormsg;
-  final bool? isLoading;
-
-    final DriverContactInfoEntity? driverContactInfo;
-
-
-  GetaDriverContactInfo({this.errormsg,
-    this.isLoading = false,
-    this.driverContactInfo,
-
-  }) ;
-
-  GetaDriverContactInfo copywith({
-    String?errormsg,
-    bool? isLoading,
-
-    DriverContactInfoEntity? driverContactInfo,
-
-  }) {
-    return GetaDriverContactInfo(errormsg: errormsg,
-      isLoading: isLoading,
-     driverContactInfo: driverContactInfo
-      // driverContactInfo: driverContactInfo,
-      //vehicleInfo: vehicleInfo
-    );
-  }
-
-
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
-
-}
-final class GetVehicleInfo extends ProfileState {
-   final String?errormsg;
- final bool? isLoading;
-   final VehicleInfoEntity ? vehicleInfo;
-
- GetVehicleInfo({this.errormsg,
-  this.isLoading = false,
-  this.vehicleInfo
-});
-
-GetVehicleInfo copywith({
-  String?errormsg,
-  bool? isLoading,
-  VehicleInfoEntity? vehicleInfo,
-}) {
-  return GetVehicleInfo(errormsg: errormsg,
-    isLoading: isLoading,
-   vehicleInfo: vehicleInfo
-  );
-}
-
-
-
-@override
-// TODO: implement props
-List<Object?> get props => throw UnimplementedError();
-
-}
-
-
-
-
-
