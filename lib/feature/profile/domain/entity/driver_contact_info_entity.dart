@@ -1,21 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-
-
 @JsonSerializable()
 class DriverContactInfoEntity extends Equatable {
-  @JsonKey(name: "email")
-  final String? email;
-  @JsonKey(name: "phone")
-  final String? phone;
+  final String email;
+  final String phone;
 
-  const DriverContactInfoEntity ({
-    this.email,
-    this.phone,
+  const DriverContactInfoEntity({
+    required this.email,
+    required this.phone,
   });
 
-  /// The properties used to determine if two [DriverContactInfo] instances are equal.
   @override
   List<Object?> get props => [email, phone];
 }

@@ -11,5 +11,5 @@ abstract class AppRoute {
  static  const applyScreen="ApplyScreen";
  static  const profile="profile";
 
-
+  static const editProfileScreen="editProfile";
 }

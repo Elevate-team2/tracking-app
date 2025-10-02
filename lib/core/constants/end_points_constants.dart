@@ -12,4 +12,7 @@ static const String signinEndPoint="drivers/signin";
    static const String getprofileEndPoint="drivers/profile-data";
    static const String logoutEndPoint="drivers/logout";
 
+  static const String uploadDriverPhoto = "drivers/upload-photo";
+  static const String editDriverProfile = "drivers/editProfile";
+
  }
