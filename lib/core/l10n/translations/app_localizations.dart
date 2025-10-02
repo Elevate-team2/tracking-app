@@ -107,20 +107,8 @@ abstract class AppLocalizations {
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'E-mail'**
+  /// **'Email'**
   String get email;
-
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// No description provided for @forgetPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Forget Password'**
-  String get forgetPassword;
 
   /// No description provided for @pleaseEnterEmail.
   ///
@@ -134,18 +122,6 @@ abstract class AppLocalizations {
   /// **'Enter your email'**
   String get enterEmail;
 
-  /// No description provided for @confirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm'**
-  String get confirm;
-
-  /// No description provided for @verifyCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Verify Code'**
-  String get verifyCode;
-
   /// No description provided for @emailVerification.
   ///
   /// In en, this message translates to:
@@ -157,6 +133,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter the code sent to your email'**
   String get enterCodeEmail;
+
+  /// No description provided for @verifyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Code'**
+  String get verifyCode;
 
   /// No description provided for @verify.
   ///
@@ -218,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Confirm password'**
   String get confirmPassword;
 
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
   /// No description provided for @successReset.
   ///
   /// In en, this message translates to:
@@ -230,17 +218,29 @@ abstract class AppLocalizations {
   /// **'Something went wrong'**
   String get errorReset;
 
-  /// No description provided for @enterYourEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your E-mail'**
-  String get enterYourEmail;
-
   /// No description provided for @enterYourPassword.
   ///
   /// In en, this message translates to:
   /// **'Enter your Password'**
   String get enterYourPassword;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Min 6 chars'**
+  String get passwordTooShort;
+
+  /// No description provided for @passwordNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordNotMatch;
 
   /// No description provided for @login.
   ///
@@ -248,11 +248,17 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
-  /// No description provided for @continue1.
+  /// No description provided for @continueBtn.
   ///
   /// In en, this message translates to:
   /// **'Continue'**
-  String get continue1;
+  String get continueBtn;
+
+  /// No description provided for @forgetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password'**
+  String get forgetPassword;
 
   /// No description provided for @rememberMe.
   ///
@@ -275,14 +281,8 @@ abstract class AppLocalizations {
   /// No description provided for @thankYou.
   ///
   /// In en, this message translates to:
-  /// **'Thank you for providing your application, we will review your application and will get back to you soon.'**
+  /// **'Thank you for providing your application, we will review your application and get back to you soon.'**
   String get thankYou;
-
-  /// No description provided for @welcome.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome to'**
-  String get welcome;
 
   /// No description provided for @flowery.
   ///
@@ -313,6 +313,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @welcomText.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to\nFlowery rider app'**
+  String get welcomText;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!!'**
+  String get welcome;
+
+  /// No description provided for @questionInRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'You want to be a delivery man?\nJoin our team'**
+  String get questionInRegister;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get country;
+
+  /// No description provided for @firstnameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'First legal name'**
+  String get firstnameLabel;
+
+  /// No description provided for @secondnameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Second legal name'**
+  String get secondnameLabel;
+
+  /// No description provided for @vehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Type'**
+  String get vehicleType;
+
+  /// No description provided for @vehicleTypeFieldError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select vehicle type'**
+  String get vehicleTypeFieldError;
+
+  /// No description provided for @vehicleNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle number'**
+  String get vehicleNumber;
+
+  /// No description provided for @vehicleNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Number Required'**
+  String get vehicleNumberRequired;
+
+  /// No description provided for @vehicleLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License'**
+  String get vehicleLicense;
+
+  /// No description provided for @uploadLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload license photo'**
+  String get uploadLicense;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phone;
+
+  /// No description provided for @nid.
+  ///
+  /// In en, this message translates to:
+  /// **'ID number'**
+  String get nid;
+
+  /// No description provided for @uploadNid.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload ID image'**
+  String get uploadNid;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @female.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// No description provided for @male.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// No description provided for @pleaseUploadBothImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload both images'**
+  String get pleaseUploadBothImages;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @sucessApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Success Apply'**
+  String get sucessApply;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @editProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfileTitle;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profileUpdated;
+
+  /// No description provided for @noChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes detected'**
+  String get noChanges;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// No description provided for @noImageSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No image selected'**
+  String get noImageSelected;
+
+  /// No description provided for @failedToPickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image'**
+  String get failedToPickImage;
 }
 
 class _AppLocalizationsDelegate

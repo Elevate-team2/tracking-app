@@ -9,6 +9,8 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/approve_scre
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
 
 abstract class Routes {
@@ -20,7 +22,7 @@ abstract class Routes {
     switch (url.path) {
 
       case AppRoute.home:
-       return MaterialPageRoute(
+        return MaterialPageRoute(
           builder: (context) {
 
             return const  AppSection();
@@ -28,17 +30,17 @@ abstract class Routes {
         );
 
 
-case (AppRoute.loginRoute):
-  return MaterialPageRoute(builder: (context)=>
-  const   LoginScreen());
-  
+      case (AppRoute.loginRoute):
+        return MaterialPageRoute(builder: (context)=>
+        const   LoginScreen());
+
       case (AppRoute.onBoarding):
         return MaterialPageRoute(builder: (context)=>
         const    OnBoarddingScreen());
 
 
       case AppRoute.forgetPasswordScreen:
-       return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
+        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
 
       case AppRoute.verifyCodeScreen:
         final email = settings.arguments as String;
@@ -52,20 +54,44 @@ case (AppRoute.loginRoute):
           builder: (context) => ResetPasswordScreen(email: email),
         );
 
-        case AppRoute.approveScreen:
-      return MaterialPageRoute(
+      case AppRoute.approveScreen:
+        return MaterialPageRoute(
           builder: (context) {
             return const  ApproveScreen();
           },
         );
 
-        case (AppRoute.applyScreen):
+      case (AppRoute.applyScreen):
         return MaterialPageRoute(
           builder: (context) {
 
             return const ApplyScreen();
           },
         );
+
+      case AppRoute.editProfileScreen:
+        return MaterialPageRoute(builder: (context) {
+          // final user = settings.arguments as LoggedInUserEntity;
+          return const EditProfileScreen(user:
+          LoggedInUserEntity(
+            id: "1",
+            firstName: "Rana",
+            lastName: "Gebril",
+            email: "ranagebril5@gmail.com",
+            phone: "01147124052",
+            photo: "",
+            role: "driver",
+            country: "Egypt",
+            vehicleType: "Car",
+            vehicleNumber: "152004",
+            vehicleLicense: "",
+            nid: "12345678912345",
+            nidImg: "",
+            gender: "female",
+            createdAt: "DateTime.now()",
+          )
+            ,);
+        },);
 
       default:
         return MaterialPageRoute(

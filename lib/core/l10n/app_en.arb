@@ -71,5 +71,12 @@
   "sucessApply": "Success Apply",
 
   "editProfile": "Edit profile",
-  "update": "Update"
+  "update": "Update",
+  "editProfileTitle": "Edit profile",
+      "profileUpdated": "Profile updated successfully",
+      "noChanges": "No changes detected",
+      "update": "Update",
+      "changePassword": "Change password",
+      "noImageSelected": "No image selected",
+      "failedToPickImage": "Failed to pick image"
 }

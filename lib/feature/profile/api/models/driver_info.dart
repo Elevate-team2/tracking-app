@@ -1,37 +1,45 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
+import '../../domain/entity/driver_info_entity.dart';
 
 part 'driver_info.g.dart';
 
 @JsonSerializable()
 class DriverInfo {
-  @JsonKey(name: "role")
-  final String? role;
-  @JsonKey(name: "_id")
+  @JsonKey(name: JsonSerlizationConstants.id)
   final String? id;
-  @JsonKey(name: "firstName")
+  @JsonKey(name: JsonSerlizationConstants.firstName)
   final String? firstName;
-  @JsonKey(name: "lastName")
+  @JsonKey(name: JsonSerlizationConstants.lastName)
   final String? lastName;
-  @JsonKey(name: "gender")
+  @JsonKey(name: JsonSerlizationConstants.gender)
   final String? gender;
-  @JsonKey(name: "photo")
+  @JsonKey(name: JsonSerlizationConstants.photo)
   final String? photo;
+  @JsonKey(name: JsonSerlizationConstants.role)
+  final String? role;
 
-  DriverInfo ({
-    this.role,
+
+  DriverInfo({
     this.id,
     this.firstName,
     this.lastName,
     this.gender,
     this.photo,
+    this.role,
   });
 
-  factory DriverInfo.fromJson(Map<String, dynamic> json) {
-    return _$DriverInfoFromJson(json);
-  }
+  factory DriverInfo.fromJson(Map<String, dynamic> json) => _$DriverInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$DriverInfoToJson(this);
 
-  Map<String, dynamic> toJson() {
-    return _$DriverInfoToJson(this);
+  DriverInfoEntity toEntity() {
+    return DriverInfoEntity(
+      id: id ?? "",
+      firstName: firstName ?? "",
+      lastName: lastName ?? "",
+      gender: gender ?? "",
+      photo: photo ?? "",
+      role: role ?? "",
+    );
   }
 }
-

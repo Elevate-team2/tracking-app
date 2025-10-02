@@ -9,4 +9,7 @@ static const String signinEndPoint="drivers/signin";
 //apply
    static const String applyEndPoint="drivers/apply";
 
+  static const String uploadDriverPhoto = "drivers/upload-photo";
+  static const String editDriverProfile = "drivers/editProfile";
+
  }
