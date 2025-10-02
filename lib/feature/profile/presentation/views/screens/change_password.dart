@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/validator/validator.dart';
 import '../../../../../config/di/di.dart';
 import '../../../api/models/change_password_request.dart';
 import '../../../domain/use_case/use_case.dart';
@@ -32,7 +33,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ChangePasswordBloc(getIt<ChangePasswordUseCase>()),
+      create: (context) => getIt<ChangePasswordBloc>(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Reset password"),
@@ -94,15 +95,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                       obscureText: true,
-                      validator: (val) {
-                        if (val == null || val.isEmpty) {
-                          return context.loc.required;
-                        }
-                        if (val != _newPasswordController.text) {
-                          return "Passwords do not match";
-                        }
-                        return null;
-                      },
+                      validator:Validator.validatePassword,
                     ),
                     const SizedBox(height: 42),
                     SizedBox(

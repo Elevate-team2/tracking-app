@@ -18,7 +18,8 @@ class TokenInterceptor extends Interceptor {
         '${Constants.bearerPrefix}$token';
       }
     } catch (e) {
-      // log
+      throw Exception('${Constants.failedToGetToken}: $e');
+
     }
 
     super.onRequest(options, handler);
