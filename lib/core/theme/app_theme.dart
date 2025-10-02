@@ -63,8 +63,11 @@ import 'package:tracking_app/core/theme/app_colors.dart';
         hintStyle: GoogleFonts.roboto(color: AppColors.black[55], fontSize: 14),
         contentPadding:const  EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
-    
-    );
+      textTheme: TextTheme(bodyLarge: GoogleFonts.roboto(fontSize:18,fontWeight:FontWeight.w500,color: AppColors.black)
+
+      , bodyMedium: GoogleFonts.roboto(fontSize:16,fontWeight:FontWeight.w400,color: AppColors.black[55]),
+      bodySmall: GoogleFonts.roboto(fontSize:14,fontWeight:FontWeight.w400,color: AppColors.pink),
+    ));
   }
 
   static ThemeData lightTheme = getTheme(

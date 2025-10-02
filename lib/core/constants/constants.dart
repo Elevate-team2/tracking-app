@@ -16,6 +16,7 @@ abstract class Constants {
   static const String success = "Success";
   static const String resetCode = "resetCode";
   static const String countriesJson = "assets/json/country.json";
+  static const String languageicon="assets/images/langicon.svg";
 
   // Country JSON keys
   static const String isoCode = "isoCode";

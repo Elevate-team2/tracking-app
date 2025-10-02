@@ -79,21 +79,21 @@ class Driver {
 
   DriverEntity toEntity() {
     return DriverEntity(
-      id: id!,
-      country: country!,
-      firstName: firstName!,
-      lastName: lastName!,
-      vehicleType: vehicleType!,
-      vehicleNumber: vehicleNumber!,
-      vehicleLicense: vehicleLicense!,
-      nid: nId!,
-      nidImg: nIdImg!,
-      email: email!,
-      gender: gender!,
-      phone: phone!,
-      photo: photo!,
-      role: role!,
-      createdAt: createdAt!,
+      id: id??'',
+      country: country??'',
+      firstName: firstName??'',
+      lastName: lastName??'',
+      vehicleType: vehicleType??'',
+      vehicleNumber: vehicleNumber??'',
+      vehicleLicense: vehicleLicense??'',
+      nid: nId??'',
+      nidImg: nIdImg??'',
+      email: email??'',
+      gender: gender??'',
+      phone: phone??'',
+      photo: photo??'',
+      role: role??'',
+      createdAt: createdAt??'',
     );
   }
 }

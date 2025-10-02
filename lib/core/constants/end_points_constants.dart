@@ -8,5 +8,8 @@ static const String signinEndPoint="drivers/signin";
    static const String allVehicles="vehicles";
 //apply
    static const String applyEndPoint="drivers/apply";
+   //profile
+   static const String getprofileEndPoint="drivers/profile-data";
+   static const String logoutEndPoint="drivers/logout";
 
  }
