@@ -20,6 +20,9 @@ class ApplyBloc extends Bloc<ApplyEvent,ApplyStates>{
       this._getAllCountriesUseCase,this._allVehiclesUseCase,this._applyUseCase
       ):super(const ApplyStates()){
     on<GetAllCountriesEvent>((event,emit) async {
+      emit(state.copyWith(
+        countriesState: RequestState.loading,
+      ));
       final result=await _getAllCountriesUseCase.getCountries();
       switch(result){
 
@@ -37,6 +40,10 @@ class ApplyBloc extends Bloc<ApplyEvent,ApplyStates>{
 
     });
     on<GetAllVehiclesEvent>((event,emit)async{
+      emit(state.copyWith(
+          vehiclesState: RequestState.loading,
+      ));
+
       final result=await _allVehiclesUseCase.getVehicles();
       switch(result){
         case SucessResult<List<VehicleEntity>>():
@@ -54,7 +61,9 @@ class ApplyBloc extends Bloc<ApplyEvent,ApplyStates>{
       }
     });
     on<GetApplyEvent>((event,emit)async{
-
+      emit(state.copyWith(
+        applyState: RequestState.loading,
+      ));
       final result=await _applyUseCase.
       apply(event.request);
     switch(result){

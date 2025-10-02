@@ -15,12 +15,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get email => 'الإيميل';
 
   @override
-  String get password => 'كلمة المرور';
-
-  @override
-  String get forgetPassword => 'هل نسيت كلمة السر';
-
-  @override
   String get pleaseEnterEmail =>
       'من فضلك أدخل البريد الإلكتروني المرتبط بحسابك';
 
@@ -28,16 +22,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterEmail => 'أدخل بريدك الإلكتروني';
 
   @override
-  String get confirm => 'تأكيد';
-
-  @override
-  String get verifyCode => 'تحقق من الرمز';
-
-  @override
   String get emailVerification => 'التحقق من البريد الإلكتروني';
 
   @override
   String get enterCodeEmail => 'من فضلك أدخل الرمز المرسل إلى بريدك';
+
+  @override
+  String get verifyCode => 'تحقق من الرمز';
 
   @override
   String get verify => 'تحقق';
@@ -71,22 +62,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmPassword => 'تأكيد كلمة المرور';
 
   @override
+  String get confirm => 'تأكيد';
+
+  @override
   String get successReset => 'تم إعادة تعيين كلمة المرور بنجاح';
 
   @override
   String get errorReset => 'حدث خطأ ما';
 
   @override
-  String get enterYourEmail => 'ادخل بريدك الالكترونى';
+  String get enterYourPassword => 'ادخل كلمة المرور';
 
   @override
-  String get enterYourPassword => 'ادخل كلمة المرور';
+  String get password => 'كلمة المرور';
+
+  @override
+  String get passwordTooShort => 'الحد الأدنى ٦ حروف';
+
+  @override
+  String get passwordNotMatch => 'كلمة المرور غير متطابقة';
 
   @override
   String get login => 'تسجيل الدخول';
 
   @override
-  String get continue1 => 'المتابعة';
+  String get continueBtn => 'متابعة';
+
+  @override
+  String get forgetPassword => 'هل نسيت كلمة السر';
 
   @override
   String get rememberMe => 'ذكرنى';
@@ -100,9 +103,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get thankYou =>
       'شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.';
-
-  @override
-  String get welcome => 'أهلاً بيك!!';
 
   @override
   String get flowery => 'تطبيق فلاورى للركاب';
@@ -121,6 +121,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get welcomText => 'مرحبا بكم \n في تطبيق الارسال';
+
+  @override
+  String get welcome => 'مرحباً بك';
 
   @override
   String get questionInRegister => 'عايز تبقى دليفري؟\nانضم لينا';
@@ -156,15 +159,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get uploadNid => 'ارفع صورة البطاقة';
 
   @override
-  String get rePassword => 'تأكيد كلمة المرور';
-
-  @override
-  String get passwordTooShort => 'الحد الأدنى ٦ حروف';
-
-  @override
-  String get passwordNotMatch => 'كلمة المرور غير متطابقة';
-
-  @override
   String get gender => 'النوع';
 
   @override
@@ -172,9 +166,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get male => 'ذكر';
-
-  @override
-  String get continueBtn => 'متابعة';
 
   @override
   String get pleaseUploadBothImages => 'من فضلك ارفع الصورتين';

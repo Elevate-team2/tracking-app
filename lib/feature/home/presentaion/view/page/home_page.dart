@@ -57,11 +57,6 @@ class _HomePageState extends State<HomePage> {
                    
                     if (state.processCompleted == true) {
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                         SnackBar(
-                          content: Text(context.loc.processCompletedSuccessfully),
-                        ),
-                      );
                         Navigator.pushNamed(
                           context,
                           AppRoute.orderDetails,

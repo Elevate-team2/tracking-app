@@ -15,7 +15,7 @@ class CacheImage extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,
-          width:  context.setHight(20),
+          width:  50,
           height:  50,
           placeholder: (context, url) =>
               const Center(child: CircularProgressIndicator(strokeWidth: 2)),

@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomTxtField(
-                        hintTxt: context.loc.enterYourEmail,
+                        hintTxt: context.loc.enterEmail,
                         lbl: context.loc.email,
                         controller: emailController,
                         validator: Validator.validateEmail,
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         },
                         child: Text(
-                          context.loc.continue1,
+                          context.loc.continueBtn,
                           style: getMediumStyle(
                             color: AppColors.white,
                             fontSize: context.setSp(FontSize.s20),

@@ -64,7 +64,7 @@ void main() {
     expect(find.byType(TextFormField), findsNWidgets(2));
     expect(find.bySemanticsLabel(l10n.email), findsOneWidget);
     expect(find.bySemanticsLabel(l10n.password), findsOneWidget);
-    expect(find.text(l10n.enterYourEmail), findsOneWidget);
+    expect(find.text(l10n.enterEmail), findsOneWidget);
     expect(find.text(l10n.enterYourPassword), findsOneWidget);
     expect(find.byType(ElevatedButton), findsOneWidget);
     expect(find.byType(Checkbox), findsOneWidget);

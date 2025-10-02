@@ -71,7 +71,8 @@ class ApproveScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                       Navigator.pushNamed(context, AppRoute.loginRoute);
+                       Navigator.pushNamed(context,
+                           AppRoute.loginRoute);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
