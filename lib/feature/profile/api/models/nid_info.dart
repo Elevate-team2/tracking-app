@@ -5,13 +5,13 @@ part 'nid_info.g.dart';
 @JsonSerializable()
 class NationalIdInfo {
   @JsonKey(name: "NID")
-  final String? NID;
+  final String? nId;
   @JsonKey(name: "NIDImg")
-  final String? NIDImg;
+  final String? nIdImg;
 
   NationalIdInfo ({
-    this.NID,
-    this.NIDImg,
+    this.nId,
+    this.nIdImg,
   });
 
   factory NationalIdInfo.fromJson(Map<String, dynamic> json) {
