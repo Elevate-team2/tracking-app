@@ -7,6 +7,7 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
+import 'package:tracking_app/core/widgets/common_loading.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/address_container.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/order_details_card.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/status_container.dart';
@@ -73,7 +74,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           },
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return  const CommonLoading();
             }
 
             if (state.remoteData == null) {

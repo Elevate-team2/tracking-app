@@ -92,7 +92,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
                 emit(
                   //3
                   state.copyWith(
-                    isLoading: false,
+                    isLoading: true,
                     orders: ordersRes.sucessResult,
                     processCompleted: true,
                     remoteData: event.remoteDataEntity,
@@ -258,9 +258,9 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       onData: (data) {
         switch (data) {
           case SucessResult<RemoteDataEntity>():
-            return state.copyWith(remoteData: data.sucessResult);
+            return state.copyWith(remoteData: data.sucessResult,isLoading:false);
           case FailedResult<RemoteDataEntity>():
-            return state.copyWith(errorMessage: data.errorMessage);
+            return state.copyWith(errorMessage: data.errorMessage,isLoading:false);
         }
       },
     );
