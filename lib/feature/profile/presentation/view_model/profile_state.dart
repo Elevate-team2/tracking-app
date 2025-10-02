@@ -94,26 +94,26 @@
 // }
 
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+
 class ProfileState {
   final DriverEntity? driver;
   final bool isLoading;
   final String? errorMessage;
+  final bool? loggedOut;
 
-  const ProfileState({
-    this.driver,
-    this.isLoading = true,
-    this.errorMessage,
-  });
+  const ProfileState({this.driver, this.isLoading = true, this.errorMessage,this.loggedOut});
 
   ProfileState copyWith({
     DriverEntity? driver,
     bool? isLoading,
     String? errorMessage,
+    bool? loggedOut
   }) {
     return ProfileState(
-      driver: driver ,
+      driver: driver,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ,
+      errorMessage: errorMessage,
+      loggedOut: loggedOut
     );
   }
 }

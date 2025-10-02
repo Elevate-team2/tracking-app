@@ -10,24 +10,13 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @factoryMethod
   ProfileRepositoryImpl({required this.profileRemoteDataSource});
 
-  // @override
-  // Future<Result<DriverContactInfoEntity>> getDriverContactInfo() {
-  //   return profileRemoteDataSource.getDriverContactInfo();
-
-  // }
-
-  // @override
-  // Future<Result<DriverInfoEntity>> getDriverInfo() {
-  //   return profileRemoteDataSource.getDriverInfo();
-  // }
-
-  // @override
-  // Future<Result<VehicleInfoEntity>> getVehicleInfo() {
-  //   return profileRemoteDataSource.getVehicleInfo();
-  // }
-
   @override
   Future<Result<DriverEntity>> getLoggedDriver() async {
     return await profileRemoteDataSource.getLoggedDriver();
+  }
+
+  @override
+  Future<Result<void>> logoutDriver() async {
+    return await profileRemoteDataSource.logoutDriver();
   }
 }

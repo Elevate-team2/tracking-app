@@ -4,9 +4,7 @@ import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 
 
 abstract interface class ProfileRepository {
-  // Future<Result<DriverInfoEntity>>getDriverInfo();
-  // Future<Result<DriverContactInfoEntity>>getDriverContactInfo();
-  // Future<Result<VehicleInfoEntity>>getVehicleInfo();
-
   Future<Result<DriverEntity>> getLoggedDriver();
+  Future<Result<void>> logoutDriver();
+  
 }

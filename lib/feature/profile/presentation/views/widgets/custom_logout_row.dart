@@ -1,27 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/theme/app_colors.dart';
+import 'package:tracking_app/core/theme/font_manger.dart';
+import 'package:tracking_app/core/theme/font_style_manger.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
+import 'package:tracking_app/feature/profile/presentation/views/widgets/custum_dialog.dart';
 
-class CustomLogoutRow extends StatelessWidget{
+class CustomLogoutRow extends StatelessWidget {
+  final ProfileBloc _profileBloc;
 
-  String title;
-  CustomLogoutRow({super.key,required this.title});
+  CustomLogoutRow({
+    super.key,
+ 
+    required ProfileBloc profileBloc,
+  }) : _profileBloc = profileBloc;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(context.setWidth(8)),
       child: Row(
         children: [
-          Icon(Icons.logout, size: 15,color: Theme.of(context).iconTheme.color),
-          const SizedBox(width: 5),
+          Icon(
+            Icons.logout,
+            size: 15,
+            color: Theme.of(context).iconTheme.color,
+          ),
+           SizedBox(width: context.setWidth(8)),
           Text(
-            // AppLocalizations.of(context)!.language,
-            title,
-            style: Theme.of(context).textTheme.bodyMedium,
+     
+           context.loc.logout,
+            style: getMediumStyle(color: AppColors.black,fontSize:context.setSp(FontSize.s14)),
           ),
           const Spacer(),
-          Icon(Icons.logout, color: Theme.of(context).iconTheme.color),
+          IconButton(
+            onPressed: () {
+            
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CustumDialog(profileBloc:_profileBloc);
+                },
+              );
+            },
+            icon: Icon(Icons.logout, color: Theme.of(context).iconTheme.color),
+          ),
         ],
       ),
     );
   }
-
 }

@@ -4,12 +4,12 @@ import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/domain/repository/profile_repository.dart';
 
 @injectable
-class GetLoggedDriverUseCase {
+class LogoutDriverUseCase {
   final ProfileRepository _profileRepository;
-  GetLoggedDriverUseCase(this._profileRepository);
+  LogoutDriverUseCase(this._profileRepository);
 
-  Future<Result<DriverEntity>> getLoggedDriver() async {
-    return await _profileRepository.getLoggedDriver();
+  Future<Result<void>> logoutDriver() async {
+    return await _profileRepository.logoutDriver();
   }
 
 

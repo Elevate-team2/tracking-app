@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
@@ -11,8 +14,6 @@ import 'package:tracking_app/feature/profile/presentation/views/widgets/custom_r
 import 'package:tracking_app/feature/profile/presentation/views/widgets/profile_container.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/personal_info_card.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/vechical_info_card.dart';
-
-import '../../../../../core/constants/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -38,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('Profile'),
+        title: Text(context.loc.profile),
         actions: [
           IconButton(
             icon: Icon(
@@ -54,7 +55,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       body: BlocProvider.value(
         value: _profileBloc,
-        child: BlocBuilder<ProfileBloc, ProfileState>(
+        child: BlocConsumer<ProfileBloc, ProfileState>(
+          listener: (context, state) {
+            if (state.loggedOut == true) {
+              Navigator.pushNamed(context, AppRoute.loginRoute);
+            }
+          },
           builder: (context, state) {
             if (state.isLoading) {
               return const Center(child: CircularProgressIndicator());
@@ -62,21 +68,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (state.driver != null) {
               final DriverEntity driver = state.driver!;
               return Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:  EdgeInsets.all(context.setWidth(12)),
                 child: Column(
                   children: [
                     ProfileContainer(
+                      onClick: () {
+                        //go to edit profile
+                      },
                       containerChild: PersonalInfoCard(driverEntity: driver),
                     ),
                     ProfileContainer(
+                      onClick: () {
+                        // go to edit vechical
+                      },
                       containerChild: VechicalInfoCard(driverEntity: driver),
                     ),
-                    CustomLanguageRow(
-                      svgPath: Constants.languageicon,
-                      title: "Language",
-                      detail: "English",
-                    ),
-                    CustomLogoutRow(title: "Logout"),
+                    CustomLanguageRow(),
+                    CustomLogoutRow( profileBloc: _profileBloc),
                   ],
                 ),
               );
@@ -91,75 +99,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-/*void showLogoutDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                "LOGOUT",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Confirm logout!!",
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Cancel button
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 24),
-                    ),
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
 
-                  // Logout button
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      UserLocalStorage.clearUser();
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        AppRoutes.home,
-                            (route) => false,
-                      );                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 24),
-                    ),
-                    child: const Text("Logout"),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),*/
+  

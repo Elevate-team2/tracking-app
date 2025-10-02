@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
             key:const Key(AppWidgetsKeys.loginScreen),
             appBar: AppBar(
               leading: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.onBoarding),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
                   child: Icon(Icons.arrow_back_ios, size: context.setSp(20)),

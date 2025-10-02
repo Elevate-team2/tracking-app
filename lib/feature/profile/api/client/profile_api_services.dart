@@ -13,7 +13,7 @@ abstract class ProfileApiServices {
   factory ProfileApiServices(Dio dio) = _ProfileApiServices;
   @GET(EndPointsConstants.getprofileEndPoint)
   Future<GetLoggedUserResponse> getLoggedDriver();
-  // Future<DriverInfo>getDriverInfo();
-  // Future<DriverContactInfo>getDriverContactInfo();
-  // Future<VehicleInfo>getVehicleInfo();
+  @GET(EndPointsConstants.logoutEndPoint)
+  Future<GetLoggedUserResponse> logoutDriver();
+
 }
