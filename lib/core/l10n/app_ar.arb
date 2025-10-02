@@ -68,7 +68,17 @@
   "continueBtn": "متابعة",
   "pleaseUploadBothImages": "من فضلك قم برفع الصورتين",
   "required": "مطلوب",
-   "sucessApply":"نجحت عمليه التسجيل"
+   "sucessApply":"نجحت عمليه التسجيل",
+   
+  "logout": "تسجيل الخروج",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "language": "اللغة",
+  "confirmLogout": "تأكيد تسجيل الخروج",
+  "cancel": "إلغاء",
+  "vehicalInfo": "معلومات المركبة"
+
+
 
 
 
