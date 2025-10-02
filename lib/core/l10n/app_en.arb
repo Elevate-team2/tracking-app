@@ -1,12 +1,9 @@
 {
     "@@locale": "en",
     "noRouteFound":"No Route Found",
-     "email":"Email",
-    "password":"Password",
-    "forgetPassword":"Forget Password",
+
     "pleaseEnterEmail":"Please enter your email associated with your account",
     "enterEmail":"Enter your email",
-    "confirm":"Confirm",
     "verifyCode": "Verify Code",
     "emailVerification": "Email Verification",
     "enterCodeEmail": "Please enter the code sent to your email",
@@ -25,8 +22,7 @@
     "errorReset": "Something went wrong",
     "enterYourEmail": "Enter your E-mail",
     "enterYourPassword": "Enter your Password",
-    "email": "E-mail",
-    "password": "Password",
+
     "login": "Login",
     "continue1": "Continue",
     "forgetPassword": "Forget Password",
@@ -34,7 +30,7 @@
     "successLogin": "✅ Success Login",
     "submitted":"Your application has been submitted!",
     "thankYou":"Thank you for providing your application, we will review your application and will get back to you soon.",
-    "welcome": "Welcome to",
+
     "flowery": "Flowery rider app",
     "apply": "Apply",
     "home":"Home",
