@@ -154,14 +154,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         TotalAndPaymentContainer(
                           containerName: context.loc.total,
                           containerValue:
-                          order.orderInfoEntity.totalPrice.toString(),
+                          "${context.loc.egp} ${order.orderInfoEntity.totalPrice.toString()}",
                         ),
                         SizedBox(height: context.setHight(15)),
 
                         TotalAndPaymentContainer(
                           containerName: context.loc.paymentMethod,
                           containerValue:
-                          "${context.loc.egp} ${order.paymentInfoEntity.paymentType}",
+                          order.paymentInfoEntity.paymentType,
                         ),
 
                         ElevatedButton(
