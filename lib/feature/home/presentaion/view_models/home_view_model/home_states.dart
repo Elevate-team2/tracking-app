@@ -18,6 +18,7 @@ class HomeStates {
     this.addedToRemote = false,
     this.processCompleted = false,
     this.remoteData ,
+
   });
 
   HomeStates copyWith({

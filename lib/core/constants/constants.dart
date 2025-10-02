@@ -45,4 +45,6 @@ abstract class Constants {
   static const String failedToDeleteToken = "Failed to delete token";
   static const String failedToCheckLoginStatus = "Failed to check login status";
   static const String orderRef = "orders";
+  static const String callError="Could not launch dialer";
+  static const String whatsAppError="Could not launch WhatsApp";
 }

@@ -197,4 +197,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update => 'Update';
+
+  @override
+  String get floweryRider => 'Flowery rider';
+
+  @override
+  String get processCompletedSuccessfully => 'process completed successfully';
+
+  @override
+  String get noOrdersFound => 'No Orders Found';
+
+  @override
+  String get unExpectedErrorfound => 'unExpected Error found';
+
+  @override
+  String get flowerOrder => 'Flower order';
+
+  @override
+  String get pickupAddress => 'Pickup address';
+
+  @override
+  String get userAddress => 'User address';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get orderDetailsTitle => 'Order details';
+
+  @override
+  String get arrivedAtPickupPoint => 'Arrived at Pickup point';
+
+  @override
+  String get startDeliver => 'Start deliver';
+
+  @override
+  String get arrivedToUser => 'Arrived to User';
+
+  @override
+  String get deliverToUser => 'Deliver to the user';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get paymentMethod => 'Payment method';
+
+  @override
+  String get statusLabel => 'Status :';
+
+  @override
+  String get orderIdLabel => 'Order ID :';
 }

@@ -84,7 +84,16 @@
 "userAddress": "عنوان المستخدم",
 "egp": "ج.م",
 "reject": "رفض",
-"accept": "قبول"
+"accept": "قبول",
+"orderDetailsTitle": "تفاصيل الطلب",
+  "arrivedAtPickupPoint": "وصلت لمكان الاستلام",
+  "startDeliver": "بدء التوصيل",
+  "arrivedToUser": "وصلت للمستخدم",
+  "deliverToUser": "تسليم للمستخدم",
+  "total": "الإجمالي",
+  "paymentMethod": "طريقة الدفع",
+   "statusLabel": "الحالة :",
+    "orderIdLabel": "رقم الطلب :"
 
 
 

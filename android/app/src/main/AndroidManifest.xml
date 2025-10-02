@@ -5,6 +5,9 @@
     <!-- For accessing the gallery (Android 13 and above) -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+
     <!-- For accessing the camera -->
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -39,10 +42,21 @@
             android:value="2" />
     </application>
 
+
+
     <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
+        </intent>
+        <package android:name="com.whatsapp" />
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
         </intent>
     </queries>
 </manifest>

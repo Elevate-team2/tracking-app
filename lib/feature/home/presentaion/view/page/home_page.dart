@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
@@ -56,12 +57,17 @@ class _HomePageState extends State<HomePage> {
                    
                     if (state.processCompleted == true) {
 
-                      //Navigator to anthor page
                       ScaffoldMessenger.of(context).showSnackBar(
                          SnackBar(
                           content: Text(context.loc.processCompletedSuccessfully),
                         ),
                       );
+                        Navigator.pushNamed(
+                          context,
+                          AppRoute.orderDetails,
+                          arguments: state.remoteData!.orderEntity.id,
+                        );
+
                       state.copyWith(processCompleted: null);
                     }
                     if (state.errorMessage != null) {
