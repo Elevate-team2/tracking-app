@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/feature/profile/domain/entity/driver_info_entity.dart';
 
 part 'driver_info.g.dart';
 
@@ -32,6 +33,16 @@ class DriverInfo {
 
   Map<String, dynamic> toJson() {
     return _$DriverInfoToJson(this);
+  }
+  DriverInfoEntity toEntity(){
+    return DriverInfoEntity(
+      role: role ?? '',
+      Id: Id ?? '',
+      firstName: firstName ?? '',
+      lastName: lastName ??'',
+      gender: gender ?? '',
+      photo: photo ?? '',
+    );
   }
 }
 

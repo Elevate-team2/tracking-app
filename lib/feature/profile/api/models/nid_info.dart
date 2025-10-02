@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/feature/profile/domain/entity/nid_info_entity.dart';
 
 part 'nid_info.g.dart';
 
@@ -20,6 +21,12 @@ class NationalIdInfo {
 
   Map<String, dynamic> toJson() {
     return _$NationalIdInfoToJson(this);
+  }
+  NationalIdInfoEntity toEntity(){
+    return NationalIdInfoEntity(
+      NID: NID ?? '',
+      NIDImg: NIDImg ?? '',
+    );
   }
 }
 

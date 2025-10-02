@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/feature/profile/domain/entity/driver_info_entity.dart';
+
+import '../../domain/entity/driver_contact_info_entity.dart';
 
 part 'driver_contact_info.g.dart';
 
@@ -20,6 +23,12 @@ class DriverContactInfo {
 
   Map<String, dynamic> toJson() {
     return _$DriverContactInfoToJson(this);
+  }
+  DriverContactInfoEntity toEntity() {
+    return DriverContactInfoEntity(
+      email: email ?? '',
+      phone: phone ?? '',
+    );
   }
 }
 

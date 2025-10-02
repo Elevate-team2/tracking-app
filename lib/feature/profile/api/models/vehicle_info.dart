@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/feature/profile/domain/entity/vehicle_info_entity.dart';
 
 part 'vehicle_info.g.dart';
 
@@ -23,6 +24,13 @@ class VehicleInfo {
 
   Map<String, dynamic> toJson() {
     return _$VehicleInfoToJson(this);
+  }
+  VehicleInfoEntity toEntity(){
+    return VehicleInfoEntity(
+      vehicleType: vehicleType ?? '',
+      vehicleNumber: vehicleNumber ?? '',
+      vehicleLicense: vehicleLicense ?? '',
+    );
   }
 }
 
