@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_item_entity.dart';
 import 'package:tracking_app/feature/home/api/models/remote_product_model.dart';
 
@@ -6,14 +7,18 @@ part 'remote_order_item_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RemoteOrderItemModel {
-  @JsonKey(name: "product")
-  RemoteProductModel? product;
-  @JsonKey(name: "price")
-  int? price;
-  @JsonKey(name: "quantity")
-  int? quantity;
-  @JsonKey(name: "_id")
-  String? id;
+  @JsonKey(name: JsonSerlizationConstants.product)
+RemoteProductModel? product;
+
+@JsonKey(name: JsonSerlizationConstants.price)
+int? price;
+
+@JsonKey(name: JsonSerlizationConstants.quantity)
+int? quantity;
+
+@JsonKey(name: JsonSerlizationConstants.id)
+String? id;
+
 
   RemoteOrderItemModel({this.product, this.price, this.quantity, this.id});
 

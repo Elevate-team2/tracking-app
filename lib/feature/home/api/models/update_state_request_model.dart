@@ -3,6 +3,7 @@
 //     final updateStateRequestModel = updateStateRequestModelFromJson(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 
 import 'package:tracking_app/feature/home/domain/entity/start_order_request_entity.dart';
 
@@ -10,7 +11,7 @@ part 'update_state_request_model.g.dart';
 
 @JsonSerializable()
 class UpdateStateRequestModel {
-  @JsonKey(name: "state")
+  @JsonKey(name: JsonSerlizationConstants.state)
   String state;
 
   UpdateStateRequestModel({required this.state});

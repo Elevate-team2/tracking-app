@@ -1,18 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/start_order_item_entity.dart';
 
 part 'update_state_order_items.g.dart';
 
 @JsonSerializable()
 class UpdateStateOrderItems {
-  @JsonKey(name: "product")
-  String product;
-  @JsonKey(name: "price")
-  int price;
-  @JsonKey(name: "quantity")
-  int quantity;
-  @JsonKey(name: "_id")
-  String id;
+  @JsonKey(name: JsonSerlizationConstants.product)
+  final String product;
+
+  @JsonKey(name: JsonSerlizationConstants.price)
+  final int price;
+
+  @JsonKey(name: JsonSerlizationConstants.quantity)
+  final int quantity;
+
+  @JsonKey(name: JsonSerlizationConstants.id)
+  final String id;
 
   UpdateStateOrderItems({
     required this.product,

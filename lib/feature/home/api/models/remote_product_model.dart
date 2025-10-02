@@ -1,45 +1,63 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/product_entity.dart';
 part 'remote_product_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RemoteProductModel {
-  @JsonKey(name: "_id")
-  String? id;
-  @JsonKey(name: "title")
-  String? title;
-  @JsonKey(name: "slug")
-  String? slug;
-  @JsonKey(name: "description")
-  String? description;
-  @JsonKey(name: "imgCover")
-  String? imgCover;
-  @JsonKey(name: "images")
-  List<String>? images;
-  @JsonKey(name: "price")
-  int? price;
-  @JsonKey(name: "priceAfterDiscount")
-  int? priceAfterDiscount;
-  @JsonKey(name: "quantity")
-  int? quantity;
-  @JsonKey(name: "category")
-  String? category;
-  @JsonKey(name: "occasion")
-  String? occasion;
-  @JsonKey(name: "createdAt")
-  String? createdAt;
-  @JsonKey(name: "updatedAt")
-  String? updatedAt;
-  @JsonKey(name: "__v")
-  int? v;
-  @JsonKey(name: "isSuperAdmin")
-  bool? isSuperAdmin;
-  @JsonKey(name: "sold")
-  int? sold;
-  @JsonKey(name: "rateAvg")
-  int? rateAvg;
-  @JsonKey(name: "rateCount")
-  int? rateCount;
+ @JsonKey(name: JsonSerlizationConstants.id)
+String? id;
+
+@JsonKey(name: JsonSerlizationConstants.title)
+String? title;
+
+@JsonKey(name: JsonSerlizationConstants.slug)
+String? slug;
+
+@JsonKey(name: JsonSerlizationConstants.description)
+String? description;
+
+@JsonKey(name: JsonSerlizationConstants.imgCover)
+String? imgCover;
+
+@JsonKey(name: JsonSerlizationConstants.images)
+List<String>? images;
+
+@JsonKey(name: JsonSerlizationConstants.price)
+int? price;
+
+@JsonKey(name: JsonSerlizationConstants.priceAfterDiscount)
+int? priceAfterDiscount;
+
+@JsonKey(name: JsonSerlizationConstants.quantity)
+int? quantity;
+
+@JsonKey(name: JsonSerlizationConstants.category)
+String? category;
+
+@JsonKey(name: JsonSerlizationConstants.occasion)
+String? occasion;
+
+@JsonKey(name: JsonSerlizationConstants.createdAt)
+String? createdAt;
+
+@JsonKey(name: JsonSerlizationConstants.updatedAt)
+String? updatedAt;
+
+@JsonKey(name: JsonSerlizationConstants.v)
+int? v;
+
+@JsonKey(name: JsonSerlizationConstants.isSuperAdmin)
+bool? isSuperAdmin;
+
+@JsonKey(name: JsonSerlizationConstants.sold)
+int? sold;
+
+@JsonKey(name: JsonSerlizationConstants.rateAvg)
+int? rateAvg;
+
+@JsonKey(name: JsonSerlizationConstants.rateCount)
+int? rateCount;
 
   RemoteProductModel({
     this.id,

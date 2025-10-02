@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/api/models/update_state_order_items.dart';
 import 'package:tracking_app/feature/home/domain/entity/start_order_response_entity.dart';
 
@@ -6,30 +7,41 @@ part 'update_state_order_model.g.dart';
 
 @JsonSerializable()
 class UpdateStateOrderModel {
-  @JsonKey(name: "_id")
-  String id;
-  @JsonKey(name: "user")
-  String user;
-  @JsonKey(name: "orderItems")
-  List<UpdateStateOrderItems> orderItems;
-  @JsonKey(name: "totalPrice")
-  int totalPrice;
-  @JsonKey(name: "paymentType")
-  String paymentType;
-  @JsonKey(name: "isPaid")
-  bool isPaid;
-  @JsonKey(name: "isDelivered")
-  bool isDelivered;
-  @JsonKey(name: "state")
-  String state;
-  @JsonKey(name: "createdAt")
-  DateTime createdAt;
-  @JsonKey(name: "updatedAt")
-  DateTime updatedAt;
-  @JsonKey(name: "orderNumber")
-  String orderNumber;
-  @JsonKey(name: "__v")
-  int v;
+ @JsonKey(name: JsonSerlizationConstants.id)
+  final String id;
+
+  @JsonKey(name: JsonSerlizationConstants.user)
+  final String user;
+
+  @JsonKey(name: JsonSerlizationConstants.orderItems)
+  final List<UpdateStateOrderItems> orderItems;
+
+  @JsonKey(name: JsonSerlizationConstants.totalPrice)
+  final int totalPrice;
+
+  @JsonKey(name: JsonSerlizationConstants.paymentType)
+  final String paymentType;
+
+  @JsonKey(name: JsonSerlizationConstants.isPaid)
+  final bool isPaid;
+
+  @JsonKey(name: JsonSerlizationConstants.isDelivered)
+  final bool isDelivered;
+
+  @JsonKey(name: JsonSerlizationConstants.state)
+  final String state;
+
+  @JsonKey(name: JsonSerlizationConstants.createdAt)
+  final DateTime createdAt;
+
+  @JsonKey(name: JsonSerlizationConstants.updatedAt)
+  final DateTime updatedAt;
+
+  @JsonKey(name: JsonSerlizationConstants.orderNumber)
+  final String orderNumber;
+
+  @JsonKey(name: JsonSerlizationConstants.v)
+  final int v;
 
   UpdateStateOrderModel({
     required this.id,

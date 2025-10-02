@@ -1,14 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 part 'metadata_model.g.dart';
 @JsonSerializable()
 class MetadataModel {
-    @JsonKey(name: "currentPage")
+    @JsonKey(name: JsonSerlizationConstants.currentPage)
     int? currentPage;
-    @JsonKey(name: "totalPages")
+    @JsonKey(name: JsonSerlizationConstants.totalPages)
     int? totalPages;
-    @JsonKey(name: "totalItems")
+    @JsonKey(name: JsonSerlizationConstants.totalItems)
     int? totalItems;
-    @JsonKey(name: "limit")
+    @JsonKey(name: JsonSerlizationConstants.limit)
     int? limit;
 
     MetadataModel({

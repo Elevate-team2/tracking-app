@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/api/models/remote_order_item_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_shipping_address_model.dart';
@@ -10,36 +11,51 @@ part 'remote_order_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RemoteOrderModel {
-  @JsonKey(name: "_id")
-  String? id;
-  @JsonKey(name: "user")
-  RemoteUserModel? user;
-  @JsonKey(name: "orderItems")
-  List<RemoteOrderItemModel>? orderItems;
-  @JsonKey(name: "totalPrice")
-  int? totalPrice;
-  @JsonKey(name: "shippingAddress")
-  RemoteShippingAddressModel? shippingAddress;
-  @JsonKey(name: "paymentType")
-  String? paymentType;
-  @JsonKey(name: "isPaid")
-  bool? isPaid;
-  @JsonKey(name: "paidAt")
-  String? paidAt;
-  @JsonKey(name: "isDelivered")
-  bool? isDelivered;
-  @JsonKey(name: "state")
-  String? state;
-  @JsonKey(name: "createdAt")
-  String? createdAt;
-  @JsonKey(name: "updatedAt")
-  String? updatedAt;
-  @JsonKey(name: "orderNumber")
-  String? orderNumber;
-  @JsonKey(name: "__v")
-  int? v;
-  @JsonKey(name: "store")
-  RemoteStoreModel? store;
+  @JsonKey(name: JsonSerlizationConstants.id)
+String? id;
+
+@JsonKey(name: JsonSerlizationConstants.user)
+RemoteUserModel? user;
+
+@JsonKey(name: JsonSerlizationConstants.orderItems)
+List<RemoteOrderItemModel>? orderItems;
+
+@JsonKey(name: JsonSerlizationConstants.totalPrice)
+int? totalPrice;
+
+@JsonKey(name: JsonSerlizationConstants.shippingAddress)
+RemoteShippingAddressModel? shippingAddress;
+
+@JsonKey(name: JsonSerlizationConstants.paymentType)
+String? paymentType;
+
+@JsonKey(name: JsonSerlizationConstants.isPaid)
+bool? isPaid;
+
+@JsonKey(name: JsonSerlizationConstants.paidAt)
+String? paidAt;
+
+@JsonKey(name: JsonSerlizationConstants.isDelivered)
+bool? isDelivered;
+
+@JsonKey(name: JsonSerlizationConstants.state)
+String? state;
+
+@JsonKey(name: JsonSerlizationConstants.createdAt)
+String? createdAt;
+
+@JsonKey(name: JsonSerlizationConstants.updatedAt)
+String? updatedAt;
+
+@JsonKey(name: JsonSerlizationConstants.orderNumber)
+String? orderNumber;
+
+@JsonKey(name: JsonSerlizationConstants.v)
+int? v;
+
+@JsonKey(name: JsonSerlizationConstants.store)
+RemoteStoreModel? store;
+
 
   RemoteOrderModel({
     this.id,
@@ -65,15 +81,16 @@ class RemoteOrderModel {
   Map<String, dynamic> toJson() => _$RemoteOrderModelToJson(this);
 
   OrderEntity toEntity() {
+
     return OrderEntity(
       id: id ?? '',
-      user: user!.toEntity(),
+      user: RemoteUserModel.toEntity(user),
       orderItems: orderItems?.map((order) => order.toEntity()).toList()??[],
       orderInfoEntity: OrderInfoEntity(isDelivered ?? false,  state ?? '',  
       orderNumber ?? '', createdAt ?? '', updatedAt ?? '',  v ?? -1,  totalPrice ?? 0),
       shippingAddress: RemoteShippingAddressModel.toEntity(shippingAddress),
       paymentInfoEntity: PaymentInfoEntity( paymentType ?? '',  paidAt ?? '',  isPaid ?? false,),
-      store: store!.toEntity(),
+      store: RemoteStoreModel.toEntity(store),
       
     );
   }

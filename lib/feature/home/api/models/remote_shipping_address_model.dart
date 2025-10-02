@@ -1,20 +1,26 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/shipping_address_entity.dart';
 
 part 'remote_shipping_address_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class RemoteShippingAddressModel {
-  @JsonKey(name: "street")
-  String? street;
-  @JsonKey(name: "city")
-  String? city;
-  @JsonKey(name: "phone")
-  String? phone;
-  @JsonKey(name: "lat")
-  String? lat;
-  @JsonKey(name: "long")
-  String? long;
+@JsonKey(name: JsonSerlizationConstants.street)
+String? street;
+
+@JsonKey(name: JsonSerlizationConstants.city)
+String? city;
+
+@JsonKey(name: JsonSerlizationConstants.phone)
+String? phone;
+
+@JsonKey(name: JsonSerlizationConstants.lat)
+String? lat;
+
+@JsonKey(name: JsonSerlizationConstants.long)
+String? long;
+
 
   RemoteShippingAddressModel({
     this.street,

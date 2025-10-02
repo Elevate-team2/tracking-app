@@ -3,6 +3,7 @@
 //     final updateStateResponseModel = updateStateResponseModelFromJson(jsonString);
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/api/models/update_state_order_model.dart';
 import 'dart:convert';
 
@@ -17,9 +18,9 @@ String updateStateResponseModelToJson(UpdateStateResponseModel data) =>
 
 @JsonSerializable()
 class UpdateStateResponseModel {
-  @JsonKey(name: "message")
+  @JsonKey(name: JsonSerlizationConstants.message)
   String message;
-  @JsonKey(name: "orders")
+  @JsonKey(name: JsonSerlizationConstants.orders)
   UpdateStateOrderModel orders;
 
   UpdateStateResponseModel({required this.message, required this.orders});
