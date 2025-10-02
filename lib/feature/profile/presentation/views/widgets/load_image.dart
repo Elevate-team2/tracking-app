@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';

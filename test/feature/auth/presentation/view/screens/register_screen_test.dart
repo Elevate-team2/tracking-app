@@ -107,5 +107,6 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
       expect(find.text(l10n.sucessApply), findsOneWidget);
     });
+
   });
 }

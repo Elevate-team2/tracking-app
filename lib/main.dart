@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/app_language_config/app_language_config.dart';
@@ -68,8 +67,8 @@ class _MyAppState extends State<MyApp> {
             );
           }
 
-          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
-          final initialRoute = isLoggedIn ? AppRoute.home : AppRoute.onBoarding;
+          //final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
+          //final initialRoute = isLoggedIn ? AppRoute.home : AppRoute.onBoarding;
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
