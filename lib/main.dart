@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/app_language_config/app_language_config.dart';
@@ -16,13 +15,13 @@ void main() async {
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
   runApp(
-    DevicePreview(
-    builder: (context) =>
+   // DevicePreview(
+   // builder: (context) =>
     ChangeNotifierProvider.value(
       value: getIt.get<AppLanguageConfig>(),
       child: const MyApp(),
     ),
-    ),
+    //),
   );
 }
 
@@ -68,8 +67,10 @@ class _MyAppState extends State<MyApp> {
             );
           }
 
-          final isLoggedIn = snapshot.hasData ? snapshot.data! : false;
-          final initialRoute = isLoggedIn ? AppRoute.home : AppRoute.onBoarding;
+          final isLoggedIn = snapshot.hasData ?
+          snapshot.data! : false;
+          final initialRoute = isLoggedIn ?
+          AppRoute.home : AppRoute.onBoarding;
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
@@ -79,6 +80,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: AppLocalizations.supportedLocales,
             locale: Locale(appLanguageConfig.selectedLocal),
             theme: AppTheme.lightTheme,
+
             onGenerateRoute: Routes.onGenerate,
           );
         },

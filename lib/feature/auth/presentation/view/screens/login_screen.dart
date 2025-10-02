@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           return Scaffold(
-            key:const Key(AppWidgetsKeys.loginScreen),
+            key: const Key(AppWidgetsKeys.loginScreen),
             appBar: AppBar(
               leading: IconButton(
                 onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.onBoarding),
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomTxtField(
-                        hintTxt: context.loc.enterYourEmail,
+                        hintTxt: context.loc.enterEmail,
                         lbl: context.loc.email,
                         controller: emailController,
                         validator: Validator.validateEmail,
@@ -133,27 +133,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       SizedBox(height: context.setHight(20)),
-                      SizedBox(
-                        height: context.setHight(50),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<LoginBloc>().add(
-                                GetLoginEvent(
-                                  LoginRequest(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text.trim(),
-                                  ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<LoginBloc>().add(
+                              GetLoginEvent(
+                                LoginRequest(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
                                 ),
-                              );
-                            }
-                          },
-                          child: Text(
-                            context.loc.continue1,
-                            style: getMediumStyle(
-                              color: AppColors.white,
-                              fontSize: context.setSp(FontSize.s20),
-                            ),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          context.loc.continueBtn,
+                          style: getMediumStyle(
+                            color: AppColors.white,
+                            fontSize: context.setSp(FontSize.s20),
                           ),
                         ),
                       ),

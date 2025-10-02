@@ -47,10 +47,14 @@
   "country": "Country",
   "firstnameLabel": "First legal name",
   "secondnameLabel": "Second legal name",
+
   "vehicleType": "Vehicle Type",
   "vehicleTypeFieldError": "Please select vehicle type",
   "vehicleNumber": "Vehicle number",
+  "vehicleNumberRequired": "Vehicle Number Required",
+  "vehicleLicense": "Vehicle License",
   "uploadLicense": "Upload license photo",
+
 
   "phone": "Phone number",
   "nid": "ID number",
@@ -62,7 +66,7 @@
   "gender": "Gender",
   "female": "Female",
   "male": "Male",
-  "continueBtn": "Continue",
+
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
   "sucessApply":"sucessApply",

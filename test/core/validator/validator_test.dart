@@ -118,5 +118,26 @@ void main() {
         expect(Validator.validatePhoneNumber('01234567890'), null);
       });
     });
+    group('validateNumber', () {
+      test('returns fieldRequired when value is null', () {
+        expect(Validator.validateNumber(null), Validator.fieldRequired);
+      });
+
+      test('returns fieldRequired when value is empty', () {
+        expect(Validator.validateNumber(''), Validator.fieldRequired);
+      });
+
+      test('returns error when value is not numeric', () {
+        expect(Validator.validateNumber('abc'), 'Enter numbers only');
+      });
+
+      test('returns null when value is numeric', () {
+        expect(Validator.validateNumber('123'), null);
+      });
+
+      test('trims input before parsing', () {
+        expect(Validator.validateNumber('   42   '), null);
+      });
+    });
   });
 }
