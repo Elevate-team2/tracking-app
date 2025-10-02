@@ -11,8 +11,8 @@ abstract class JsonSerlizationConstants {
   static const String lastName = "lastName";
   static const String vehicleType = "vehicleType";
   static const String vehicleNumber = "vehicleNumber";
-  static const String nid = "n_id";
-  static const String nidImg = "n_id_img";
+  static const String nid = "NID";
+  static const String nidImg = "NIDImg";
   static const String vehicleLicense = "vehicleLicense";
   static const String gender = "gender";
   static const String phone = "phone";

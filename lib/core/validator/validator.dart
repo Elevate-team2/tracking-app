@@ -76,5 +76,15 @@ class Validator {
       return null;
     }
   }
+  static String? validateNumber(String? val) {
+    if (val == null || val.isEmpty) {
+      return fieldRequired;
+    } else if (int.tryParse(val.trim()) == null) {
+      return 'Enter numbers only';
+    }
+    else {
+      return null;
+    }
+  }
 }
 

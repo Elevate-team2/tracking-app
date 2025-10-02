@@ -44,7 +44,7 @@ void main() {
           child: const ApplyScreen(),
         ),
         routes: {
-      AppRoute.loginRoute: (_) => const Scaffold(
+      AppRoute.approveScreen: (_) => const Scaffold(
             body: Text('Login Screen'),
           ),
     },
@@ -65,7 +65,7 @@ void main() {
 
       expect(find.byType(TextFormField), findsWidgets);
       expect(find.text("First legal name"), findsOneWidget);
-      expect(find.text("Second legal name"), findsOneWidget);
+      expect(find.text("Second legal name"), findsNWidgets(1));
       expect(find.text("Email"), findsOneWidget);
       expect(find.text("Phone number"), findsOneWidget);
     });
@@ -89,7 +89,8 @@ void main() {
     });
 
     testWidgets("Show SnackBar on success", (tester) async {
-      final l10n = await AppLocalizations.delegate.load(const Locale('en'));
+      final l10n = await AppLocalizations.delegate.
+      load(const Locale('en'));
 
       when(
         mockApplyBloc.state,

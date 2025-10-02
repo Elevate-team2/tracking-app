@@ -36,6 +36,7 @@ case (AppRoute.loginRoute):
         return MaterialPageRoute(builder: (context)=>
         const    OnBoarddingScreen());
 
+
       case AppRoute.forgetPasswordScreen:
        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
 

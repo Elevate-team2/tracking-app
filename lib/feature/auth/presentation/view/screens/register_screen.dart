@@ -10,7 +10,12 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
+import 'package:tracking_app/core/validator/validator.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/auth_info.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/location_info.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/personal_info.dart';
+import 'package:tracking_app/feature/auth/api/models/apply/request/vehicle_info.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
@@ -97,7 +102,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
             Expanded(
               child: file == null
                   ? Text(label, style: const TextStyle(color: Colors.grey))
-                  : Image.file(file, height: 60, fit: BoxFit.cover),
+                  : Image.file(file, height: 60,
+                  fit: BoxFit.cover),
             ),
             const Icon(Icons.upload, color: Colors.black54),
           ],
@@ -121,6 +127,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(context.loc.sucessApply)));
+            Navigator.of(context).pushNamed(AppRoute.approveScreen);
+          }
+          if (state.applyState == RequestState.error) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.applyErrorMessage!)));
             Navigator.of(context).pushNamed(AppRoute.loginRoute);
           }
         },
@@ -256,6 +268,16 @@ class _ApplyScreenState extends State<ApplyScreen> {
                       ),
                       SizedBox(height: sh * 0.02),
 
+                      TextFormField(
+                        controller: vehicleNumberCtrl,
+                        decoration: InputDecoration(
+                          labelText: context.loc.vehicleNumber,
+                          border: const OutlineInputBorder(),
+                        ),
+                        validator: Validator.validateNumber,
+                      ),
+                      SizedBox(height: sh * 0.02),
+
                       // Upload License
                       _buildUploadBox(
                         label: context.loc.uploadLicense,
@@ -314,8 +336,14 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         file: nidImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null) setState(() => nidImg = file);
-                        },
+                          if (file != null)
+                            {
+                            setState(() {
+                              nidImg=file;
+
+                            });
+                            }
+                        }
                       ),
                       SizedBox(height: sh * 0.02),
 
@@ -337,7 +365,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         controller: confirmPasswordCtrl,
                         obscureText: true,
                         decoration: InputDecoration(
-                          labelText: context.loc.rePassword,
+                          labelText: context.loc.resetPasswordSubtitle,
                           border: const OutlineInputBorder(),
                         ),
                         validator: (val) {
@@ -396,19 +424,44 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             context.read<ApplyBloc>().add(
                               GetApplyEvent(
                                 ApplyRequest(
-                                  country: country,
-                                  firstName: firstNameCtrl.text,
-                                  lastName: lastNameCtrl.text,
-                                  vehicleType: vehicleType,
-                                  vehicleNumber: vehicleNumberCtrl.text,
-                                  nid: nidCtrl.text,
-                                  email: emailCtrl.text,
-                                  nidimg: nidImg,
-                                  vehicleLicense: vehicleLicenseImg,
-                                  password: passwordCtrl.text,
-                                  rePassword: confirmPasswordCtrl.text,
-                                  gender: gender,
-                                  phone: phoneCtrl.text,
+
+                                  authenticationInfo: AuthenticationInfo(
+                                    password: passwordCtrl.text,
+                                    rePassword: confirmPasswordCtrl.text,
+                                  ),
+                                  locationInfo: LocationInfo(
+                                    country: country,
+
+                                  ),
+                                  personalInfo: PersonalInfo(
+                                    gender: gender,
+                                    phone: phoneCtrl.text,
+                                    nid: nidCtrl.text,
+                                    email: emailCtrl.text,
+                                    nidimg: nidImg,
+
+                                    firstName: firstNameCtrl.text,
+                                    lastName: lastNameCtrl.text,
+                                  ),
+                                  vehicleInfo: VehicleInfo(
+                                    vehicleType: vehicleType,
+                                    vehicleNumber: vehicleNumberCtrl.text,
+                                    vehicleLicense: vehicleLicenseImg,
+                                  ),
+
+                                  // country: country,
+                                  // firstName: firstNameCtrl.text,
+                                  // lastName: lastNameCtrl.text,
+                                  // vehicleType: vehicleType,
+                                  // vehicleNumber: vehicleNumberCtrl.text,
+                                  // nid: nidCtrl.text,
+                                  // email: emailCtrl.text,
+                                  // nidimg: nidImg,
+                                  // vehicleLicense: vehicleLicenseImg,
+                                  // password: passwordCtrl.text,
+                                  // rePassword: confirmPasswordCtrl.text,
+                                  // gender: gender,
+                                  // phone: phoneCtrl.text,
                                 ),
                               ),
                             );

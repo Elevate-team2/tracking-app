@@ -2,22 +2,22 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/config/network/token_interceptor.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:tracking_app/core/interceptors/token_interceptor.dart';
 
 
 @module
 abstract class DioModule {
   @lazySingleton
   Dio provieDio(
-      TokenInterceptor tokenInterceptor,
+      
       ) {
     final dio = Dio();
     dio.interceptors.add(getIt.get<PrettyDioLogger>());
     dio.options.headers = {Constants.contentType: Constants.appJson};
     dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
-    dio.interceptors.add(tokenInterceptor);
+     dio.interceptors.add(TokenInterceptor());
 
     return dio;
   }
