@@ -35,6 +35,7 @@ import 'package:tracking_app/core/theme/app_colors.dart';
           textStyle: GoogleFonts.roboto(
             fontSize: 20,
             fontWeight: FontWeight.w500,
+            color: AppColors.white,
           ),
         ),
       ),

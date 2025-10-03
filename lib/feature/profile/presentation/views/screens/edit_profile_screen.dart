@@ -15,9 +15,8 @@ import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
-import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_bloc.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/gender_section.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/profile_photo_section.dart';
 
@@ -76,14 +75,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           if (state.editProfileRequestState == RequestState.success) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                  key:const Key(AppWidgetsKeys.profileUpdatedSnackBar),
-                  content: Text(context.loc.profileUpdated)),
+                key: const Key(AppWidgetsKeys.profileUpdatedSnackBar),
+                content: Text(context.loc.profileUpdated),
+              ),
             );
           } else if (state.editProfileRequestState == RequestState.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                  key:const Key(AppWidgetsKeys.errorSnackBarEditProfile),
-                  content: Text(state.editProfileErrorMessage ?? context.loc.error)),
+                key: const Key(AppWidgetsKeys.errorSnackBarEditProfile),
+                content: Text(
+                  state.editProfileErrorMessage ?? context.loc.error,
+                ),
+              ),
             );
           }
         },
@@ -93,7 +96,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               key: const Key(AppWidgetsKeys.editProfileAppBar),
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.profile),
+                onPressed: () =>
+                    Navigator.of(context).popAndPushNamed(AppRoute.profile),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
                   child: Icon(Icons.arrow_back_ios, size: context.setWidth(20)),
@@ -174,7 +178,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         label: Text(context.loc.password),
                         suffix: InkWell(
                           key: const Key(AppWidgetsKeys.changePasswordButton),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(
+                              context,
+                            ).pushNamed(AppRoute.changePasswordScreen);
+                          },
                           child: Text(
                             context.loc.changePassword,
                             style: getRegularStyle(
@@ -200,20 +208,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           key: const Key(AppWidgetsKeys.editButton),
                           style: AppTheme.lightTheme.elevatedButtonTheme.style
                               ?.copyWith(
-                            backgroundColor: WidgetStatePropertyAll(
-                              (!_hasChanges())
-                                  ? AppColors.black[30]
-                                  : AppColors.pink,
-                            ),
-                          ),
+                                backgroundColor: WidgetStatePropertyAll(
+                                  (!_hasChanges())
+                                      ? AppColors.black[30]
+                                      : AppColors.pink,
+                                ),
+                              ),
                           onPressed: () {
                             if (!_formKey.currentState!.validate()) return;
 
                             if (!_hasChanges()) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  key:const Key(AppWidgetsKeys.noChangesSnackBar),
-                                    content: Text(context.loc.noChanges)),
+                                  key: const Key(
+                                    AppWidgetsKeys.noChangesSnackBar,
+                                  ),
+                                  content: Text(context.loc.noChanges),
+                                ),
                               );
                               return;
                             }

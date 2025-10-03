@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/app_language_config/app_language_config.dart';
@@ -16,14 +17,14 @@ void main() async {
   await configureDependencies();
   await getIt.get<AppLanguageConfig>().setSelectedLocal();
   runApp(
-   // DevicePreview(
-   // builder: (context) =>
+    DevicePreview(
+    builder: (context) =>
     ChangeNotifierProvider.value(
       value: getIt.get<AppLanguageConfig>(),
       child:  DevicePreview(
         builder:(context)=> MyApp()),
     ),
-    //),
+    ),
   );
 }
 

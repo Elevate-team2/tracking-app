@@ -13,5 +13,6 @@ abstract class AppRoute {
 
   static const editProfileScreen="editProfile";
   static const editVechicalScreen="editVehical";
+  static const changePasswordScreen="changePassword";
 
 }

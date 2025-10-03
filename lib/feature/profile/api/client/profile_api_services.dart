@@ -8,6 +8,9 @@ import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edi
 import 'package:tracking_app/feature/profile/api/models/edit_profile/response/edit_profile_response.dart';
 import 'package:tracking_app/feature/profile/api/models/get_logged_user_response.dart';
 
+import '../models/change_password_request.dart';
+import '../models/change_password_response.dart';
+
 part 'profile_api_services.g.dart';
 
 
@@ -28,5 +31,10 @@ abstract class ProfileApiServices {
   @PUT(EndPointsConstants.editDriverProfile)
   Future<EditProfileResponse> editProfile(@Body() EditProfileRequest request);
 
+
+  @PATCH(EndPointsConstants.changePassword)
+  Future<ChangePasswordResponse> changePassword(
+      @Body() ChangePasswordRequest request,
+      );
 
 }

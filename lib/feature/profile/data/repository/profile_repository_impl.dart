@@ -6,6 +6,8 @@ import 'package:tracking_app/feature/profile/data/data_source/profile_remote_dat
 import 'package:tracking_app/feature/profile/domain/entity/edit_profile_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/domain/repository/profile_repository.dart';
+import 'package:tracking_app/feature/profile/api/models/change_password_request.dart';
+import 'package:tracking_app/feature/profile/api/models/change_password_response.dart';
 
 @Injectable(as: ProfileRepository)
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -30,5 +32,13 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<Result<EditProfileEntity>> editProfile(EditProfileRequest request) async{
     return await _profileRemoteDataSource.editProfile(request);
+    
+  }
+
+
+   @override
+  Future<Result<ChangePasswordResponse>> changePassword(ChangePasswordRequest request) async {
+   return await _profileRemoteDataSource.changePassword(request);
+
   }
 }

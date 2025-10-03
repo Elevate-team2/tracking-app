@@ -24,8 +24,8 @@ import 'package:tracking_app/feature/auth/api/data_source/local/user_local_stora
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/get_logged_driver.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/logout_driver.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/profile_event.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/profile_state.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_view_model/profile_event.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/profile_view_model/profile_state.dart';
 
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {

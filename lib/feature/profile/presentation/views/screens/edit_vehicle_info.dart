@@ -18,7 +18,7 @@ import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_mod
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
-import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_bloc.dart';
+import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/load_image.dart';
 
 class EditVehicleInfo extends StatefulWidget {

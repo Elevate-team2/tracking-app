@@ -12,8 +12,10 @@ import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_sc
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
-import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
+
+import '../../feature/profile/presentation/views/screens/change_password.dart';
+
 
 abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -89,6 +91,12 @@ abstract class Routes {
             return EditVehicleInfo(user: user,);
           },
         );
+
+      case (AppRoute.changePasswordScreen):
+        return MaterialPageRoute(
+            builder: (context){
+              return const ChangePasswordScreen();
+            });
 
       default:
         return MaterialPageRoute(

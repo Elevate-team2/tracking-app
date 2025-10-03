@@ -15,4 +15,6 @@ static const String signinEndPoint="drivers/signin";
   static const String uploadDriverPhoto = "drivers/upload-photo";
   static const String editDriverProfile = "drivers/editProfile";
 
+  // change password
+  static const String changePassword = "drivers/change-password";
  }
