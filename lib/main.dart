@@ -46,7 +46,6 @@ class _MyAppState extends State<MyApp> {
   void _initializeApp() {
     _loginFuture = UserLocalStorageImpl().isLoggedIn();
   }
-
   @override
   Widget build(BuildContext context) {
     final appLanguageConfig = Provider.of<AppLanguageConfig>(context);

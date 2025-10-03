@@ -80,7 +80,8 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
             appBar: AppBar(
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).
+                pop(true),
                 icon: Icon(
                   Icons.arrow_back_ios_new_outlined,
                   size: context.setSp(24),

@@ -92,7 +92,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               key: const Key(AppWidgetsKeys.editProfileAppBar),
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.profile),
+                onPressed: () =>
+                    Navigator.of(context).
+                    pop(
+                      true
+                    ),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
                   child: Icon(Icons.arrow_back_ios, size: context.setWidth(20)),

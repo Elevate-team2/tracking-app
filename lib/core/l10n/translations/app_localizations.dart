@@ -404,6 +404,12 @@ abstract class AppLocalizations {
   /// **'Upload ID image'**
   String get uploadNid;
 
+  /// No description provided for @rePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get rePassword;
+
   /// No description provided for @gender.
   ///
   /// In en, this message translates to:
@@ -437,26 +443,56 @@ abstract class AppLocalizations {
   /// No description provided for @sucessApply.
   ///
   /// In en, this message translates to:
-  /// **'sucess Apply'**
+  /// **'sucessApply'**
   String get sucessApply;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @confirmLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Logout'**
+  String get confirmLogout;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @vehicalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehical info'**
+  String get vehicalInfo;
 
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:
   /// **'Edit profile'**
   String get editProfile;
-
-  /// No description provided for @vehicleNumberRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Vehicle Number Required'**
-  String get vehicleNumberRequired;
-
-  /// No description provided for @vehicleLicense.
-  ///
-  /// In en, this message translates to:
-  /// **'Vehicle License'**
-  String get vehicleLicense;
 
   /// No description provided for @update.
   ///
@@ -577,6 +613,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Order ID :'**
   String get orderIdLabel;
+
+  /// No description provided for @editProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfileTitle;
+
+  /// No description provided for @profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profileUpdated;
+
+  /// No description provided for @noChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes detected'**
+  String get noChanges;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get changePassword;
+
+  /// No description provided for @noImageSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No image selected'**
+  String get noImageSelected;
+
+  /// No description provided for @failedToPickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image'**
+  String get failedToPickImage;
+
+  /// No description provided for @updateVehicleInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ update Vehicle Information'**
+  String get updateVehicleInformation;
 }
 
 class _AppLocalizationsDelegate

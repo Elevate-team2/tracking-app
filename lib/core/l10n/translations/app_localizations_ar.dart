@@ -40,10 +40,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resend => 'إعادة إرسال';
 
   @override
-  String get success => 'تم بنجاح ✅';
+  String get success => 'تم بنجاح :white_check_mark:';
 
   @override
-  String get error => 'خطأ ❌';
+  String get error => 'خطأ :x:';
 
   @override
   String get resetPasswordTitle => 'إعادة تعيين كلمة المرور';
@@ -95,7 +95,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rememberMe => 'ذكرنى';
 
   @override
-  String get successLogin => '✅ تم تسجيل الدخول بنجاح';
+  String get successLogin => ':white_check_mark: تم تسجيل الدخول بنجاح';
 
   @override
   String get submitted => 'تم إرسال طلبك بنجاح!';
@@ -123,7 +123,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcomText => 'مرحبا بكم \n في تطبيق الارسال';
 
   @override
-  String get welcome => 'مرحباً بك';
+  String get welcome => 'أهلاً بيك!!';
 
   @override
   String get questionInRegister => 'عايز تبقى دليفري؟\nانضم لينا';
@@ -132,10 +132,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country => 'الدولة';
 
   @override
-  String get firstnameLabel => 'الاسم الأول';
+  String get firstnameLabel => 'الاسم الأول القانوني';
 
   @override
-  String get secondnameLabel => 'الاسم التاني';
+  String get secondnameLabel => 'الاسم الثاني القانوني';
 
   @override
   String get vehicleType => 'نوع المركبة';
@@ -147,10 +147,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vehicleNumber => 'رقم المركبة';
 
   @override
-  String get vehicleNumberRequired => 'مطلوب رقم المركبة';
+  String get vehicleNumberRequired => 'مطلوب رقم المركبة ';
 
   @override
-  String get vehicleLicense => 'رخصة القيادة';
+  String get vehicleLicense => 'رخصة القيادة ';
 
   @override
   String get uploadLicense => 'ارفع صورة الرخصة';
@@ -165,6 +165,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get uploadNid => 'ارفع صورة البطاقة';
 
   @override
+  String get rePassword => 'تأكيد كلمة المرور';
+
+  @override
   String get gender => 'النوع';
 
   @override
@@ -174,17 +177,116 @@ class AppLocalizationsAr extends AppLocalizations {
   String get male => 'ذكر';
 
   @override
-  String get pleaseUploadBothImages => 'من فضلك ارفع الصورتين';
+  String get pleaseUploadBothImages => 'من فضلك قم برفع الصورتين';
 
   @override
   String get required => 'مطلوب';
 
   @override
-  String get sucessApply => 'Success Apply';
+  String get sucessApply => 'نجحت عمليه التسجيل';
 
   @override
-  String get editProfile => 'تعديل الملف الشخصى';
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get confirmLogout => 'تأكيد تسجيل الخروج';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get vehicalInfo => 'معلومات المركبة';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصى ';
 
   @override
   String get update => 'تحديث';
+
+  @override
+  String get floweryRider => 'موصل الزهور';
+
+  @override
+  String get processCompletedSuccessfully => 'تمت العملية بنجاح';
+
+  @override
+  String get noOrdersFound => 'لا توجد طلبات';
+
+  @override
+  String get unExpectedErrorfound => 'حدث خطأ غير متوقع';
+
+  @override
+  String get flowerOrder => 'طلب زهور';
+
+  @override
+  String get pickupAddress => 'عنوان الاستلام';
+
+  @override
+  String get userAddress => 'عنوان المستخدم';
+
+  @override
+  String get egp => 'ج.م';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get orderDetailsTitle => 'تفاصيل الطلب';
+
+  @override
+  String get arrivedAtPickupPoint => 'وصلت لمكان الاستلام';
+
+  @override
+  String get startDeliver => 'بدء التوصيل';
+
+  @override
+  String get arrivedToUser => 'وصلت للمستخدم';
+
+  @override
+  String get deliverToUser => 'تسليم للمستخدم';
+
+  @override
+  String get total => 'الإجمالي';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get statusLabel => 'الحالة :';
+
+  @override
+  String get orderIdLabel => 'رقم الطلب :';
+
+  @override
+  String get editProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get profileUpdated => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get noChanges => 'لا يوجد تغييرات';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get noImageSelected => 'لم يتم اختيار صورة';
+
+  @override
+  String get failedToPickImage => 'فشل في اختيار الصورة';
+
+  @override
+  String get updateVehicleInformation => '✅ تم تحديث معلومات المركبه';
 }
