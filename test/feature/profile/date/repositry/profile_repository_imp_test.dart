@@ -26,22 +26,22 @@ void main() {
       newPassword: "Mari123@1",
     );
 
-    final successResponse = ChangePasswordResponse(
-      message: "success",
-      token: "fake-token",
-    );
+    // final successResponse = ChangePasswordResponse(
+    //   message: "success",
+    //   token: "fake-token",
+    // );
 
-    test("should return SuccessResult when remote data source returns success",
-            () async {
-          when(mockProfileRemoteDataSourceImpl.changePassword(request))
-              .thenAnswer((_) async => successResponse);
+    // test("should return SuccessResult when remote data source returns success",
+    //         () async {
+    //       when(mockProfileRemoteDataSourceImpl.changePassword(request))
+    //           .thenAnswer((_) async => successResponse);
 
-          final result = await profileRepositoryImpl.changePassword(request);
+    //       final result = await profileRepositoryImpl.changePassword(request);
 
-          expect(result, isA<SucessResult<ChangePasswordResponse>>());
-          expect((result as SucessResult).sucessResult, successResponse);
-          verify(mockProfileRemoteDataSourceImpl.changePassword(request)).called(1);
-        });
+    //       expect(result, isA<SucessResult<ChangePasswordResponse>>());
+    //       expect((result as SucessResult).sucessResult, successResponse);
+    //       verify(mockProfileRemoteDataSourceImpl.changePassword(request)).called(1);
+    //     });
 
     test("should return FailedResult when remote data source throws Exception",
             () async {

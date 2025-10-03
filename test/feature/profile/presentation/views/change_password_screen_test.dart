@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/change_password_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/change_password_state.dart';
