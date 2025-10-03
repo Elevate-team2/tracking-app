@@ -17,6 +17,7 @@ import 'package:tracking_app/feature/profile/presentation/views/widgets/personal
 import 'package:tracking_app/feature/profile/presentation/views/widgets/vechical_info_card.dart';
 
 class ProfileScreen extends StatefulWidget {
+
   const ProfileScreen({super.key});
 
   @override
@@ -28,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+ 
     _profileBloc.add(GetLoggedDriverEvent());
     super.initState();
   }

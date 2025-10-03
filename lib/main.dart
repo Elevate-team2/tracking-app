@@ -9,6 +9,7 @@ import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/routes/routes.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
 import 'feature/auth/api/data_source/local/user_local_storage_impl.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,8 @@ void main() async {
    // builder: (context) =>
     ChangeNotifierProvider.value(
       value: getIt.get<AppLanguageConfig>(),
-      child: const MyApp(),
+      child:  DevicePreview(
+        builder:(context)=> MyApp()),
     ),
     //),
   );
@@ -74,8 +76,8 @@ class _MyAppState extends State<MyApp> {
 
           return MaterialApp(
             navigatorKey: Routes.navigatorKey,
-            // initialRoute: initialRoute,
-            initialRoute: AppRoute.onBoarding,
+            initialRoute: initialRoute,
+           // initialRoute: AppRoute.onBoarding,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,

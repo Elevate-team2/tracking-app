@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
@@ -13,35 +14,33 @@ import 'package:tracking_app/feature/profile/presentation/views/screens/profile_
 import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
-
 abstract class Routes {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   static Route onGenerate(RouteSettings settings) {
-    final url = Uri.parse(settings.name ??   '/');
+    final url = Uri.parse(settings.name ?? '/');
 
     switch (url.path) {
-
       case AppRoute.home:
         return MaterialPageRoute(
           builder: (context) {
-
-            return const  AppSection();
+            return const AppSection();
           },
         );
 
-
       case (AppRoute.loginRoute):
-        return MaterialPageRoute(builder: (context)=>
-        const   LoginScreen());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
 
       case (AppRoute.onBoarding):
-        return MaterialPageRoute(builder: (context)=>
-        const    OnBoarddingScreen());
-
+        return MaterialPageRoute(
+          builder: (context) => const OnBoarddingScreen(),
+        );
 
       case AppRoute.forgetPasswordScreen:
-        return MaterialPageRoute(builder: (context) => const ForgetPasswordScreen());
+        return MaterialPageRoute(
+          builder: (context) => const ForgetPasswordScreen(),
+        );
 
       case AppRoute.verifyCodeScreen:
         final email = settings.arguments as String;
@@ -58,56 +57,37 @@ abstract class Routes {
       case AppRoute.approveScreen:
         return MaterialPageRoute(
           builder: (context) {
-            return const  ApproveScreen();
+            return const ApproveScreen();
           },
         );
 
       case (AppRoute.applyScreen):
         return MaterialPageRoute(
           builder: (context) {
-
             return const ApplyScreen();
           },
         );
-        case (AppRoute.profile):
+      case (AppRoute.profile):
         return MaterialPageRoute(
           builder: (context) {
-
-            return  const ProfileScreen();
+            return const ProfileScreen();
           },
         );
-        
 
       case AppRoute.editProfileScreen:
-        return MaterialPageRoute(builder: (context) {
-          // final user = settings.arguments as LoggedInUserEntity;
-          return const EditProfileScreen(user:
-          LoggedInUserEntity(
-            id: "1",
-            firstName: "Rana",
-            lastName: "Gebril",
-            email: "ranagebril5@gmail.com",
-            phone: "01147124052",
-            photo: "",
-            role: "driver",
-            country: "Egypt",
-            vehicleType: "Car",
-            vehicleNumber: "152004",
-            vehicleLicense: "",
-            nid: "12345678912345",
-            nidImg: "",
-            gender: "female",
-            createdAt: "DateTime.now()",
-          )
-            ,);
-        },);
+        return MaterialPageRoute(
+          builder: (context) {
+            final user = settings.arguments as DriverEntity;
+            return EditProfileScreen(user: user);
+          },
+        );
 
-     
       default:
         return MaterialPageRoute(
           builder: (context) {
-
-            return Scaffold(body: Center(child: Text(context.loc.noRouteFound)));
+            return Scaffold(
+              body: Center(child: Text(context.loc.noRouteFound)),
+            );
           },
         );
     }

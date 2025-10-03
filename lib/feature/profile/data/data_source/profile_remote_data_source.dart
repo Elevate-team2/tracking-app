@@ -10,6 +10,6 @@ abstract interface class ProfileRemoteDataSource {
 
   Future<Result<DriverEntity>> getLoggedDriver();
    Future<Result<void>> logoutDriver();
-  Future<Result<String>> uploadDriverPhoto(File photo);
+ Future<Result<String>> uploadDriverPhoto(File photo);
   Future<Result<EditProfileEntity>> editProfile(EditProfileRequest request);
 }

@@ -7,11 +7,13 @@ import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/app_theme.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
@@ -20,7 +22,7 @@ import 'package:tracking_app/feature/profile/presentation/views/widgets/gender_s
 import 'package:tracking_app/feature/profile/presentation/views/widgets/profile_photo_section.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final LoggedInUserEntity user;
+  final DriverEntity user;
 
   const EditProfileScreen({required this.user, super.key});
 
@@ -91,7 +93,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               key: const Key(AppWidgetsKeys.editProfileAppBar),
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.profile),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
                   child: Icon(Icons.arrow_back_ios, size: context.setWidth(20)),
