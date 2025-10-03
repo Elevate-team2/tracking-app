@@ -22,7 +22,7 @@ import 'package:tracking_app/core/constants/constants.dart';
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthApiServices _authApiServices;
 
-  const AuthRemoteDataSourceImpl(this._authApiServices);
+  const AuthRemoteDataSourceImpl(this._authApiServices,);
 
   @override
   Future<Result<LoginResponse>> login(LoginRequest request) async {
@@ -32,7 +32,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return SucessResult(response);
     } catch (error) {
       if (error is DioException) {
-        return FailedResult(ServerFailure.fromDioError(error).errorMessage);
+        return FailedResult(ServerFailure.
+        fromDioError(error).errorMessage);
       } else {
         return FailedResult(error.toString());
       }
@@ -181,3 +182,4 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     }
   }
 }
+

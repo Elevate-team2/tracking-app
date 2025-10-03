@@ -8,7 +8,9 @@ class EditProfileState extends Equatable {
   final RequestState? editProfileRequestState;
   final EditProfileEntity? editedProfileInfo;
   final String? editProfileErrorMessage;
-
+  final RequestState? editVehicleRequestState;
+  final EditProfileEntity? editedVehicleInfo;
+  final String? editVehicleErrorMessage;
   const EditProfileState({
     this.uploadPhotoRequestState = RequestState.init,
     this.selectedPhoto,
@@ -17,6 +19,10 @@ class EditProfileState extends Equatable {
     this.editProfileRequestState = RequestState.init,
     this.editedProfileInfo,
     this.editProfileErrorMessage = "",
+    this.editVehicleRequestState=RequestState.init,
+    this.editedVehicleInfo,
+    this.editVehicleErrorMessage
+
   });
 
   EditProfileState copyWith({
@@ -27,6 +33,9 @@ class EditProfileState extends Equatable {
     final RequestState? editProfileRequestState,
     final EditProfileEntity? editedProfileInfo,
     final String? editProfileErrorMessage,
+    final RequestState? editVehicleRequestState,
+    final EditProfileEntity? editedVehicleInfo,
+    final String? editVehicleErrorMessage,
   }) {
     return EditProfileState(
       uploadPhotoRequestState:
@@ -40,6 +49,9 @@ class EditProfileState extends Equatable {
       editedProfileInfo: editedProfileInfo ?? this.editedProfileInfo,
       editProfileErrorMessage:
           editProfileErrorMessage ?? this.editProfileErrorMessage,
+      editVehicleRequestState: editVehicleRequestState??this.editVehicleRequestState,
+      editedVehicleInfo: editedVehicleInfo??this.editedVehicleInfo,
+      editVehicleErrorMessage: editVehicleErrorMessage??this.editVehicleErrorMessage
     );
   }
 
@@ -51,5 +63,7 @@ class EditProfileState extends Equatable {
     editProfileRequestState,
     editedProfileInfo,
     editProfileErrorMessage,
+    editVehicleErrorMessage,
+    editedVehicleInfo,editVehicleRequestState
   ];
 }

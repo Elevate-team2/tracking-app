@@ -236,4 +236,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failedToPickImage => 'Failed to pick image';
+
+  @override
+  String get updateVehicleInformation => '✅ update Vehicle Information';
 }

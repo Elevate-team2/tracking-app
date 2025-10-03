@@ -66,9 +66,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                       obscureText: true,
-                      validator: (val) => val == null || val.isEmpty
-                          ? context.loc.required
-                          : null,
+                      validator: Validator.validatePassword,
+
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -80,9 +79,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                       obscureText: true,
-                      validator: (val) => val == null || val.isEmpty
-                          ? context.loc.required
-                          : null,
+                      validator: Validator.validatePassword,
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -90,11 +87,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       decoration: InputDecoration(
                         labelText: context.loc.confirmPassword,
                         hintText: "Confirm password",
+
                         border: const OutlineInputBorder(),
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                       ),
                       obscureText: true,
-                      validator:Validator.validatePassword,
+                      validator:(val)=>
+                          Validator.validateConfirmPassword(val,
+                              _passwordController.text),
                     ),
                     const SizedBox(height: 42),
                     SizedBox(

@@ -16,23 +16,23 @@ class EditProfileRequest {
   @JsonKey(name: JsonSerlizationConstants.phone)
   final String? phone;
   
-  @JsonKey(name: JsonSerlizationConstants.vehicleType)
-  final String? vehicleType;
-  
-  @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
-  final String? vehicleNumber;
-  
-  @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
-  final String? vehicleLicense;
+  // @JsonKey(name: JsonSerlizationConstants.vehicleType)
+  // final String? vehicleType;
+  //
+  // @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
+  // final String? vehicleNumber;
+  //
+  // @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
+  // final String? vehicleLicense;
 
   EditProfileRequest({
     this.firstName,
     this.lastName,
     this.email,
     this.phone,
-    this.vehicleType,
-    this.vehicleNumber,
-    this.vehicleLicense,
+    // this.vehicleType,
+    // this.vehicleNumber,
+    // this.vehicleLicense,
   });
 
   factory EditProfileRequest.fromJson(Map<String, dynamic> json) =>

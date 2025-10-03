@@ -235,4 +235,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get failedToPickImage => 'فشل في اختيار الصورة';
+
+  @override
+  String get updateVehicleInformation => '✅ تم تحديث معلومات المركبه';
 }

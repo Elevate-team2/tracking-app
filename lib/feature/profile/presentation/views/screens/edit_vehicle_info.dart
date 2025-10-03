@@ -17,7 +17,7 @@ import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_f
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
-import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
+import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_vehicle_request.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/load_image.dart';
 
@@ -31,7 +31,7 @@ class EditVehicleInfo extends StatefulWidget {
 }
 
 class _EditVehicleInfoState extends State<EditVehicleInfo> {
-  String? vehicleType;
+  late String vehicleType;
   late TextEditingController vehicleNumber;
   File? vehicleLicense;
 
@@ -59,19 +59,19 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
   @override
   void initState() {
     super.initState();
-    vehicleNumber = TextEditingController();
+    vehicleType = widget.user.vehicleType;
+    vehicleNumber = TextEditingController(text: widget.user.vehicleNumber ?? "");
   }
 
   @override
   void dispose() {
-    super.dispose();
     vehicleNumber.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final sh = MediaQuery.of(context).size.height;
-
     return BlocProvider(
       create: (context) => getIt<EditProfileBloc>(),
       child: Builder(
@@ -80,9 +80,7 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
             appBar: AppBar(
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(
                   Icons.arrow_back_ios_new_outlined,
                   size: context.setSp(24),
@@ -91,7 +89,7 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
               ),
               actions: [
                 Stack(
-                  alignment: AlignmentGeometry.topRight,
+                  alignment: Alignment.topRight,
                   children: [
                     Icon(
                       CupertinoIcons.bell,
@@ -115,39 +113,24 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
               ],
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 24,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
               child: Column(
                 children: [
                   BlocProvider(
                     create: (context) =>
-                        getIt<ApplyBloc>()..add(GetAllVehiclesEvent()),
+                    getIt<ApplyBloc>()..add(GetAllVehiclesEvent()),
                     child: BlocBuilder<ApplyBloc, ApplyStates>(
                       builder: (context, state) {
                         return DropdownButtonFormField(
-                          validator: (value) => value == null
-                              ? context.loc.vehicleTypeFieldError
-                              : null,
+                          validator: (value) =>
+                          value == null ? context.loc.vehicleTypeFieldError : null,
                           decoration: InputDecoration(
                             labelText: context.loc.vehicleType,
                           ),
                           items: state.vehicle.map((e) {
                             return DropdownMenuItem(
                               value: e.id,
-                              child: Row(
-                                children: [
-                                  //  Image.network(
-                                  //    e.image,
-                                  //    width: context.setWidth(40),
-                                  //    fit: BoxFit.scaleDown,
-                                  //    height: context.setHight(40),
-                                  //  ),
-                                  // SizedBox(width: context.setWidth(7)),
-                                  Text(e.type),
-                                ],
-                              ),
+                              child: Text(e.type),
                             );
                           }).toList(),
                           onChanged: (value) {
@@ -166,12 +149,12 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
                     lbl: context.loc.vehicleNumber,
                     controller: vehicleNumber,
                     validator: (value) =>
-                        value == null ? context.loc.vehicleNumber : null,
+                    value == null ? context.loc.vehicleNumber : null,
                   ),
                   SizedBox(height: context.setHight(20)),
-
                   LoadImage(
                     file: vehicleLicense,
+                    networkUrl: widget.user.vehicleLicense,
                     onTap: () async {
                       final file = await _pickImage();
                       if (file != null) {
@@ -185,18 +168,18 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
                   SizedBox(height: sh * 0.4),
                   BlocListener<EditProfileBloc, EditProfileState>(
                     listener: (context, state) {
-                      if (state.editProfileRequestState ==
-                          RequestState.success) {
+                      if (state.editVehicleRequestState == RequestState.success) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(context.loc.updateVehicleInformation),
                           ),
                         );
                       }
-                      if (state.editProfileRequestState == RequestState.error) {
+                      if (state.editVehicleRequestState
+                          ==RequestState.error) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(state.editProfileErrorMessage!),
+                      const   SnackBar(
+                            content: Text("Something went Wrong"),
                           ),
                         );
                       }
@@ -204,13 +187,13 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
                     child: CustomBtn(
                       bg: AppColors.midGray,
                       onPressed: () {
-                        final request = EditProfileRequest(
-                          vehicleLicense: vehicleLicense!.path,
-                          vehicleType: vehicleType,
+                        final request = EditVehicleRequest(
                           vehicleNumber: vehicleNumber.text,
+                          vehicleType: vehicleType,
+                          vehicleLicense: vehicleLicense!.path
                         );
                         context.read<EditProfileBloc>().add(
-                          EditBtnSubmitEvent(request),
+                         EditVehicleBtnSubmitEvent(request)
                         );
                       },
                       txt: context.loc.update,

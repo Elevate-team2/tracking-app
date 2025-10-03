@@ -547,6 +547,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to pick image'**
   String get failedToPickImage;
+
+  /// No description provided for @updateVehicleInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ update Vehicle Information'**
+  String get updateVehicleInformation;
 }
 
 class _AppLocalizationsDelegate

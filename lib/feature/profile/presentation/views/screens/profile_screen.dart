@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
- 
+
     _profileBloc.add(GetLoggedDriverEvent());
     super.initState();
   }
@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
+
         title: Padding(
           padding:  EdgeInsets.symmetric(horizontal: context.setWidth(12)),
           child: Text(context.loc.profile),
@@ -55,7 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
 
-      body: BlocProvider.value(
+      body:
+      BlocProvider.value(
         value: _profileBloc,
         child: BlocConsumer<ProfileBloc, ProfileState>(
           listener: (context, state) {
@@ -76,16 +77,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ProfileContainer(
                       onClick: () {
                         Navigator.pushNamed(context, AppRoute.editProfileScreen,
-                        arguments: state.driver);
+                            arguments: state.driver);
                       },
                       containerChild: PersonalInfoCard(driverEntity: driver),
                     ),
                     ProfileContainer(
                       onClick: () {
-                        Navigator.pushNamed(context, AppRoute.editVechicalScreen,
-                        arguments: state.driver);
+                        Navigator.pushNamed(context,
+
+                            AppRoute.editVechicalScreen,
+                            arguments: state.driver);
                       },
-                      containerChild: VechicalInfoCard(driverEntity: driver),
+                      containerChild:
+                      VechicalInfoCard(driverEntity: driver),
                     ),
                     const CustomLanguageRow(),
                     CustomLogoutRow( profileBloc: _profileBloc),
@@ -103,7 +107,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-
-
-

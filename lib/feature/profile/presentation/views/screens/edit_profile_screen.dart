@@ -75,18 +75,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           if (state.editProfileRequestState == RequestState.success) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                key: const Key(AppWidgetsKeys.profileUpdatedSnackBar),
-                content: Text(context.loc.profileUpdated),
-              ),
+                  key:const Key(AppWidgetsKeys.profileUpdatedSnackBar),
+                  content: Text(context.loc.profileUpdated)),
             );
           } else if (state.editProfileRequestState == RequestState.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                key: const Key(AppWidgetsKeys.errorSnackBarEditProfile),
-                content: Text(
-                  state.editProfileErrorMessage ?? context.loc.error,
-                ),
-              ),
+                  key:const Key(AppWidgetsKeys.errorSnackBarEditProfile),
+                  content: Text(state.editProfileErrorMessage ?? context.loc.error)),
             );
           }
         },
@@ -96,8 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               key: const Key(AppWidgetsKeys.editProfileAppBar),
               title: Text(context.loc.editProfileTitle),
               leading: IconButton(
-                onPressed: () =>
-                    Navigator.of(context).popAndPushNamed(AppRoute.profile),
+                onPressed: () => Navigator.of(context).popAndPushNamed(AppRoute.profile),
                 icon: Padding(
                   padding: EdgeInsets.only(right: context.setWidth(2)),
                   child: Icon(Icons.arrow_back_ios, size: context.setWidth(20)),
