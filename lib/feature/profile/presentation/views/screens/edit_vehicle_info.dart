@@ -60,7 +60,8 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
   void initState() {
     super.initState();
     vehicleType = widget.user.vehicleType;
-    vehicleNumber = TextEditingController(text: widget.user.vehicleNumber ?? "");
+    vehicleNumber =
+        TextEditingController(text: widget.user.vehicleNumber );
   }
 
   @override
