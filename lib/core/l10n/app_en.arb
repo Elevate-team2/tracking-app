@@ -86,5 +86,6 @@
       "noChanges": "No changes detected",
       "changePassword": "Change password",
       "noImageSelected": "No image selected",
-      "failedToPickImage": "Failed to pick image"
+      "failedToPickImage": "Failed to pick image",
+        "updateVehicleInformation": "✅ update Vehicle Information"
 }

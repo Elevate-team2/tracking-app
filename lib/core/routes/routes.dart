@@ -10,6 +10,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/approve_scre
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/domain/entity/logged_in_user_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
@@ -79,6 +80,13 @@ abstract class Routes {
           builder: (context) {
             final user = settings.arguments as DriverEntity;
             return EditProfileScreen(user: user);
+          },
+        );
+      case AppRoute.editVechicalScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final user = settings.arguments as DriverEntity;
+            return EditVehicleInfo(user: user,);
           },
         );
 

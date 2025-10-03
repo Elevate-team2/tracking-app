@@ -38,7 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.loc.profile),
+        
+        title: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: context.setWidth(12)),
+          child: Text(context.loc.profile),
+        ),
         actions: [
           IconButton(
             icon: Icon(
@@ -79,7 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     ProfileContainer(
                       onClick: () {
-                        // go to edit vechical
+                        Navigator.pushNamed(context, AppRoute.editVechicalScreen,
+                        arguments: state.driver);
                       },
                       containerChild: VechicalInfoCard(driverEntity: driver),
                     ),
