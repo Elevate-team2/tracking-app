@@ -17,6 +17,7 @@ abstract class Constants {
   static const String success = "Success";
   static const String resetCode = "resetCode";
   static const String countriesJson = "assets/json/country.json";
+  static const String languageicon="assets/images/langicon.svg";
 
   // Country JSON keys
   static const String isoCode = "isoCode";
@@ -47,4 +48,13 @@ abstract class Constants {
   static const String orderRef = "orders";
   static const String callError="Could not launch dialer";
   static const String whatsAppError="Could not launch WhatsApp";
+
+  static const String authorizationHeader = 'Authorization';
+  static const String bearerPrefix = 'Bearer ';
+
+  static const String male = "male";
+  static const String female = "female";
+  static const String noImgSelected = "No image selected";
+  static const String failedPickImg = "Failed to pick image";
+  static const String maskedPass = "★★★★★★";
 }

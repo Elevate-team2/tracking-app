@@ -23,6 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
           if (state.rememberMe && token != null) {
             await UserLocalStorageImpl().saveToken(token!);
           }
+
           emit(
             state.copyWith(
               requestState: RequestState.success,

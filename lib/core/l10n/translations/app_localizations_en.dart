@@ -40,6 +40,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterCodeEmail => 'Please enter the code sent to your email';
 
   @override
+  String get verifyCode => 'Verify Code';
+
+  @override
   String get verify => 'Verify';
 
   @override
@@ -69,6 +72,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmPassword => 'Confirm password';
+
+  @override
+  String get confirm => 'Confirm';
 
   @override
   String get successReset => 'Password reset successfully';
@@ -102,6 +108,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Thank you for providing your application, we will review your application and will get back to you soon.';
 
   @override
+  String get welcome => 'Welcome to';
+      'Thank you for providing your application, we will review your application and will get back to you soon.';
+
+  @override
   String get welcome => 'Welcome!!';
 
   @override
@@ -121,6 +131,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomText => 'Welcome to\nFlowery rider app';
+
+  @override
+  String get welcome => 'Welcome!!';
 
   @override
   String get questionInRegister =>
@@ -145,6 +158,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vehicleNumber => 'Vehicle number';
 
   @override
+  String get vehicleNumberRequired => 'Vehicle Number Required';
+
+  @override
+  String get vehicleLicense => 'Vehicle License';
+
+  @override
   String get uploadLicense => 'Upload license photo';
 
   @override
@@ -155,15 +174,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get uploadNid => 'Upload ID image';
-
-  @override
-  String get rePassword => 'Confirm password';
-
-  @override
-  String get passwordTooShort => 'Min 6 chars';
-
-  @override
-  String get passwordNotMatch => 'Passwords do not match';
 
   @override
   String get gender => 'Gender';
@@ -184,7 +194,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get required => 'Required';
 
   @override
-  String get sucessApply => 'sucess Apply';
+  String get sucessApply => 'sucessApply';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get confirmLogout => 'Confirm Logout';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get vehicalInfo => 'Vehical info';
+
+  @override
+  String get continueBtn => 'Continue';
 
   @override
   String get editProfile => 'Edit profile';
@@ -197,6 +231,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update => 'Update';
+
+  @override
+  String get editProfileTitle => 'Edit profile';
+
+  @override
+  String get profileUpdated => 'Profile updated successfully';
+
+  @override
+  String get noChanges => 'No changes detected';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get noImageSelected => 'No image selected';
+
+  @override
+  String get failedToPickImage => 'Failed to pick image';
+
+  @override
+  String get updateVehicleInformation => '✅ update Vehicle Information';
 
   @override
   String get floweryRider => 'Flowery rider';

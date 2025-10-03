@@ -1,56 +1,44 @@
 {
-  "@@locale": "ar",
-
-  "noRouteFound": "لا يوجد صفحه بهذا الاسم",
-
-  "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
-  "enterEmail": "أدخل بريدك الإلكتروني",
-  "enterYourEmail": "ادخل بريدك الالكترونى",
-  "enterYourPassword": "ادخل كلمة المرور",
-
-  "verifyCode": "تحقق من الرمز",
-  "emailVerification": "التحقق من البريد الإلكتروني",
-  "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
-  "verify": "تحقق",
-  "didNotReceiveCode": "لم يصلك الرمز؟",
-  "resend": "إعادة إرسال",
-
-  "success": "تم بنجاح ✅",
-  "error": "خطأ ❌",
-
-  "resetPasswordTitle": "إعادة تعيين كلمة المرور",
-  "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
-  "newPassword": "كلمة المرور الجديدة",
-  "enterNewPassword": "أدخل كلمة المرور الجديدة",
-  "confirmPassword": "تأكيد كلمة المرور",
-  "confirm": "تأكيد",
-  "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
-  "errorReset": "حدث خطأ ما",
-
-  "login": "تسجيل الدخول",
-  "continue1": "المتابعة",
-  "forgetPassword": "هل نسيت كلمة السر",
-  "rememberMe": "ذكرنى",
-  "successLogin": "✅ تم تسجيل الدخول بنجاح",
-
-  "submitted": "تم إرسال طلبك بنجاح!",
-  "thankYou": "شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.",
-
-  "flowery": "تطبيق فلاورى للركاب",
-  "welcome": "مرحباً بك",
-  "welcomText": "مرحبا بكم \n في تطبيق الارسال",
-
-  "home": "الرئيسية",
-  "orders": "الطلبات",
-  "profile": "الملف الشخصي",
-
+    "@@locale": "ar",
+      "pleaseEnterEmail": "من فضلك أدخل البريد الإلكتروني المرتبط بحسابك",
+      "enterEmail": "أدخل بريدك الإلكتروني",
+      "confirm": "تأكيد",
+      "verifyCode": "تحقق من الرمز",
+      "emailVerification": "التحقق من البريد الإلكتروني",
+      "enterCodeEmail": "من فضلك أدخل الرمز المرسل إلى بريدك",
+      "verify": "تحقق",
+      "didNotReceiveCode": "لم يصلك الرمز؟",
+      "resend": "إعادة إرسال",
+      "success": "تم بنجاح :white_check_mark:",
+      "error": "خطأ :x:",
+      "resetPasswordTitle": "إعادة تعيين كلمة المرور",
+      "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
+      "newPassword": "كلمة المرور الجديدة",
+      "enterNewPassword": "أدخل كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
+      "errorReset": "حدث خطأ ما",
+    "noRouteFound":"لا يوجد صفحه بهذا الاسم",
+    "enterYourEmail": "ادخل بريدك الالكترونى",
+    "enterYourPassword": "ادخل كلمة المرور",
+    "login": "تسجيل الدخول",
+    "continue1": "المتابعة",
+    "forgetPassword": "هل نسيت كلمة السر",
+    "rememberMe": "ذكرنى",
+    "successLogin": ":white_check_mark: تم تسجيل الدخول بنجاح",
+    "submitted": "تم إرسال طلبك بنجاح!",
+    "thankYou": "شكرًا لتقديم طلبك، سنقوم بمراجعته وسنعود إليك قريبًا.",
+    "flowery": "تطبيق فلاورى للركاب",
+    "home":"الرئيسية",
+    "orders":"الطلبات",
+    "profile":"الملف الشخصي",
+     "welcomText":"مرحبا بكم \n في تطبيق الارسال",
   "apply": "تسجيل",
-  "successApply": "نجحت عملية التسجيل",
-
+  "welcome": "أهلاً بيك!!",
   "questionInRegister": "عايز تبقى دليفري؟\nانضم لينا",
   "country": "الدولة",
-  "firstnameLabel": "الاسم الأول",
-  "secondnameLabel": "الاسم التاني",
+  "firstnameLabel": "الاسم الأول القانوني",
+  "secondnameLabel": "الاسم الثاني القانوني",
   "vehicleType": "نوع المركبة",
   "vehicleTypeFieldError": "من فضلك اختر نوع المركبة",
   "vehicleNumber": "رقم المركبة",
@@ -63,7 +51,7 @@
   "email": "الإيميل",
   "phone": "رقم التليفون",
   "nid": "رقم البطاقة",
-
+  "uploadNid": "ارفع صورة البطاقة",
   "password": "كلمة المرور",
   "rePassword": "تأكيد كلمة المرور",
   "passwordTooShort": "الحد الأدنى ٦ حروف",
@@ -74,7 +62,7 @@
   "male": "ذكر",
 
   "continueBtn": "متابعة",
-  "pleaseUploadBothImages": "من فضلك ارفع الصورتين",
+  "pleaseUploadBothImages": "من فضلك قم برفع الصورتين",
   "required": "مطلوب",
    "sucessApply":"نجحت عمليه التسجيل",
 "editProfile": "تعديل الملف الشخصى ",
@@ -82,7 +70,7 @@
   "vehicleLicense": "رخصة القيادة ",
   "update": "تحديث ",
 
-  
+
 
 "floweryRider": "موصل الزهور",
 "processCompletedSuccessfully": "تمت العملية بنجاح",
@@ -102,7 +90,7 @@
   "total": "الإجمالي",
   "paymentMethod": "طريقة الدفع",
    "statusLabel": "الحالة :",
-    "orderIdLabel": "رقم الطلب :"
+    "orderIdLabel": "رقم الطلب :",
 
 
 
@@ -111,4 +99,23 @@
 
 
 
+
+  "logout": "تسجيل الخروج",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "language": "اللغة",
+  "confirmLogout": "تأكيد تسجيل الخروج",
+  "cancel": "إلغاء",
+  "vehicalInfo": "معلومات المركبة",
+   "sucessApply":"نجحت عمليه التسجيل",
+    "editProfileTitle": "تعديل الملف الشخصي",
+     "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+     "noChanges": "لا يوجد تغييرات",
+     "update": "تحديث",
+     "changePassword": "تغيير كلمة المرور",
+     "noImageSelected": "لم يتم اختيار صورة",
+     "failedToPickImage": "فشل في اختيار الصورة",
+  "vehicleNumberRequired": "مطلوب رقم المركبة ",
+  "vehicleLicense": "رخصة القيادة ",
+    "updateVehicleInformation": "✅ تم تحديث معلومات المركبه"
 }

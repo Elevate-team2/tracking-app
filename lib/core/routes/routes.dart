@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
+import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
@@ -10,6 +11,11 @@ import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart
 import 'package:tracking_app/feature/home/presentaion/view/page/order_details_screen.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
+import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
+
+import '../../feature/profile/presentation/views/screens/change_password.dart';
 
 
 abstract class Routes {
@@ -65,6 +71,33 @@ abstract class Routes {
             return const ApplyScreen();
           },
         );
+      case (AppRoute.profile):
+        return MaterialPageRoute(
+          builder: (context) {
+            return const ProfileScreen();
+          },
+        );
+
+      case AppRoute.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final user = settings.arguments as DriverEntity;
+            return EditProfileScreen(user: user);
+          },
+        );
+      case AppRoute.editVechicalScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final user = settings.arguments as DriverEntity;
+            return EditVehicleInfo(user: user,);
+          },
+        );
+
+      case (AppRoute.changePasswordScreen):
+        return MaterialPageRoute(
+            builder: (context){
+              return const ChangePasswordScreen();
+            });
 
       case AppRoute.orderDetails:
         final orderId = settings.arguments as String;

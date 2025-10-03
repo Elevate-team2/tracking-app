@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/constants/constants.dart';
-
+@lazySingleton
 class UserLocalStorageImpl {
   final FlutterSecureStorage storage;
 
@@ -14,7 +15,6 @@ class UserLocalStorageImpl {
       throw Exception('${Constants.failedToSaveToken}: $e');
     }
   }
-
   Future<String?> getToken() async {
     try {
       return await storage.read(key: Constants.token);

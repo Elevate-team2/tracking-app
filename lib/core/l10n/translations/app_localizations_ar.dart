@@ -147,6 +147,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vehicleNumber => 'رقم المركبة';
 
   @override
+  String get vehicleNumberRequired => 'مطلوب رقم المركبة';
+
+  @override
+  String get vehicleLicense => 'رخصة القيادة';
+
+  @override
   String get uploadLicense => 'ارفع صورة الرخصة';
 
   @override
@@ -174,74 +180,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get required => 'مطلوب';
 
   @override
-  String get sucessApply => 'نجحت عمليه التسجيل';
+  String get sucessApply => 'Success Apply';
 
   @override
-  String get editProfile => 'تعديل الملف الشخصى ';
+  String get editProfile => 'تعديل الملف الشخصى';
 
   @override
-  String get vehicleNumberRequired => 'مطلوب رقم المركبة ';
-
-  @override
-  String get vehicleLicense => 'رخصة القيادة ';
-
-  @override
-  String get update => 'تحديث ';
-
-  @override
-  String get floweryRider => 'موصل الزهور';
-
-  @override
-  String get processCompletedSuccessfully => 'تمت العملية بنجاح';
-
-  @override
-  String get noOrdersFound => 'لا توجد طلبات';
-
-  @override
-  String get unExpectedErrorfound => 'حدث خطأ غير متوقع';
-
-  @override
-  String get flowerOrder => 'طلب زهور';
-
-  @override
-  String get pickupAddress => 'عنوان الاستلام';
-
-  @override
-  String get userAddress => 'عنوان المستخدم';
-
-  @override
-  String get egp => 'ج.م';
-
-  @override
-  String get reject => 'رفض';
-
-  @override
-  String get accept => 'قبول';
-
-  @override
-  String get orderDetailsTitle => 'تفاصيل الطلب';
-
-  @override
-  String get arrivedAtPickupPoint => 'وصلت لمكان الاستلام';
-
-  @override
-  String get startDeliver => 'بدء التوصيل';
-
-  @override
-  String get arrivedToUser => 'وصلت للمستخدم';
-
-  @override
-  String get deliverToUser => 'تسليم للمستخدم';
-
-  @override
-  String get total => 'الإجمالي';
-
-  @override
-  String get paymentMethod => 'طريقة الدفع';
-
-  @override
-  String get statusLabel => 'الحالة :';
-
-  @override
-  String get orderIdLabel => 'رقم الطلب :';
+  String get update => 'تحديث';
 }

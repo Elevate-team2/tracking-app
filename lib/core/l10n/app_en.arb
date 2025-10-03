@@ -58,24 +58,36 @@
   "vehicleLicense": "Vehicle License",
   "uploadLicense": "Upload license photo",
 
+
   "phone": "Phone number",
   "nid": "ID number",
   "uploadNid": "Upload ID image",
 
+  "rePassword": "Confirm password",
+  "passwordTooShort": "Min 6 chars",
+  "passwordNotMatch": "Passwords do not match",
   "gender": "Gender",
   "female": "Female",
   "male": "Male",
 
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
-  "sucessApply": "Success Apply",
+  "sucessApply":"sucessApply",
 
+  "logout":"Logout",
+  "english":"English",
+  "arabic":"Arabic",
+  "language":"Language",
+  "confirmLogout":"Confirm Logout",
+  "cancel":"Cancel",
+  "vehicalInfo":"Vehical info",
+  "continueBtn":"Continue",
   "editProfile": "Edit profile",
 "vehicleNumberRequired": "Vehicle Number Required",
   "vehicleLicense": "Vehicle License",
 
   "update": "Update",
-  
+
 
   "floweryRider":"Flowery rider",
   "processCompletedSuccessfully":"process completed successfully",
@@ -95,7 +107,7 @@
      "total": "Total",
      "paymentMethod": "Payment method",
      "statusLabel": "Status :",
-       "orderIdLabel": "Order ID :"
+       "orderIdLabel": "Order ID :",
 
 
 
@@ -108,5 +120,12 @@
 
 
 
-
+  "update": "Update",
+  "editProfileTitle": "Edit profile",
+      "profileUpdated": "Profile updated successfully",
+      "noChanges": "No changes detected",
+      "changePassword": "Change password",
+      "noImageSelected": "No image selected",
+      "failedToPickImage": "Failed to pick image",
+        "updateVehicleInformation": "✅ update Vehicle Information"
 }

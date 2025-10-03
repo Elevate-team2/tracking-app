@@ -7,6 +7,7 @@ import 'package:tracking_app/core/api_error/api_error.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/extensions/apply_request_extension.dart';
 import 'package:tracking_app/feature/auth/api/client/auth_api_services.dart';
+import 'package:tracking_app/feature/auth/api/data_source/local/user_local_storage_impl.dart';
 import 'package:tracking_app/feature/auth/api/models/login/request/login_request.dart';
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
@@ -27,10 +28,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Result<LoginResponse>> login(LoginRequest request) async {
     try {
       final response = await _authApiServices.login(request);
+      await UserLocalStorageImpl().saveToken(response.token!);
       return SucessResult(response);
     } catch (error) {
       if (error is DioException) {
-        return FailedResult(ServerFailure.fromDioError(error).errorMessage);
+        return FailedResult(ServerFailure.
+        fromDioError(error).errorMessage);
       } else {
         return FailedResult(error.toString());
       }
@@ -87,12 +90,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return FailedResult<String>(response[Constants.error]!);
       }
 
-      final message = response[Constants.status] ??
+      final message =
+          response[Constants.status] ??
           response[Constants.message] ??
           Constants.success;
       return SucessResult<String>(message);
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data[Constants.error] ??
+      final errorMessage =
+          dioError.response?.data[Constants.error] ??
           dioError.response?.data[Constants.message] ??
           dioError.message;
       return FailedResult<String>(errorMessage);
@@ -102,8 +107,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<String>> resetPassword(
-      String email, String newPassword) async {
+  Future<Result<String>> resetPassword(String email, String newPassword) async {
     try {
       final response = await _authApiServices.resetPassword({
         Constants.email: email,
@@ -116,7 +120,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return FailedResult<String>(errorMessage);
       }
     } on DioException catch (dioError) {
-      final errorMessage = dioError.response?.data[Constants.error] ??
+      final errorMessage =
+          dioError.response?.data[Constants.error] ??
           dioError.response?.data[Constants.message] ??
           dioError.message;
       return FailedResult<String>(errorMessage);
