@@ -8,6 +8,7 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/widgets/common_loading.dart';
+import 'package:tracking_app/feature/home/api/client/firebase_service/home_firebase_service.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/address_container.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/order_details_card.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/status_container.dart';
@@ -41,12 +42,51 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     ];
   }
 
-  void _nextStep() {
-    setState(() {
-      if (currentStep < buttonLabels.length - 1) {
+  void _nextStep() async {
+    if (currentStep < buttonLabels.length - 1) {
+      setState(() {
         currentStep++;
-      }
+      });
+
+      // update state in firebase
+      final newState = _mapStepToState(currentStep);
+      await getIt<HomeFirebaseService>().updateOrderState(widget.orderId, newState);
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    getIt<HomeFirebaseService>()
+        .getDataFromRemote(widget.orderId)
+        .listen((data) {
+      setState(() {
+        currentStep = _mapStateToStep(data.orderDeliveryStatus ?? 'waiting');
+      });
     });
+  }
+  int _mapStateToStep(String state) {
+    switch (state) {
+      case 'Accepted': return 0;
+      case 'Picked': return 1;
+      case 'Out for delivery': return 2;
+      case 'Delivered': return 3;
+      default: return 0;
+    }
+  }
+
+  String _mapStepToState(int step) {
+    switch (step) {
+      case 0:
+        return 'Accepted';
+      case 1:
+        return 'Picked';
+      case 2:
+        return 'Out for delivery';
+      case 3:
+        return 'Delivered';
+      default:
+        return 'Placed';
+    }
   }
 
   @override
