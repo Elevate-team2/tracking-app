@@ -8,7 +8,10 @@ on:
     branches:
       - developments
     types:
-      - closed
+      - opened
+      - edited
+      - synchronize
+      - reopened
 
 jobs:
   build:
@@ -66,7 +69,7 @@ jobs:
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+          appId: ${{secrets.APP_ID}}
+          serviceCredentialsFileContent: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           groups: testers
           file: build/app/outputs/flutter-apk/app-release.apk
