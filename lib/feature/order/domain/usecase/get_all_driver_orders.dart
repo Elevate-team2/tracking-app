@@ -12,4 +12,5 @@ class GetAllDriverOrdersUseCase {
   Future<Result<OrderDriverEntity>> getAllDriverOrders() async {
     return await _orderRepository.getAllDriverOrders();
   }
+
 }
