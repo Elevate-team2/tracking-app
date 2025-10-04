@@ -3,10 +3,10 @@ name: Firebase Distribution
 on:
   push:
     branches:
-      - developments
+      - development
   pull_request:
     branches:
-      - developments
+      - development
     types:
       - opened
       - edited
