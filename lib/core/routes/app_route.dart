@@ -9,11 +9,15 @@ abstract class AppRoute {
   static const String onBoarding= "onBoarding";
  //ApplyScreen
  static  const applyScreen="ApplyScreen";
-static const String orderDetails="orderDetails";
  static  const profile="profile";
 
   static const editProfileScreen="editProfile";
   static const editVechicalScreen="editVehical";
   static const changePasswordScreen="changePassword";
+// Order
+  static const String orderDetails="orderDetails";
+  static const String orderPage="orderPage";
+
+
 
 }

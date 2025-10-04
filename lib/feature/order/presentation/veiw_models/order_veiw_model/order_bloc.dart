@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_driver_entity.dart';
+import '../../../domain/repository/order_repository.dart';
 import '../../../domain/usecase/get_all_driver_orders.dart';
 import 'order_events.dart';
 import 'order_states.dart';
@@ -10,8 +11,10 @@ import 'order_states.dart';
 @singleton
 class OrderBloc extends Bloc<OrderEvent, OrderStates> {
   final GetAllDriverOrdersUseCase _getDriverOrdersUseCase;
+  final OrderRepository _orderRepository;
 
-  OrderBloc(this._getDriverOrdersUseCase) : super(const OrderStates()) {
+
+  OrderBloc(this._getDriverOrdersUseCase, this._orderRepository) : super(const OrderStates()) {
     on<GetDriverOrdersEvent>(_getDriverOrders);
     on<RefreshDriverOrdersEvent>(_refreshOrders);
   }
