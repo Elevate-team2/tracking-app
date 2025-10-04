@@ -8,8 +8,8 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/remote_data_entity.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
 

@@ -1,5 +1,5 @@
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/remote_data_entity.dart';
 
 abstract class HomeEvents {}
 

@@ -8,13 +8,13 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
-import 'package:tracking_app/feature/home/presentaion/view/page/order_details_screen.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
+import '../../feature/order/presentation/view/page/order_details_screen.dart';
 import '../../feature/profile/presentation/views/screens/change_password.dart';
 
 

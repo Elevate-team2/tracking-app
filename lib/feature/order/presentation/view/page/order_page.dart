@@ -6,7 +6,7 @@ class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const  Scaffold(
-      body: Text('OrderPage',style: TextStyle(fontSize: 100),),
+      body: Text('OrderPage',style: TextStyle(fontSize: 50),),
     );
   }
 }
